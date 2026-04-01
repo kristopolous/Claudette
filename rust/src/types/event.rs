@@ -30,12 +30,12 @@ pub enum StreamEvent {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AssistantMessage {
-    pub content: Vec<ContentBlock>,
+    pub content: Vec<ApiContentBlock>,
     pub usage: Usage,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum ContentBlock {
+pub enum ApiContentBlock {
     Text {
         text: String,
     },

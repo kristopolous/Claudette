@@ -1,3 +1,5 @@
+# tools/BashTool/modeValidation
+
 ## Purpose
 Validates bash commands against the current permission mode, allowing auto-approval for certain modes.
 

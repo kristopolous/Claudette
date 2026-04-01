@@ -5,7 +5,7 @@ use claudette_rs::commands::{clear_command, cost_command, help_command, model_co
 use claudette_rs::context::{format_claude_md_context, get_git_status, format_git_context};
 use claudette_rs::tools::{BashTool, EditTool, GlobTool, GrepTool, ReadTool, TodoWriteTool, WebFetchTool, WebSearchTool, WriteTool};
 use claudette_rs::tui::{App, run_tui};
-use claudette_rs::types::{Command, CommandRegistry, Message, PermissionContext, ToolRegistry, CostTracker, StreamEvent};
+use claudette_rs::types::{Command as SlashCommand, CommandRegistry, Message, PermissionContext, ToolRegistry, CostTracker, StreamEvent};
 use parking_lot::Mutex;
 use std::sync::Arc;
 use tokio::sync::mpsc;

@@ -1,7 +1,6 @@
-# BashTool/commentLabel.ts
+# tools/BashTool/commentLabel
 
 ## Purpose
-
 Extracts a human-readable label from a bash command if the first line is a comment (starting with `#` but not `#!` shebang). Used in fullscreen mode to display a concise tool-use label and collapse-group indicator. This is effectively the note Claude wrote for the human.
 
 ## Imports

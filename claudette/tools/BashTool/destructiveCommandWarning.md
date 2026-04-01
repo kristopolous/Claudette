@@ -1,7 +1,6 @@
-# BashTool/destructiveCommandWarning.ts
+# tools/BashTool/destructiveCommandWarning
 
 ## Purpose
-
 Detects potentially destructive bash command patterns and returns human-readable warning messages for display in the permission dialog. Purely informational — does not affect permission decisions or auto-approval. Used to alert users about high-risk operations.
 
 ## Imports

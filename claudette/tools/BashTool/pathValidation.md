@@ -1,7 +1,6 @@
-# BashTool/pathValidation.ts
+# tools/BashTool/pathValidation
 
 ## Purpose
-
 Validates filesystem path access for Bash commands. Enforces that commands operate only within allowed working directories. Provides command-specific path extraction, handles safe wrapper stripping (timeout, nice, env, etc.), validates output redirections, blocks dangerous operations (rm on critical paths, cd then write), and integrates with permission system. Supports both string-based and AST-based (preferred) parsing.
 
 ## Imports

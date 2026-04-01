@@ -1,3 +1,5 @@
+# tools/BashTool/commandSemantics
+
 ## Purpose
 Provides semantic interpretation of command exit codes, recognizing that some commands (e.g., grep, find, diff) use non-zero exit codes for non-error conditions.
 

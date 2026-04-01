@@ -1,3 +1,5 @@
+# tools/BashTool/bashSecurity
+
 ## Purpose
 Security validation layer for bash commands: detects dangerous patterns, command injection, shell metacharacters, obfuscation, and parser differentials between shell-quote and bash.
 

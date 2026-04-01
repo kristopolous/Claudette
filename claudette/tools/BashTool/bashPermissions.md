@@ -1,3 +1,5 @@
+# tools/BashTool/bashPermissions
+
 ## Purpose
 Core permission system for the Bash tool: evaluates commands against user-defined rules, enforces security constraints (cd+git, compound commands, path access), and integrates classifier auto-approval.
 

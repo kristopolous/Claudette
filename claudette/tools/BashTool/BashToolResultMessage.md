@@ -1,3 +1,5 @@
+# tools/BashTool/BashToolResultMessage
+
 ## Purpose
 React component that renders the result of a Bash tool execution, displaying stdout, stderr (with sandbox violations stripped), images, and status messages.
 

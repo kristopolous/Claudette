@@ -182,17 +182,15 @@ impl AnthropicClient {
             stream: Some(true),
         };
 
-        let req = self
+        let builder = self
             .client
             .post(format!("{}/v1/messages", self.config.base_url))
             .header("x-api-key", &self.config.api_key)
             .header("anthropic-version", "2023-06-01")
             .header("content-type", "application/json")
             .header("accept", "text/event-stream")
-            .json(&request)
-            .build()
-            .expect("Failed to build request");
+            .json(&request);
 
-        EventSource::new(self.client.execute(req)).expect("Failed to create event source")
+        EventSource::new(builder).expect("Failed to create event source")
     }
 }

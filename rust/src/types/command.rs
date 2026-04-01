@@ -1,6 +1,3 @@
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone)]
 pub struct Command {
     pub name: String,
     pub description: String,
@@ -11,6 +8,12 @@ pub struct Command {
 #[async_trait::async_trait]
 pub trait CommandHandler: Send + Sync {
     async fn execute(&self, args: &str) -> anyhow::Result<String>;
+}
+
+impl std::fmt::Display for Command {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "/{} - {}", self.name, self.description)
+    }
 }
 
 impl Command {

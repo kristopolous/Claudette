@@ -13,4 +13,4 @@ Every module, every pattern, every decision - described so you can feed it to an
 
 Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 
-Ports coming soon!
+Example? Try the rust path

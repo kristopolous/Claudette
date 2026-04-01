@@ -28,9 +28,6 @@ Loads agent definitions from markdown files in agent directories.
 ## Exports
 ### Types
 - `AgentMcpServerSpec` - MCP server spec type (string | inline object)
-- `AgentMcpServerSpecSchema` - Zod schema for MCP server specs
-- `AgentJsonSchema` - Zod schema for single agent JSON validation
-- `AgentsJsonSchema` - Zod schema for multiple agents JSON validation
 - `BaseAgentDefinition` - base agent definition type
 - `BuiltInAgentDefinition` - built-in agent type
 - `CustomAgentDefinition` - custom agent type
@@ -56,8 +53,3 @@ Loads agent definitions from markdown files in agent directories.
 - `parseAgentFromJson` - parses single agent from JSON object
 - `parseAgentsFromJson` - parses multiple agents from JSON object
 - `parseAgentFromMarkdown` - parses agent from markdown file
-- `getParseError` - determines parsing error for agent file
-- `parseHooksFromFrontmatter` - parses hooks from frontmatter
-
-### Memory Snapshots
-- `initializeAgentMemorySnapshots` - initializes agent memory from project snapshots

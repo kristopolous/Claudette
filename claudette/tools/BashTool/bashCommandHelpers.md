@@ -1,3 +1,5 @@
+# tools/BashTool/bashCommandHelpers
+
 ## Purpose
 Validates and evaluates permissions for bash commands, handling compound commands, pipelines, and cross-segment patterns like cd+git, while respecting user permissions.
 
