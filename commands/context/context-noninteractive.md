@@ -1,25 +1,12 @@
 ## Purpose
-Show current context usage in non-interactive/headless mode as markdown table.
+Shows current context usage in non-interactive mode (slash command and SDK control request).
 
 ## Imports
-- **Internal**: microcompact service, analyzeContextUsage, message helpers, formatting, settings constants
+- **Internal**: `AppState` type, `Tools`, `ToolUseContext`, `AgentDefinitionsResult`, `Message` type, `analyzeContextUsage`, `formatTokens`, `getMessagesAfterCompactBoundary`, `getSourceDisplayName`
 
 ## Logic
-1. Defines type `CollectContextDataInput` with messages, getAppState, options
-2. `collectContextData` async function:
-   - Applies same transforms as interactive version (compact boundary, projectView, microcompact)
-   - Calls analyzeContextUsage to get ContextData with token breakdown
-3. `call` async function:
-   - Calls collectContextData with ToolUseContext
-   - Returns text response with formatContextAsMarkdownTable(data)
-4. formatContextAsMarkdownTable builds detailed markdown showing:
-   - Model, tokens, percentage
-   - Context collapse status (if enabled)
-   - Estimated usage by category table
-   - MCP tools, system tools (Ant), system prompt sections (Ant)
-   - Custom agents, memory files, skills
-   - Message breakdown with top tools/attachments (Ant)
-5. Command type: 'local' (returns text, not JSX)
+`collectContextData` is the shared data collection function: applies the same transforms as the interactive version (compact boundary, projectView, microcompact) then calls `analyzeContextUsage`. `call` invokes `collectContextData` and formats the result as a markdown table with `formatContextAsMarkdownTable`, returning a text result.
 
 ## Exports
-- `call` - async function returning { type: 'text', value: string }
+- `collectContextData` - Shared function to collect context data
+- `call` - Local command function returning markdown text

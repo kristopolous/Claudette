@@ -1,15 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `hooks` configuration command.
+Registers the hooks command metadata and lazy-loads the implementation.
 
 ## Imports
-- **Internal**: Command type, hooks.tsx implementation
+- **Internal**: `Command` type
 
 ## Logic
-1. Command with type 'local-jsx'
-2. Name: 'hooks', description: 'View hook configurations for tool events'
-3. `immediate: true` (no confirmation needed)
-4. Lazy loads via `load: () => import('./hooks.js')`
-5. Renders HooksConfigMenu UI for managing tool event hooks
+Defines a 'local-jsx' command named 'hooks' with description "View hook configurations for tool events". The command has `immediate: true` and loads its implementation from './hooks.js' on demand.
 
 ## Exports
-- `default` - Command object
+- `default` - The hooks command object

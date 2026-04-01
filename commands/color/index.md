@@ -1,16 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `color` command.
+Registers the color command metadata with lazy loading.
 
 ## Imports
-- **Internal**: Command type, implementation from color.ts
+- **Internal**: `Command` type
 
 ## Logic
-1. Defines command with type 'local-jsx'
-2. Description: "Set the prompt bar color for this session"
-3. Immediate: true (no confirmation)
-4. Argument hint: '<color|default>'
-5. Lazy loads implementation with `load: () => import('./color.js')`
-6. Command allows users to customize their agent identity color
+Defines a 'local-jsx' command named 'color' with description "Set the prompt bar color for this session". The command is immediate, accepts an argument hint '<color|default>', and loads implementation from './color.js'.
 
 ## Exports
-- `default` - Command object
+- `default` - The color command object

@@ -1,16 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `exit` command with immediate execution.
+Registers the exit command metadata with immediate execution.
 
 ## Imports
-- **Internal**: Command type, implementation from exit.js
+- **Internal**: `Command` type
 
 ## Logic
-1. Command with type 'local-jsx'
-2. Name: 'exit', description: 'Exit the REPL'
-3. Aliases: ['quit']
-4. `immediate: true` - no confirmation prompt needed
-5. Lazy loads via `load: () => import('./exit.js')`
-6. Handles immediate exit (or tmux detach in bg mode) with goodbye
+Defines a 'local-jsx' command named 'exit' with alias 'quit' and description "Exit the REPL". The command is marked `immediate: true` and loads implementation from './exit.js'.
 
 ## Exports
-- `default` - Command object
+- `default` - The exit command object

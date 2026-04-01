@@ -1,15 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `export` command.
+Registers the export command metadata with lazy loading.
 
 ## Imports
-- **Internal**: Command type, implementation from export.js
+- **Internal**: `Command` type
 
 ## Logic
-1. Command object with type 'local-jsx'
-2. Name: 'export', description: 'Export the current conversation to a file or clipboard'
-3. Argument hint: '[filename]' (optional, provides defaults if omitted)
-4. Lazy loads via `load: () => import('./export.js')`
-5. Shows ExportDialog for interactive filename selection or writes directly
+Defines a 'local-jsx' command named 'export' with description "Export the current conversation to a file or clipboard". Accepts optional argument '[filename]' and loads implementation from './export.js'.
 
 ## Exports
-- `exportCommand` - Command object (default export)
+- `default` - The export command object

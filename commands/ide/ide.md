@@ -1,29 +1,15 @@
 ## Purpose
-Manage IDE integrations and show connection status.
+Manages IDE integrations: detects available IDEs with Claude extensions, connects/disconnects, and opens projects in IDEs.
 
 ## Imports
-- **External**: `chalk` (terminal colors), `path` module
-- **Internal**: React, many UI components (Select, Dialog), IDE auto-connect dialogs, MCP client cache clear, AppState hooks, execFileNoThrow, IDE detection utilities, worktree session utils
+- **Stdlib**: `path`
+- **External**: `chalk`, `react`
+- **Internal**: Extensive: `logEvent`, `Select`, `Dialog`, `IdeAutoConnectDialog`, `IdeDisableAutoConnectDialog`, `Box`, `Text`, `clearServerCache`, `ScopedMcpServerConfig`, `useAppState`, `useSetAppState`, `getCwd`, `execFileNoThrow`, IDE detection utils (`detectIDEs`, `detectRunningIDEs`, `isJetBrainsIde`, `isSupportedJetBrainsTerminal`, `isSupportedTerminal`, `toIDEDisplayName`), `getCurrentWorktreeSession`, `CommandResultDisplay`, `LocalJSXCommandContext`
 
 ## Logic
-1. Local-jsx command that manages IDE integrations
-2. Provides UI to:
-   - Detect available IDEs on the system (JetBrains IDEs, supported terminals)
-   - Detect running IDE instances with their ports/workspaces
-   - Allow user to select an IDE to connect to
-   - Manage auto-connect settings (with confirmation dialogs)
-   - Disconnect from IDE
-3. Uses IDE detection utilities:
-   - detectIDEs() - finds installed IDEs
-   - detectRunningIDEs() - finds running instances with ports
-   - isJetBrainsIde, isSupportedJetBrainsTerminal, isSupportedTerminal checks
-4. Shows dialogs for auto-connect confirmation when enabling
-5. Shows disable confirmation when disconnecting
-6. Clears MCP server cache on some actions
-7. Command is part of IDE integration feature for AI assistance inside editor
-8. Argument hint: '[open]' (future use)
+The `call` function is the main entry point. It handles an optional 'open' argument to directly open the current project in an IDE. Otherwise, it displays an interactive React Ink UI for managing IDE connections. It detects IDEs with Claude Code extensions, categorizes them as available/unavailable, shows current IDE connection status, and allows selecting an IDE to connect via MCP. Handles auto-connect dialogs, extension installation prompts for running IDEs without the extension, and disconnection. Uses dynamic MCP config to establish SSE/WebSocket connections to IDE extensions. Manages connection timeout and state updates.
 
 ## Exports
-- `call` - async LocalJSXCommandCall rendering IDEScreen component with selection UI
-- `IDEScreen` - React component (internal export)
-- state management: selectedValue, showAutoConnectDialog, showDisableAutoConnectDialog
+- `call` - Async JSX command function (type 'local-jsx')
+- `formatWorkspaceFolders` - Helper to format workspace folder paths for display
+- Internal components: `IDEScreen`, `IDEOpenSelection`, `RunningIDESelector`, `InstallOnMount`, `IDECommandFlow`

@@ -1,18 +1,12 @@
 ## Purpose
-List all files currently in context (visible to Claude in this session).
+Lists all files currently in the context (those loaded via Read tool).
 
 ## Imports
-- **Internal**: ToolUseContext type, LocalCommandResult type, getCwd utility, cacheKeys from fileStateCache
+- **Stdlib**: `path`
+- **Internal**: `ToolUseContext` type, `LocalCommandResult` type, `getCwd`, `cacheKeys` (from fileStateCache)
 
 ## Logic
-1. Simple local command that reads from readFileState cache
-2. Extracts all file paths that have been read/accessed in this session
-3. Converts paths to relative from current working directory
-4. Joins with newlines
-5. Returns text: "Files in context:\n" + list
-6. If no files in context, returns "No files in context"
-7. Only enabled for Ant users (internal), supports non-interactive mode
-8. Useful for debugging what context the model has access to
+`call` extracts file paths from the `context.readFileState` cache (tracking files that have been read), converts each to a relative path from the current working directory, and returns them as a newline-separated list. If no files are in context, returns "No files in context".
 
 ## Exports
-- `call` - async function returning LocalCommandResult (text)
+- `call` - Async function returning LocalCommandResult with file list

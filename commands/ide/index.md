@@ -1,15 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `ide` management command.
+Registers the ide command metadata and lazy-loads the JSX implementation.
 
 ## Imports
-- **Internal**: Command type, ide.tsx implementation
+- **Internal**: `Command` type
 
 ## Logic
-1. Command with type 'local-jsx'
-2. Name: 'ide', description: 'Manage IDE integrations and show status'
-3. Argument hint: '[open]' (potential future usage)
-4. Lazy loads via `load: () => import('./ide.js')`
-5. Renders IDE management UI for connecting/disconnecting from embedded editor experiences (JetBrains, etc.)
+Defines a 'local-jsx' command named 'ide' with description "Manage IDE integrations and show status". Accepts an optional '[open]' argument to directly open the project. The implementation is loaded from './ide.js' when invoked.
 
 ## Exports
-- `default` - Command object
+- `default` - The ide command object

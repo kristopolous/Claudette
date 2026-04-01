@@ -1,20 +1,12 @@
 ## Purpose
-Set the prompt bar color for this session (agent identity customization).
+Sets the prompt bar color for the current session, with reset to default.
 
 ## Imports
-- **External**: `crypto` (UUID type)
-- **Internal**: Session state, agent color manager, transcript path utilities, session storage, teammate check
+- **Stdlib**: `crypto` (UUID)
+- **Internal**: `getSessionId`, `ToolUseContext`, `AGENT_COLORS`, `AgentColorName`, `getTranscriptPath`, `saveAgentColor`, `isTeammate`
 
 ## Logic
-1. Takes single argument: color name or 'default/reset/none/gray/grey'
-2. Checks if session is a swarm teammate (teammates cannot set color — assigned by leader)
-3. Without argument: shows available colors from AGENT_COLORS
-4. If reset alias: saves 'default' to transcript, clears standaloneAgentContext.color in AppState
-5. Validates color against AGENT_COLORS list
-6. If valid color: saves to transcript (persistence), updates AppState standaloneAgentContext.color
-7. Returns text confirmation
-8. Command type: 'local-jsx' (requires context for setAppState)
+`call` first checks if the session is a swarm teammate (color cannot be set). If no argument or a reset alias (default/reset/none/gray/grey), saves 'default' to session storage and clears AppState color. If a color argument is provided, validates against `AGENT_COLORS`; on success, saves to transcript storage and updates AppState. Provides user feedback via `onDone`.
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning null (updates state, shows message)
-- Color choices managed by AgentColorManager
+- `call` - Async function returning null (updates state)

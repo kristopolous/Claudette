@@ -1,22 +1,16 @@
 ## Purpose
-Copy Claude's responses to clipboard, with options to select full text or individual code blocks.
+Copies Claude's last response to clipboard, with options to select code blocks or full text.
 
 ## Imports
-- **Stdlib**: `fs/promises` (mkdir, writeFile), `os` (tmpdir), `path` (join)
-- **External**: `marked` (markdown parsing)
-- **Internal**: Multiple UI components (Select, Pane, Box, Text), utilities (extractTextContent, setClipboard, getGlobalConfig, saveGlobalConfig), types (Message, AssistantMessage, CommandResultDisplay)
+- **Stdlib**: `fs/promises`, `os`, `path`
+- **External**: `marked`, `react`
+- **Internal**: Many components (Select, Byline, KeyboardShortcutHint, Pane), `setClipboard`, `logEvent`, `LocalJSXCommandCall`, `Message` types, `getGlobalConfig`, `saveGlobalConfig`, `extractTextContent`, `stripPromptXMLTags`, `countCharInString`
 
 ## Logic
-1. Collects recent assistant messages (up to 20) from conversation history
-2. Extracts code blocks from markdown using marked.lexer()
-3. If no code blocks or `copyFullResponse` config is set, copies entire response
-4. Otherwise, presents interactive picker to let user choose:
-   - Full response
-   - Individual code blocks (with language and line count)
-   - "Always copy full response" option to set preference
-5. Writes to temp file at `~/.cache/claude/response.md` as fallback
-6. Sends to clipboard via OSC 52 escape sequence
-7. Supports keyboard shortcuts: Enter (copy), W (write to file), Esc (cancel)
+`collectRecentAssistantTexts` walks message history (up to 20 turns) to collect assistant responses. `extractCodeBlocks` lexes markdown to find code blocks with language. `copyOrWriteToFile` copies to clipboard via OSC 52 and writes a fallback file in temp dir. `CopyPicker` component presents options: full response, individual code blocks, or "always copy full" (sets config). `call` determines what to copy: if no code blocks or config.copyFullResponse set, copies full text directly; else shows picker. Handles `/copy N` for Nth-latest message.
 
 ## Exports
-- `call` - LocalJSXCommandCall async function that returns React component or null
+- `call` - JSX command function
+- `collectRecentAssistantTexts` - Helper
+- `extractCodeBlocks` - Helper
+- `fileExtension` - Helper to get extension from language

@@ -1,16 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `files` command.
+Registers the files command metadata and implements enablement logic.
 
 ## Imports
-- **Internal**: Command type, implementation from files.js
+- **Internal**: `Command` type, `isEnvTruthy`
 
 ## Logic
-1. Command with type 'local'
-2. Name: 'files', description: 'List all files currently in context'
-3. `isEnabled` returns true only for Ant users (internal debugging command)
-4. `supportsNonInteractive: true` (works in headless mode)
-5. Lazy loads via `load: () => import('./files.js')`
-6. Lists files that have been read into context via @ mentions, Read tool, etc.
+Defines a 'local' command named 'files' with description "List all files currently in context". The command is only enabled for internal users (`USER_TYPE='ant'`) and supports non-interactive mode. Implementation is lazy-loaded from './files.js'.
 
 ## Exports
-- `default` - Command object
+- `default` - The files command object

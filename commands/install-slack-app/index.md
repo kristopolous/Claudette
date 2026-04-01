@@ -1,16 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `install-slack-app` command.
+Registers the install-slack-app command metadata and lazy-loads the implementation.
 
 ## Imports
-- **Internal**: Command type, install-slack-app implementation
+- **Internal**: `Command` type
 
 ## Logic
-1. Command with type 'local'
-2. Name: 'install-slack-app', description: 'Install the Claude Slack app'
-3. `availability: ['claude-ai']` (only for Claude AI subscribers)
-4. `supportsNonInteractive: false` (requires interactive browser launch)
-5. Lazy loads via `load: () => import('./install-slack-app.js')`
-6. Opens Slack marketplace for Claude app integration
+Defines a 'local' command named 'install-slack-app' with description "Install the Claude Slack app". The command is only available to 'claude-ai' users and does not support non-interactive mode. Implementation is loaded from './install-slack-app.js' on demand.
 
 ## Exports
-- `default` - installSlackApp Command object
+- `default` - The installSlackApp command object

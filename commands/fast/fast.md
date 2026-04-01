@@ -1,30 +1,14 @@
 ## Purpose
-Toggle fast mode, which uses a faster/cheaper model for simpler tasks.
+Toggles Fast Mode (research preview using Opus46 model) with interactive picker or shortcut arguments.
 
 ## Imports
-- **External**: React, React Compiler runtime
-- **Internal**: FastIcon, Dialog, FastModePicker component, fastMode utilities (getFastModeModel, isFastModeEnabled, isFastModeSupportedByModel, prefetchFastModeStatus, clearFastModeCooldown, getFastModeRuntimeState, getFastModeUnavailableReason), analytics, settings management, formatDuration, formatModelPricing, getOpus46CostTier, shouldInferenceConfigCommandBeImmediate
+- **External**: `react`, `chalk`
+- **Internal**: Many: `CommandResultDisplay`, `LocalJSXCommandContext`, `Dialog`, `FastIcon`, `Box`, `Link`, `Text`, `useKeybindings`, `logEvent`, `useAppState`, `useSetAppState`, fastMode utils (`clearFastModeCooldown`, `getFastModeModel`, etc.), `formatDuration`, `formatModelPricing`, `getOpus46CostTier`, `updateSettingsForSource`
 
 ## Logic
-1. Local-jsx command that renders FastModePicker dialog
-2. Fast mode behavior:
-   - When enabled: switches mainLoopModel to fast model (if current doesn't support fast mode)
-   - Updates user settings to persist preference
-   - Clears cooldown on toggle
-3. FastModePicker component:
-   - Shows current model and fast mode state
-   - Displays pricing information
-   - Handles enable/disable
-   - Checks availability (feature flag, cooldown status, model support)
-   - Logs analytics event on toggle
-   - Shows confirmation message with model/pricing details
-4. Command is enabled only when isFastModeEnabled() returns true (feature gated)
-5. Hidden when fast mode not available
-6. Description dynamically includes fast model display name
-7. Availability: ['claude-ai', 'console']
-8. `immediate` determined by shouldInferenceConfigCommandBeImmediate()
+Provides a command to enable/disable Fast Mode. `applyFastMode` updates global settings and app state, switching model if needed. `FastModePicker` component renders a dialog with toggle, pricing info, cooldown status, and unavailability reasons. `handleFastModeShortcut` processes 'on'/'off' arguments for quick toggling. `call` checks feature flag, prefetches status, shows picker or executes shortcut. The command is gated by `isFastModeEnabled()`.
 
 ## Exports
-- `call` - async LocalJSXCommandCall rendering FastModePicker
-- `FastModePicker` - React component (exported for testing/reuse)
-- `applyFastMode` - helper function to update state/settings
+- `call` - Main JSX command function
+- `FastModePicker` - React component for the toggle dialog
+- Internal: `applyFastMode`, `handleFastModeShortcut`

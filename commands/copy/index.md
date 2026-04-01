@@ -1,16 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `copy` command to reduce startup time.
+Registers the copy command metadata with lazy loading.
 
 ## Imports
-- **Stdlib**: None
-- **External**: None
-- **Internal**: Implementation (from copy.js)
+- **Internal**: `Command` type
 
 ## Logic
-1. Defines command metadata with type 'local-jsx'
-2. Describes command: "Copy Claude's last response to clipboard (or /copy N for the Nth-latest)"
-3. Uses lazy loading via `load: () => import('./copy.js')` to defer loading the React component
-4. Command presents interactive UI for selecting content to copy
+Defines a 'local-jsx' command named 'copy' with description: "Copy Claude's last response to clipboard (or /copy N for the Nth-latest)". Implementation is loaded from './copy.js' on demand.
 
 ## Exports
-- `default` - Command object with metadata and lazy loader
+- `default` - The copy command object

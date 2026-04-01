@@ -1,21 +1,12 @@
 ## Purpose
-Visualize current context usage as a colored grid showing token distribution.
+Shows current context usage as a colored grid in interactive mode.
 
 ## Imports
-- **External**: React, feature flags
-- **Internal**: ContextVisualization component, microcompact service, analyzeContextUsage, renderToAnsiString, context transforms (getMessagesAfterCompactBoundary, projectView)
+- **External**: `react`
+- **Internal**: `ContextVisualization` component, `microcompactMessages`, `LocalJSXCommandContext`, `Message` type, `analyzeContextUsage`, `getMessagesAfterCompactBoundary`, `renderToAnsiString`
 
 ## Logic
-1. Local-jsx command that renders context visualization in terminal
-2. Applies same context transforms as query API:
-   - Filters to messages after compact boundary
-   - Applies projectView (if CONTEXT_COLLAPSE feature enabled)
-   - Runs microcompactMessages to get final representation
-3. Calls analyzeContextUsage with compacted messages to get token breakdown by category
-4. Renders ContextVisualization React component
-5. Converts to ANSI string to preserve colors (like local commands)
-6. Passes result to onDone and returns null
-7. Shows comprehensive breakdown: tokens by category, MCP tools, custom agents, memory files, skills, message categories (ant-only)
+`call` transforms messages to the API view (applying compact boundary and projectView if CONTEXT_COLLAPSE feature), then applies microcompact to get accurate representation. It calls `analyzeContextUsage` to collect context data, renders `<ContextVisualization>` to an ANSI string using `renderToAnsiString`, passes the result to `onDone`, and returns null.
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning null (output via onDone)
+- `call` - Async JSX command function

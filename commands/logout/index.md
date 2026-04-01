@@ -1,15 +1,11 @@
 ## Purpose
-Provides lazy-loaded command metadata for the `logout` command.
+Registers the logout command metadata and lazy-loads the JSX implementation.
 
 ## Imports
-- **Internal**: Command type, logout implementation, envUtils
+- **Internal**: `Command` type, `isEnvTruthy`
 
 ## Logic
-1. Command with type 'local-jsx'
-2. Name: 'logout', description: 'Sign out from your Anthropic account'
-3. `isEnabled` returns false if DISABLE_LOGOUT_COMMAND env is truthy
-4. Lazy loads via `load: () => import('./logout.js')`
-5. Performs full logout: clears credentials, caches, and exits
+Defines a 'local-jsx' command named 'logout' with description "Sign out from your Anthropic account". The command is disabled if `DISABLE_LOGOUT_COMMAND` environment variable is truthy. The actual implementation is loaded dynamically from './logout.js' when the command is invoked.
 
 ## Exports
-- `default` - Command object
+- `default` - The logout command object

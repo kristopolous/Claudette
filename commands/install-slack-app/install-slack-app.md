@@ -1,20 +1,11 @@
 ## Purpose
-Install the Claude Slack app from the Slack marketplace.
+Opens the Slack app installation page in the user's browser to install the Claude Slack app.
 
 ## Imports
-- **Internal**: Analytics logging, openBrowser utility, saveGlobalConfig
+- **Internal**: `LocalCommandResult` type, `logEvent` (analytics), `openBrowser`, `saveGlobalConfig`
 
 ## Logic
-1. Simple local command that:
-   - Logs analytics event 'tengu_install_slack_app_clicked'
-   - Increments slackAppInstallCount in global config
-   - Opens browser to Slack marketplace URL for Claude app
-2. Returns text: "Opening Slack app installation page in browser…" on success
-3. On failure to open browser, returns URL for manual visit
-4. Command type: 'local'
-5. Availability: ['claude-ai'] (for Claude AI subscribers)
-6. Not supported in non-interactive mode
+`call` logs an analytics event, increments `slackAppInstallCount` in global config, and attempts to open the Slack marketplace URL (A08SF47R6P4-claude) using the default browser. Returns a text message indicating success or failure.
 
 ## Exports
-- `call` - async function returning LocalCommandResult (text)
-- `SLACK_APP_URL` constant
+- `call` - Async function that opens browser to Slack app install page
