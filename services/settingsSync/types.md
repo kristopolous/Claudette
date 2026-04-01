@@ -1,12 +1,12 @@
 # settingsSync/types
 
 ## Purpose
-Provides Zod schemas and types for the user settings sync API.
+Provides Zod schemas and types for user settings sync API.
 
 ## Imports
 - **Stdlib**: (none)
 - **External**: `zod/v4`
-- **Internal**: lazySchema utils
+- **Internal**: lazySchema, settings types
 
 ## Logic
 1. `UserSyncContentSchema` - flat key-value storage with entries record

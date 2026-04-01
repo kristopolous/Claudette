@@ -1,12 +1,12 @@
 # setup
 
 ## Purpose
-Implements the main setup function that initializes the Claude Code session environment.
+Implements main setup function that initializes Claude Code session environment.
 
 ## Imports
-- **Stdlib**: (none)
+- **Stdlib**: `process`
 - **External**: `bun:bundle`, `chalk`
-- **Internal**: analytics, cwd, releaseNotes, services, bootstrap state, commands, SessionMemory, types, agentSwarms, appleTerminalBackup, auth, claudemd, config, diagLogs, env, git, hooks, iTermBackup, log, logoV2Utils, nativeInstaller, permissions, plans, sessionStorage, startupProfiler, worktree utils
+- **Internal**: analytics, cwd, releaseNotes, Shell, bootstrap state, commands, SessionMemory, types, agentSwarmsEnabled, appleTerminalBackup, auth, claudemd, config, diagLogs, env, envDynamic, envUtils, errors, git, hooks, iTermBackup, log, logoV2Utils, nativeInstaller, permissions, plans, sessionStorage, startupProfiler, worktree utils
 
 ## Logic
 1. Checks Node.js version (requires ≥18)

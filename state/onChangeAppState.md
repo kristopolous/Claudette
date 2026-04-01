@@ -1,50 +1,29 @@
-# onChangeAppState.ts
+# state/onChangeAppState
 
 ## Purpose
-Side-effect handler for AppState changes. Implements the single choke point for synchronizing state changes to external systems (CCR, SDK, config persistence) without scattering update logic throughout the codebase.
+Handles state change notifications for session metadata sync and mode changes.
 
 ## Imports
-- **Stdlib**: None
-- **External**: None
-- **Internal**:
-  - `setMainLoopModelOverride` from `src/bootstrap/state.js`
-  - `clearApiKeyHelperCache`, `clearAwsCredentialsCache`, `clearGcpCredentialsCache` from `src/utils/auth.js`
-  - `getGlobalConfig`, `saveGlobalConfig` from `src/utils/config.js`
-  - `toError` from `src/utils/errors.js`
-  - `logError` from `src/utils/log.js`
-  - `applyConfigEnvironmentVariables` from `src/utils/managedEnv.js`
-  - `permissionModeFromString`, `toExternalPermissionMode` from `src/utils/permissions/PermissionMode.js`
-  - `notifyPermissionModeChanged`, `notifySessionMetadataChanged`, `SessionExternalMetadata` from `src/utils/sessionState.js`
-  - `updateSettingsForSource` from `src/utils/settings/settings.js`
-  - `AppState` from `src/state/AppStateStore.js`
+- **Stdlib**: (none)
+- **External**: (none)
+- **Internal**: bootstrap state, auth, config, errors, log, managedEnv, permissions, sessionState, settings, AppState types
 
 ## Logic
-Implements change handlers for specific AppState mutations:
-
-1. **Permission Mode Sync** - When `toolPermissionContext.mode` changes:
-   - Externalizes internal mode names (filters out `bubble`, `ungated auto`)
-   - Notifies CCR via `notifySessionMetadataChanged` with external mode
-   - Notifies SDK status stream via `notifyPermissionModeChanged`
-   - Handles ultraplan mode transition detection
-
-2. **mainLoopModel Changes** - When model selection changes:
-   - If set to `null`: removes model from settings and clears override
-   - If set to a value: saves to settings and updates override
-
-3. **expandedView Changes** - Persists view mode to global config:
-   - Maps `expandedView: 'tasks'` to `showExpandedTodos: true`
-   - Maps `expandedView: 'teammates'` to `showSpinnerTree: true`
-
-4. **verbose Changes** - Persists verbose flag to global config
-
-5. **tungstenPanelVisible** (ANT-only) - Persists panel visibility to global config
-
-6. **settings Changes** - Clears auth caches and re-applies environment variables:
-   - Clears API key helper cache
-   - Clears AWS credentials cache
-   - Clears GCP credentials cache
-   - Re-applies config environment variables if `settings.env` changed
+1. `externalMetadataToAppState` - inverse of push, restores state on worker restart
+2. Restores permission_mode and is_ultraplan_mode from external metadata
+3. `onChangeAppState` - main handler for state changes
+4. toolPermissionContext.mode changes notify CCR/SDK via single choke point
+5. Prior to this: only 2 of 8+ mutation paths notified CCR
+6. Now: ANY setAppState mode change notifies CCR and SDK
+7. Externalizes mode names (bubble/auto → default for external)
+8. Skips CCR notify if EXTERNAL mode unchanged (default→bubble→default is noise)
+9. SDK channel passes raw mode with its own filter
+10. Ultraplan flag: null per RFC 7396 removes key
+11. Clears auth caches on relevant changes
+12. Applies config environment variables
+13. Updates settings for source
+14. Notifies permission mode and session metadata changes
 
 ## Exports
-- `externalMetadataToAppState` - Inverse mapper from `SessionExternalMetadata` to an AppState updater function
-- `onChangeAppState` - Main handler called when AppState changes; syncs state to external systems
+- `externalMetadataToAppState` - restores state from external metadata
+- `onChangeAppState` - handles state change notifications

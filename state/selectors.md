@@ -1,36 +1,25 @@
-# selectors.ts
+# state/selectors
 
 ## Purpose
-Pure selector functions for deriving computed state from AppState. Provides type-safe queries for UI state like the currently viewed teammate and input routing destinations.
+Provides pure selectors for deriving computed state from AppState.
 
 ## Imports
-- **Stdlib**: None
-- **External**: None
-- **Internal**:
-  - `InProcessTeammateTaskState` from `src/tasks/InProcessTeammateTask/types.js`
-  - `isInProcessTeammateTask` from `src/tasks/InProcessTeammateTask/types.js`
-  - `LocalAgentTaskState` from `src/tasks/LocalAgentTask/LocalAgentTask.js`
-  - `AppState` from `src/state/AppStateStore.js`
+- **Stdlib**: (none)
+- **External**: (none)
+- **Internal**: InProcessTeammateTask types, LocalAgentTask types, AppState
 
 ## Logic
-Two selector functions for UI state:
-
-1. **getViewedTeammateTask** - Retrieves the currently viewed teammate task:
-   - Returns `undefined` if no teammate is being viewed
-   - Returns `undefined` if the task ID doesn't exist
-   - Returns `undefined` if the task is not an in-process teammate task
-   - Used by components that need to display teammate-specific UI
-
-2. **getActiveAgentForInput** - Determines where user input should be routed:
-   - Returns `{ type: 'viewed', task }` when viewing an agent (input goes to that agent)
-   - Returns `{ type: 'named_agent', task }` for local agent tasks
-   - Returns `{ type: 'leader' }` as the default (input goes to main leader)
-   - Used by input routing logic to direct user messages to the correct agent
+1. `getViewedTeammateTask` - gets currently viewed teammate task
+2. Returns undefined if: no teammate viewed, task ID doesn't exist, not in-process teammate
+3. `ActiveAgentForInput` - discriminated union: leader, viewed, named_agent
+4. `getActiveAgentForInput` - determines where user input should be routed
+5. Returns { type: 'leader' } when not viewing teammate
+6. Returns { type: 'viewed', task } when viewing agent
+7. Returns { type: 'named_agent', task } for local agent tasks
+8. Used by input routing logic to direct messages to correct agent
+9. Selectors are pure - data extraction only, no side effects
 
 ## Exports
-- `getViewedTeammateTask` - Returns the currently viewed teammate task or undefined
-- `ActiveAgentForInput` - Discriminated union type for input routing:
-  - `{ type: 'leader' }` - Input goes to leader
-  - `{ type: 'viewed', task }` - Input goes to viewed teammate
-  - `{ type: 'named_agent', task }` - Input goes to named local agent
-- `getActiveAgentForInput` - Returns the destination for user input routing
+- `ActiveAgentForInput` - discriminated union for input routing
+- `getViewedTeammateTask` - gets viewed teammate task
+- `getActiveAgentForInput` - determines input routing destination
