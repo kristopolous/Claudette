@@ -1,204 +1,46 @@
-# config
+# utils/config
 
 ## Purpose
-Re-entrancy guard: prevents getConfig → logEvent → getGlobalConfig → getConfig
+Manages global and project configuration with file watching and migration support.
 
 ## Imports
-- **Stdlib**: bun:bundle, crypto, fs, lodash-es/memoize.js, lodash-es/pickBy.js, path
-- **Internal**: ../bootstrap/state.js, ../memdir/paths.js, ../services/analytics/index.js, ../services/mcp/types.js, ../utils/cwd.js, ./cleanupRegistry.js, ./debug.js, ./diagLogs.js, ./env.js, ./envUtils.js...
+- **Stdlib**: `crypto`, `fs`, `path`
+- **External**: `bun:bundle`, `lodash-es/memoize/pickBy`
+- **Internal**: bootstrap state, memdir paths, analytics, oauth types, cwd, cleanupRegistry, debug, diagLogs, env, envUtils, errors, file, fsOperations, git, json, jsonRead, lockfile, log, memory types, path, privacyLevel, settings managedPath, theme, teamMemPaths, bridge bridgeEnabled, imageResizer, model modelOptions, JSON utils
 
-## Items
-
-### createDefaultGlobalConfig
-**Type**: Function
-
-### isGlobalConfigKey
-**Type**: Function
-
-### resetTrustDialogAcceptedCacheForTesting
-**Type**: Function
-
-### checkHasTrustDialogAccepted
-**Type**: Function
-
-### computeTrustDialogAccepted
-**Type**: Function
-
-### isPathTrusted
-**Type**: Function
-
-### isProjectConfigKey
-**Type**: Function
-
-### wouldLoseAuthState
-**Type**: Function
-
-### saveGlobalConfig
-**Type**: Function
-
-### getGlobalConfigWriteCount
-**Type**: Function
-
-### reportConfigCacheStats
-**Type**: Function
-
-### migrateConfigFields
-**Type**: Function
-
-### removeProjectHistory
-**Type**: Function
-
-### startGlobalConfigFreshnessWatcher
-**Type**: Function
-
-### writeThroughGlobalConfigCache
-**Type**: Function
-
-### getGlobalConfig
-**Type**: Function
-
-### getRemoteControlAtStartup
-**Type**: Function
-
-### getCustomApiKeyStatus
-**Type**: Function
-
-### enableConfigs
-**Type**: Function
-
-### getConfigBackupDir
-**Type**: Function
-
-### findMostRecentBackup
-**Type**: Function
-
-### getCurrentProjectConfig
-**Type**: Function
-
-### saveCurrentProjectConfig
-**Type**: Function
-
-### isAutoUpdaterDisabled
-**Type**: Function
-
-### shouldSkipPluginAutoupdate
-**Type**: Function
-
-### formatAutoUpdaterDisabledReason
-**Type**: Function
-
-### getAutoUpdaterDisabledReason
-**Type**: Function
-
-### getOrCreateUserID
-**Type**: Function
-
-### recordFirstStartTime
-**Type**: Function
-
-### getMemoryPath
-**Type**: Function
-
-### getManagedClaudeRulesDir
-**Type**: Function
-
-### getUserClaudeRulesDir
-**Type**: Function
-
-### _setGlobalConfigCacheForTesting
-**Type**: Function
-
-### SerializedStructuredHistoryEntry
-**Type**: Interface
-
-### HistoryEntry
-**Type**: Interface
-
-### PastedContent
-**Type**: Type alias
-
-### ReleaseChannel
-**Type**: Type alias
-
-### ProjectConfig
-**Type**: Type alias
-
-### InstallMethod
-**Type**: Type alias
-
-### NotificationChannel
-**Type**: Type alias
-
-### AccountInfo
-**Type**: Type alias
-
-### EditorMode
-**Type**: Type alias
-
-### DiffTool
-**Type**: Type alias
-
-### OutputStyle
-**Type**: Type alias
-
-### GlobalConfig
-**Type**: Type alias
-
-### GlobalConfigKey
-**Type**: Type alias
-
-### ProjectConfigKey
-**Type**: Type alias
-
-### AutoUpdaterDisabledReason
-**Type**: Type alias
+## Logic
+1. `insideGetConfig` - re-entrancy guard for getConfig → logEvent recursion
+2. `PastedContent` - { id, type, content, mediaType, filename, dimensions, sourcePath }
+3. `HistoryEntry` - { display, pastedContents }
+4. `SerializedStructuredHistoryEntry` - serialized history entry
+5. `ReleaseChannel` - stable, latest
+6. `ProjectConfig` - allowedTools, mcpContextUris, mcpServers, lastAPIDuration
+7. `getGlobalClaudeFile` - gets global config file path
+8. Legacy fallback to .config.json
+9. Uses fileSuffixForOauthConfig for oauth config suffix
+10. `getGlobalConfig` - gets global config with memoization
+11. `saveGlobalConfig` - saves global config with file watching
+12. `getCurrentProjectConfig` - gets project-specific config
+13. `saveCurrentProjectConfig` - saves project config
+14. `getManagedClaudeRulesDir` - gets managed rules directory
+15. `getUserClaudeRulesDir` - gets user rules directory
+16. `getClaudeRulesDirs` - gets all rules directories
+17. `getAutoMemEntrypoint` - gets auto memory entrypoint
+18. `getMemoryPath` - gets memory file path
+19. `getTeamsDir` - gets teams directory
+20. `getSettingsFilePathForSource` - gets settings file path by source
+21. `getManagedFilePath` - gets managed settings file path
+22. File watching with unwatchFile/watchFile
+23. Config migration support
 
 ## Exports
-- PastedContent
-- SerializedStructuredHistoryEntry
-- HistoryEntry
-- ReleaseChannel
-- ProjectConfig
-- InstallMethod
-- NotificationChannel
-- AccountInfo
-- EditorMode
-- DiffTool
-- OutputStyle
-- GlobalConfig
-- DEFAULT_GLOBAL_CONFIG
-- GLOBAL_CONFIG_KEYS
-- GlobalConfigKey
-- isGlobalConfigKey
-- PROJECT_CONFIG_KEYS
-- ProjectConfigKey
-- resetTrustDialogAcceptedCacheForTesting
-- checkHasTrustDialogAccepted
-- isPathTrusted
-- isProjectConfigKey
-- saveGlobalConfig
-- getGlobalConfigWriteCount
-- CONFIG_WRITE_DISPLAY_THRESHOLD
-- getGlobalConfig
-- getRemoteControlAtStartup
-- getCustomApiKeyStatus
-- enableConfigs
-- getProjectPathForConfig
-- getCurrentProjectConfig
-- saveCurrentProjectConfig
-- isAutoUpdaterDisabled
-- shouldSkipPluginAutoupdate
-- AutoUpdaterDisabledReason
-- formatAutoUpdaterDisabledReason
-- getAutoUpdaterDisabledReason
-- getOrCreateUserID
-- recordFirstStartTime
-- getMemoryPath
-- getManagedClaudeRulesDir
-- getUserClaudeRulesDir
-- _getConfigForTesting
-- _wouldLoseAuthStateForTesting
-- _setGlobalConfigCacheForTesting
-
-## Source
-`config.ts`
+- `PastedContent` - pasted content type
+- `HistoryEntry` - history entry type
+- `ReleaseChannel` - release channel type
+- `ProjectConfig` - project config type
+- `getGlobalClaudeFile` - gets global config file
+- `getGlobalConfig` - gets global config
+- `saveGlobalConfig` - saves global config
+- `getCurrentProjectConfig` - gets project config
+- `saveCurrentProjectConfig` - saves project config
+- (Config management functions)
