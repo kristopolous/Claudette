@@ -11,4 +11,3 @@ Uses a React context to detect if a MessageResponse is nested inside another Mes
 
 ## Exports
 - `MessageResponse` - Renders message response content with optional height constraint and automatic prefix handling
-- `MessageResponseProvider` - Provider component that sets the context to true for descendant MessageResponse components

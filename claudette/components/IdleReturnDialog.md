@@ -13,4 +13,3 @@ Displays a dialog when the user returns after being idle, offering options to co
 
 ## Exports
 - `IdleReturnDialog` - React component that shows an idle return dialog with action options
-- `formatIdleDuration` - Helper function that converts minutes into a formatted duration string

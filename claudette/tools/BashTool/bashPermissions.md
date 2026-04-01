@@ -55,18 +55,15 @@ Core permission system for the Bash tool: evaluates commands against user-define
 
 ## Exports
 - `bashToolHasPermission` - async main function `(input, context, getCommandSubcommandPrefixFn?) => Promise<PermissionResult>`
-- `checkCommandOperatorPermissions` - validates piped/compound commands, returns `Promise<PermissionResult>`
 - `bashToolCheckExactMatchPermission` - exact rule check, returns `PermissionResult`
 - `bashToolCheckPermission` - prefix/wildcard + path/readonly checks, returns `PermissionResult`
 - `checkCommandAndSuggestRules` - combines checks and suggestions, returns `Promise<PermissionResult>`
-- `checkSandboxAutoAllow` - sandbox auto-allow path, returns `PermissionResult`
 - `getSimpleCommandPrefix` / `getFirstWordPrefix` - extract reusable command prefixes
 - `stripSafeWrappers` / `stripAllLeadingEnvVars` / `stripWrappersFromArgv` - stripping utilities
 - `isNormalizedCdCommand` / `isNormalizedGitCommand` / `commandHasAnyCd` - normalized command detectors
-- `suggestionForExactCommand` / `suggestionForPrefix` - rule suggestion helpers
 - `permissionRuleExtractPrefix` / `matchWildcardPattern` / `bashPermissionRule` - rule parsing/matching
 - `startSpeculativeClassifierCheck` / `consumeSpeculativeClassifierCheck` / `clearSpeculativeChecks` / `peekSpeculativeClassifierCheck` - classifier speculation management
 - `awaitClassifierAutoApproval` - for swarm workers, returns `PermissionDecisionReason | undefined`
 - `executeAsyncClassifierCheck` - runs async classifier with callbacks
-- Constants: `MAX_SUBCOMMANDS_FOR_SECURITY_CHECK` (50), `MAX_SUGGESTED_RULES_FOR_COMPOUND` (5)
-- Types: `CommandIdentityCheckers`
+- Constants: `MAX_SUBCOMMANDS_FOR_SECURITY_CHECK` (50), `MAX_SUGGESTED_RULES_FOR_COMPOUND` (5), `BINARY_HIJACK_VARS` (regex)
+- Note: `checkCommandOperatorPermissions` and `checkSandboxAutoAllow` are internal; `suggestionForExactCommand`/`suggestionForPrefix` are from shellRuleMatching.

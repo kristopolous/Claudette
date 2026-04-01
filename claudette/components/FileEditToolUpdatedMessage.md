@@ -3,7 +3,7 @@ Renders a message displaying file edit results with addition/removal counts and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `diff`
+- **External**: `react`, `react/compiler-runtime`, `diff`
 - **Internal**: `hooks/useTerminalSize`, `ink`, `utils/array`, `components/MessageResponse`, `components/StructuredDiffList`
 
 ## Logic

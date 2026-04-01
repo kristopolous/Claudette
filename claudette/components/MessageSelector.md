@@ -11,9 +11,5 @@ Displays a list of selectable user messages with the current prompt as a virtual
 
 ## Exports
 - `MessageSelector` - Dialog for selecting and restoring a previous message with code/conversation/summarize options
-- `RestoreOptionDescription` - Displays description text for the selected restore option
-- `RestoreCodeConfirmation` - Shows which files will be restored based on diff stats
-- `DiffStatsText` - Renders insertion/deletion counts with diff coloring
-- `UserMessageOption` - Renders a single user message preview in the selection list
 - `selectableUserMessagesFilter` - Filters messages to only include user-authored, non-synthetic messages
 - `messagesAfterAreOnlySynthetic` - Checks if all messages after an index are synthetic or non-meaningful

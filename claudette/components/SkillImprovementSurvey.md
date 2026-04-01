@@ -11,4 +11,3 @@ Renders a skill improvement suggestion with the skill name, a list of proposed c
 
 ## Exports
 - `SkillImprovementSurvey` - main survey component that gates rendering based on open state and input validity
-- `SkillImprovementSurveyView` - internal view component rendering the survey UI with change list and selection options

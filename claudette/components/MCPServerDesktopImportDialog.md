@@ -1,5 +1,5 @@
 ## Purpose
-Displays a dialog for importing MCP servers from Claudette Desktop into the current configuration.
+Displays a dialog for importing MCP servers from Claude Desktop into the current configuration.
 
 ## Imports
 - **Stdlib**: none

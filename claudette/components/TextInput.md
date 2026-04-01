@@ -3,7 +3,7 @@ Provides the main text input component with voice recording waveform cursor, cli
 
 ## Imports
 - **Stdlib**: bun:bundle (feature)
-- **External**: chalk, react (React, useMemo, useRef, ReactNode)
+- **External**: chalk, react (React, useMemo, useRef)
 - **Internal**: ../context/voice.js (useVoiceState), ../hooks/useClipboardImageHint.js (useClipboardImageHint), ../hooks/useSettings.js (useSettings), ../hooks/useTextInput.js (useTextInput), ../ink.js (Box, color, useAnimationFrame, useTerminalFocus, useTheme), ../types/textInputTypes.js (BaseTextInputProps), ../utils/envUtils.js (isEnvTruthy), ../utils/textHighlighting.js (TextHighlight), ./BaseTextInput.js (BaseTextInput), ./Spinner/utils.js (hueToRgb)
 
 ## Logic

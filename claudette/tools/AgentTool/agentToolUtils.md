@@ -32,10 +32,11 @@ Provides utility functions for agent tool execution and result handling.
 - `ResolvedAgentTools` - resolved agent tools type
 - `filterToolsForAgent` - filters tools for agent
 - `agentToolResultSchema` - agent result schema
+- `AgentToolResult` - agent result type
 - `classifyHandoffIfNeeded` - classifies handoff need
 - `emitTaskProgress` - emits task progress
 - `extractPartialResult` - extracts partial result
 - `finalizeAgentTool` - finalizes agent tool
 - `getLastToolUseName` - gets last tool use name
 - `runAsyncAgentLifecycle` - runs agent lifecycle
-- (Progress tracking and task lifecycle functions)
+- `countToolUses` - counts tool uses in messages

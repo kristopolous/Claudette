@@ -8,7 +8,7 @@ Provides an interactive session selector UI for browsing, searching, filtering, 
 
 ## Logic
 1. Filters logs by tag, branch, worktree, and project scope
-2. Supports text search with fuzzy matching via Fuse.js and snippet extraction
+2. Supports text search with case-insensitive substring matching and snippet extraction
 3. Groups logs by session ID with expandable/collapsible tree view
 4. Handles multiple view modes: list, search, rename, and preview
 5. Supports agentic search for deep transcript searching

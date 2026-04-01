@@ -3,7 +3,7 @@ Provides a React context for sharing keybinding state, resolution logic, and han
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (createContext, useContext, useLayoutEffect, useMemo), `react/compiler-runtime`
+- **External**: `react` (createContext, RefObject, useContext, useLayoutEffect, useMemo), `react/compiler-runtime`
 - **Internal**: `ink.js` (Key type), `resolver.js` (ChordResolveResult, getBindingDisplayText, resolveKeyWithChordState), `types.js` (KeybindingContextName, ParsedBinding, ParsedKeystroke)
 
 ## Logic

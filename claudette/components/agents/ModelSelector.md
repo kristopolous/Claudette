@@ -3,7 +3,7 @@ Provides a UI component for selecting an inference model for an agent.
 
 ## Imports
 - **External**: react, react/compiler-runtime
-- **Internal**: ink.js (Box, Text), utils/model/agent.js (getAgentModelOptions), CustomSelect/select.js (Select)
+- **Internal**: ink (Box, Text), utils/model/agent (getAgentModelOptions), CustomSelect/select (Select)
 
 ## Logic
 Retrieves available model options and ensures the current model (if custom) is included in the selection list. Renders a select component with a descriptive hint about model capabilities. Defaults to sonnet if no model is specified.

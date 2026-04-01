@@ -11,4 +11,3 @@ Maps the PR review state (approved, changes_requested, pending, merged) to a col
 
 ## Exports
 - `PrBadge` - renders a color-coded pull request badge with link
-- `getPrStatusColor` - maps review state to a color string

@@ -2,9 +2,9 @@
 A security-sensitive dialog component that prompts the user to explicitly approve or reject the use of a custom inference provider API key detected in their environment.
 
 ## Imports
-- **Stdlib**: None
-- **External**: `ui-framework` (e.g., react), `ui-components` (e.g., ink)
-- **Internal**: `utils/config`, `components/CustomSelect`, `components/design-system/Dialog`
+- **Stdlib**: none
+- **External**: `react`
+- **Internal**: `../ink`, `../utils/config`, `./CustomSelect/index`, `./design-system/Dialog`
 
 ## Logic
 1. **Security Prompting**:

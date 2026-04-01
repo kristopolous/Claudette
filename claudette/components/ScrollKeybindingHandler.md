@@ -13,11 +13,13 @@ Implements complex scroll handling including keyboard page/line navigation, mous
 - `ScrollKeybindingHandler` - component that manages all scroll-related keyboard and mouse interactions
 - `shouldClearSelectionOnKey` - determines if a keypress should clear text selection
 - `selectionFocusMoveForKey` - maps a keypress to a selection focus move for keyboard extension
+- `WheelAccelState` - type describing wheel acceleration state
 - `computeWheelStep` - calculates rows to scroll for one wheel event with acceleration
 - `readScrollSpeedBase` - reads CLAUDE_CODE_SCROLL_SPEED environment variable
 - `initWheelAccel` - creates initial wheel acceleration state
 - `dragScrollDirection` - computes autoscroll direction for a drag selection
 - `jumpBy` - scrolls by a delta amount and returns sticky state
 - `scrollUp` - scrolls up with boundary clamping
+- `ModalPagerAction` - type for modal pager action strings
 - `modalPagerAction` - maps keystrokes to modal pager actions
 - `applyModalPagerAction` - applies a modal pager action to a ScrollBox

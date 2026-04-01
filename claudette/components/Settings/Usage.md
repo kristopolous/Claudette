@@ -11,5 +11,3 @@ Fetches utilization data on mount and displays rate limit bars for current sessi
 
 ## Exports
 - `Usage` - React component that renders usage statistics with progress bars for session and weekly rate limits
-- `LimitBar` - internal component that renders a single rate limit bar with title, progress, and reset info
-- `ExtraUsageSection` - internal component that displays extra usage credits for eligible subscription plans

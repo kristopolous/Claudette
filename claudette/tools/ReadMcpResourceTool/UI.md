@@ -4,7 +4,7 @@ Renders the user-facing UI messages for the Read MCP Resource tool, displaying t
 ## Imports
 - **Stdlib**: None
 - **External**: `react`, `zod/v4`
-- **Internal**: `components/MessageResponse`, `components/shell/OutputLine`, `ink`, `Tool`, `types/message`, `utils/slowOperations`, `ReadMcpResourceTool/ReadMcpResourceTool`
+- **Internal**: `components/MessageResponse`, `components/shell/OutputLine`, `ink`, `ToolProgressData`, `types/message`, `utils/slowOperations`, `ReadMcpResourceTool/ReadMcpResourceTool`
 
 ## Logic
 Renders tool use messages showing the resource URI and server name being read. Renders tool result messages by formatting output as JSON when content exists, or displaying a dimmed "No content" placeholder when empty. Uses OutputLine component for verbose display of formatted results.

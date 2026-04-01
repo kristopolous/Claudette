@@ -11,4 +11,3 @@ Subscribes to the SandboxManager violation store to track sandbox violations, ke
 
 ## Exports
 - `SandboxViolationExpandedView` - renders a summary of sandbox-blocked operations with recent violation details
-- `formatTime` - formats a Date as "h:mm:ssa" (e.g., "1:30:45pm")

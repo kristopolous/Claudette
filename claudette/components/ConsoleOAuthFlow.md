@@ -17,4 +17,3 @@ Handles the OAuth authentication flow for logging into the inference provider, s
 
 ## Exports
 - `ConsoleOAuthFlow` - React component managing the complete OAuth login flow
-- `OAuthStatusMessage` - Internal component rendering state-specific OAuth messages

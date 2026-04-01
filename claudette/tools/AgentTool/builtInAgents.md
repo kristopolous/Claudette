@@ -22,6 +22,4 @@ Defines built-in agent definitions that ship with Claude Code.
 
 ## Exports
 - `getBuiltInAgents` - gets list of built-in agent definitions
-- `ONE_SHOT_BUILTIN_AGENT_TYPES` - set of one-shot agent types
-- `VERIFICATION_AGENT_TYPE` - verification agent type constant
-- (Built-in agent definitions)
+- `areExplorePlanAgentsEnabled` - checks if explore/plan agents are enabled

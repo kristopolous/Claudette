@@ -4,7 +4,7 @@ Provides UI rendering functions for the EnterWorktree tool, displaying worktree 
 ## Imports
 - **Stdlib**: None
 - **External**: `react`
-- **Internal**: `ink`, `Tool`, `types/message`, `utils/theme`, `EnterWorktreeTool`
+- **Internal**: `ink`, `ToolProgressData`, `types/message`, `utils/theme`, `EnterWorktreeTool`
 
 ## Logic
 Implements UI components for displaying EnterWorktree tool interactions in the terminal interface. Renders a 'Creating worktree…' message during tool use, and on completion displays the worktree branch name and path in a formatted layout using Ink components.

@@ -4,7 +4,7 @@ A theme-aware Text component that resolves theme color keys to raw colors and su
 ## Imports
 - **Stdlib**: none
 - **External**: `react`, `react/compiler-runtime`
-- **Internal**: `Text`, `Color`, `Styles`, `getTheme`, `Theme`, `useTheme`, `TextHoverColorContext`
+- **Internal**: `Text`, `Color`, `Styles`, `getTheme`, `Theme`, `useTheme`
 
 ## Logic
 Resolves the color prop through the current theme, with precedence: explicit color > hover color context > dimmed inactive. Resolves background color from theme keys and passes all styling props to the underlying Text component.

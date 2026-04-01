@@ -26,11 +26,8 @@ Manages agent memory snapshot persistence and synchronization.
 15. `loadAgentMemoryFromSnapshot` - loads memory from snapshot
 
 ## Exports
-- `getSnapshotDirForAgent` - gets snapshot directory
-- `copySnapshotToLocal` - copies snapshot to local memory
-- `saveSyncedMeta` - saves sync metadata
-- `loadSyncedMeta` - loads sync metadata
-- `shouldSyncSnapshot` - checks if sync needed
-- `syncSnapshotIfNeeded` - syncs if needed
-- `saveAgentMemorySnapshot` - saves memory snapshot
-- `loadAgentMemoryFromSnapshot` - loads from snapshot
+- `getSnapshotDirForAgent` - gets snapshot directory for agent
+- `checkAgentMemorySnapshot` - checks if sync needed
+- `initializeFromSnapshot` - initializes local memory from snapshot
+- `replaceFromSnapshot` - replaces local memory with snapshot
+- `markSnapshotSynced` - marks snapshot as synced

@@ -4,7 +4,7 @@ A dialog component that handles the connection status and user interaction for e
 ## Imports
 - **Stdlib**: `path`
 - **External**: `qrcode`, `react`
-- **Internal**: `bootstrap/state`, `bridge/bridgeStatusUtil`, `constants/figures`, `context/overlayContext`, `ink`, `keybindings/useKeybindings`, `state/AppState`, `utils/config`, `utils/git`, `components/design-system/Dialog`
+- **Internal**: `../bootstrap/state`, `../bridge/bridgeStatusUtil`, `../constants/figures`, `../context/overlayContext`, `../ink`, `../keybindings/useKeybinding`, `../state/AppState`, `../utils/config`, `../utils/git`, `./design-system/Dialog`
 
 ## Logic
 1. **Connection Status Monitoring**:

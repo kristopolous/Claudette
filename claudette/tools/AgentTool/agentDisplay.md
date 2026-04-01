@@ -25,9 +25,10 @@ Provides shared utilities for displaying agent information in CLI and interactiv
 14. `compareAgentsByName` - comparison function for sorting
 
 ## Exports
-- `AgentSource` - agent source type
 - `AgentSourceGroup` - source group type
 - `AGENT_SOURCE_GROUPS` - ordered source groups array
 - `ResolvedAgent` - resolved agent type with override info
 - `resolveAgentOverrides` - resolves agent overrides
 - `resolveAgentModelDisplay` - resolves model display string
+- `getOverrideSourceLabel` - gets human-readable source name
+- `compareAgentsByName` - comparison function for sorting

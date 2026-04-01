@@ -3,8 +3,8 @@ A UI component designed to display the real-time progress and output of bash com
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
-- **Internal**: `tools/BashTool/BashTool`, `types/tools`, `components/messages/UserBashInputMessage`, `components/shell/ShellProgressMessage`
+- **External**: `react`, `react/compiler-runtime`
+- **Internal**: `ink`, `tools/BashTool/BashTool`, `types/tools`, `components/messages/UserBashInputMessage`, `components/shell/ShellProgressMessage`
 
 ## Logic
 1. **Input Echo**: Renders the original bash command provided by the user, clearly indicating what was executed.
@@ -12,10 +12,10 @@ A UI component designed to display the real-time progress and output of bash com
     - If detailed progress information is available (via the `progress` prop), it displays:
         - Elapsed time since execution began.
         - Total number of output lines captured.
-        - A preview of the most recent output (specifically, the last 5 lines).
+        - Full output, recent output, elapsed time, and total lines (passed through to ShellProgressMessage).
         - Verbose details if the `verbose` flag is enabled.
     - **Fallback**: If no specific progress data is provided, it defaults to a generic tool use progress message.
-3. **Component Structure**: Utilizes Ink components (`Box`, `Text`) to structure the output, ensuring it integrates well within a terminal UI environment.
+3. **Component Structure**: Utilizes Ink `Box` to structure the output, ensuring it integrates well within a terminal UI environment.
 4. **Clarity and Context**: Provides essential feedback to the user about the ongoing execution of shell commands, including partial output and timing information.
 
 ## Exports

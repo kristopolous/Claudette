@@ -3,7 +3,7 @@ Renders file paths as OSC 8 hyperlinks for terminal compatibility.
 
 ## Imports
 - **Stdlib**: url (pathToFileURL)
-- **External**: react (React, ReactNode)
+- **External**: react (React)
 - **Internal**: ../ink/components/Link.js (Link)
 
 ## Logic

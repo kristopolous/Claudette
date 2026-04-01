@@ -17,5 +17,3 @@ Visualizes context usage breakdown including token counts per category, MCP tool
 
 ## Exports
 - `ContextVisualization` - React component displaying detailed context usage visualization
-- `groupBySource` - Utility function that groups items by source type and sorts by tokens
-- `CollapseStatus` - Internal component showing context collapse feature status

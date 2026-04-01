@@ -1,5 +1,5 @@
 ## Purpose
-Displays a list of previous Claudette Code sessions filtered by the current repository for the user to resume.
+Displays a list of previous Claude Code sessions filtered by the current repository for the user to resume.
 
 ## Imports
 - **Stdlib**: none

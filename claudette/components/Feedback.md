@@ -13,6 +13,3 @@ Walks the user through four steps: input description, consent review, submitting
 - `redactSensitiveInfo` - removes API keys, tokens, and credentials from text using regex patterns
 - `Feedback` - renders the multi-step feedback submission dialog
 - `createGitHubIssueUrl` - generates a pre-filled GitHub issue URL with redacted feedback data
-- `submitFeedback` - sends feedback data to the inference provider API
-- `generateTitle` - uses a lightweight model to generate a technical issue title from the description
-- `createFallbackTitle` - creates a safe fallback title from the first line of the description

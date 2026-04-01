@@ -11,4 +11,3 @@ Calculates token warning state from usage percentage and model. Supports three d
 
 ## Exports
 - `TokenWarning` - renders a token usage warning with context percentage or collapse status
-- `CollapseLabel` - internal component showing live collapse progress as "x / y summarized"

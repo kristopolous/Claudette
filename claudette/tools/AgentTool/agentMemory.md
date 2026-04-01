@@ -26,3 +26,6 @@ Manages agent memory directory paths and scope handling.
 - `AgentMemoryScope` - agent memory scope type
 - `getAgentMemoryDir` - gets memory directory for agent/scope
 - `isAgentMemoryPath` - checks if path is in agent memory
+- `getAgentMemoryEntrypoint` - gets memory file path
+- `getMemoryScopeDisplay` - gets display string for scope
+- `loadAgentMemoryPrompt` - loads persistent memory prompt
