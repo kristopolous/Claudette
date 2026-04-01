@@ -1,23 +1,45 @@
+# WebFetchTool/prompt.ts
+
 ## Purpose
-Provides tool name, description, and the secondary model prompt builder for WebFetch.
+
+Exports the WebFetch tool name, description, and a helper to construct the secondary model prompt. The prompt guides the AI in extracting information from fetched web content, with stricter rules for non-preapproved domains to mitigate copyright concerns.
 
 ## Imports
-- None
+
+- **Stdlib**: None
+- **External**: None
+- **Internal**: None
 
 ## Logic
-Exports:
-- `WEB_FETCH_TOOL_NAME` - 'WebFetch'
-- `DESCRIPTION` - multi-line string explaining:
-  - Fetches URL content, converts HTML to markdown
-  - Processes with a small fast model using a prompt
-  - When to use, usage notes (MCP preference, URL requirements, HTTP→HTTPS upgrade, read-only, summarization, cache, redirect handling, GitHub via gh CLI)
-- `makeSecondaryModelPrompt(markdownContent, prompt, isPreapprovedDomain)`: Constructs prompt for the secondary model. Includes webpage content between markers, the user's prompt, and domain-specific guidelines:
-  - Preapproved domains: concise response, include details/code/examples as needed
-  - Non-preapproved: strict 125-char quote limit, avoid verbatim copying beyond quotes, no legal commentary, no song lyrics
 
-This prompt is sent to the Haiku model via `queryHaiku` in utils to extract/summarize info from the fetched page.
+- `WEB_FETCH_TOOL_NAME = 'WebFetch'`
+- `DESCRIPTION`: Multi-line string documenting:
+  - What the tool does (fetch URL, convert HTML→markdown, process with small model)
+  - When to use (retrieve and analyze web content)
+  - Usage notes:
+    - Prefer MCP-provided WebFetch if available (fewer restrictions)
+    - URL must be fully-formed; HTTP upgraded to HTTPS automatically
+    - Prompt should describe desired extraction
+    - Read-only; may summarize large content
+    - 15-minute cache for repeated accesses
+    - Redirects: tool informs and returns redirect info; need new WebFetch with new URL
+    - GitHub URLs: prefer `gh` CLI via Bash instead
+- `makeSecondaryModelPrompt(markdownContent, prompt, isPreapprovedDomain): string`:
+  - Builds prompt for the secondary (Haiku) model
+  - Includes:
+    - "Web page content:" section with markdown between `---` delimiters
+    - The user's extraction `prompt`
+    - `guidelines` depending on domain trust:
+      - Preapproved: "Provide a concise response based on the content above. Include relevant details, code examples, and documentation excerpts as needed."
+      - Non-preapproved: Stricter rules:
+        - 125-char max for quotes
+        - Use quotation marks for exact language; avoid paraphrasing as identical
+        - Not a lawyer, don't comment on legality
+        - Never reproduce exact song lyrics
+  - Returns complete prompt string
 
 ## Exports
-- `WEB_FETCH_TOOL_NAME` (string)
-- `DESCRIPTION` (string)
-- `makeSecondaryModelPrompt(markdownContent, prompt, isPreapprovedDomain)` (function)
+
+- `WEB_FETCH_TOOL_NAME: string`
+- `DESCRIPTION: string`
+- `makeSecondaryModelPrompt(markdownContent: string, prompt: string, isPreapprovedDomain: boolean): string`

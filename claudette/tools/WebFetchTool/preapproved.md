@@ -1,32 +1,31 @@
+# WebFetchTool/preapproved.ts
+
 ## Purpose
-Defines the list of preapproved hosts for which the WebFetch tool can be used without explicit user permission per request.
+
+Defines the list of preapproved domains allowed for WebFetch without requiring explicit user approval each time. Supports hostname-only entries and path-scoped entries (e.g., `github.com/anthropics`). Provides function to check if a given hostname+path is preapproved. Security-critical: these exceptions apply only to GET requests via WebFetch, not to sandbox network restrictions.
 
 ## Imports
-- None
+
+- **Stdlib**: None
+- **External**: None
+- **Internal**: None
 
 ## Logic
-Exports:
-- `PREAPPROVED_HOSTS` - a Set of strings containing hostnames and hostname/path entries. Covers:
-  - Anthropic domains
-  - Language docs (Python, C++, Java, C#, JavaScript, Go, PHP, Swift, Kotlin, Ruby, Rust, TypeScript)
-  - Web frameworks (React, Angular, Vue, Next.js, Express, Node, Bun, jQuery, Bootstrap, Tailwind, D3, Three, Redux, Webpack, Jest, React Router)
-  - Python libs (Django, Flask, FastAPI, Pandas, NumPy, TensorFlow, PyTorch, scikit-learn, Matplotlib, Requests, Jupyter)
-  - PHP frameworks (Laravel, Symfony, WordPress)
-  - Java (Spring, Hibernate, Tomcat, Gradle, Maven)
-  - .NET (ASP.NET, .NET, NuGet, Blazor)
-  - Mobile (React Native, Flutter, iOS/macOS, Android)
-  - Data Science (Keras, Spark, Hugging Face, Kaggle)
-  - Databases (MongoDB, Redis, PostgreSQL, MySQL, SQLite, GraphQL, Prisma)
-  - Cloud/DevOps (AWS, GCP, Azure, Kubernetes, Docker, Terraform, Ansible, Vercel, Netlify, Heroku)
-  - Testing (Cypress, Selenium)
-  - Game engines (Unity, Unreal)
-  - Tools (Git, Nginx, Apache)
-- `isPreapprovedHost(hostname, pathname)`: function that checks HOSTNAME_ONLY set and PATH_PREFIXES map. Path matching enforces segment boundaries to avoid prefix collisions.
 
-The split into HOSTNAME_ONLY and PATH_PREFIXES is computed once at module load for O(1) lookups.
-
-SECURITY NOTE: Preapproval applies only to WebFetch (GET). Sandbox network restrictions are separate and do NOT inherit this list.
+- `PREAPPROVED_HOSTS`: Set of 80+ strings, each either:
+  - Hostname only (e.g., `'github.com'`, `'react.dev'`)
+  - Hostname + path prefix (e.g., `'github.com/anthropics'`) requiring exact match or subpath
+- Categories include: Anthropic services, programming language docs, web frameworks, Python libs, PHP, Java, .NET, mobile, data science, databases, cloud/devops, testing, game dev, tools
+- **SECURITY WARNING**: Only for WebFetch GET; sandbox network restrictions do NOT inherit this list because some domains (Hugging Face, Kaggle, NuGet) allow uploads which could exfiltrate data
+- Compile-time split into two maps for O(1) lookup:
+  - `HOSTNAME_ONLY`: Set of hostnames with no path restrictions
+  - `PATH_PREFIXES`: Map from hostname → array of path prefixes
+- `isPreapprovedHost(hostname, pathname): boolean`:
+  - Returns true if hostname in `HOSTNAME_ONLY`
+  - If hostname in `PATH_PREFIXES`, checks each prefix: exact match or `pathname.startsWith(prefix + '/')` (enforces segment boundary to avoid `"/foo"` matching `"/foo-evil"`)
+  - Otherwise false
 
 ## Exports
-- `PREAPPROVED_HOSTS` (Set<string>)
-- `isPreapprovedHost(hostname, pathname)` (function)
+
+- `PREAPPROVED_HOSTS: Set<string>` (readonly)
+- `isPreapprovedHost(hostname: string, pathname: string): boolean`

@@ -1,43 +1,73 @@
+# WebFetchTool/utils.ts
+
 ## Purpose
-Provides core URL fetching, caching, domain blocklist checking, and HTML-to-markdown conversion for WebFetch tool.
+
+Provides core utilities for the WebFetchTool: URL validation, domain blocklist checking, safe redirect handling, content fetching with caching, HTML-to-markdown conversion, and optional prompt application via a secondary model. Implements security boundaries (domain preapproval, egress blocking) and resource limits.
 
 ## Imports
-- **External**: `axios`, `LRUCache` from 'lru-cache'
+
+- **Stdlib**: `Buffer`
+- **External**:
+  - `axios` (HTTP client)
+  - `lru-cache` (caching)
+  - `turndown` (HTML → markdown)
 - **Internal**:
-  - `AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS`, `logEvent` from services/analytics
-  - `queryHaiku` from services/api/claude
-  - `AbortError` from utils/errors
-  - `getWebFetchUserAgent` from utils/http
-  - `logError` from utils/log
-  - `isBinaryContentType`, `persistBinaryContent` from utils/mcpOutputStorage
-  - `getSettings_DEPRECATED` from utils/settings
-  - `asSystemPrompt` from utils/systemPromptType
-  - `isPreapprovedHost` from preapproved
-  - `makeSecondaryModelPrompt` from prompt
+  - Analytics: `logEvent`
+  - API: `queryHaiku`
+  - Errors: `AbortError`
+  - HTTP: `getWebFetchUserAgent`
+  - Logging: `logError`
+  - MCP: `isBinaryContentType`, `persistBinaryContent`
+  - Settings: `getSettings_DEPRECATED`
+  - System prompt: `asSystemPrompt`
+  - WebFetchTool: `isPreapprovedHost`, `makeSecondaryModelPrompt`
 
 ## Logic
-Exports many functions and constants:
-- Custom error classes: `DomainBlockedError`, `DomainCheckFailedError`, `EgressBlockedError`
-- Caching: `URL_CACHE` (LRU, 15min TTL, 50MB), `DOMAIN_CHECK_CACHE` (128 entries, 5min)
-- `clearWebFetchCache()` clears both caches
-- Lazy `turndown` service singleton for HTML→markdown
-- Constants: `MAX_URL_LENGTH` (2000), `MAX_HTTP_CONTENT_LENGTH` (10MB), `FETCH_TIMEOUT_MS` (60s), `DOMAIN_CHECK_TIMEOUT_MS` (10s), `MAX_REDIRECTS` (10), `MAX_MARKDOWN_LENGTH` (100k)
-- `isPreapprovedUrl(url)`: checks host+path against preapproved list
-- `validateURL(url)`: length, URL parsing, no credentials, at least 2 hostname parts
-- `checkDomainBlocklist(domain)`: async check to api.anthropic.com; caches allowed; returns allowed/blocked/check_failed
-- `isPermittedRedirect(original, redirect)`: allows same origin, www changes, no port/creds changes
-- `getWithPermittedRedirects(url, signal, redirectChecker, depth)`: axios fetch with manual redirect handling; detects egress blocks
-- `getURLMarkdownContent(url, abortController)`: main entry; validates, checks cache, upgrades http→https, preflight domain check unless skip flag, fetches with redirects, converts HTML→markdown via Turndown, caches result. For binary content, also persists to disk via `persistBinaryContent`. Returns `FetchedContent`.
-- `applyPromptToMarkdown(prompt, markdownContent, signal, isNonInteractiveSession, isPreapprovedDomain)`: Sends markdown + prompt to small model (`queryHaiku`) with different guidelines for preapproved vs other domains. Truncates content to `MAX_MARKDOWN_LENGTH`. Returns model's text response.
+
+**Error Classes**:
+- `DomainBlockedError`: Domain explicitly blocked by allowlist
+- `DomainCheckFailedError`: Unable to contact blocklist service (network/enterprise policy)
+- `EgressBlockedError`: Egress proxy blocked the domain (403 with `x-proxy-error: blocked-by-allowlist`)
+
+**Caches** (LRU):
+- `URL_CACHE`: 15-minute TTL, 50MB max size; stores `{bytes, code, codeText, content, contentType, persistedPath?, persistedSize?}`
+- `DOMAIN_CHECK_CACHE`: 5-minute TTL, max 128 entries; stores `true` for allowed domains only
+
+**Lazy Service**:
+- `getTurndownService()`: Dynamically imports and instantiates Turndown HTML-to-markdown converter; reused across calls
+
+**Constants**:
+- `MAX_URL_LENGTH = 2000` (no strict limit due to JWT-signed URLs)
+- `MAX_HTTP_CONTENT_LENGTH = 10MB`
+- `FETCH_TIMEOUT_MS = 60s`
+- `DOMAIN_CHECK_TIMEOUT_MS = 10s`
+- `MAX_REDIRECTS = 10`
+- `MAX_MARKDOWN_LENGTH = 100,000` for prompt application
+
+**Functions**:
+- `isPreapprovedUrl(url)`: Returns true if hostname+path in preapproved list
+- `validateURL(url)`: Checks length, parses URL, rejects credentials, ensures hostname has ≥2 parts
+- `checkDomainBlocklist(domain)`: Queries Anthropic domain_info API; caches `allowed` only; returns `allowed`/`blocked`/`check_failed`
+- `isPermittedRedirect(original, redirect)`: Allows same-origin redirects and `www.` prefix changes; disallows port/username/password/protocol changes
+- `getWithPermittedRedirects(url, signal, redirectChecker, depth=0)`: Fetches with `maxRedirects: 0`; manually follows permitted redirects recursively; detects egress blocks; returns `AxiosResponse<ArrayBuffer>` or `RedirectInfo`
+- `getURLMarkdownContent(url, abortController)`: Main fetch entry
+  - Validates URL, checks cache, upgrades http→https, performs blocklist check (unless skipWebFetchPreflight setting), logs hostname for `ant` users
+  - Calls `getWithPermittedRedirects` with `isPermittedRedirect`
+  - If binary content type: persists raw buffer to disk via `persistBinaryContent`
+  - Converts HTML to markdown via Turndown; non-HTML used raw
+  - Caches entry under original URL with size weight
+  - Returns `FetchedContent` (or `RedirectInfo`)
+- `applyPromptToMarkdown(prompt, markdownContent, signal, isNonInteractiveSession, isPreapprovedDomain)`: Sends truncated content + prompt to secondary model (Haiku) via `queryHaiku`; returns transformed text; throws on abort
 
 ## Exports
-- `clearWebFetchCache()`
-- `isPreapprovedUrl(url)`
-- `validateURL(url)`
-- `checkDomainBlocklist(domain)`
-- `isPermittedRedirect(original, redirect)`
-- `getWithPermittedRedirects(...)`
-- `getURLMarkdownContent(url, abortController)`
-- `applyPromptToMarkdown(...)`
+
+- `clearWebFetchCache(): void`
+- `isPreapprovedUrl(url: string): boolean`
+- `validateURL(url: string): boolean`
+- `checkDomainBlocklist(domain: string): Promise<DomainCheckResult>`
+- `isPermittedRedirect(originalUrl: string, redirectUrl: string): boolean`
+- `getWithPermittedRedirects(url: string, signal: AbortSignal, redirectChecker: (original, redirect) => boolean, depth?: number): Promise<AxiosResponse<ArrayBuffer> | RedirectInfo>`
 - `FetchedContent` type
-- Plus types for errors internal but not exported
+- `getURLMarkdownContent(url: string, abortController: AbortController): Promise<FetchedContent | RedirectInfo>`
+- `applyPromptToMarkdown(prompt: string, markdownContent: string, signal: AbortSignal, isNonInteractiveSession: boolean, isPreapprovedDomain: boolean): Promise<string>`
+- `MAX_MARKDOWN_LENGTH: number`
