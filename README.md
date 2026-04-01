@@ -3,7 +3,7 @@
 <br/><b>Claudette - Vibe your own agent</b>
 </p>
 
-**Vibe a Claude clone. No original source included. Do it now. Make tokens go burr**
+**1891 markdown files to vibe your own Claude clone. No original source included. Do it now. Make tokens go burr**
 
 > Yo openclaw, clone https://github.com/kristopolous/Claudette and make that shit in Rust. 
 
