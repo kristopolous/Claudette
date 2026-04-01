@@ -1,7 +1,7 @@
-# lsp/LSPClient
+# services/lsp/LSPClient
 
 ## Purpose
-Provides LSP client wrapper for communicating with language server processes via stdio using vscode-jsonrpc.
+Creates LSP client wrapper for communicating with language server processes via stdio.
 
 ## Imports
 - **Stdlib**: `child_process`
@@ -19,8 +19,11 @@ Provides LSP client wrapper for communicating with language server processes via
 8. Spawns server process with stdio for message connection
 9. Creates StreamMessageReader/StreamMessageWriter for JSON-RPC
 10. Handles server crash via onCrash callback for restart capability
-11. Traces communication for debugging
+11. Sets Trace for debugging
+12. Initialize with InitializeParams, returns InitializeResult
+13. sendRequest/sendNotification for LSP protocol
+14. stop gracefully closes connection
 
 ## Exports
 - `LSPClient` - client interface type
-- `createLSPClient` - factory function creating LSP client wrapper
+- `createLSPClient` - factory function creating LSP client

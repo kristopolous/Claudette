@@ -1,7 +1,7 @@
-# lsp/manager
+# services/lsp/manager
 
 ## Purpose
-Provides singleton LSP server manager with initialization state tracking and test reset.
+Provides singleton LSP server manager with initialization state tracking.
 
 ## Imports
 - **Stdlib**: (none)
@@ -16,8 +16,8 @@ Provides singleton LSP server manager with initialization state tracking and tes
 5. `initializationGeneration` - counter preventing stale promises from updating state
 6. `initializationPromise` - resolves when initialization completes
 7. `_resetLspManagerForTesting` - test-only sync reset (clears state without async teardown)
-8. `getLspManager` - returns singleton or undefined if not initialized/failed/pending
-9. `getInitializationStatus` - returns current initialization state
+8. `getLspServerManager` - returns singleton or undefined if not initialized/failed/pending
+9. `getInitializationStatus` - returns current initialization status
 10. `initializeLspServerManager` - async initialization with generation tracking
 11. Registers LSP notification handlers for passive feedback
 12. Respects isBareMode for minimal initialization
@@ -25,7 +25,7 @@ Provides singleton LSP server manager with initialization state tracking and tes
 ## Exports
 - `InitializationState` - initialization state type
 - `_resetLspManagerForTesting` - test-only reset function
-- `getLspManager` - gets singleton manager instance
+- `getLspServerManager` - gets singleton manager instance
 - `getInitializationStatus` - gets initialization status
 - `initializeLspServerManager` - initializes manager asynchronously
 - `shutdownLspServerManager` - shuts down all servers

@@ -1,4 +1,4 @@
-# autoDream/config
+# services/autoDream/config
 
 ## Purpose
 Provides auto-dream enabled state check with minimal imports for UI components.
@@ -14,7 +14,7 @@ Provides auto-dream enabled state check with minimal imports for UI components.
 3. Falls through to tengu_onyx_plover GrowthBook feature if setting undefined
 4. Returns gb?.enabled === true from GrowthBook
 5. Leaf config module - intentionally minimal imports
-6. UI components can read enabled state without dragging in forked agent/task registry chain
+6. UI components can read enabled state without dragging in forked agent/task registry/message builder chain
 
 ## Exports
 - `isAutoDreamEnabled` - function checking if auto-dream enabled

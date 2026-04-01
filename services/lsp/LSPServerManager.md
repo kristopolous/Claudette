@@ -1,4 +1,4 @@
-# lsp/LSPServerManager
+# services/lsp/LSPServerManager
 
 ## Purpose
 Manages multiple LSP server instances and routes requests based on file extensions.

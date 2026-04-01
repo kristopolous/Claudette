@@ -1,0 +1,18 @@
+# Agents Command Definition (`index`)
+
+## Purpose
+Defines the `agents` command that provides a management interface for agent configurations. This is a local JSX command that loads the agents UI.
+
+## Imports
+### Internal
+- `Command` type from `../../commands.js`
+
+## Logic
+Creates a command object with:
+- `type`: `'local-jsx'` (renders a React component)
+- `name`: `'agents'`
+- `description`: `'Manage agent configurations'`
+- `load`: A function that dynamically imports `./agents.js` (or `./agents.tsx`) to load the command implementation.
+
+## Exports
+- `agents` (Command) - The command definition object that registers the agents management feature

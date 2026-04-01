@@ -1,4 +1,4 @@
-# lsp/passiveFeedback
+# services/lsp/passiveFeedback
 
 ## Purpose
 Converts LSP diagnostics to Claude diagnostic format and registers notification handlers.

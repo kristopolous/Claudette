@@ -1,28 +1,30 @@
-# extractMemories/extractMemories
+# services/extractMemories/extractMemories
 
 ## Purpose
-Extracts durable memories from session transcript and writes them to auto-memory directory using forked agent pattern.
+Extracts durable memories from session transcript and writes to auto-memory directory.
 
 ## Imports
 - **Stdlib**: `path`
 - **External**: `bun:bundle`
-- **Internal**: bootstrap state, hooks, memdir, memoryScan, paths, Tool, tool constants, message types, abortController, array utils, debug, forkedAgent, messages, GrowthBook, analytics, extractMemories prompts
+- **Internal**: bootstrap state, hooks, memdir, memoryScan/paths, Tool, BashTool, FileEditTool, FileReadTool, FileWriteTool, GlobTool, GrepTool, REPLTool, message types, abortController, array utils, debug, forkedAgent, hooks postSampling, messages, growthbook, analytics metadata, extractMemories prompts
 
 ## Logic
-1. Runs once at end of each complete query loop (no tool calls) via handleStopHooks
-2. Uses forked agent pattern (runForkedAgent) - perfect fork sharing parent's prompt cache
-3. State closure-scoped inside initExtractMemories (tests call in beforeEach for fresh closure)
-4. `isModelVisibleMessage` - filters to user/assistant messages only (excludes progress/system/attachment)
-5. Checks isAutoMemoryEnabled before running
-6. Supports TEAMMEM feature for team memory (conditional require)
-7. Uses canUseTool callback for permission context
-8. Counts model-visible messages for extraction scope
-9. Builds extract prompt (auto-only or combined with team memory)
-10. Runs forked agent with cache-safe params
-11. Creates memory-saved message after successful extraction
-12. Logs extraction events for analytics with sanitized tool names
+1. Runs once at end of each complete query loop (final response, no tool calls)
+2. Uses forked agent pattern - perfect fork sharing parent's prompt cache
+3. State closure-scoped inside initExtractMemories (fresh closure per test)
+4. `isModelVisibleMessage` - checks if message visible to model (user/assistant only)
+5. Excludes progress, system, attachment messages
+6. Uses ENTRYPOINT_NAME for memory manifest
+7. Formats memory manifest, scans memory files
+8. Checks isAutoMemoryEnabled, isAutoMemPath
+9. Uses BASH_TOOL_NAME, FILE_EDIT_TOOL_NAME, FILE_READ_TOOL_NAME, etc.
+10. Creates abort controller for cancellation
+11. Creates cache-safe params for forked agent
+12. Creates memory-saved message after extraction
+13. Logs events for analytics with sanitized tool names
+14. TEAMMEM feature-gated team memory support
 
 ## Exports
-- `initExtractMemories` - initializes extraction with closure-scoped state
-- `extractMemories` - runs memory extraction for session
 - `isModelVisibleMessage` - checks if message visible to model
+- `initExtractMemories` - initializes memory extraction
+- `extractMemories` - extracts memories from session
