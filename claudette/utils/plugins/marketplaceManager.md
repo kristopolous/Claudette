@@ -1,166 +1,50 @@
-# marketplaceManager
+# utils/plugins/marketplaceManager
 
 ## Purpose
-Only the official marketplace can be implicitly declared — it's the one
+Manages marketplace sources, caching, and plugin installation for Claude Code plugins.
 
 ## Imports
-- **Stdlib**: axios, fs/promises, lodash-es/isEqual.js, lodash-es/memoize.js, path
-- **Internal**: ../../services/analytics/growthbook.js, ../debug.js, ../envUtils.js, ../execFileNoThrow.js, ../fsOperations.js, ../git.js, ../log.js, ../settings/types.js, ./cacheUtils.js, ./fetchTelemetry.js...
+- **Stdlib**: `path`
+- **External**: `axios`, `lodash-es/isEqual/memoize`
+- **Internal**: growthbook, debug, envUtils, errors, execFileNoThrow, fsOperations, git, log, settings settings/types, JSON utils, plugins addDirPluginSettings/cacheUtils/fetchTelemetry/installedPluginsManager/marketplaceHelpers/officialMarketplace/officialMarketplaceGcs/pluginDirectories/pluginIdentifier/pluginOptionsStorage/schemas
 
-## Items
-
-### getKnownMarketplacesFile
-**Type**: Function
-
-### getMarketplacesCacheDir
-**Type**: Function
-
-### clearMarketplacesCache
-**Type**: Function
-
-### getDeclaredMarketplaces
-**Type**: Function
-
-### getMarketplaceDeclaringSource
-**Type**: Function
-
-### saveMarketplaceToSettings
-**Type**: Function
-
-### loadKnownMarketplacesConfig
-**Type**: Function
-
-### loadKnownMarketplacesConfigSafe
-**Type**: Function
-
-### saveKnownMarketplacesConfig
-**Type**: Function
-
-### registerSeedMarketplaces
-**Type**: Function
-
-### readSeedKnownMarketplaces
-**Type**: Function
-
-### findSeedMarketplaceLocation
-**Type**: Function
-
-### seedDirFor
-**Type**: Function
-
-### getPluginGitTimeoutMs
-**Type**: Function
-
-### gitPull
-**Type**: Function
-
-### gitSubmoduleUpdate
-**Type**: Function
-
-### enhanceGitPullErrorMessages
-**Type**: Function
-
-### isGitHubSshLikelyConfigured
-**Type**: Function
-
-### isAuthenticationError
-**Type**: Function
-
-### extractSshHost
-**Type**: Function
-
-### gitClone
-**Type**: Function
-
-### safeCallProgress
-**Type**: Function
-
-### reconcileSparseCheckout
-**Type**: Function
-
-### cacheMarketplaceFromGit
-**Type**: Function
-
-### redactHeaders
-**Type**: Function
-
-### redactUrlCredentials
-**Type**: Function
-
-### cacheMarketplaceFromUrl
-**Type**: Function
-
-### getCachePathForSource
-**Type**: Function
-
-### loadAndCacheMarketplace
-**Type**: Function
-
-### addMarketplaceSource
-**Type**: Function
-
-### removeMarketplaceSource
-**Type**: Function
-
-### readCachedMarketplace
-**Type**: Function
-
-### getMarketplaceCacheOnly
-**Type**: Function
-
-### getPluginByIdCacheOnly
-**Type**: Function
-
-### getPluginById
-**Type**: Function
-
-### refreshAllMarketplaces
-**Type**: Function
-
-### refreshMarketplace
-**Type**: Function
-
-### setMarketplaceAutoUpdate
-**Type**: Function
-
-### LoadedPluginMarketplace
-**Type**: Type alias
-
-### KnownMarketplacesConfig
-**Type**: Type alias
-
-### DeclaredMarketplace
-**Type**: Type alias
-
-### MarketplaceProgressCallback
-**Type**: Type alias
+## Logic
+1. Manages known marketplace sources (URLs, GitHub repos, npm packages, local files)
+2. Caches marketplace manifests locally for offline access
+3. File structure: ~/.claude/plugins/known_marketplaces.json, marketplaces/
+4. `loadKnownMarketplacesConfig` - loads marketplace configuration
+5. `saveKnownMarketplacesConfig` - saves marketplace configuration
+6. `addMarketplaceSource` - adds new marketplace source
+7. `removeMarketplaceSource` - removes marketplace source
+8. `refreshMarketplace` - refreshes marketplace cache
+9. `refreshAllMarketplaces` - refreshes all marketplace caches
+10. `installPluginFromMarketplace` - installs plugin from marketplace entry
+11. `getPluginFromMarketplace` - gets plugin from marketplace
+12. `getMarketplaceManifest` - gets marketplace manifest
+13. `cacheMarketplaceManifest` - caches manifest locally
+14. `getAddDirEnabledPlugins` - gets add-dir enabled plugins
+15. `getAddDirExtraMarketplaces` - gets add-dir extra marketplaces
+16. `markPluginVersionOrphaned` - marks plugin version orphaned
+17. `classifyFetchError`, `logPluginFetch` - fetch telemetry
+18. `removeAllPluginsForMarketplace` - removes all plugins for marketplace
+19. `extractHostFromSource`, `formatSourceForDisplay` - source helpers
+20. `getHostPatternsFromAllowlist`, `getStrictKnownMarketplaces` - allowlist helpers
+21. `isSourceAllowedByPolicy`, `isSourceInBlocklist` - policy checks
+22. `OFFICIAL_MARKETPLACE_NAME`, `OFFICIAL_MARKETPLACE_SOURCE` - official marketplace constants
+23. `fetchOfficialMarketplaceFromGcs` - fetches official marketplace from GCS
+24. `deletePluginDataDir`, `getPluginSeedDirs`, `getPluginsDirectory` - directory helpers
+25. `parsePluginIdentifier` - parses plugin identifier
+26. `deletePluginOptions` - deletes plugin options
 
 ## Exports
-- getMarketplacesCacheDir
-- clearMarketplacesCache
-- KnownMarketplacesConfig
-- DeclaredMarketplace
-- getDeclaredMarketplaces
-- getMarketplaceDeclaringSource
-- saveMarketplaceToSettings
-- loadKnownMarketplacesConfig
-- loadKnownMarketplacesConfigSafe
-- saveKnownMarketplacesConfig
-- registerSeedMarketplaces
-- gitPull
-- gitClone
-- MarketplaceProgressCallback
-- reconcileSparseCheckout
-- addMarketplaceSource
-- removeMarketplaceSource
-- getMarketplaceCacheOnly
-- getMarketplace
-- getPluginByIdCacheOnly
-- getPluginById
-- refreshAllMarketplaces
-- refreshMarketplace
-- setMarketplaceAutoUpdate
-- _test
-
-## Source
-`marketplaceManager.ts`
+- `loadKnownMarketplacesConfig` - loads marketplace config
+- `saveKnownMarketplacesConfig` - saves marketplace config
+- `addMarketplaceSource` - adds marketplace source
+- `removeMarketplaceSource` - removes marketplace source
+- `refreshMarketplace` - refreshes marketplace
+- `refreshAllMarketplaces` - refreshes all marketplaces
+- `installPluginFromMarketplace` - installs plugin
+- `getPluginFromMarketplace` - gets plugin
+- `getMarketplaceManifest` - gets manifest
+- `cacheMarketplaceManifest` - caches manifest
+- (Marketplace management functions)

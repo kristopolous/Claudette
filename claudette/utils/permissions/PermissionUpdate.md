@@ -1,47 +1,35 @@
-# PermissionUpdate
+# utils/permissions/PermissionUpdate
 
 ## Purpose
-Types extracted to src/types/permissions.ts to break import cycles
+Provides permission update application and rule extraction utilities.
 
 ## Imports
-- **Stdlib**: path
-- **Internal**: ../../Tool.js, ../debug.js, ../settings/constants.js, ../slowOperations.js, ./filesystem.js, ./PermissionRule.js, ./permissionsLoader.js
+- **Stdlib**: `path`
+- **External**: (none)
+- **Internal**: Tool, types permissions, debug, settings constants/settings, JSON utils, filesystem, PermissionRule, PermissionUpdateSchema, permissionRuleParser, permissionsLoader
 
-## Items
-
-### extractRules
-**Type**: Function
-
-### hasRules
-**Type**: Function
-
-### applyPermissionUpdate
-**Type**: Function
-
-### applyPermissionUpdates
-**Type**: Function
-
-### supportsPersistence
-**Type**: Function
-
-### persistPermissionUpdate
-**Type**: Function
-
-### persistPermissionUpdates
-**Type**: Function
-
-### createReadRuleSuggestion
-**Type**: Function
+## Logic
+1. Re-exports: AdditionalWorkingDirectory, WorkingDirectorySource
+2. `extractRules` - extracts PermissionRuleValue[] from updates
+3. Handles 'addRules' type updates
+4. `hasRules` - checks if updates have rules
+5. `applyPermissionUpdate` - applies single update to context
+6. 'setMode': updates mode in context
+7. 'addRules': adds rules to alwaysAllowRules/alwaysDenyRules/askRules
+8. 'replaceRules': replaces rules in destination
+9. 'removeRules': removes rules from destination
+10. 'addDirectories': adds directories to additionalWorkingDirectories
+11. 'removeDirectories': removes directories from additionalWorkingDirectories
+12. `applyPermissionUpdates` - applies multiple updates
+13. `persistPermissionUpdates` - persists updates to settings
+14. Uses permissionRuleValueToString for string conversion
+15. Uses addPermissionRulesToSettings for adding rules
 
 ## Exports
-- extractRules
-- hasRules
-- applyPermissionUpdate
-- applyPermissionUpdates
-- supportsPersistence
-- persistPermissionUpdate
-- persistPermissionUpdates
-- createReadRuleSuggestion
-
-## Source
-`PermissionUpdate.ts`
+- `AdditionalWorkingDirectory` - working directory type
+- `WorkingDirectorySource` - working directory source type
+- `extractRules` - extracts rules from updates
+- `hasRules` - checks if updates have rules
+- `applyPermissionUpdate` - applies single update
+- `applyPermissionUpdates` - applies multiple updates
+- `persistPermissionUpdates` - persists updates

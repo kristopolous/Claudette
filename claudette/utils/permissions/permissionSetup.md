@@ -1,173 +1,42 @@
-# permissionSetup
+# utils/permissions/permissionSetup
 
 ## Purpose
-Only check Bash rules
+Provides permission mode setup and transition utilities.
 
 ## Imports
-- **Stdlib**: bun:bundle, path, path
-- **Internal**: ../cwd.js, ../envUtils.js, ../settings/constants.js, ../settings/constants.js, ./permissions.js, ./permissionsLoader.js, ../../tools/AgentTool/constants.js, ../../tools/BashTool/toolName.js, ../../tools/PowerShellTool/toolName.js, ../../tools.js...
+- **Stdlib**: `path`
+- **External**: `bun:bundle`
+- **Internal**: bootstrap state, Tool, cwd, envUtils, settings constants/settings, PermissionMode, permissions, permissionsLoader, autoModeState, growthbook, commands add-dir validation, analytics, AgentTool, BashTool, PowerShellTool, tools, fsOperations, betas, debug, gracefulShutdown, model model, permissions dangerousPatterns/PermissionRule/PermissionUpdate/PermissionUpdateSchema/permissionRuleParser
 
-## Items
-
-### isDangerousBashPermission
-**Type**: Function
-
-### isDangerousPowerShellPermission
-**Type**: Function
-
-### isDangerousTaskPermission
-**Type**: Function
-
-### formatPermissionSource
-**Type**: Function
-
-### isDangerousClassifierPermission
-**Type**: Function
-
-### findDangerousClassifierPermissions
-**Type**: Function
-
-### isOverlyBroadBashAllowRule
-**Type**: Function
-
-### isOverlyBroadPowerShellAllowRule
-**Type**: Function
-
-### findOverlyBroadBashPermissions
-**Type**: Function
-
-### findOverlyBroadPowerShellPermissions
-**Type**: Function
-
-### isPermissionUpdateDestination
-**Type**: Function
-
-### removeDangerousPermissions
-**Type**: Function
-
-### stripDangerousPermissionsForAutoMode
-**Type**: Function
-
-### restoreDangerousPermissions
-**Type**: Function
-
-### transitionPermissionMode
-**Type**: Function
-
-### parseBaseToolsFromCLI
-**Type**: Function
-
-### isSymlinkTo
-**Type**: Function
-
-### initialPermissionModeFromCLI
-**Type**: Function
-
-### parseToolListFromCLI
-**Type**: Function
-
-### initializeToolPermissionContext
-**Type**: Function
-
-### getAutoModeUnavailableNotification
-**Type**: Function
-
-### verifyAutoModeGateAccess
-**Type**: Function
-
-### shouldDisableBypassPermissions
-**Type**: Function
-
-### isAutoModeDisabledBySettings
-**Type**: Function
-
-### isAutoModeGateEnabled
-**Type**: Function
-
-### getAutoModeUnavailableReason
-**Type**: Function
-
-### parseAutoModeEnabledState
-**Type**: Function
-
-### getAutoModeEnabledState
-**Type**: Function
-
-### getAutoModeEnabledStateIfCached
-**Type**: Function
-
-### hasAutoModeOptInAnySource
-**Type**: Function
-
-### isBypassPermissionsModeDisabled
-**Type**: Function
-
-### createDisabledBypassPermissionsContext
-**Type**: Function
-
-### checkAndDisableBypassPermissions
-**Type**: Function
-
-### isDefaultPermissionModeAuto
-**Type**: Function
-
-### shouldPlanUseAutoMode
-**Type**: Function
-
-### prepareContextForPlanMode
-**Type**: Function
-
-### transitionPlanAutoMode
-**Type**: Function
-
-### DangerousPermissionInfo
-**Type**: Type alias
-
-### AutoModeGateCheckResult
-**Type**: Type alias
-
-### AutoModeUnavailableReason
-**Type**: Type alias
-
-### AutoModeEnabledState
-**Type**: Type alias
+## Logic
+1. `getOriginalCwd`, `handleAutoModeTransition`, `handlePlanModeTransition` - bootstrap state functions
+2. `setHasExitedPlanMode`, `setNeedsAutoModeExitAttachment` - state setters
+3. `ToolPermissionContext`, `ToolPermissionRulesBySource` - permission context types
+4. `getCwd` - gets current working directory
+5. `isEnvTruthy` - checks env var truthy
+6. `SettingSource`, `SETTING_SOURCES` - setting source types
+7. `getSettings_DEPRECATED`, `getSettingsFilePathForSource`, `getUseAutoModeDuringPlan`, `hasAutoModeOptIn` - settings functions
+8. `permissionModeFromString` - converts string to PermissionMode
+9. `applyPermissionRulesToPermissionContext` - applies rules to context
+10. `loadAllPermissionRulesFromDisk` - loads rules from disk
+11. `autoModeStateModule` - auto mode state module (TRANSCRIPT_CLASSIFIER feature-gated)
+12. `checkSecurityRestrictionGate` - checks security restriction gate
+13. `checkStatsigFeatureGate_CACHED_MAY_BE_STALE` - checks Statsig gate
+14. `getDynamicConfig_BLOCKS_ON_INIT` - gets dynamic config
+15. `getFeatureValue_CACHED_MAY_BE_STALE` - gets feature value
+16. `addDirHelpMessage`, `validateDirectoryForWorkspace` - add-dir validation
+17. `AGENT_TOOL_NAME`, `BASH_TOOL_NAME`, `POWERSHELL_TOOL_NAME` - tool name constants
+18. `getToolsForDefaultPreset`, `parseToolPreset` - tool preset functions
+19. `getFsImplementation`, `safeResolvePath` - filesystem functions
+20. `modelSupportsAutoMode` - checks model auto mode support
+21. `logForDebugging` - debug logging
+22. `gracefulShutdown` - graceful shutdown
+23. `getMainLoopModel` - gets main loop model
+24. `CROSS_PLATFORM_CODE_EXEC`, `DANGEROUS_BASH_PATTERNS` - dangerous patterns
+25. `PermissionRule`, `PermissionRuleSource`, `PermissionRuleValue` - rule types
+26. `AdditionalWorkingDirectory`, `applyPermissionUpdate` - update types/functions
+27. `PermissionUpdateDestination` - destination type
+28. `normalizeLegacyToolName`, `permissionRuleValueFromString` - parser functions
 
 ## Exports
-- isDangerousBashPermission
-- isDangerousPowerShellPermission
-- isDangerousTaskPermission
-- DangerousPermissionInfo
-- findDangerousClassifierPermissions
-- isOverlyBroadBashAllowRule
-- isOverlyBroadPowerShellAllowRule
-- findOverlyBroadBashPermissions
-- findOverlyBroadPowerShellPermissions
-- removeDangerousPermissions
-- stripDangerousPermissionsForAutoMode
-- restoreDangerousPermissions
-- transitionPermissionMode
-- parseBaseToolsFromCLI
-- initialPermissionModeFromCLI
-- parseToolListFromCLI
-- initializeToolPermissionContext
-- AutoModeGateCheckResult
-- AutoModeUnavailableReason
-- getAutoModeUnavailableNotification
-- verifyAutoModeGateAccess
-- shouldDisableBypassPermissions
-- isAutoModeGateEnabled
-- getAutoModeUnavailableReason
-- AutoModeEnabledState
-- getAutoModeEnabledState
-- getAutoModeEnabledStateIfCached
-- hasAutoModeOptInAnySource
-- isBypassPermissionsModeDisabled
-- createDisabledBypassPermissionsContext
-- checkAndDisableBypassPermissions
-- isDefaultPermissionModeAuto
-- shouldPlanUseAutoMode
-- prepareContextForPlanMode
-- transitionPlanAutoMode
-
-## Source
-`permissionSetup.ts`
+- (Permission setup functions)

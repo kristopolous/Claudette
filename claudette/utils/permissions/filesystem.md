@@ -1,158 +1,58 @@
-# filesystem
+# utils/permissions/filesystem
 
 ## Purpose
-Try both path separators (Windows paths may not be normalized to /)
+Provides filesystem permission utilities for path validation and dangerous file/directory protection.
 
 ## Imports
-- **Stdlib**: bun:bundle, crypto, ignore, lodash-es/memoize.js, os, path, src/memdir/paths.js, src/tools/AgentTool/agentMemory.js, zod/v4
-- **Internal**: ../../bootstrap/state.js, ../../services/analytics/growthbook.js, ../../Tool.js, ../../tools/FileReadTool/prompt.js, ../cwd.js, ../envUtils.js, ../plans.js, ../platform.js, ../sessionStorage.js, ../settings/constants.js...
+- **Stdlib**: `crypto`, `os`, `path`
+- **External**: `bun:bundle`, `ignore`, `lodash-es/memoize`, `zod/v4`
+- **Internal**: memdir paths, AgentTool agentMemory, FileEditTool constants, bootstrap state, growthbook, Tool, FileReadTool, cwd, envUtils, fsOperations, path, plans, platform, sessionStorage, settings constants/settings, shell readOnlyCommandValidation, toolResultStorage, windowsPaths, permissions PermissionResult/PermissionRule/PermissionUpdate/PermissionUpdateSchema
 
-## Items
-
-### normalizeCaseForComparison
-**Type**: Function
-
-### getClaudeSkillScope
-**Type**: Function
-
-### relativePath
-**Type**: Function
-
-### toPosixPath
-**Type**: Function
-
-### getSettingsPaths
-**Type**: Function
-
-### isClaudeSettingsPath
-**Type**: Function
-
-### isClaudeConfigFilePath
-**Type**: Function
-
-### isSessionPlanFile
-**Type**: Function
-
-### getSessionMemoryDir
-**Type**: Function
-
-### getSessionMemoryPath
-**Type**: Function
-
-### isSessionMemoryPath
-**Type**: Function
-
-### isProjectDirPath
-**Type**: Function
-
-### isScratchpadEnabled
-**Type**: Function
-
-### getClaudeTempDirName
-**Type**: Function
-
-### getClaudeTempDir
-**Type**: Function
-
-### getBundledSkillsRoot
-**Type**: Function
-
-### getProjectTempDir
-**Type**: Function
-
-### getScratchpadDir
-**Type**: Function
-
-### ensureScratchpadDir
-**Type**: Function
-
-### isScratchpadPath
-**Type**: Function
-
-### isDangerousFilePathToAutoEdit
-**Type**: Function
-
-### hasSuspiciousWindowsPathPattern
-**Type**: Function
-
-### checkPathSafetyForAutoEdit
-**Type**: Function
-
-### allWorkingDirectories
-**Type**: Function
-
-### pathInAllowedWorkingPath
-**Type**: Function
-
-### pathInWorkingPath
-**Type**: Function
-
-### rootPathForSource
-**Type**: Function
-
-### prependDirSep
-**Type**: Function
-
-### normalizePatternToPath
-**Type**: Function
-
-### normalizePatternsToPath
-**Type**: Function
-
-### getFileReadIgnorePatterns
-**Type**: Function
-
-### patternWithRoot
-**Type**: Function
-
-### getPatternsByRoot
-**Type**: Function
-
-### matchingRuleForInput
-**Type**: Function
-
-### checkReadPermissionForTool
-**Type**: Function
-
-### generateSuggestions
-**Type**: Function
-
-### checkEditableInternalPath
-**Type**: Function
-
-### checkReadableInternalPath
-**Type**: Function
+## Logic
+1. `DANGEROUS_FILES` - protected files (.gitconfig, .bashrc, .zshrc, .mcp.json, .claude.json, etc.)
+2. `DANGEROUS_DIRECTORIES` - protected directories (.git, .vscode, .idea, .claude)
+3. `isPathInDangerousFile` - checks if path is dangerous file
+4. `isPathInDangerousDirectory` - checks if path in dangerous directory
+5. `isPathSafeForAutoEdit` - checks if path safe for auto-editing
+6. `expandPath` - expands path with tilde notation
+7. `sanitizePath` - sanitizes path for safe use
+8. `containsPathTraversal` - checks for path traversal attempts
+9. `getDirectoryForPath` - gets directory for path
+10. `pathInWorkingPath` - checks if path in working path
+11. `isAgentMemoryPath` - checks if path is agent memory path
+12. `isAutoMemPath` - checks if path is auto memory path
+13. `getToolResultsDir` - gets tool results directory
+14. `getPlanSlug`, `getPlansDirectory` - plan utilities
+15. `getSettingsFilePathForSource` - gets settings file path
+16. `getSettingsRootPathForSource` - gets settings root path
+17. `containsVulnerableUncPath` - checks for vulnerable UNC path
+18. `windowsPathToPosixPath` - converts Windows to POSIX path
+19. `getRuleByContentsForToolName` - gets rule by contents
+20. `createReadRuleSuggestion` - creates read rule suggestion
+21. `applyPermissionUpdates` - applies permission updates
+22. `persistPermissionUpdates` - persists permission updates
 
 ## Exports
-- DANGEROUS_FILES
-- DANGEROUS_DIRECTORIES
-- normalizeCaseForComparison
-- getClaudeSkillScope
-- relativePath
-- toPosixPath
-- isClaudeSettingsPath
-- getSessionMemoryDir
-- getSessionMemoryPath
-- isScratchpadEnabled
-- getClaudeTempDirName
-- getClaudeTempDir
-- getBundledSkillsRoot
-- getProjectTempDir
-- getScratchpadDir
-- ensureScratchpadDir
-- checkPathSafetyForAutoEdit
-- allWorkingDirectories
-- getResolvedWorkingDirPaths
-- pathInAllowedWorkingPath
-- pathInWorkingPath
-- normalizePatternsToPath
-- getFileReadIgnorePatterns
-- matchingRuleForInput
-- checkReadPermissionForTool
-- checkWritePermissionForTool
-- generateSuggestions
-- checkEditableInternalPath
-- checkReadableInternalPath
-
-## Source
-`filesystem.ts`
+- `DANGEROUS_FILES` - dangerous files array
+- `DANGEROUS_DIRECTORIES` - dangerous directories array
+- `isPathInDangerousFile` - checks dangerous file
+- `isPathInDangerousDirectory` - checks dangerous directory
+- `isPathSafeForAutoEdit` - checks safe for auto-edit
+- `expandPath` - expands path
+- `sanitizePath` - sanitizes path
+- `containsPathTraversal` - checks path traversal
+- `getDirectoryForPath` - gets directory
+- `pathInWorkingPath` - checks path in working path
+- `isAgentMemoryPath` - checks agent memory path
+- `isAutoMemPath` - checks auto memory path
+- `getToolResultsDir` - gets tool results dir
+- `getPlanSlug` - gets plan slug
+- `getPlansDirectory` - gets plans directory
+- `getSettingsFilePathForSource` - gets settings file path
+- `getSettingsRootPathForSource` - gets settings root path
+- `containsVulnerableUncPath` - checks vulnerable UNC path
+- `windowsPathToPosixPath` - converts Windows to POSIX
+- `getRuleByContentsForToolName` - gets rule by contents
+- `createReadRuleSuggestion` - creates read rule suggestion
+- `applyPermissionUpdates` - applies permission updates
+- `persistPermissionUpdates` - persists permission updates

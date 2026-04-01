@@ -1,26 +1,28 @@
-# check1mAccess
+# utils/model/check1mAccess
 
 ## Purpose
-undefined = no cache yet, treat as not enabled (conservative)
+Provides 1M context access checks for Opus and Sonnet models.
 
 ## Imports
-- **Stdlib**: src/services/claudeAiLimits.js
-- **Internal**: ../auth.js, ../config.js, ../context.js
+- **Stdlib**: (none)
+- **External**: (none)
+- **Internal**: claudeAiLimits, auth, config, context
 
-## Items
-
-### isExtraUsageEnabled
-**Type**: Function
-
-### checkOpus1mAccess
-**Type**: Function
-
-### checkSonnet1mAccess
-**Type**: Function
+## Logic
+1. `isExtraUsageEnabled` - checks if extra usage enabled from cached reason
+2. undefined = no cache yet, treat as not enabled (conservative)
+3. null = no disabled reason from API, extra usage enabled
+4. Checks OverageDisabledReason enum values:
+   - 'out_of_credits' = provisioned but depleted (enabled)
+   - 'overage_not_provisioned', 'org_level_disabled', etc. = not enabled
+5. `checkOpus1mAccess` - checks if Opus 1M context access allowed
+6. Returns false if 1M context disabled via env var
+7. Subscribers: access if extra usage enabled
+8. Non-subscribers (API/PAYG): always have access
+9. `checkSonnet1mAccess` - checks if Sonnet 1M context access allowed
+10. Same logic as Opus check
 
 ## Exports
-- checkOpus1mAccess
-- checkSonnet1mAccess
-
-## Source
-`check1mAccess.ts`
+- `isExtraUsageEnabled` - checks extra usage enabled
+- `checkOpus1mAccess` - checks Opus 1M access
+- `checkSonnet1mAccess` - checks Sonnet 1M access

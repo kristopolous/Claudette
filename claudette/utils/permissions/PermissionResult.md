@@ -1,18 +1,27 @@
-# PermissionResult
+# utils/permissions/PermissionResult
 
 ## Purpose
-Types extracted to src/types/permissions.ts to break import cycles
+Provides permission result type re-exports and helper functions.
 
 ## Imports
-(none detected)
+- **Stdlib**: (none)
+- **External**: (none)
+- **Internal**: types permissions
 
-## Items
-
-### getRuleBehaviorDescription
-**Type**: Function
+## Logic
+1. Re-exports: PermissionAllowDecision, PermissionAskDecision, PermissionDecision, PermissionDecisionReason, PermissionDenyDecision, PermissionMetadata, PermissionResult
+2. `getRuleBehaviorDescription` - gets prose description for rule behavior
+3. 'allow' → 'allowed'
+4. 'deny' → 'denied'
+5. default (ask) → 'asked for confirmation for'
+6. Used for user-facing messages about permission decisions
 
 ## Exports
-- getRuleBehaviorDescription
-
-## Source
-`PermissionResult.ts`
+- `PermissionAllowDecision` - allow decision type
+- `PermissionAskDecision` - ask decision type
+- `PermissionDecision` - decision type
+- `PermissionDecisionReason` - decision reason type
+- `PermissionDenyDecision` - deny decision type
+- `PermissionMetadata` - metadata type
+- `PermissionResult` - result type
+- `getRuleBehaviorDescription` - gets behavior description

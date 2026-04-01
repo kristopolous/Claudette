@@ -1,129 +1,40 @@
-# installer
+# utils/nativeInstaller/installer
 
 ## Purpose
-7 days in milliseconds - used for mtime-based lock stale timeout.
+Implements file-based native installer system with directory management and version control.
 
 ## Imports
-- **Stdlib**: fs, os, path
-- **Internal**: ../autoUpdater.js, ../cleanupRegistry.js, ../config.js, ../debug.js, ../doctorDiagnostic.js, ../env.js, ../envDynamic.js, ../envUtils.js, ../errors.js, ../execFileNoThrow.js...
+- **Stdlib**: `fs`, `fs/promises`, `os`, `path`
+- **External**: (none)
+- **Internal**: analytics, autoUpdater, cleanupRegistry, config, debug, doctorDiagnostic, env, envDynamic, envUtils, errors, execFileNoThrow, localInstaller, lockfile, log, semver, shellConfig, sleep, xdg, nativeInstaller download/pidLock
 
-## Items
-
-### getPlatform
-**Type**: Function
-
-### getBinaryName
-**Type**: Function
-
-### getBaseDirectories
-**Type**: Function
-
-### isPossibleClaudeBinary
-**Type**: Function
-
-### getVersionPaths
-**Type**: Function
-
-### tryWithVersionLock
-**Type**: Function
-
-### atomicMoveToInstallPath
-**Type**: Function
-
-### installVersionFromPackage
-**Type**: Function
-
-### installVersionFromBinary
-**Type**: Function
-
-### installVersion
-**Type**: Function
-
-### performVersionUpdate
-**Type**: Function
-
-### versionIsAvailable
-**Type**: Function
-
-### updateLatest
-**Type**: Function
-
-### removeDirectoryIfEmpty
-**Type**: Function
-
-### updateSymlink
-**Type**: Function
-
-### checkInstall
-**Type**: Function
-
-### installLatest
-**Type**: Function
-
-### installLatestImpl
-**Type**: Function
-
-### getVersionFromSymlink
-**Type**: Function
-
-### getLockFilePathFromVersionPath
-**Type**: Function
-
-### lockCurrentVersion
-**Type**: Function
-
-### logLockAcquisitionError
-**Type**: Function
-
-### forceRemoveLock
-**Type**: Function
-
-### cleanupOldVersions
-**Type**: Function
-
-### isNpmSymlink
-**Type**: Function
-
-### removeInstalledSymlink
-**Type**: Function
-
-### cleanupShellAliases
-**Type**: Function
-
-### manualRemoveNpmPackage
-**Type**: Function
-
-### tryRemove
-**Type**: Function
-
-### attemptNpmUninstall
-**Type**: Function
-
-### cleanupNpmInstallations
-**Type**: Function
-
-### SetupMessage
-**Type**: Type alias
-
-### InstallLatestResult
-**Type**: Type alias
-
-### VersionInfo
-**Type**: Type alias
+## Logic
+1. `VERSION_RETENTION_COUNT` (2) - versions to retain
+2. `LOCK_STALE_MS` (7 days) - mtime-based lock stale timeout
+3. Directory structure management with symlinks
+4. Version installation and activation
+5. Multi-process safety with locking
+6. Simple fallback mechanism using modification time
+7. Supports both JS and native builds
+8. `checkInstall` - checks installation status
+9. `cleanupNpmInstallations` - cleans up npm installations
+10. `cleanupOldVersions` - cleans up old versions
+11. `cleanupShellAliases` - cleans up shell aliases
+12. `installLatest` - installs latest version
+13. `lockCurrentVersion` - locks current version
+14. `removeInstalledSymlink` - removes installed symlink
+15. Uses acquireProcessLifetimeLock for process safety
+16. Uses withLock for file operations
+17. Handles version retention and cleanup
 
 ## Exports
-- VERSION_RETENTION_COUNT
-- SetupMessage
-- getPlatform
-- getBinaryName
-- removeDirectoryIfEmpty
-- checkInstall
-- installLatest
-- lockCurrentVersion
-- cleanupOldVersions
-- removeInstalledSymlink
-- cleanupShellAliases
-- cleanupNpmInstallations
-
-## Source
-`installer.ts`
+- `VERSION_RETENTION_COUNT` - version retention constant
+- `LOCK_STALE_MS` - lock stale timeout constant
+- `checkInstall` - checks installation
+- `cleanupNpmInstallations` - cleans npm installations
+- `cleanupOldVersions` - cleans old versions
+- `cleanupShellAliases` - cleans shell aliases
+- `installLatest` - installs latest
+- `lockCurrentVersion` - locks version
+- `removeInstalledSymlink` - removes symlink
+- (Installer implementation functions)
