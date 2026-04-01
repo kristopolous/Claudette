@@ -9,7 +9,7 @@ Entry point that registers the 'plugin' command and loads the plugin management 
 Defines the plugin command with:
 - Type: 'local-jsx' (React Ink UI)
 - Name: 'plugin' with aliases ['plugins', 'marketplace']
-- Description: 'Manage Claude Code plugins'
+- Description: 'Manage Claudette plugins'
 - immediate: true (shows UI immediately)
 - load: dynamically imports ./plugin.js
 

@@ -1,7 +1,7 @@
 # ccrClient
 
 ## Purpose
-Implements CCR (Claude Code Remote) client for worker registration, heartbeat, state reporting, and event streaming with coalescing.
+Implements CCR (Claudette Remote) client for worker registration, heartbeat, state reporting, and event streaming with coalescing.
 
 ## Imports
 - **Stdlib**: `crypto`

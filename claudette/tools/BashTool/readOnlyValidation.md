@@ -52,3 +52,4 @@ Provides unified allowlist-based validation for read-only commands and flags. De
 ## Exports
 
 - `isCommandSafeViaFlagParsing(command: string): boolean`
+- `checkReadOnlyConstraints(input: {command: string}, toolPermissionContext: ToolPermissionContext): PermissionResult`

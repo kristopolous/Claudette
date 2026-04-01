@@ -1,5 +1,5 @@
 ## Purpose
-Open the settings/config panel to adjust Claude Code preferences.
+Open the settings/config panel to adjust Claudette preferences.
 
 ## Imports
 - **Internal**: Settings component from UI components

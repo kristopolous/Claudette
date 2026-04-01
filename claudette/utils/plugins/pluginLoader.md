@@ -1,7 +1,7 @@
 # utils/plugins/pluginLoader
 
 ## Purpose
-Discovers, loads, and validates Claude Code plugins from marketplaces and git repositories.
+Discovers, loads, and validates Claudette plugins from marketplaces and git repositories.
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`

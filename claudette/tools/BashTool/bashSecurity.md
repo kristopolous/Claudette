@@ -53,13 +53,5 @@ The module provides both sync (`bashCommandIsSafe_DEPRECATED`) and async (`bashC
 ## Exports
 - `bashCommandIsSafeAsync_DEPRECATED` - async function `(command: string, onDivergence?: () => void) => Promise<PermissionResult>`
 - `bashCommandIsSafe_DEPRECATED` - sync function `(command: string) => PermissionResult` (deprecated)
-- `stripSafeHeredocSubstitutions` - strips safe heredocs, returns string or `null`
-- `hasSafeHeredocSubstitution` - boolean check
-- `isNormalizedGitCommand` / `isNormalizedCdCommand` / `commandHasAnyCd` - normalized command detectors
-- `getSimpleCommandPrefix` / `getFirstWordPrefix` - prefix extraction for rules
-- `suggestionForExactCommand` / `suggestionForPrefix` - rule suggestion helpers
-- `permissionRuleExtractPrefix` / `matchWildcardPattern` / `bashPermissionRule` - rule utilities
-- `startSpeculativeClassifierCheck` / `consumeSpeculativeClassifierCheck` / `clearSpeculativeChecks` / `peekSpeculativeClassifierCheck` - classifier speculation
-- `awaitClassifierAutoApproval` - returns high-confidence allow reason for swarm
-- `executeAsyncClassifierCheck` - runs async classifier with callbacks
-- Constants: `MAX_SUBCOMMANDS_FOR_SECURITY_CHECK` (50), `MAX_SUGGESTED_RULES_FOR_COMPOUND` (5), `BASH_SECURITY_CHECK_IDS` (map of check names to IDs)
+- `stripSafeHeredocSubstitutions` - strips safe heredoc substitutions, returns `string | null`
+- `hasSafeHeredocSubstitution` - boolean check for safe heredoc substitution

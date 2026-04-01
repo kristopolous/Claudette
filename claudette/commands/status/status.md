@@ -1,7 +1,7 @@
 # Status Command (`status`)
 
 ## Purpose
-Opens the Settings UI with the "Status" tab active, displaying Claude Code status information including version, model, account, API connectivity, and tool statuses.
+Opens the Settings UI with the "Status" tab active, displaying Claudette status information including version, model, account, API connectivity, and tool statuses.
 
 ## Imports
 ### Stdlib

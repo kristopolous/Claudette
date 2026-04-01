@@ -1,5 +1,5 @@
 ## Purpose
-Analyzes Claude Code usage data to generate insights about user behavior, session patterns, and productivity trends.
+Analyzes Claudette usage data to generate insights about user behavior, session patterns, and productivity trends.
 
 ## Imports
 - **Stdlib**: `child_process`, `diff`, `fs/promises`, `os`, `path`

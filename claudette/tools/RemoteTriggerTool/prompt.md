@@ -1,5 +1,5 @@
 ## Purpose
-Provides the description and prompt text for the Remote Trigger tool that manages scheduled remote Claude Code agents via the claude.ai CCR API.
+Provides the description and prompt text for the Remote Trigger tool that manages scheduled remote Claudette agents via the claude.ai CCR API.
 
 ## Imports
 - **Stdlib**: None

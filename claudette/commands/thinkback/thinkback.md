@@ -1,7 +1,7 @@
 # Think-Back Command (`think-back`)
 
 ## Purpose
-Generates and displays a personalized "Year in Review" animation showcasing the user's Claude Code activity. Handles installation of the thinkback plugin from the marketplace, then provides a menu to play the animation, edit content, fix errors, or regenerate. Gated by a Statsig feature flag.
+Generates and displays a personalized "Year in Review" animation showcasing the user's Claudette activity. Handles installation of the thinkback plugin from the marketplace, then provides a menu to play the animation, edit content, fix errors, or regenerate. Gated by a Statsig feature flag.
 
 ## Imports
 ### External

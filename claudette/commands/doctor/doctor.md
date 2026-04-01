@@ -1,5 +1,5 @@
 ## Purpose
-Launches the Doctor screen to diagnose and verify Claude Code installation and settings.
+Launches the Doctor screen to diagnose and verify Claudette installation and settings.
 
 ## Imports
 - **External**: `react`

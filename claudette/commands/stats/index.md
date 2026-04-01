@@ -1,7 +1,7 @@
 # Stats Command Definition (`index`)
 
 ## Purpose
-Defines the `stats` command for showing Claude Code usage statistics and activity.
+Defines the `stats` command for showing Claudette usage statistics and activity.
 
 ## Imports
 ### Internal
@@ -11,7 +11,7 @@ Defines the `stats` command for showing Claude Code usage statistics and activit
 Creates a command object:
 - `type`: `'local-jsx'`
 - `name`: `'stats'`
-- `description`: `'Show your Claude Code usage statistics and activity'`
+- `description`: `'Show your Claudette usage statistics and activity'`
 - `load`: Dynamic import of `./stats.js` (or `.tsx`)
 
 ## Exports

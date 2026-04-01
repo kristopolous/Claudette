@@ -12,7 +12,7 @@ Defines the `think-back` command, which generates and displays a "Year in Review
 Creates a command object:
 - `type`: `'local-jsx'`
 - `name`: `'think-back'`
-- `description`: `'Your 2025 Claude Code Year in Review'`
+- `description`: `'Your 2025 Claudette Year in Review'`
 - `isEnabled`: Returns true only if `checkStatsigFeatureGate_CACHED_MAY_BE_STALE('tengu_thinkback')` is true (feature flag).
 - `load`: Dynamic import of `./thinkback.js` (or `.tsx`)
 

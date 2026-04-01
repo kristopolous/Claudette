@@ -1,7 +1,7 @@
 # Stickers Command Definition (`index`)
 
 ## Purpose
-Defines the `stickers` command for ordering Claude Code stickers.
+Defines the `stickers` command for ordering Claudette stickers.
 
 ## Imports
 ### Internal
@@ -11,7 +11,7 @@ Defines the `stickers` command for ordering Claude Code stickers.
 Creates a command object:
 - `type`: `'local'` (non-JSX, returns text result)
 - `name`: `'stickers'`
-- `description`: `'Order Claude Code stickers'`
+- `description`: `'Order Claudette stickers'`
 - `supportsNonInteractive`: `false` (requires interactive environment to open browser)
 - `load`: Dynamic import of `./stickers.js` (or `.ts`)
 

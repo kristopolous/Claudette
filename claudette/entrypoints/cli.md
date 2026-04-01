@@ -1,7 +1,7 @@
 # cli
 
 ## Purpose
-Bootstrap entrypoint for Claude Code CLI with fast-paths for common flags and special modes.
+Bootstrap entrypoint for Claudette CLI with fast-paths for common flags and special modes.
 
 ## Imports
 - **Stdlib**: `process`

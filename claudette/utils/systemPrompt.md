@@ -20,7 +20,7 @@ Provides system prompt building utilities based on priority rules.
      - Proactive mode: agent prompt APPENDED to default
      - Otherwise: agent prompt REPLACES default
    - 3. Custom system prompt (if specified via --system-prompt)
-   - 4. Default system prompt (standard Claude Code prompt)
+   - 4. Default system prompt (standard Claudette prompt)
 6. appendSystemPrompt always added at end (except when override set)
 7. Coordinator mode: uses getCoordinatorSystemPrompt from coordinatorMode.js
 8. Lazy require to avoid circular dependency at module load time

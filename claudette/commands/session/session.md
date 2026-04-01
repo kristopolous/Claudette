@@ -1,7 +1,7 @@
 # Session Command (`session`)
 
 ## Purpose
-Displays the remote session URL and a QR code when Claude Code is running in remote mode (e.g., via `claude --remote`). Allows quick access from mobile devices. Hidden when not in remote mode.
+Displays the remote session URL and a QR code when Claudette is running in remote mode (e.g., via `claude --remote`). Allows quick access from mobile devices. Hidden when not in remote mode.
 
 ## Imports
 ### External

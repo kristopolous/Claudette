@@ -21,7 +21,7 @@ Files API client for downloading and uploading files to Anthropic Public Files A
 10. Logs debug info and errors
 11. Uses sleep for retry backoff
 12. Logs events for analytics
-13. Used by Claude Code agent for file attachments at session startup
+13. Used by Claudette agent for file attachments at session startup
 
 ## Exports
 - `FILES_API_BETA_HEADER` - beta header constant

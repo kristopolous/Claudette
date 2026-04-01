@@ -91,7 +91,6 @@ Each command has a function extracting paths from args:
 - `PathCommand` type
 - `PATH_EXTRACTORS` constant
 - `COMMAND_OPERATION_TYPE` constant
-- `COMMAND_VALIDATOR` constant
 - `createPathChecker(command, operationTypeOverride?)` function
 - `checkPathConstraints(input, cwd, toolPermissionContext, compoundCommandHasCd?, astRedirects?, astCommands?)` function
 - `stripWrappersFromArgv(argv)` function

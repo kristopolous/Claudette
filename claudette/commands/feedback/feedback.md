@@ -1,5 +1,5 @@
 ## Purpose
-Submit feedback about Claude Code (bug reports, suggestions).
+Submit feedback about Claudette (bug reports, suggestions).
 
 ## Imports
 - **External**: React

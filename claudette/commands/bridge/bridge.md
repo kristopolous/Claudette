@@ -1,5 +1,5 @@
 ## Purpose
-Manages the bidirectional Remote Control bridge connection for Claude Code on the web.
+Manages the bidirectional Remote Control bridge connection for Claudette on the web.
 
 ## Imports
 - **Stdlib**: `child_process` (spawnSync)

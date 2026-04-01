@@ -1,5 +1,5 @@
 ## Purpose
-Generates prompt documentation for the configuration tool that allows getting and setting Claude Code configuration settings.
+Generates prompt documentation for the configuration tool that allows getting and setting Claudette configuration settings.
 
 ## Imports
 - **Stdlib**: None

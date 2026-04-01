@@ -1,7 +1,7 @@
 # setup
 
 ## Purpose
-Implements main setup function that initializes Claude Code session environment.
+Implements main setup function that initializes Claudette session environment.
 
 ## Imports
 - **Stdlib**: `process`

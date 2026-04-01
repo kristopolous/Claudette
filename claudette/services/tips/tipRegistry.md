@@ -1,7 +1,7 @@
 # services/tips/tipRegistry
 
 ## Purpose
-Provides tip registry for contextual tips shown during Claude Code startup spinner.
+Provides tip registry for contextual tips shown during Claudette startup spinner.
 
 ## Imports
 - **Stdlib**: (none)

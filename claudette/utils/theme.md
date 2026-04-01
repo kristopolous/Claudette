@@ -1,7 +1,7 @@
 # utils/theme
 
 ## Purpose
-Provides theme configuration for Claude Code UI colors.
+Provides theme configuration for Claudette UI colors.
 
 ## Imports
 - **Stdlib**: (none)

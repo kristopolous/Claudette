@@ -1,5 +1,5 @@
 ## Purpose
-Displays the current version of Claude Code and exits.
+Displays the current version of Claudette and exits.
 
 ## Imports
 - **Internal**: `Command` type, `getVersionString`

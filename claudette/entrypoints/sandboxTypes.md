@@ -1,7 +1,7 @@
 # sandboxTypes
 
 ## Purpose
-Provides sandbox configuration types for the Claude Code Agent SDK, serving as single source of truth for sandbox settings.
+Provides sandbox configuration types for the Claudette Agent SDK, serving as single source of truth for sandbox settings.
 
 ## Imports
 - **Stdlib**: (none)

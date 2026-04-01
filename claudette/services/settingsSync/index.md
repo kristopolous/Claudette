@@ -1,7 +1,7 @@
 # settingsSync/index
 
 ## Purpose
-Syncs user settings and memory files across Claude Code environments (interactive CLI and CCR).
+Syncs user settings and memory files across Claudette environments (interactive CLI and CCR).
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`

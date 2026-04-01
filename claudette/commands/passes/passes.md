@@ -1,7 +1,7 @@
 # Passes Command (`passes`)
 
 ## Purpose
-Displays the Passes (referral program) interface, allowing users to share a free week of Claude Code with friends. Tracks first visit to control upsell visibility. Supports earning extra usage through referrals.
+Displays the Passes (referral program) interface, allowing users to share a free week of Claudette with friends. Tracks first visit to control upsell visibility. Supports earning extra usage through referrals.
 
 ## Imports
 ### Stdlib

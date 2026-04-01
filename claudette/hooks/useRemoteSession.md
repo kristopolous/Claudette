@@ -1,7 +1,7 @@
 # useRemoteSession
 
 ## Purpose
-Manages a remote CCR (Claude Code Remote) session via WebSocket, handling messaging, permissions, and session lifecycle.
+Manages a remote CCR (Claudette Remote) session via WebSocket, handling messaging, permissions, and session lifecycle.
 
 ## Imports
 - **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef` from 'react'

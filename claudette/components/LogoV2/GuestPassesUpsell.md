@@ -29,7 +29,7 @@ Provides guest passes upsell component and utilities.
 18. `GuestPassesUpsell` - React component for guest passes upsell
 19. Gets referrer reward via getCachedReferrerReward
 20. Renders Text with dimColor
-21. Shows "[✻] [✻] [✻] · Share Claude Code and earn {amount} of extra usage · /passes" or "3 guest passes at /passes"
+21. Shows "[✻] [✻] [✻] · Share Claudette and earn {amount} of extra usage · /passes" or "3 guest passes at /passes"
 22. `useState` - React hook
 23. `Text` - ink text component
 24. `logEvent` - logs analytics event

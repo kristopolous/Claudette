@@ -1,33 +1,35 @@
 ## Purpose
-Prompt generation module for BashTool that creates LLM prompts for various bash operations and validations.
+Provides utility functions for retrieving timeout settings used in BashTool prompts.
 
 ## Imports
-- **Stdlib**: none
-- **External**: none
-- **Internal**: 
-  - `shouldUseSandbox` (BashTool/shouldUseSandbox)
-  - `toolName` (BashTool/toolName)
-  - `utils` (BashTool/utils)
-  - `sedValidation` (BashTool/sedValidation)
-  - `pathValidation` (BashTool/pathValidation)
-  - `readOnlyValidation` (BashTool/readOnlyValidation)
-  - `destructiveCommandWarning` (BashTool/destructiveCommandWarning)
-  - `sedEditParser` (BashTool/sedEditParser)
-  - `commentLabel` (BashTool/commentLabel)
+- **External**: `bun:bundle`
+- **Internal**:
+  - `constants/prompts` - `prependBullets`
+  - `utils/attribution` - `getAttributionTexts`
+  - `utils/embeddedTools` - `hasEmbeddedSearchTools`
+  - `utils/envUtils` - `isEnvTruthy`
+  - `utils/gitSettings` - `shouldIncludeGitInstructions`
+  - `utils/permissions/filesystem` - `getClaudeTempDir`
+  - `utils/sandbox/sandbox-adapter` - `SandboxManager`
+  - `utils/slowOperations` - `jsonStringify`
+  - `utils/timeouts` - `getDefaultBashTimeoutMs`, `getMaxBashTimeoutMs`
+  - `utils/undercover` - `getUndercoverInstructions`, `isUndercover`
+  - `AgentTool/constants` - `AGENT_TOOL_NAME`
+  - `FileEditTool/constants` - `FILE_EDIT_TOOL_NAME`
+  - `FileReadTool/prompt` - `FILE_READ_TOOL_NAME`
+  - `FileWriteTool/prompt` - `FILE_WRITE_TOOL_NAME`
+  - `GlobTool/prompt` - `GLOB_TOOL_NAME`
+  - `GrepTool/prompt` - `GREP_TOOL_NAME`
+  - `TodoWriteTool/TodoWriteTool` - `TodoWriteTool`
+  - `BashTool/toolName` - `BASH_TOOL_NAME`
 
 ## Logic
-Provides specialized prompt generators for bash operations including directory creation, file removal, sed edits, and command execution. Each function returns a formatted prompt string that guides the LLM on proper usage, safety checks, and validation requirements. The module also defines constants for plan mode transitions and includes helper functions for constructing prompts that incorporate validation results, sandbox status, and command-specific guidelines.
+This module exports two functions for timeout configuration:
+- `getDefaultTimeoutMs()` returns the default timeout for bash commands (from `getDefaultBashTimeoutMs`).
+- `getMaxTimeoutMs()` returns the maximum allowed timeout (from `getMaxBashTimeoutMs`).
+
+The file also contains extensive internal functions (`getSimplePrompt`, `getCommitAndPRInstructions`, `getSimpleSandboxSection`, etc.) that build the complete Bash tool system prompt. These internal functions combine tool usage guidelines, sandbox restrictions, git protocols, and context-specific instructions to produce the final prompt string used by the tool. 
 
 ## Exports
-- `mkdirPrompt` - Generates prompt for mkdir command with validation messages
-- `rmPrompt` - Generates prompt for rm command with validation and warnings
-- `rmdirPrompt` - Generates prompt for rmdir command
-- `mvPrompt` - Generates prompt for mv command
-- `cpPrompt` - Generates prompt for cp command
-- `findPrompt` - Generates prompt for find command
-- `EXIT_PLAN_MODE_PROMPT` - Constant prompt text for exiting plan mode
-- `getCommandPrompt` - Generates prompt for general command execution with validation
-- `getSedPrompt` - Generates prompt specifically for sed edit operations
-- `getPromptWithOverwriteCheck` - Generates prompt with file overwrite validation
-- `getPromptWithSandboxCheck` - Generates prompt with sandbox environment notice
-- `getPromptWithReadOnlyCheck` - Generates prompt with read-only file system warning
+- `getDefaultTimeoutMs(): number`
+- `getMaxTimeoutMs(): number`

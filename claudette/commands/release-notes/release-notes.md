@@ -1,7 +1,7 @@
 # Release Notes Command (`release-notes`)
 
 ## Purpose
-Fetches and displays release notes (changelog) for Claude Code. Attempts a quick network fetch (500ms timeout), falls back to cached notes, and shows a URL if none are available.
+Fetches and displays release notes (changelog) for Claudette. Attempts a quick network fetch (500ms timeout), falls back to cached notes, and shows a URL if none are available.
 
 ## Imports
 ### Internal

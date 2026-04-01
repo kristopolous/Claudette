@@ -1,7 +1,7 @@
 # tools/AgentTool/built-in/statuslineSetup
 
 ## Purpose
-Defines the Statusline Setup agent for creating/updating Claude Code status line commands.
+Defines the Statusline Setup agent for creating/updating Claudette status line commands.
 
 ## Imports
 - **Stdlib**: (none)

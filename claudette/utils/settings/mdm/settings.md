@@ -1,7 +1,7 @@
 # utils/settings/mdm/settings
 
 ## Purpose
-Provides MDM (Mobile Device Management) profile enforcement for Claude Code managed settings.
+Provides MDM (Mobile Device Management) profile enforcement for Claudette managed settings.
 
 ## Imports
 - **Stdlib**: `path`

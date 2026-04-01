@@ -6,7 +6,7 @@ Provides lazy-loaded command metadata for the `feedback` command with conditiona
 
 ## Logic
 1. Command with type 'local-jsx'
-2. Name: 'feedback', description: 'Submit feedback about Claude Code'
+2. Name: 'feedback', description: 'Submit feedback about Claudette'
 3. Aliases: ['bug']
 4. Argument hint: '[report]' (optional initial description)
 5. `isEnabled` returns false when:

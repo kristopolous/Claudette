@@ -1,7 +1,7 @@
 # utils/fingerprint
 
 ## Purpose
-Computes 3-character fingerprint for Claude Code attribution.
+Computes 3-character fingerprint for Claudette attribution.
 
 ## Imports
 - **Stdlib**: `crypto`
@@ -19,7 +19,7 @@ Computes 3-character fingerprint for Claude Code attribution.
 8. IMPORTANT: Do not change without coordination with 1P/3P APIs
 9. `computeFingerprintFromMessages` - computes from message array
 10. Uses MACRO.VERSION for version string
-11. Used for Claude Code attribution tracking
+11. Used for Claudette attribution tracking
 
 ## Exports
 - `FINGERPRINT_SALT` - fingerprint salt constant

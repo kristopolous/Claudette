@@ -1,7 +1,7 @@
 # tools/AgentTool/builtInAgents
 
 ## Purpose
-Defines built-in agent definitions that ship with Claude Code.
+Defines built-in agent definitions that ship with Claudette.
 
 ## Imports
 - **Stdlib**: (none)

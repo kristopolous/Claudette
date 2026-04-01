@@ -1,7 +1,7 @@
 # utils/telemetry/sessionTracing
 
 ## Purpose
-Provides session tracing for Claude Code using OpenTelemetry (BETA).
+Provides session tracing for Claudette using OpenTelemetry (BETA).
 
 ## Imports
 - **Stdlib**: `async_hooks`
@@ -9,7 +9,7 @@ Provides session tracing for Claude Code using OpenTelemetry (BETA).
 - **Internal**: growthbook, message types, envUtils, telemetryAttributes, telemetry betaSessionTracing/perfettoTracing
 
 ## Logic
-1. High-level API for creating and managing spans to trace Claude Code workflows
+1. High-level API for creating and managing spans to trace Claudette workflows
 2. Each user interaction creates root interaction span, containing operation spans (LLM requests, tool calls, etc.)
 3. Requirements: Enhanced telemetry via feature('ENHANCED_TELEMETRY_BETA'), OTEL_TRACES_EXPORTER configured
 4. `Span` - OpenTelemetry span type (re-exported)

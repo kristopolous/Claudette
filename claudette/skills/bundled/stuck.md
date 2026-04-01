@@ -1,7 +1,7 @@
 # stuck
 
 ## Purpose
-Implements the /stuck bundled skill for diagnosing frozen/slow Claude Code sessions.
+Implements the /stuck bundled skill for diagnosing frozen/slow Claudette sessions.
 
 ## Imports
 - **Stdlib**: (none)
@@ -9,7 +9,7 @@ Implements the /stuck bundled skill for diagnosing frozen/slow Claude Code sessi
 - **Internal**: bundledSkills
 
 ## Logic
-1. Scans for other Claude Code processes (excluding current PID)
+1. Scans for other Claudette processes (excluding current PID)
 2. Detects stuck session signs:
    - High CPU (≥90% sustained) - infinite loop
    - State D (uninterruptible sleep) - I/O hang

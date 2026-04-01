@@ -1,7 +1,7 @@
 # Stickers Command (`stickers`)
 
 ## Purpose
-Opens the browser to the sticker ordering page for Claude Code. Reports whether the browser was successfully launched or provides a fallback URL.
+Opens the browser to the sticker ordering page for Claudette. Reports whether the browser was successfully launched or provides a fallback URL.
 
 ## Imports
 ### Internal

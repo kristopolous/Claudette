@@ -1,7 +1,7 @@
 # services/api/firstTokenDate
 
 ## Purpose
-Fetches and caches user's first Claude Code token date for tenure tracking.
+Fetches and caches user's first Claudette token date for tenure tracking.
 
 ## Imports
 - **Stdlib**: (none)

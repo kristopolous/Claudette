@@ -32,7 +32,7 @@ Tool for executing Windows PowerShell commands with comprehensive security, sand
    - Interprets exit codes semantically
    - Manages large output via file persistence (>64MB truncation)
    - Resizes image output if detected
-   - Extracts Claude Code hints and clears cwd if outside project
+   - Extracts Claudette hints and clears cwd if outside project
 4. Returns structured output with stdout, stderr, exit code interpretation, background task info
 
 ## Exports

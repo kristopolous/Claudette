@@ -1,7 +1,7 @@
 # agentSdkTypes
 
 ## Purpose
-Main entrypoint for Claude Code Agent SDK types, re-exporting public API from core and runtime types.
+Main entrypoint for Claudette Agent SDK types, re-exporting public API from core and runtime types.
 
 ## Imports
 - **Stdlib**: (none)

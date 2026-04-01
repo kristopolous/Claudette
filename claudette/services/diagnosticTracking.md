@@ -1,7 +1,7 @@
 # services/diagnosticTracking
 
 ## Purpose
-Tracks LSP diagnostics for displaying IDE errors/warnings in Claude Code.
+Tracks LSP diagnostics for displaying IDE errors/warnings in Claudette.
 
 ## Imports
 - **Stdlib**: (none)

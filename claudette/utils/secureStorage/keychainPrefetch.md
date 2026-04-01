@@ -10,8 +10,8 @@ Fires macOS keychain reads in parallel with main.tsx module evaluation.
 
 ## Logic
 1. `isRemoteManagedSettingsEligible` reads two keychain entries SEQUENTIALLY via sync execSync:
-   - "Claude Code-credentials" (OAuth tokens) ~32ms
-   - "Claude Code" (legacy API key) ~33ms
+   - "Claudette-credentials" (OAuth tokens) ~32ms
+   - "Claudette" (legacy API key) ~33ms
    - Sequential cost: ~65ms on every macOS startup
 2. Firing both here lets subprocesses run in parallel with ~65ms of main.tsx imports
 3. `ensureKeychainPrefetchCompleted` awaited alongside `ensureMdmSettingsLoaded` in main.tsx preAction

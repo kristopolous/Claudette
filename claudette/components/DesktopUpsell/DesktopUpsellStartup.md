@@ -1,5 +1,5 @@
 ## Purpose
-Displays a startup dialog prompting users to try the Claude Code desktop application with options to defer or dismiss permanently.
+Displays a startup dialog prompting users to try the Claudette desktop application with options to defer or dismiss permanently.
 
 ## Imports
 - **Stdlib**: process
@@ -10,7 +10,7 @@ Displays a startup dialog prompting users to try the Claude Code desktop applica
 1. Checks if the current platform is supported (macOS or Windows x64)
 2. Retrieves dynamic config to determine if the startup dialog is enabled
 3. Tracks how many times the upsell has been shown, hiding after 3 displays
-4. Renders a PermissionDialog with a Select offering "Open in Claude Code Desktop", "Not now", and "Don't ask again" options
+4. Renders a PermissionDialog with a Select offering "Open in Claudette Desktop", "Not now", and "Don't ask again" options
 5. On "try" selection, transitions to a DesktopHandoff component; on dismissal, persists config and calls onDone
 
 ## Exports

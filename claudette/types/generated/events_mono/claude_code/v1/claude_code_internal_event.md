@@ -1,7 +1,7 @@
 # claude_code_internal_event
 
 ## Purpose
-Generated TypeScript types for Claude Code internal telemetry events.
+Generated TypeScript types for Claudette internal telemetry events.
 
 ## Imports
 - **Stdlib**: (none)

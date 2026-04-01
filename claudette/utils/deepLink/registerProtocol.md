@@ -10,10 +10,10 @@ Registers claude-cli:// custom URI scheme with OS for deep linking.
 
 ## Logic
 1. `MACOS_BUNDLE_ID` - 'com.anthropic.claude-code-url-handler'
-2. `APP_NAME` - 'Claude Code URL Handler'
+2. `APP_NAME` - 'Claudette URL Handler'
 3. `DESKTOP_FILE_NAME` - 'claude-code-url-handler.desktop'
-4. `MACOS_APP_NAME` - 'Claude Code URL Handler.app'
-5. `MACOS_APP_DIR` - ~/Applications/Claude Code URL Handler.app
+4. `MACOS_APP_NAME` - 'Claudette URL Handler.app'
+5. `MACOS_APP_DIR` - ~/Applications/Claudette URL Handler.app
 6. `MACOS_SYMLINK_PATH` - symlink to claude binary in app bundle
 7. `linuxDesktopPath` - $XDG_DATA_HOME/applications/claude-code-url-handler.desktop
 8. `WINDOWS_REG_KEY` - HKCU\Software\Classes\claude-cli

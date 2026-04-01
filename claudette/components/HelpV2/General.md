@@ -1,5 +1,5 @@
 ## Purpose
-Displays general help information about Claude Code capabilities and available keyboard shortcuts.
+Displays general help information about Claudette capabilities and available keyboard shortcuts.
 
 ## Imports
 - **External**: react, react/compiler-runtime

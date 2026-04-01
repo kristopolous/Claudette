@@ -1,5 +1,5 @@
 ## Purpose
-Display the total cost and duration of the current Claude Code session.
+Display the total cost and duration of the current Claudette session.
 
 ## Imports
 - **Stdlib**: None

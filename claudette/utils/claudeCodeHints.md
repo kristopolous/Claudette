@@ -1,7 +1,7 @@
 # utils/claudeCodeHints
 
 ## Purpose
-Parses Claude Code hints protocol from tool output for install prompts.
+Parses Claudette hints protocol from tool output for install prompts.
 
 ## Imports
 - **Stdlib**: (none)

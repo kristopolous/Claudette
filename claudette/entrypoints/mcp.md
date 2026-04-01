@@ -1,7 +1,7 @@
 # mcp
 
 ## Purpose
-Implements MCP (Model Context Protocol) server that exposes Claude Code tools to external clients.
+Implements MCP (Model Context Protocol) server that exposes Claudette tools to external clients.
 
 ## Imports
 - **Stdlib**: (none)

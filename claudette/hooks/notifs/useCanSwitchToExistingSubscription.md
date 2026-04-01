@@ -21,7 +21,7 @@ Shows a low-priority startup notification encouraging users with an existing Cla
 - If subscription found:
   - Increments `subscriptionNoticeCount`
   - Logs analytics `tengu_switch_to_subscription_notice_shown`
-  - Returns notification JSX: "Use your existing Claude {type} plan with Claude Code · /login to activate"
+  - Returns notification JSX: "Use your existing Claude {type} plan with Claudette · /login to activate"
 - Not shown if no subscription found, already logged in, or limit reached
 
 ## Exports

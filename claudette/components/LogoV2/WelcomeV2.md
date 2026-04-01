@@ -1,7 +1,7 @@
 # components/LogoV2/WelcomeV2
 
 ## Purpose
-Provides welcome screen component for Claude Code startup display.
+Provides welcome screen component for Claudette startup display.
 
 ## Imports
 - **Stdlib**: (none)
@@ -17,7 +17,7 @@ Provides welcome screen component for Claude Code startup display.
 6. If Apple Terminal: renders AppleTerminalWelcomeV2 with theme
 7. If light theme (light, light-daltonized, light-ansi): renders light theme welcome
 8. Uses memoized Text components for ASCII art
-9. Renders "Welcome to Claude Code" with version
+9. Renders "Welcome to Claudette" with version
 10. Renders Clawd ASCII art with block characters
 11. If dark theme: renders dark theme welcome
 12. Uses color="clawd_body" for Clawd body

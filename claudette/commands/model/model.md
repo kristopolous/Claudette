@@ -1,7 +1,7 @@
 # Model Command (`model`)
 
 ## Purpose
-Allows users to select or set the AI model for Claude Code. Supports interactive model picking via ModelPicker, direct model specification via argument, and displays the current model. Handles validation, 1M context access checks, fast mode interactions, and effort display.
+Allows users to select or set the AI model for Claudette. Supports interactive model picking via ModelPicker, direct model specification via argument, and displays the current model. Handles validation, 1M context access checks, fast mode interactions, and effort display.
 
 ## Imports
 ### External

@@ -1,7 +1,7 @@
 # Status Command Definition (`index`)
 
 ## Purpose
-Defines the `status` command, which shows Claude Code status information (version, model, account, API connectivity, tool statuses). The command executes immediately when typed.
+Defines the `status` command, which shows Claudette status information (version, model, account, API connectivity, tool statuses). The command executes immediately when typed.
 
 ## Imports
 ### Internal
@@ -11,7 +11,7 @@ Defines the `status` command, which shows Claude Code status information (versio
 Creates a command object:
 - `type`: `'local-jsx'`
 - `name`: `'status'`
-- `description`: `'Show Claude Code status including version, model, account, API connectivity, and tool statuses'`
+- `description`: `'Show Claudette status including version, model, account, API connectivity, and tool statuses'`
 - `immediate`: `true` (executes immediately)
 - `load`: Dynamic import of `./status.js` (or `.tsx`)
 

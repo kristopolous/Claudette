@@ -1,7 +1,7 @@
 # utils/plugins/marketplaceManager
 
 ## Purpose
-Manages marketplace sources, caching, and plugin installation for Claude Code plugins.
+Manages marketplace sources, caching, and plugin installation for Claudette plugins.
 
 ## Imports
 - **Stdlib**: `path`

@@ -11,7 +11,7 @@ Provides remote session detail dialog component for viewing remote agent task de
 ## Logic
 1. `Props` - { session, toolUseContext, onDone, onBack?, onKill? }
 2. `formatToolUseSummary` - formats tool use as compact one-line summary
-3. plan_ready phase (ExitPlanMode): "Review the plan in Claude Code on the web"
+3. plan_ready phase (ExitPlanMode): "Review the plan in Claudette on the web"
 4. AskUserQuestion: shows question text as CTA, not tool name
 5. For other tools: shows tool name + first meaningful string arg
 6. Collapses whitespace for multi-line inputs

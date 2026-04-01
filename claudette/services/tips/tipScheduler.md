@@ -1,7 +1,7 @@
 # services/tips/tipScheduler
 
 ## Purpose
-Selects and records tips to show during Claude Code startup spinner.
+Selects and records tips to show during Claudette startup spinner.
 
 ## Imports
 - **Stdlib**: (none)

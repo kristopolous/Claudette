@@ -1,5 +1,5 @@
 ## Purpose
-Tool for getting and setting Claude Code configuration settings (theme, model, permissions, etc.).
+Tool for getting and setting Claudette configuration settings (theme, model, permissions, etc.).
 
 ## Imports
 - **External**: `zod/v4`

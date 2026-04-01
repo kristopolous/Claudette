@@ -1,5 +1,5 @@
 ## Purpose
-Install Claude Code native build and set up shell launcher.
+Install Claudette native build and set up shell launcher.
 
 ## Imports
 - **External**: React

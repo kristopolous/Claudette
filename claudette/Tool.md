@@ -1,7 +1,7 @@
 # Tool
 
 ## Purpose
-Defines the core Tool interface and tool registry for Claude Code.
+Defines the core Tool interface and tool registry for Claudette.
 
 ## Imports
 - **Stdlib**: (none)
