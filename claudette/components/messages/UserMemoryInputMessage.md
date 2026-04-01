@@ -14,4 +14,3 @@ Renders user memory input messages with a hash prefix and a random acknowledgmen
 
 ## Exports
 - `UserMemoryInputMessage` - React component rendering memory input with acknowledgment
-- `getSavingMessage` - Internal function returning a random acknowledgment phrase

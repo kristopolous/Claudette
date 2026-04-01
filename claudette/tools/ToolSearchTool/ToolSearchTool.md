@@ -27,11 +27,7 @@ Tool for searching deferred tools (lazy-loaded tools) by name or description, wi
 
 ## Exports
 - `ToolSearchTool` - Main tool definition
-- `Input` - Type (query, max_results?)
+- `inputSchema` - Input schema (query, max_results?)
+- `outputSchema` - Output schema
 - `Output` - Type (matches[], query, total_deferred_tools, pending_mcp_servers?)
 - `clearToolSearchDescriptionCache` - Clears memoization cache
-- Helper: `getDeferredToolsCacheKey`
-- Helper: `parseToolName`
-- Helper: `compileTermPatterns`
-- Helper: `searchToolsWithKeywords`
-- Helper: `buildSearchResult`

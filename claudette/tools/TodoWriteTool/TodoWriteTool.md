@@ -24,6 +24,4 @@ Tool for updating the session's task checklist (todo list), replacing the entire
 
 ## Exports
 - `TodoWriteTool` - Main tool definition
-- `Input` - Type with todos: TodoListSchema
 - `Output` - Type with oldTodos, newTodos, verificationNudgeNeeded?
-- Constant: `TODO_WRITE_TOOL_NAME`

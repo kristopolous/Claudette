@@ -3,7 +3,7 @@
 <br/><b>Claudette - Vibe your own claude</b>
 </p>
 
-**1961 skills to vibe a Claude clone. No original source included. Do it now. Make tokens go burr**
+**1961 skills to vibe a Claude clone. Make tokens go burr**
 
 > Yo openclaw, clone https://github.com/kristopolous/Claudette and make that shit in Rust. 
 

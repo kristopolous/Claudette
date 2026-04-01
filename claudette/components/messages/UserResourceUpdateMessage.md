@@ -14,5 +14,3 @@ Renders MCP resource and polling update notifications parsed from XML-formatted 
 
 ## Exports
 - `UserResourceUpdateMessage` - React component rendering MCP resource/polling updates
-- `parseUpdates` - Internal function parsing XML-formatted update strings into structured data
-- `formatUri` - Internal function formatting URIs for display

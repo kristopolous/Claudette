@@ -17,6 +17,3 @@ Renders assistant tool use messages with tool name, input display, progress indi
 
 ## Exports
 - `AssistantToolUseMessage` - React component rendering tool use messages with full state management
-- `renderToolUseMessage` - Internal function that renders tool use message from tool and input
-- `renderToolUseProgressMessage` - Internal function rendering progress messages for in-progress tool calls
-- `renderToolUseQueuedMessage` - Internal function rendering queued state message

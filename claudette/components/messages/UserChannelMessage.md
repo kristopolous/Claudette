@@ -14,4 +14,3 @@ Renders channel messages from external sources (e.g., Slack) parsed from XML-for
 
 ## Exports
 - `UserChannelMessage` - React component rendering channel messages with source attribution
-- `displayServerName` - Internal function extracting leaf name from scoped server identifiers

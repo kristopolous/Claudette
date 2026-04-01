@@ -15,5 +15,3 @@ Renders local command output (stdout and stderr) with diamond-prefixed formattin
 
 ## Exports
 - `UserLocalCommandOutputMessage` - React component rendering local command stdout/stderr
-- `IndentedContent` - Internal component wrapping content with gutter or delegating to CloudLaunchContent
-- `CloudLaunchContent` - Internal component parsing and rendering cloud launch formatted output

@@ -17,4 +17,3 @@ Renders a collapsed summary of grouped read/search tool operations with live pro
 
 ## Exports
 - `CollapsedReadSearchContent` - React component rendering collapsed read/search group summaries
-- `VerboseToolUse` - Internal function rendering a single tool use in verbose mode
