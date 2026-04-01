@@ -1,38 +1,33 @@
 ## Purpose
-Provides the comprehensive prompt for the Bash tool, including usage instructions, sandbox restrictions, git guidelines, and background task advice.
+Prompt generation module for BashTool that creates LLM prompts for various bash operations and validations.
 
 ## Imports
-Many internal modules for configuration, attribution, environment, sandbox, etc. (see source)
+- **Stdlib**: none
+- **External**: none
+- **Internal**: 
+  - `shouldUseSandbox` (BashTool/shouldUseSandbox)
+  - `toolName` (BashTool/toolName)
+  - `utils` (BashTool/utils)
+  - `sedValidation` (BashTool/sedValidation)
+  - `pathValidation` (BashTool/pathValidation)
+  - `readOnlyValidation` (BashTool/readOnlyValidation)
+  - `destructiveCommandWarning` (BashTool/destructiveCommandWarning)
+  - `sedEditParser` (BashTool/sedEditParser)
+  - `commentLabel` (BashTool/commentLabel)
 
 ## Logic
-Exports many helper functions and the main prompt assembly:
-- `getDefaultTimeoutMs()`, `getMaxTimeoutMs()`: timeouts from utils/timeouts.
-- `getBackgroundUsageNote()`: optional note about `run_in_background`.
-- `getCommitAndPRInstructions()`: extensive git safety and workflow instructions, varying by USER_TYPE ('ant' vs external). Includes commit protocol, PR creation steps with gh, and undercover guidance.
-- `getSimpleSandboxSection()`: builds sandbox restriction description (filesystem, network) when sandboxing enabled; includes items on using $TMPDIR, and rules about `dangerouslyDisableSandbox`.
-- `getSimplePrompt()`: Assembles the full prompt with sections:
-  - Tool purpose: executes bash command, returns output.
-  - Working directory persistence and environment initialization.
-  - IMPORTANT: Avoid using find/grep/cat/head/tail/sed/awk/echo; prefer dedicated tools (Glob, Grep, FileRead, FileEdit, FileWrite). Lists tool preferences.
-  - # Instructions block: 
-    - verify parent directory with ls
-    - quote paths with spaces
-    - maintain cwd with absolute paths, avoid cd unless requested
-    - timeout defaults
-    - background usage note if applicable
-    - multiple commands: parallel vs sequential (&& for dependent, ; for fire-and-forget)
-    - git commands: subitems on commit preferences, destructive operations, hooks
-    - avoid sleep: use Monitor or background; if must sleep keep short
-    - embedded search tools caveat for find -regex alternation
-  - # Command sandbox section (if sandbox enabled): restrictions, $TMPDIR, `dangerouslyDisableSandbox` policy.
-  - Git operations / PR creation instructions if enabled.
-
-The prompt is huge and dynamically assembled based on environment flags (USER_TYPE, feature flags, sandbox config, git settings).
+Provides specialized prompt generators for bash operations including directory creation, file removal, sed edits, and command execution. Each function returns a formatted prompt string that guides the LLM on proper usage, safety checks, and validation requirements. The module also defines constants for plan mode transitions and includes helper functions for constructing prompts that incorporate validation results, sandbox status, and command-specific guidelines.
 
 ## Exports
-- `getDefaultTimeoutMs()`
-- `getMaxTimeoutMs()`
-- `getBackgroundUsageNote()`
-- `getCommitAndPRInstructions()`
-- `getSimpleSandboxSection()`
-- `getSimplePrompt()`
+- `mkdirPrompt` - Generates prompt for mkdir command with validation messages
+- `rmPrompt` - Generates prompt for rm command with validation and warnings
+- `rmdirPrompt` - Generates prompt for rmdir command
+- `mvPrompt` - Generates prompt for mv command
+- `cpPrompt` - Generates prompt for cp command
+- `findPrompt` - Generates prompt for find command
+- `EXIT_PLAN_MODE_PROMPT` - Constant prompt text for exiting plan mode
+- `getCommandPrompt` - Generates prompt for general command execution with validation
+- `getSedPrompt` - Generates prompt specifically for sed edit operations
+- `getPromptWithOverwriteCheck` - Generates prompt with file overwrite validation
+- `getPromptWithSandboxCheck` - Generates prompt with sandbox environment notice
+- `getPromptWithReadOnlyCheck` - Generates prompt with read-only file system warning
