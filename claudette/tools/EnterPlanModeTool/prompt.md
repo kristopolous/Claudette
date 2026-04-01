@@ -35,5 +35,3 @@ Exports a function `getEnterPlanModeToolPrompt()` that returns the prompt/instru
 ## Exports
 
 - `getEnterPlanModeToolPrompt(): string`
-- `getEnterPlanModeToolPromptExternal(): string` (internal use)
-- `getEnterPlanModeToolPromptAnt(): string` (internal use)

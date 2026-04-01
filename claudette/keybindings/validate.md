@@ -4,7 +4,7 @@ Validates user keybinding configuration and detects issues such as parse errors,
 ## Imports
 - **Stdlib**: none
 - **External**: none
-- **Internal**: `utils/stringUtils.js` (plural), `parser` (chordToString, parseChord, parseKeystroke), `reservedShortcuts` (getReservedShortcuts, normalizeKeyForComparison), `types` (KeybindingBlock, KeybindingContextName, ParsedBinding)
+- **Internal**: `utils/stringUtils` (plural), `parser` (chordToString, parseChord, parseKeystroke), `reservedShortcuts` (getReservedShortcuts, normalizeKeyForComparison), `types` (KeybindingBlock, KeybindingContextName, ParsedBinding)
 
 ## Logic
 Validates the structure of keybinding blocks, individual keystroke syntax, action formats, and command binding constraints. Detects duplicate keys within the same context by parsing raw JSON and by comparing parsed bindings. Checks for reserved shortcuts that are intercepted by the OS or terminal. Combines all validations and deduplicates warnings by type, key, and context. Provides formatting functions for displaying warnings to the user.

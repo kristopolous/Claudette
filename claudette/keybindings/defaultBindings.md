@@ -4,7 +4,7 @@ Defines the default keybindings that ship with Claudette, organized by UI contex
 ## Imports
 - **Stdlib**: none
 - **External**: `bun:bundle` (feature)
-- **Internal**: `utils/semver.js` (satisfies), `utils/bundledMode` (isRunningWithBun), `utils/platform` (getPlatform), `types` (KeybindingBlock)
+- **Internal**: `utils/semver` (satisfies), `utils/bundledMode` (isRunningWithBun), `utils/platform` (getPlatform), `types` (KeybindingBlock)
 
 ## Logic
 Constructs an array of keybinding blocks for each UI context (Global, Chat, Autocomplete, Confirmation, etc.). Adapts certain bindings based on platform capabilities such as terminal VT mode support and available feature flags. Platform-specific keys like image paste and mode cycling are selected at module load time. Feature-gated bindings are conditionally included using runtime feature checks.

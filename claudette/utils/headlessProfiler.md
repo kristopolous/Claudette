@@ -4,7 +4,7 @@
 Detailed profiling mode - same env var as startupProfiler
 
 ## Imports
-- **Internal**: ../bootstrap/state, ./debug.js, ./envUtils, ./profilerBase, ./slowOperations
+- **Internal**: ../bootstrap/state, ./debug, ./envUtils, ./profilerBase, ./slowOperations
 
 ## Items
 

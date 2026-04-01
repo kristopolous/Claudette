@@ -13,6 +13,8 @@ Defines Zod schemas and TypeScript types for file edit tool input validation and
 4. Defines gitDiff schema for git diff metadata including filename, status, additions, deletions, changes, patch, and repository
 
 ## Exports
+- `inputSchema` - Zod input schema
+- `outputSchema` - Zod output schema
 - `FileEditInput` - type for parsed file edit input with file_path, old_string, new_string, replace_all
 - `EditInput` - type for individual edit without file_path
 - `FileEdit` - runtime type for edit with old_string, new_string, and guaranteed boolean replace_all
