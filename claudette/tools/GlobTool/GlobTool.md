@@ -1,65 +1,24 @@
-# GlobTool
+## Purpose
+Tool for finding files by name pattern or wildcard (glob), with results limited and relativized to save tokens.
 
-Search for files by name pattern or wildcard.
+## Imports
+- **External**: `zod/v4`
+- **Internal**: 
+  - Tool: `buildTool`, `ToolDef`, `ValidationResult`
+  - Utils: `getCwd`, `isENOENT`, `FILE_NOT_FOUND_CWD_NOTE`, `suggestPathUnderCwd`, `getFsImplementation`, `glob`, `lazySchema`, `expandPath`, `toRelativePath`, `checkReadPermissionForTool`, `PermissionDecision`, `matchWildcardPattern`
+  - Local: `DESCRIPTION`, `GLOB_TOOL_NAME`, `getToolUseSummary`, `renderToolResultMessage`, `renderToolUseErrorMessage`, `renderToolUseMessage`, `userFacingName`
 
-## Tool Name
-`Search` (user-facing name)
+## Logic
+1. Input: pattern (required), path (optional, defaults to CWD)
+2. Validates path exists and is a directory if provided; UNC path bypass validation
+3. Checks read permissions via permission system; matcher uses wildcard pattern matching
+4. Executes glob with configurable limit (default 100) and offset 0; respects abortController
+5. Filters by permission context (read patterns) inside glob utility
+6. Relativizes results under CWD to reduce token usage
+7. Returns durationMs, numFiles, filenames array, truncated flag
+8. Output: empty → "No files found"; truncated adds suggestion note
 
-## Usage
-```
-pattern: "*.ts"
-path: "/path/to/search"
-```
-
-## Input Schema
-
-```typescript
-{
-  pattern: string;       // Required. The glob pattern to match files against
-  path?: string;         // Optional. The directory to search in. Defaults to current working directory.
-}
-```
-
-## Output Schema
-
-```typescript
-{
-  durationMs: number;    // Time taken to execute the search in milliseconds
-  numFiles: number;      // Total number of files found
-  filenames: string[];   // Array of file paths that match the pattern
-  truncated: boolean;    // Whether results were truncated (limited to 100 files)
-}
-```
-
-## Configuration
-
-- **Max Results**: 100 files (configurable via `globLimits.maxResults`)
-- **Max Result Size**: 100,000 characters
-- **Concurrency**: Safe to run concurrently with other tools
-- **Read Only**: Yes - does not modify filesystem
-
-## Validation Rules
-
-1. If `path` is provided, it must exist and be a directory
-2. UNC paths (starting with `\\` or `//`) are rejected for security to prevent NTLM credential leaks
-3. Non-existent paths suggest alternatives based on current working directory
-
-## Error Handling
-
-| Error Code | Condition |
-|------------|-----------|
-| 1 | Directory does not exist |
-| 2 | Path is not a directory |
-
-## Output Rendering
-
-- Empty results: Returns `No files found`
-- Non-empty results: Returns filenames joined by newlines
-- Truncated results: Appends message suggesting more specific path or pattern
-
-## Security
-
-- Validates read permissions before execution
-- Matches patterns against allowed filesystem rules
-- Skips filesystem operations for UNC paths to prevent credential leaks
-- Paths are relativized under current working directory to reduce token usage
+## Exports
+- `GlobTool` - Main tool definition
+- `Output` - Type (durationMs, numFiles, filenames[], truncated)
+- Constant: `GLOB_TOOL_NAME`

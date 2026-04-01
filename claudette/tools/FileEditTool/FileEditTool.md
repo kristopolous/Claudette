@@ -1,134 +1,41 @@
-# FileEditTool
+## Purpose
+Tool for modifying file contents through exact string replacement operations with comprehensive validation and atomic writes.
 
-The FileEditTool is used to modify existing files by performing exact string replacements.
+## Imports
+- **Stdlib**: `path`
+- **Internal**: 
+  - Analytics: `logEvent`, `getFeatureValue_CACHED_MAY_BE_STALE`
+  - Diagnostic: `diagnosticTracker`, `clearDeliveredDiagnosticsForFile`
+  - LSP: `getLspServerManager`
+  - MCP: `notifyVscodeFileUpdated`
+  - Services: `checkTeamMemSecrets`
+  - Skills: `activateConditionalSkillsForPaths`, `addSkillDirectories`, `discoverSkillDirsForPaths`
+  - Tool: `buildTool`, `ToolDef`, `ToolUseContext`
+  - Utils: `getCwd`, `logForDebugging`, `countLinesChanged`, `isEnvTruthy`, `isENOENT`, `FILE_NOT_FOUND_CWD_NOTE`, `findSimilarFile`, `getFileModificationTime`, `suggestPathUnderCwd`, `writeTextContent`, `fileHistoryEnabled`, `fileHistoryTrackEdit`, `logFileOperation`, `readFileSyncWithMetadata`, `formatFileSize`, `getFsImplementation`, `fetchSingleFileGitDiff`, `ToolUseDiff`, `logError`, `expandPath`, `checkWritePermissionForTool`, `matchingRuleForInput`, `PermissionDecision`, `matchWildcardPattern`, `validateInputForSettingsFileEdit`
+  - Other tools: `NOTEBOOK_EDIT_TOOL_NAME`
+  - Constants: `FILE_EDIT_TOOL_NAME`, `FILE_UNEXPECTEDLY_MODIFIED_ERROR`
+  - Local: `getEditToolDescription`, `FileEditInput`, `FileEditOutput`, `inputSchema`, `outputSchema`, `getToolUseSummary`, `renderToolResultMessage`, `renderToolUseErrorMessage`, `renderToolUseMessage`, `renderToolUseRejectedMessage`, `userFacingName`
+  - Helpers: `areFileEditsInputsEquivalent`, `findActualString`, `getPatchForEdit`, `preserveQuoteStyle`
 
-## Tool Name
+## Logic
+1. Validates input: checks for secrets, identical strings, permission denies, file existence, size limits, UNC paths
+2. Ensures file was previously read (tracking via readFileState)
+3. Checks for file modifications since last read (timestamp + content comparison fallback for Windows)
+4. Handles quote style normalization (curly vs straight quotes)
+5. Detects multiple matches unless replace_all is true
+6. Special validation for settings files
+7. Atomic read-modify-write with precautions:
+   - Creates parent directories
+   - Backs up file history
+   - Writes with preserved encoding/line endings
+8. Notifies LSP servers (didChange, didSave) and VSCode
+9. Updates readFileState to invalidate stale reads
+10. Logs analytics and optionally computes git diff
+11. Returns structured output with patch, metadata
 
-`Edit`
-
-## Input Schema
-
-```typescript
-{
-  file_path: string;      // The absolute path to the file to modify
-  old_string: string;     // The text to replace
-  new_string: string;     // The text to replace it with (must be different from old_string)
-  replace_all?: boolean;  // Replace all occurrences of old_string (default: false)
-}
-```
-
-## Output Schema
-
-```typescript
-{
-  filePath: string;           // The file path that was edited
-  oldString: string;          // The original string that was replaced
-  newString: string;          // The new string that replaced it
-  originalFile: string;      // The original file contents before editing
-  structuredPatch: Hunk[];    // Diff patch showing the changes
-  userModified: boolean;      // Whether the user modified the proposed changes
-  replaceAll: boolean;        // Whether all occurrences were replaced
-  gitDiff?: GitDiff;          // Optional git diff information
-}
-```
-
-## Key Features
-
-### String Replacement
-- Performs exact string matching for replacements
-- Supports `replace_all` flag to replace all occurrences
-- Normalizes curly quotes to straight quotes when matching (preserves original formatting)
-
-### File Validation
-- **File must be read first**: The file must have been read using the Read tool before editing
-- **File modification detection**: Warns if file has been modified since being read
-- **Size limit**: 1 GiB maximum file size
-- **No UNC paths**: Prevents credential leaks by blocking UNC paths (Windows)
-
-### Quote Style Preservation
-When `old_string` uses curly quotes (', ", ', ") and the file also uses curly quotes, the `new_string` will automatically be converted to use matching curly quote styles.
-
-### Multi-Match Detection
-- If `old_string` appears multiple times but `replace_all` is false, the edit will be rejected
-- Provides helpful error message showing the number of matches found
-
-## Validation Rules
-
-The tool validates inputs and may reject edits with the following error codes:
-
-| Error Code | Condition |
-|------------|-----------|
-| 0 | Secret detected in team memory file |
-| 1 | `old_string` and `new_string` are identical |
-| 2 | File is in a denied directory per permission settings |
-| 3 | File already exists when trying to create new file |
-| 4 | File does not exist |
-| 5 | File is a Jupyter Notebook (.ipynb) |
-| 6 | File has not been read yet |
-| 7 | File has been modified since read |
-| 8 | String to replace not found in file |
-| 9 | Multiple matches found but `replace_all` is false |
-| 10 | File is too large (> 1 GiB) |
-
-## File Processing
-
-### Atomic Write Operations
-The tool performs atomic read-modify-write operations to prevent data corruption:
-1. Creates parent directory if needed
-2. Backs up file history before editing
-3. Validates file hasn't changed since last read
-4. Applies the edit
-5. Updates read timestamp to invalidate stale writes
-
-### LSP Integration
-After editing, the tool notifies Language Server Protocol servers:
-- `didChange`: Content has been modified
-- `didSave`: File has been saved to disk
-
-### Quote Normalization
-The tool handles quote normalization in two ways:
-1. **Matching**: When `old_string` contains curly quotes but the exact match isn't found, it tries normalized (straight) quotes
-2. **Preservation**: When applying edits to files with curly quotes, the tool converts straight quotes in `new_string` to matching curly quotes
-
-## Constants
-
-```typescript
-FILE_EDIT_TOOL_NAME = 'Edit'
-FILE_UNEXPECTEDLY_MODIFIED_ERROR = 'File has been unexpectedly modified. Read it again before attempting to write it.'
-MAX_EDIT_FILE_SIZE = 1024 * 1024 * 1024  // 1 GiB
-```
-
-## Usage Example
-
-```typescript
-// Single replacement
-{
-  file_path: '/path/to/file.txt',
-  old_string: 'Hello World',
-  new_string: 'Hello World',
-  replace_all: false
-}
-
-// Replace all occurrences
-{
-  file_path: '/path/to/config.json',
-  old_string: 'debug: true',
-  new_string: 'debug: false',
-  replace_all: true
-}
-```
-
-## Special Behaviors
-
-- **New file creation**: An empty `old_string` on a nonexistent file creates a new file (only valid if file doesn't exist and is empty)
-- **Empty file editing**: If file exists but is empty, `old_string` must be empty to add content
-- **Plan files**: Files in the plans directory have special display behavior showing `/plan to preview` hint
-- **Skill discovery**: Automatically discovers and activates skills based on the file path being edited
-
-## Error Handling
-
-When validation fails, the tool returns an error with:
-- `result: false`
-- `behavior: 'ask'` (prompts user for guidance)
-- `message`: Human-readable error description
-- `errorCode`: Numeric code for programmatic handling
+## Exports
+- `FileEditTool` - Main tool definition
+- `FileEditInput` - Input type (file_path, old_string, new_string, replace_all?)
+- `FileEditOutput` - Output type (filePath, oldString, newString, originalFile, structuredPatch, userModified, replaceAll, gitDiff?)
+- `MAX_EDIT_FILE_SIZE` - Constant (1 GiB)
+- Helper: `readFileForEdit` (sync read with metadata)

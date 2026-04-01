@@ -1,78 +1,41 @@
-# FileWriteTool.ts
-
 ## Purpose
-
-Implements a file write tool that creates new files or overwrites existing files with full content replacement. Handles atomic writes, file modification validation, LSP notifications, skill discovery, and file history tracking.
-
-## Items
-
-### inputSchema
-**Purpose**: Zod schema defining the tool's input parameters.
-**Logic**: Strict object with `file_path` (absolute path string) and `content` (string to write). Uses lazy schema for potential deferred initialization.
-
-### outputSchema
-**Purpose**: Zod schema defining the tool's output.
-**Logic**: Returns object with `type` (enum: 'create' | 'update'), `filePath`, `content`, `structuredPatch` (array of hunk schemas), `originalFile` (null for new files), and optional `gitDiff`.
-
-### FileWriteTool
-**Purpose**: Main tool definition satisfying `ToolDef<InputSchema, Output>`.
-**Logic**: Built with `buildTool()`. Key methods:
-
-- **`description()`**: Returns 'Write a file to the local filesystem.'
-- **`validateInput({ file_path, content }, context)`**: Multiple validation checks:
-  1. Rejects writes to team memory files containing secrets via `checkTeamMemSecrets`
-  2. Checks deny rules from permission settings
-  3. Skips filesystem ops for UNC paths (prevents NTLM credential leaks)
-  4. Verifies file has been read before writing (prevents blind overwrites)
-  5. Compares mtime to detect external modifications since last read
-- **`backfillObservableInput(input)`**: Expands `file_path` via `expandPath` to prevent hook bypass via ~ or relative paths
-- **`preparePermissionMatcher({ file_path })`**: Returns wildcard pattern matcher for permission system
-- **`checkPermissions(input, context)`**: Delegates to `checkWritePermissionForTool`
-- **`call({ file_path, content }, context)`**: Main execution:
-  1. Discovers and loads skills from the file's path
-  2. Activates conditional skills matching the path
-  3. Runs `diagnosticTracker.beforeFileEdited`
-  4. Creates parent directory if needed
-  5. Backs up to file history if enabled
-  6. Reads current file state and validates no changes since last read
-  7. Writes content with LF line endings (preserves model's explicit line endings)
-  8. Notifies LSP servers (didChange, didSave) and VSCode
-  9. Updates read timestamp to invalidate stale writes
-  10. Logs MEMORY.md writes as analytics events
-  11. Computes git diff if remote and feature flag enabled
-  12. Returns result with patch and original content
-- **`mapToolResultToToolResultBlockParam({ filePath, type }, toolUseID)`**: Formats output message based on create vs update type
+Tool for creating new files or overwriting existing files with full content replacement, ensuring atomic writes and comprehensive validation.
 
 ## Imports
-
-- **Stdlib**: `path` (dirname, sep)
-- **External**: `zod` (v4)
+- **Stdlib**: `path`
+- **External**: `zod/v4`
 - **Internal**: 
   - Analytics: `logEvent`, `getFeatureValue_CACHED_MAY_BE_STALE`
-  - Diagnostics: `diagnosticTracker`, `clearDeliveredDiagnosticsForFile`
+  - Diagnostic: `diagnosticTracker`, `clearDeliveredDiagnosticsForFile`
   - LSP: `getLspServerManager`
   - MCP: `notifyVscodeFileUpdated`
+  - Services: `checkTeamMemSecrets`
   - Skills: `activateConditionalSkillsForPaths`, `addSkillDirectories`, `discoverSkillDirsForPaths`
-  - Tool framework: `buildTool`, `ToolDef`, `ToolUseContext`
+  - Tool: `buildTool`, `ToolDef`, `ToolUseContext`
   - Utils: `getCwd`, `expandPath`, `getFileModificationTime`, `writeTextContent`, `readFileSyncWithMetadata`, `getFsImplementation`, `isENOENT`, `countLinesChanged`, `getPatchForDisplay`, `logForDebugging`, `logError`, `isEnvTruthy`
   - Permissions: `checkWritePermissionForTool`, `matchingRuleForInput`, `matchWildcardPattern`
   - File history: `fileHistoryEnabled`, `fileHistoryTrackEdit`
   - Analytics: `logFileOperation`
   - Git: `fetchSingleFileGitDiff`, `ToolUseDiff`
   - Constants: `FILE_UNEXPECTEDLY_MODIFIED_ERROR`
-  - Types: `hunkSchema`, `gitDiffSchema` from FileEditTool
+  - Types: `hunkSchema`, `gitDiffSchema` (from FileEditTool)
+  - Local: `FILE_WRITE_TOOL_NAME`, `getWriteToolDescription`, `getToolUseSummary`, `isResultTruncated`, `renderToolResultMessage`, `renderToolUseErrorMessage`, `renderToolUseMessage`, `renderToolUseRejectedMessage`, `userFacingName`
 
-## Insights
-
-- **Atomic write pattern**: Ensures parent directory exists BEFORE the critical section, and avoids async operations between staleness check and write to prevent interleaving
-- **Line ending handling**: Explicitly uses LF ('LF') - does NOT preserve old file's line endings since model sent explicit line endings and preserving could corrupt files (e.g., bash scripts with CRLF on Linux)
-- **Staleness detection**: Uses mtime with content comparison fallback on Windows (where mtime can change without content changes due to cloud sync/antivirus)
-- **UNC path security**: Skips fs operations for UNC paths to prevent SMB authentication which could leak credentials to malicious servers
-- **Skill discovery**: Fire-and-forget - discovers skills from file path without blocking the write operation
-- **Write ordering**: Content write must happen after read timestamp check to maintain atomicity guarantees
+## Logic
+1. Validates: rejects team memory secrets, checks deny rules, UNC paths skip fs ops, requires Read-before-Edit, detects external modifications (mtime + content fallback)
+2. Creates parent directory before write
+3. Backs up file history if enabled
+4. Reads current content and validates staleness
+5. Writes with LF line endings (explicit, not preserved from original)
+6. Notifies LSP (didChange, didSave) and VSCode
+7. Updates readFileState to invalidate stale reads
+8. Logs CLAUDE.md writes as analytics
+9. Optionally computes git diff (remote mode with feature flag)
+10. Generates structured patch for updates, empty patch for creates
+11. Counts lines changed for analytics
+12. Returns type ('create'|'update'), filePath, content, structuredPatch, originalFile?, gitDiff?
 
 ## Exports
-
-- `Output` - output schema type
-- `FileWriteToolInput` - input schema type
-- `FileWriteTool` - main tool definition
+- `FileWriteTool` - Main tool definition
+- `FileWriteToolInput` - Input type (file_path, content)
+- `Output` - Output type (type, filePath, content, structuredPatch, originalFile?, gitDiff?)
