@@ -29,15 +29,3 @@ But nobody knows how they actually work.
 
 Now they do.
 
----
-
-**The future is custom AI assistants. Build yours.**
-
-```
-         ___
-       /   \   CLAUDETTE
-      |     |  Make tokens go burr.
-       \___/
-```
-
-*No original source code included.*
