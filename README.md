@@ -11,7 +11,5 @@
 
 Every module, every pattern, every decision - described so you can feed it to an LLM and get working code back.
 
-Python? Go? Rust? QBasic? Brainfuck? The instructions describe what to build.
-
-Get in the game and make one yourself
+Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 
