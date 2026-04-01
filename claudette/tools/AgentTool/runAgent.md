@@ -27,4 +27,5 @@ Implements core agent execution with query loop and tool orchestration.
 16. Supports coordinator mode with special handling
 
 ## Exports
+- `runAgent` - core agent execution function
 - `filterIncompleteToolCalls` - filters incomplete tool calls from messages

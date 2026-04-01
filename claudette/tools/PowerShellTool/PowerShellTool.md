@@ -41,5 +41,3 @@ Tool for executing Windows PowerShell commands with comprehensive security, sand
 - `Out` - Output type (stdout, stderr, interrupted, returnCodeInterpretation, isImage, persistedOutputPath/Size, backgroundTaskId, backgroundedByUser, assistantAutoBackgrounded)
 - `PowerShellProgress` - Progress type
 - `detectBlockedSleepPattern` - Detects problematic sleep patterns
-- `isSearchOrReadPowerShellCommand` - Determines if command is search/read for UI collapsing
-- `runPowerShellCommand` - Async generator for command execution with progress

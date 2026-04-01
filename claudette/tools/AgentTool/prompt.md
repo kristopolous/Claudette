@@ -24,7 +24,6 @@ Provides prompt generation for agent tool with dynamic agent listing.
 13. Includes tool descriptions, examples, and agent listing
 
 ## Exports
-- `getToolsDescription` - formats tools description for agent
 - `formatAgentLine` - formats agent line for attachment
 - `shouldInjectAgentListInMessages` - checks attachment injection
 - `getPrompt` - generates agent tool prompt
