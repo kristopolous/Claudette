@@ -4,7 +4,7 @@
 
 ---
 
-~1,800 modules of "how to build a Claude-like AI coding assistant" captured as LLM-readable instructions. Every module, every pattern, every decision - described so you can feed it to an LLM and get working code back.
+~1,800 modules of "how to build Claudette" captured as LLM-readable instructions. Every module, every pattern, every decision - described so you can feed it to an LLM and get working code back.
 
 Python? Go? Rust? QBasic? Brainfuck? The instructions describe *what to build*, not *how to type it*.
 
@@ -23,7 +23,7 @@ Each .md file contains:
 
 ## Why This Exists
 
-Every team will want their own AI coding assistant. Custom. Self-hosted. Built their way.
+Every team will want their own Claudette. Custom. Self-hosted. Built their way.
 
 But nobody knows how they actually work.
 

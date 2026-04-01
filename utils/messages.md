@@ -1,7 +1,7 @@
 # messages
 
 ## Purpose
-Message creation, normalization, and transformation utilities for the AI coding assistant conversation system. Handles creating user/assistant/system messages, normalizing messages for API calls, managing tool use/results, streaming message handling, and message filtering/transformation.
+Message creation, normalization, and transformation utilities for Claudette's conversation system. Handles creating user/assistant/system messages, normalizing messages for API calls, managing tool use/results, streaming message handling, and message filtering/transformation.
 
 ## Imports
 - **Stdlib**: `crypto` (randomUUID, UUID), `lodash-es` (isObject, last)
