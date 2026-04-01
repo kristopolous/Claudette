@@ -1,39 +1,38 @@
-# diff
+# utils/diff
 
 ## Purpose
-For some reason, & confuses the diff library, so we replace it with a token,
+Provides diff utilities for file edits with line counting and analytics.
 
 ## Imports
-- **Stdlib**: diff, src/services/analytics/index.js
-- **Internal**: ../bootstrap/state.js, ../cost-tracker.js, ../tools/FileEditTool/types.js, ./array.js, ./file.js
+- **Stdlib**: (none)
+- **External**: `diff`
+- **Internal**: analytics, bootstrap state, cost-tracker, FileEditTool types, array, file
 
-## Items
-
-### adjustHunkLineNumbers
-**Type**: Function
-
-### escapeForDiff
-**Type**: Function
-
-### unescapeFromDiff
-**Type**: Function
-
-### countLinesChanged
-**Type**: Function
-
-### getPatchFromContents
-**Type**: Function
-
-### getPatchForDisplay
-**Type**: Function
+## Logic
+1. `CONTEXT_LINES` (3) - context lines for diff
+2. `DIFF_TIMEOUT_MS` (5000) - diff timeout
+3. `adjustHunkLineNumbers` - shifts hunk line numbers by offset
+4. Used when getPatchForDisplay received file slice (readEditContext)
+5. Converts slice-relative to file-relative line numbers
+6. `AMPERSAND_TOKEN`, `DOLLAR_TOKEN` - tokens to escape & and $ for diff
+7. `escapeForDiff` - escapes & and $ before diff
+8. `unescapeFromDiff` - unescapes tokens after diff
+9. `countLinesChanged` - counts lines added/removed in patch
+10. For new files: counts all lines as additions
+11. Updates total lines changed via addToTotalLinesChanged
+12. Updates LOC counter via getLocCounter
+13. Logs tengu_file_changed event with lines_added/lines_removed
+14. `getPatchForDisplay` - gets formatted patch for display
+15. `generateUnifiedDiff` - generates unified diff format
+16. `parseUnifiedDiff` - parses unified diff to hunks
 
 ## Exports
-- CONTEXT_LINES
-- DIFF_TIMEOUT_MS
-- adjustHunkLineNumbers
-- countLinesChanged
-- getPatchFromContents
-- getPatchForDisplay
-
-## Source
-`diff.ts`
+- `CONTEXT_LINES` - context lines constant
+- `DIFF_TIMEOUT_MS` - diff timeout constant
+- `adjustHunkLineNumbers` - adjusts hunk line numbers
+- `escapeForDiff` - escapes for diff
+- `unescapeFromDiff` - unescapes from diff
+- `countLinesChanged` - counts changed lines
+- `getPatchForDisplay` - gets patch for display
+- `generateUnifiedDiff` - generates unified diff
+- `parseUnifiedDiff` - parses unified diff
