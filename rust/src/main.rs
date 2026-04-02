@@ -5,10 +5,11 @@ use claudette_rs::commands::{clear_command, cost_command, help_command, model_co
 use claudette_rs::context::{format_claude_md_context, get_git_status, format_git_context};
 use claudette_rs::tools::{BashTool, EditTool, GlobTool, GrepTool, ReadTool, TodoWriteTool, WebFetchTool, WebSearchTool, WriteTool};
 use claudette_rs::tui::{App, run_tui};
-use claudette_rs::types::{CommandRegistry, Message, ToolRegistry, CostTracker, StreamEvent};
+use claudette_rs::types::{CommandRegistry, Message, ToolRegistry, CostTracker, StreamEvent, ToolDefinition};
 use parking_lot::Mutex;
 use std::sync::Arc;
 use tokio::sync::mpsc;
+use claudette_rs::utils::system_prompt::build_system_prompt;
 
 #[derive(Parser, Debug)]
 #[command(name = "claudette")]
@@ -258,40 +259,7 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-async fn build_system_prompt(cwd: &std::path::Path) -> String {
-    let mut prompt = String::from("You are Claudette, a highly skilled software engineer AI. You help users with coding tasks including writing, debugging, refactoring, and understanding code.\n\n");
 
-    let now = chrono::Utc::now();
-    prompt.push_str(&format!("Current date: {}\n\n", now.format("%Y-%m-%d")));
-
-    if let Ok(Some(status)) = get_git_status(cwd) {
-        let git_ctx = format_git_context(&status);
-        if !git_ctx.is_empty() {
-            prompt.push_str("## Git Status\n");
-            prompt.push_str(&git_ctx);
-            prompt.push_str("\n\n");
-        }
-    }
-
-    if let Ok(ctx) = format_claude_md_context(cwd).await {
-        if !ctx.is_empty() {
-            prompt.push_str(&ctx);
-        }
-    }
-
-    prompt.push_str("\n## Available Tools\n");
-    prompt.push_str("- Bash: Execute shell commands\n");
-    prompt.push_str("- Read: Read file contents\n");
-    prompt.push_str("- Write: Write file contents\n");
-    prompt.push_str("- Edit: Search-replace in files\n");
-    prompt.push_str("- Glob: Find files by pattern\n");
-    prompt.push_str("- Grep: Search file contents with regex\n");
-    prompt.push_str("- TodoWrite: Manage todo items\n");
-    prompt.push_str("- WebFetch: Fetch URL content\n");
-    prompt.push_str("- WebSearch: Search the web\n");
-
-    prompt
-}
 
 async fn run_demo(cwd: &std::path::Path) -> Result<()> {
     eprintln!("Running in DEMO mode — no API calls will be made.\n");

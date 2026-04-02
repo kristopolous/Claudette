@@ -1,8 +1,7 @@
-use crate::context::{format_claude_md_context, format_git_context, get_git_status};
+use crate::context::{format_claude_md_context, get_git_status};
 use crate::mcp::transport::McpClientTransport;
-use crate::types::{Message, Tool};
+use crate::types::ToolDefinition;
 use chrono::Local;
-use std::collections::HashMap;
 use std::path::Path;
 
 /// Dynamic boundary marker separating static cacheable content from dynamic content
@@ -11,8 +10,8 @@ pub const SYSTEM_PROMPT_DYNAMIC_BOUNDARY: &str = "\n=== END OF STATIC PROMPT ===
 /// Build the complete system prompt based on tools, model info, and environment
 pub async fn build_system_prompt(
     cwd: &Path,
-    tools: Option<&[Tool]>, // list of available tools
-    model_info: Option<(&str, &str)>, // (marketing_name, model_id)
+    tools: Option<&[ToolDefinition]>,
+    model_info: Option<(&str, &str)>,
     mcp_clients: Option<&[McpClientTransport]>,
     simple_mode: Option<bool>,
     proactive_mode: Option<bool>,
@@ -39,7 +38,6 @@ pub async fn build_system_prompt(
     let mut prompt = String::new();
 
     if simple_mode {
-        // Simple mode: minimal prompt
         let date = Local::now().format("%Y-%m-%d").to_string();
         prompt.push_str(&format!("You are Claude Code, Anthropic's official CLI for Claude.\n\nCWD: {}\nDate: {}\n", cwd.display(), date));
         return prompt;
@@ -48,7 +46,6 @@ pub async fn build_system_prompt(
     if proactive_mode {
         prompt.push_str("\nYou are an autonomous agent. Use the available tools to do useful work.\n");
     } else {
-        // Standard intro
         prompt.push_str(
             "You are an interactive agent that helps users with software engineering tasks. \
             Use the instructions below and the tools available to you to assist the user.\n\n\
@@ -58,7 +55,7 @@ pub async fn build_system_prompt(
         );
     }
 
-    // System section
+    // System
     prompt.push_str(
         "# System\n\
         - All text you output outside of tool use is displayed to the user. Output text \
@@ -79,7 +76,7 @@ pub async fn build_system_prompt(
         before continuing.\n"
     );
 
-    // Hooks section (if enabled)
+    // Hooks
     if enable_hooks {
         prompt.push_str(
             "- Users may configure 'hooks', shell commands that execute in response to events \
@@ -96,7 +93,7 @@ pub async fn build_system_prompt(
         by the context window.\n"
     );
 
-    // Doing Tasks section
+    // Doing Tasks
     prompt.push_str(
         "\n# Doing Tasks\n\
         - The user will primarily request you to perform software engineering tasks. \
@@ -140,7 +137,7 @@ pub async fn build_system_prompt(
         Find a safer way. Measure twice, cut once.\n"
     );
 
-    // Using your tools section
+    // Using your tools
     prompt.push_str(
         "\n# Using your tools\n\
         - Do NOT use the BashTool to run commands when a relevant dedicated tool is \
@@ -157,7 +154,7 @@ pub async fn build_system_prompt(
         tool calls where possible.\n"
     );
 
-    // Agent tool section (conditional based on fork subagent support)
+    // Agent tool
     if fork_subagent_enabled {
         prompt.push_str(
             "\n# Agent tool\n\
@@ -177,10 +174,8 @@ pub async fn build_system_prompt(
         );
     }
 
-    // Session-specific guidance based on available features
-    prompt.push_str(
-        "\n# Session-specific guidance\n"
-    );
+    // Session-specific guidance
+    prompt.push_str("\n# Session-specific guidance\n");
 
     if verification_agent_enabled {
         prompt.push_str(
@@ -203,7 +198,7 @@ pub async fn build_system_prompt(
         AskUserQuestionTool to ask them.\n"
     );
 
-    // Output efficiency section
+    // Output efficiency
     if ant_mode {
         prompt.push_str(
             "\n# Communicating with the user\n\
@@ -246,34 +241,34 @@ pub async fn build_system_prompt(
         by a read tool call should just be \"Let me read the file.\" with a period.\n"
     );
 
-    // Language preference (if set)
+    // Language
     if let Some(lang) = language_preference {
         prompt.push_str(&format!("\n# Language\nAlways respond in {}. Use {} for all explanations, comments, and communications with the user. Technical terms and code identifiers should remain in their original form.\n", lang, lang));
     }
 
-    // Output style (if set)
+    // Output style
     if let Some(style) = output_style {
         prompt.push_str(&format!("\n# Output Style: {}\n{}", style, "Custom output style applied from settings.\n"));
     }
 
-    // Token budget (if specified)
+    // Token budget
     if let Some(budget) = token_budget {
         prompt.push_str(&format!("\n# Token budget\nWhen the user specifies a token target (e.g., '+500k', 'spend 2M tokens', 'use 1B tokens'), your output token count will be shown each turn. Keep working until you approach the target — plan your work to fill it productively. The target is a hard minimum, not a suggestion. Current target: {} tokens.\n", budget));
     }
 
-    // MCP instructions (if available)
+    // MCP instructions
     if let Some(clients) = mcp_clients {
         if !clients.is_empty() {
             prompt.push_str("\n# MCP Server Instructions\n\nThe following MCP servers have provided instructions for how to use their tools and resources:\n\n");
             for client in clients {
-                if let Some(instructions) = client.instructions {
+                if let Some(instructions) = &client.instructions {
                     prompt.push_str(&format!("## {}\n{}\n", client.name, instructions));
                 }
             }
         }
     }
 
-    // Scratchpad instructions (if enabled)
+    // Scratchpad
     if enable_scratchpad {
         if let Some(dir) = scratchpad_dir {
             prompt.push_str(&format!("\n# Scratchpad Directory\n\nIMPORTANT: Always use this scratchpad directory for temporary files instead of `/tmp` or other system temp directories: {}\n\nUse this directory for ALL temporary file needs: storing intermediate results, writing temporary scripts, saving outputs that don't belong in the user's project, creating working files during analysis. Only use `/tmp` if the user explicitly requests it.\n", dir));
@@ -284,31 +279,22 @@ pub async fn build_system_prompt(
     prompt.push_str(&format!("\n# Function Result Clearing\n\nOld tool results will be automatically cleared from context to free up space. The {} most recent results are always kept.\n", keep_recent));
     prompt.push_str("When working with tool results, write down any important information you might need later in your response, as the original tool result may be cleared later.\n");
 
-    // Dynamic boundary marker
+    // Dynamic boundary
     prompt.push_str(SYSTEM_PROMPT_DYNAMIC_BOUNDARY);
 
-    // Model-specific info and environment details
+    // Environment info
     let (marketing_name, model_id) = model_info.unwrap_or(("Claude", "unknown"));
     let platform = std::env::consts::OS;
     let arch = std::env::consts::ARCH;
     let shell = std::env::var("SHELL").unwrap_or_else(|_| "unknown".to_string());
     let now = Local::now();
+
     let cutoff = match model_id {
-        // Anthropic models
-        m if m.contains("opus") => "2025-02-01",
-        m if m.contains("sonnet") => "2025-02-01",
-        m if m.contains("haiku") => "2025-02-01",
-        // OpenAI models
+        m if m.contains("opus") || m.contains("sonnet") || m.contains("haiku") => "2025-02-01",
         m if m.contains("gpt-4") => "2023-10",
         m if m.contains("gpt-3.5") => "2021-09",
         _ => "unknown",
     };
-
-    // Version/recent model info
-    let recent_models = "\n- The most recent Claude model family is Claude 4.5/4.6 Opus/Sonnet.\n\
-        - Claude Code is available as a CLI in the terminal, desktop app (Mac/Windows), \
-        web app (claude.ai/code), and IDE extensions (VS Code, JetBrains, etc.).\n\
-        - Fast mode for Claude Code uses the same Claude Opus 4.6 model with faster output.\n";
 
     prompt.push_str(&format!(
         "\n# Environment\n\
@@ -320,7 +306,10 @@ pub async fn build_system_prompt(
         - OS Version: {}\n\
         - You are powered by the model named {}. The exact model ID is {}.\n\
         - Assistant knowledge cutoff is {}.\n\
-        {}\
+        - The most recent Claude model family is Claude 4.5/4.6 Opus/Sonnet.\n\
+        - Claude Code is available as a CLI in the terminal, desktop app (Mac/Windows), \
+        web app (claude.ai/code), and IDE extensions (VS Code, JetBrains, etc.).\n\
+        - Fast mode for Claude Code uses the same Claude Opus 4.6 model with faster output.\n\
         - Current date: {}\n\
         - Current time: {}\n",
         cwd.display(),
@@ -332,7 +321,6 @@ pub async fn build_system_prompt(
         marketing_name,
         model_id,
         cutoff,
-        recent_models,
         now.format("%Y-%m-%d"),
         now.format("%H:%M:%S")
     ));
@@ -345,24 +333,81 @@ pub async fn build_system_prompt(
         }
     }
 
+    // Available Tools list (dynamic)
+    prompt.push_str("\n# Available Tools\n");
+    if let Some(tool_list) = tools {
+        for tool in tool_list {
+            let desc = match tool.name.as_str() {
+                "Bash" => "Execute shell commands",
+                "Read" => "Read file contents",
+                "Write" => "Write file contents",
+                "Edit" => "Search-replace in files",
+                "Glob" => "Find files by pattern",
+                "Grep" => "Search file contents with regex",
+                "TodoWrite" => "Manage todo items",
+                "WebFetch" => "Fetch URL content",
+                "WebSearch" => "Search the web",
+                _ => "Custom tool",
+            };
+            prompt.push_str(&format!("- {}: {}\n", tool.name, desc));
+        }
+    } else {
+        prompt.push_str("- Bash: Execute shell commands\n");
+        prompt.push_str("- Read: Read file contents\n");
+        prompt.push_str("- Write: Write file contents\n");
+        prompt.push_str("- Edit: Search-replace in files\n");
+        prompt.push_str("- Glob: Find files by pattern\n");
+        prompt.push_str("- Grep: Search file contents with regex\n");
+        prompt.push_str("- TodoWrite: Manage todo items\n");
+        prompt.push_str("- WebFetch: Fetch URL content\n");
+        prompt.push_str("- WebSearch: Search the web\n");
+    }
+
     // Tool-specific prompts
-    for tool in tools {
-        match tool.name.as_str() {
-            "Bash" => {
-                prompt.push_str("\n# BashTool\n");
-                prompt.push_str(build_bash_prompt());
+    if let Some(tool_list) = tools {
+        for tool in tool_list {
+            match tool.name.as_str() {
+                "Bash" => {
+                    prompt.push_str("\n# BashTool\n");
+                    prompt.push_str(build_bash_prompt());
+                }
+                "WebSearch" => {
+                    prompt.push_str("\n# WebSearchTool\n");
+                    prompt.push_str(build_websearch_prompt());
+                }
+                _ => {}
             }
-            "WebSearch" => {
-                prompt.push_str("\n# WebSearchTool\n");
-                prompt.push_str(build_websearch_prompt());
-            }
-            _ => {}
         }
     }
 
     prompt
 }
 
+/// Return OS version string equivalent to `uname -sr`
+fn uname_sr() -> String {
+    let os = std::env::consts::OS;
+    match os {
+        "linux" => {
+            if let Ok(output) = std::process::Command::new("uname").arg("-sr").output() {
+                if let Ok(s) = String::from_utf8(output.stdout) {
+                    return s.trim().to_string();
+                }
+            }
+            "Linux".to_string()
+        }
+        "macos" => {
+            if let Ok(output) = std::process::Command::new("uname").arg("-sr").output() {
+                if let Ok(s) = String::from_utf8(output.stdout) {
+                    return s.trim().to_string();
+                }
+            }
+            "Darwin".to_string()
+        }
+        _ => os.to_string(),
+    }
+}
+
+/// Build the Bash tool prompt with comprehensive instructions
 fn build_bash_prompt() -> String {
     let mut prompt = String::new();
 
@@ -437,58 +482,6 @@ fn build_websearch_prompt() -> String {
           - Example: If the user asks for \"latest React docs\", search for \"React \
           documentation\" with the current year, NOT last year.\n", current_month_year)
     );
-
-    prompt
-}
-            }
-            "Linux".to_string()
-        }
-        "macos" => {
-            if let Ok(output) = std::process::Command::new("uname").arg("-sr").output() {
-                if let Ok(s) = String::from_utf8(output.stdout) {
-                    return s.trim().to_string();
-                }
-            }
-            "Darwin".to_string()
-        }
-        _ => os.to_string(),
-    }
-}
-
-/// Build the Bash tool prompt with comprehensive instructions
-fn build_bash_prompt() -> String {
-        if git_status.has_changes {
-            prompt.push_str("- Working tree: has uncommitted changes\n");
-        }
-    } else {
-        prompt.push_str("- Is a git repository: no\n");
-    }
-
-    prompt.push_str(&format!("- Platform: {}/{}\n", platform, arch));
-    let shell = std::env::var("SHELL").unwrap_or_else(|_| "unknown".to_string());
-    prompt.push_str(&format!("- Shell: {}\n", shell));
-    prompt.push_str(&format!("- Current date: {}\n", now.format("%Y-%m-%d")));
-    prompt.push_str(&format!("- Current time: {}\n", now.format("%H:%M:%S")));
-
-    // Section 14: CLAUDE.md context
-    if let Ok(claude_md) = format_claude_md_context(cwd).await {
-        if !claude_md.is_empty() {
-            prompt.push_str("\n# Project Context (from CLAUDE.md files)\n");
-            prompt.push_str(&claude_md);
-        }
-    }
-
-    // Section 15: Tool list
-    prompt.push_str("\n# Available Tools\n");
-    prompt.push_str("- Bash: Execute shell commands\n");
-    prompt.push_str("- Read: Read file contents\n");
-    prompt.push_str("- Write: Write file contents\n");
-    prompt.push_str("- Edit: Search-replace in files\n");
-    prompt.push_str("- Glob: Find files by pattern\n");
-    prompt.push_str("- Grep: Search file contents with regex\n");
-    prompt.push_str("- TodoWrite: Manage todo items\n");
-    prompt.push_str("- WebFetch: Fetch URL content\n");
-    prompt.push_str("- WebSearch: Search the web\n");
 
     prompt
 }
