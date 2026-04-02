@@ -241,10 +241,7 @@ pub fn ui(frame: &mut Frame, app: &App) {
 
     let input_x = 1 + app.input_buffer.len() as u16;
     let input_y = chunks[1].y + 1;
-    frame.set_cursor(
-        input_x.min(chunks[1].width - 2 + chunks[1].x),
-        input_y,
-    );
+    frame.set_cursor_position(input_x.min(chunks[1].width - 2 + chunks[1].x), input_y);
 
     let status = format!(
         "Tokens: {} in / {} out | Cost: ${:.4}",
