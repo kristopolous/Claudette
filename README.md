@@ -15,6 +15,17 @@ Want to go piecemeal? Run `claudia` and she will export a subset as a set of tas
 
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
-Examples? Try `rust/`, `web/`, or for a 90s flare, `tk/`...
+## Included claudette vibed examples
 
-Let's do this!
+### Web
+Includes jsh and virtual file systems.
+
+<img width="500" alt="claude-web" src="https://github.com/user-attachments/assets/b8163d02-91c7-4758-a6c7-f9667db78657" />
+
+### Tkinter
+A 1990s style vintage way to do toolcalling, mcp and sub-agents.
+
+<img width="500"  alt="tk-claude" src="https://github.com/user-attachments/assets/584f6c64-096a-4a8c-a5d0-6bd019749664" />
+
+
+And more!
