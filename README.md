@@ -9,7 +9,7 @@
 
 ---
 
-Every module, every pattern, every decision - described so you can feed it to an LLM and get working code back.
+Every module, every pattern, every decision - described so you can feed it to an LLM. Some guy got 100k stars in 24 hours "re-implementing claude" and now, you can to.
 
 Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 

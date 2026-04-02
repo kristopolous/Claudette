@@ -11,22 +11,31 @@ pub const SYSTEM_PROMPT_DYNAMIC_BOUNDARY: &str = "\n=== END OF STATIC PROMPT ===
 /// Build the complete system prompt based on tools, model info, and environment
 pub async fn build_system_prompt(
     cwd: &Path,
-    tools: &[Tool],
+    tools: Option<&[Tool]>, // list of available tools
     model_info: Option<(&str, &str)>, // (marketing_name, model_id)
     mcp_clients: Option<&[McpClientTransport]>,
-    simple_mode: bool,
-    proactive_mode: bool,
+    simple_mode: Option<bool>,
+    proactive_mode: Option<bool>,
     language_preference: Option<&str>,
     output_style: Option<&str>,
     token_budget: Option<usize>,
-    enable_scratchpad: bool,
+    enable_scratchpad: Option<bool>,
     scratchpad_dir: Option<&str>,
-    enable_hooks: bool,
-    fork_subagent_enabled: bool,
-    verification_agent_enabled: bool,
-    ant_mode: bool,
-    keep_recent: usize,
+    enable_hooks: Option<bool>,
+    fork_subagent_enabled: Option<bool>,
+    verification_agent_enabled: Option<bool>,
+    ant_mode: Option<bool>,
+    keep_recent: Option<usize>,
 ) -> String {
+    let simple_mode = simple_mode.unwrap_or(false);
+    let proactive_mode = proactive_mode.unwrap_or(false);
+    let enable_hooks = enable_hooks.unwrap_or(false);
+    let fork_subagent_enabled = fork_subagent_enabled.unwrap_or(false);
+    let verification_agent_enabled = verification_agent_enabled.unwrap_or(false);
+    let ant_mode = ant_mode.unwrap_or(false);
+    let enable_scratchpad = enable_scratchpad.unwrap_or(false);
+    let keep_recent = keep_recent.unwrap_or(10);
+
     let mut prompt = String::new();
 
     if simple_mode {
