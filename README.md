@@ -3,7 +3,7 @@
 <br/><b>Claudette - Vibe your own claude</b>
 </p>
 
-**1961 skills to vibe a Claude clone. Make tokens go burr**
+**1,961 skills to vibe a Claude clone derived from the source. Make tokens go burr**
 
 > Yo openclaw, clone https://github.com/kristopolous/Claudette and make it in Rust. 
 
@@ -13,6 +13,4 @@ Every module, every pattern, every decision - described so you can feed it to an
 
 Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 
-Example? Try `rust/`
-
-What about a completely web one? already, `web/`
+Example? Try `rust/` or `web/` 
