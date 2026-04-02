@@ -1,9 +1,9 @@
 use crate::mcp::protocol::{
     CallToolParams, CallToolResult, ClientCapabilities, ClientInfo, InitializeParams,
-    InitializeResult, JsonRpcMessage, JsonRpcRequest, McpTool, ToolListResult,
+    InitializeResult, JsonRpcMessage, McpTool, ToolListResult,
 };
 use crate::mcp::transport::{McpTransport, StdioTransport};
-use crate::types::{Tool, ToolDefinition, ToolResult, ToolUseContext};
+use crate::types::{Tool, ToolResult, ToolUseContext};
 use anyhow::Result;
 use async_trait::async_trait;
 use serde_json::json;

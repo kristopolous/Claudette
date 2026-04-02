@@ -6,7 +6,7 @@ use anyhow::Result;
 use futures::StreamExt;
 use reqwest_eventsource::Event;
 use serde_json;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use tokio_util::sync::CancellationToken;
 use tracing::{debug, info};
 
@@ -193,6 +193,11 @@ impl QueryEngine {
                             }
                         };
 
+                        // Check for [DONE] sentinel (some endpoints)
+                        if msg.data.trim() == "[DONE]" {
+                            break;
+                        }
+
                         let data: serde_json::Value = match serde_json::from_str(&msg.data) {
                             Ok(v) => v,
                             Err(e) => {
@@ -294,7 +299,8 @@ impl QueryEngine {
                     if let Some(usage) = stream_usage {
                         self.total_usage.accumulate(&usage);
                     } else {
-                        return Err(anyhow::anyhow!("Stream ended without usage info"));
+                        // Some endpoints may not provide usage; continue without it
+                        debug!("Stream ended without usage information");
                     }
 
                     self.messages.push(Message::Assistant {

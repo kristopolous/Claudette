@@ -41,7 +41,7 @@ impl Tool for ReadTool {
         true
     }
 
-    async fn execute(&self, input: serde_json::Value, ctx: &ToolUseContext<'_>) -> Result<ToolResult> {
+    async fn execute(&self, input: serde_json::Value, _ctx: &ToolUseContext<'_>) -> Result<ToolResult> {
         let file_path = input["file_path"]
             .as_str()
             .ok_or_else(|| anyhow::anyhow!("Missing 'file_path' field"))?;

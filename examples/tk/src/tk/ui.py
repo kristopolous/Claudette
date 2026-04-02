@@ -935,7 +935,7 @@ class MainWindow:
     def _add_assistant_bubble(self, text: str):
         wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
         wrapper.pack(fill=tk.X, pady=2, padx=10)
-        bubble = tk.Label(wrapper, text=text, bg="#e8e8e8", fg="black",
+        bubble = tk.Label(wrapper, text=text, bg="#e8e8e8", fg="#222222",
                           font=("TkDefaultFont", 10), wraplength=500,
                           justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
                           highlightthickness=0, borderwidth=0, relief=tk.FLAT)
@@ -944,12 +944,16 @@ class MainWindow:
 
     def _add_tool_bubble(self, text: str):
         wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
-        wrapper.pack(fill=tk.X, pady=2, padx=10)
-        bubble = tk.Label(wrapper, text=text, bg="#e0f0e0", fg="darkgreen",
-                          font=("TkFixedFont", 9), wraplength=500,
-                          justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
+        wrapper.pack(fill=tk.X, pady=4, padx=10)
+        header = tk.Label(wrapper, text="Tool Output", bg="#f5f5f5", fg="#888888",
+                          font=("TkDefaultFont", 8), justify=tk.LEFT, anchor=tk.W,
                           highlightthickness=0, borderwidth=0, relief=tk.FLAT)
-        bubble.pack(side=tk.LEFT)
+        header.pack(anchor=tk.W, padx=2, pady=(0, 2))
+        bubble = tk.Label(wrapper, text=text, bg="#e8e4d8", fg="#333333",
+                          font=("TkFixedFont", 9), wraplength=700,
+                          justify=tk.LEFT, padx=10, pady=8, anchor=tk.W,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(fill=tk.X, side=tk.LEFT)
         self._message_widgets.append(wrapper)
 
     def _add_error_bubble(self, text: str):
@@ -980,7 +984,7 @@ class MainWindow:
         if self._streaming_label is None:
             wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
             wrapper.pack(fill=tk.X, pady=2, padx=10)
-            bubble = tk.Label(wrapper, text="", bg="#e8e8e8", fg="black",
+            bubble = tk.Label(wrapper, text="", bg="#e8e8e8", fg="#222222",
                               font=("TkDefaultFont", 10), wraplength=500,
                               justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
                               highlightthickness=0, borderwidth=0, relief=tk.FLAT)
@@ -1039,7 +1043,10 @@ class MainWindow:
         self.query_engine.on_cost_update = self._on_cost_update
 
         def run_async():
+            import warnings
+            warnings.filterwarnings("ignore", message=".*was never awaited", category=RuntimeWarning)
             loop = asyncio.new_event_loop()
+            loop.set_debug(False)
             asyncio.set_event_loop(loop)
             try:
                 async def main():
@@ -1059,7 +1066,16 @@ class MainWindow:
         self.root.after(0, lambda: self._append_streaming(text))
 
     def _on_tool_start(self, name: str, args: dict):
+        self._finalize_streaming()
         self.root.after(0, lambda: self._append_message("tool", f"Running {name}..."))
+
+    def _finalize_streaming(self):
+        def _do():
+            if self._streaming_label and self._streaming_text:
+                self._message_widgets.append(self._streaming_wrapper)
+            self._streaming_label = None
+            self._streaming_text = ""
+        self.root.after(0, _do)
 
     def _on_tool_result(self, name: str, result: str):
         preview = result[:500] + "..." if len(result) > 500 else result

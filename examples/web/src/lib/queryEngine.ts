@@ -30,20 +30,20 @@ function buildApiMessages(history: Message[], systemPrompt: string, tools: Tool[
       })
     } else if (msg.role === 'assistant') {
       if (Array.isArray(msg.content)) {
-        const blocks: Array<Record<string, unknown>> = []
-        for (const block of msg.content) {
-          if (block.type === 'text') {
-            blocks.push({ type: 'text', text: block.text })
-          } else if (block.type === 'tool_use') {
-            blocks.push({
-              type: 'tool_use',
-              id: block.id,
-              name: block.name,
-              input: block.input,
-            })
-          }
-        }
-        messages.push({ role: 'assistant', content: blocks })
+        const textParts = msg.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('')
+        const toolCalls = msg.content.filter((b: any) => b.type === 'tool_use').map((b: any, idx: number) => ({
+          index: idx,
+          id: b.id,
+          type: 'function',
+          function: {
+            name: b.name,
+            arguments: JSON.stringify(b.input || {}),
+          },
+        }))
+        const assistantMsg: Record<string, unknown> = {}
+        if (textParts) assistantMsg.content = textParts
+        if (toolCalls.length > 0) assistantMsg.tool_calls = toolCalls
+        messages.push({ role: 'assistant', ...assistantMsg })
       } else {
         messages.push({ role: 'assistant', content: msg.content })
       }
@@ -193,6 +193,8 @@ async function* query(
 
       // Handle tool calls
       if (toolCalls.length > 0) {
+        const openaiToolCalls: Array<Record<string, unknown>> = []
+
         for (const tc of toolCalls) {
           let input: Record<string, unknown> = {}
           try {
@@ -206,6 +208,16 @@ async function* query(
             id: tc.id,
             name: tc.name,
             input,
+          })
+
+          openaiToolCalls.push({
+            index: openaiToolCalls.length,
+            id: tc.id,
+            type: 'function',
+            function: {
+              name: tc.name,
+              arguments: tc.argumentsStr,
+            },
           })
 
           yield {
@@ -249,10 +261,91 @@ async function* query(
           })
         }
 
-        // Add assistant message with tool uses
-        if (assistantBlocks.length > 0) {
-          messages.push({ role: 'assistant', content: assistantBlocks })
+        // Add assistant message in OpenAI format
+        const assistantMsg: Record<string, unknown> = {}
+        if (fullContent) assistantMsg.content = fullContent
+        assistantMsg.tool_calls = openaiToolCalls
+        messages.push({ role: 'assistant', ...assistantMsg })
+
+        // Continue loop for next turn
+        continue
+      }
+
+      // Handle tool calls
+      if (toolCalls.length > 0) {
+        const openaiToolCalls: Array<Record<string, unknown>> = []
+
+        for (const tc of toolCalls) {
+          let input: Record<string, unknown> = {}
+          try {
+            input = JSON.parse(tc.argumentsStr)
+          } catch {
+            // try to parse as best we can
+          }
+
+          assistantBlocks.push({
+            type: 'tool_use',
+            id: tc.id,
+            name: tc.name,
+            input,
+          })
+
+          openaiToolCalls.push({
+            index: openaiToolCalls.length,
+            id: tc.id,
+            type: 'function',
+            function: {
+              name: tc.name,
+              arguments: tc.argumentsStr,
+            },
+          })
+
+          yield {
+            type: 'tool_use',
+            tool_use: {
+              type: 'tool_use',
+              id: tc.id,
+              name: tc.name,
+              input,
+            },
+          }
+
+          // Execute the tool
+          const tool = tools.find(t => t.name === tc.name)
+          const context: ToolUseContext = {
+            vfs,
+            cwd,
+            abortSignal,
+            maxTurns,
+            apiKey,
+            model,
+          }
+
+          let result: string
+          if (tool) {
+            result = await tool.execute(input, context)
+          } else {
+            result = `Unknown tool: ${tc.name}`
+          }
+
+          yield {
+            type: 'tool_result',
+            tool_result: { tool_use_id: tc.id, content: result },
+          }
+
+          // Add tool result to messages
+          messages.push({
+            role: 'tool',
+            content: result,
+            tool_call_id: tc.id,
+          })
         }
+
+        // Add assistant message in OpenAI format
+        const assistantMsg: Record<string, unknown> = {}
+        if (fullContent) assistantMsg.content = fullContent
+        assistantMsg.tool_calls = openaiToolCalls
+        messages.push({ role: 'assistant', ...assistantMsg })
 
         // Continue loop for next turn
         continue

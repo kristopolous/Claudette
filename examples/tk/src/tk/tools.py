@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+import asyncio
 import os
 import re
 import fnmatch
@@ -81,28 +82,28 @@ class BashTool(BaseTool):
         if not command:
             return ToolResult(tool_call_id="", content="No command provided", is_error=True)
         try:
-            result = subprocess.run(
+            proc = await asyncio.create_subprocess_shell(
                 command,
-                shell=True,
-                capture_output=True,
-                text=True,
-                timeout=timeout,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
                 cwd=cwd or os.getcwd(),
             )
+            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=timeout)
             output = ""
-            if result.stdout:
-                output += result.stdout
-            if result.stderr:
+            if stdout:
+                output += stdout.decode("utf-8", errors="replace")
+            if stderr:
                 if output:
                     output += "\n--- stderr ---\n"
-                output += result.stderr
+                output += stderr.decode("utf-8", errors="replace")
             if not output:
                 output = "(command completed with no output)"
             max_output = 50000
             if len(output) > max_output:
                 output = output[:max_output] + f"\n... (output truncated, {len(output) - max_output} more characters)"
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=output)
-        except subprocess.TimeoutExpired:
+        except asyncio.TimeoutError:
+            proc.kill()
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=f"Command timed out after {timeout}s", is_error=True)
         except Exception as e:
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=str(e), is_error=True)

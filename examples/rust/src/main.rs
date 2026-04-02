@@ -1,18 +1,17 @@
-use anyhow::Result;
+use anyhow::{Result, anyhow};
 use clap::Parser;
 use claudette_rs::api::{ApiConfig, ApiProvider, LlmClient, QueryEngine};
 use claudette_rs::commands::{clear_command, cost_command, help_command, model_command};
-use claudette_rs::context::{format_claude_md_context, get_git_status, format_git_context};
 use claudette_rs::mcp::{McpClient, McpToolWrapper};
 use claudette_rs::tools::{BashTool, EditTool, GlobTool, GrepTool, ReadTool, TodoWriteTool, WebFetchTool, WebSearchTool, WriteTool};
 use claudette_rs::tui::{App, run_tui};
-use claudette_rs::types::{CommandRegistry, Message, ToolRegistry, CostTracker, StreamEvent, ToolDefinition};
+use claudette_rs::types::{CommandRegistry, Message, ToolRegistry, CostTracker, StreamEvent};
 use claudette_rs::types::permission::{PermissionContext, PermissionMode, ToolPermissionRule};
+use claudette_rs::utils::system_prompt::build_system_prompt;
 use parking_lot::Mutex;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::{mpsc, Mutex as TokioMutex};
-use claudette_rs::utils::system_prompt::build_system_prompt;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 struct McpServerConfig {
@@ -75,13 +74,17 @@ struct Cli {
     #[arg(long, value_enum, default_value = "anthropic")]
     provider: Provider,
 
-    /// Base URL for API requests (for OpenAI-compatible endpoints)
-    #[arg(long)]
-    base_url: Option<String>,
-
-    /// Maximum tokens in response
-    #[arg(long, default_value_t = 8192)]
-    max_tokens: u64,
+     /// Base URL for API requests (for OpenAI-compatible endpoints)
+     #[arg(long)]
+     base_url: Option<String>,
+ 
+     /// API key (overrides settings and environment variables)
+     #[arg(long)]
+     api_key: Option<String>,
+ 
+     /// Maximum tokens in response
+     #[arg(long, default_value_t = 8192)]
+     max_tokens: u64,
 
     /// Maximum turns per message
     #[arg(long, default_value_t = 50)]
@@ -134,6 +137,14 @@ async fn main() -> Result<()> {
         Provider::Openai => ApiProvider::OpenAI,
     };
 
+    // If --api-key provided, set appropriate environment variable
+    if let Some(key) = &cli.api_key {
+        match provider {
+            ApiProvider::Anthropic => std::env::set_var("ANTHROPIC_API_KEY", key),
+            ApiProvider::OpenAI => std::env::set_var("OPENAI_API_KEY", key),
+        }
+    }
+
     // Auto-detect provider if neither key is set for the chosen one
     let has_anthropic_key = std::env::var("ANTHROPIC_API_KEY").is_ok();
     let has_openai_key = std::env::var("OPENAI_API_KEY").is_ok();
@@ -150,11 +161,12 @@ async fn main() -> Result<()> {
         (p, _, _) => p,
     };
 
+    // Ensure the appropriate API key is set (from --api-key or environment)
     let api_key = match provider {
         ApiProvider::Anthropic => std::env::var("ANTHROPIC_API_KEY")
-            .map_err(|_| anyhow::anyhow!("ANTHROPIC_API_KEY not set"))?,
+            .map_err(|_| anyhow!("ANTHROPIC_API_KEY not set. Use --api-key or set env var."))?,
         ApiProvider::OpenAI => std::env::var("OPENAI_API_KEY")
-            .map_err(|_| anyhow::anyhow!("OPENAI_API_KEY not set"))?,
+            .map_err(|_| anyhow!("OPENAI_API_KEY not set. Use --api-key or set env var."))?,
     };
 
     let base_url = cli.base_url.unwrap_or_else(|| match provider {
@@ -298,10 +310,11 @@ async fn main() -> Result<()> {
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
     let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
 
-    let cost_tracker_clone = cost_tracker.clone();
-    let model_clone = model.clone();
-    let query_handle = tokio::spawn(async move {
-        while let Some(input) = input_rx.recv().await {
+     let cost_tracker_clone = cost_tracker.clone();
+     let model_clone = model.clone();
+     let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
+     let query_handle = tokio::spawn(async move {
+         while let Some(input) = input_rx.recv().await {
             if input.starts_with('/') {
                 if input == "/quit" || input == "/exit" {
                     let _ = event_tx.send(StreamEvent::MessageEnd {
@@ -387,7 +400,7 @@ async fn main() -> Result<()> {
         }
     });
 
-    let app = App::new();
+    let app = App::new(Some(command_names.clone()));
     run_tui(app, event_rx, input_tx).await?;
 
     query_handle.abort();
@@ -397,7 +410,7 @@ async fn main() -> Result<()> {
 
 
 
-async fn run_demo(cwd: &std::path::Path) -> Result<()> {
+async fn run_demo(_cwd: &std::path::Path) -> Result<()> {
      eprintln!("Running in DEMO mode — no API calls will be made.\n");
 
      // Build tool registry first
@@ -465,9 +478,11 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
 
 
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
-    let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
+     let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
 
-    let query_handle = tokio::spawn(async move {
+     let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
+
+     let query_handle = tokio::spawn(async move {
         while let Some(input) = input_rx.recv().await {
             if input.starts_with('/') {
                 if input == "/quit" || input == "/exit" {
@@ -511,9 +526,9 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
                 }
             }
 
-            let tx = event_tx.clone();
+             let tx = event_tx.clone();
 
-            tokio::spawn(async move {
+             tokio::spawn(async move {
                 let demo_responses = [
                     ("👋 Hi! I'm Claudette running in demo mode.", 200),
                     ("", 100),
@@ -546,7 +561,7 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
         }
     });
 
-    let app = App::new();
+    let app = App::new(Some(command_names.clone()));
     run_tui(app, event_rx, input_tx).await?;
 
     query_handle.abort();

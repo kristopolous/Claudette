@@ -68,7 +68,7 @@ export default function ApiKeyInput({ onSubmit }: ApiKeyInputProps) {
               id="baseUrl"
               type="url"
               value={baseUrl}
-              onChange={(e) => setBaseUrl(e.target.value)}
+              onChange={(e) => setBaseUrl(e.target.value.replace(/\s/g, ''))}
               placeholder="https://api.openai.com/v1"
               className="w-full px-3 py-2 bg-[#161b22] border border-[#30363d] rounded-md text-sm focus:outline-none focus:border-[#58a6ff]"
             />
@@ -81,7 +81,7 @@ export default function ApiKeyInput({ onSubmit }: ApiKeyInputProps) {
               id="apiKey"
               type="password"
               value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
+              onChange={(e) => setApiKey(e.target.value.replace(/\s/g, ''))}
               placeholder="sk-..."
               className="w-full px-3 py-2 bg-[#161b22] border border-[#30363d] rounded-md text-sm focus:outline-none focus:border-[#58a6ff]"
               autoComplete="off"

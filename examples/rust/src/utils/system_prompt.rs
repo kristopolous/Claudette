@@ -1,5 +1,4 @@
 use crate::context::{format_claude_md_context, get_git_status};
-use crate::mcp::transport::McpTransport;
 use crate::types::ToolDefinition;
 use chrono::Local;
 use std::path::Path;

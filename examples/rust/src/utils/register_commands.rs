@@ -1,5 +1,5 @@
 use crate::commands::*;
-use crate::types::{Command, CommandRegistry, CostTracker};
+use crate::types::{CommandRegistry, CostTracker};
 use parking_lot::Mutex;
 use std::sync::Arc;
 

@@ -59,8 +59,6 @@ impl Tool for BashTool {
             .as_str()
             .ok_or_else(|| anyhow::anyhow!("Missing 'command' field"))?;
 
-        let timeout_ms = input["timeout"].as_u64().unwrap_or(120000);
-
         if ctx.abort_signal.is_cancelled() {
             return Ok(ToolResult::error("Command execution was cancelled"));
         }

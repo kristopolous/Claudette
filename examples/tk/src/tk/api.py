@@ -241,11 +241,14 @@ class APIClient:
                 return StreamEvent(type="text", data={"text": delta["content"]})
             if delta.get("tool_calls"):
                 for tc in delta["tool_calls"]:
+                    func = tc.get("function", {})
+                    name = func.get("name")
+                    args = func.get("arguments", "")
                     return StreamEvent(type="tool_use_delta", data={
                         "index": tc.get("index", 0),
                         "id": tc.get("id"),
-                        "name": tc.get("function", {}).get("name"),
-                        "arguments": tc.get("function", {}).get("arguments"),
+                        "name": name,
+                        "partial_json": args,
                     })
         usage = data.get("usage")
         if usage:
@@ -285,6 +288,7 @@ class APIClient:
 
         request = self.client.build_request("POST", endpoint, headers=headers, json=payload)
         response = await self.client.send(request, stream=True)
+        line_iter = None
         try:
             if response.status_code != 200:
                 body = await response.aread()
@@ -293,19 +297,21 @@ class APIClient:
                 })
                 return
 
-            lines = response.aiter_lines()
-            try:
-                async for line in lines:
-                    event = self._parse_stream_event(line)
-                    if event:
-                        yield event
-            finally:
-                await lines.aclose()
+            line_iter = response.aiter_lines()
+            async for line in line_iter:
+                event = self._parse_stream_event(line)
+                if event:
+                    yield event
         except (GeneratorExit, asyncio.CancelledError):
             pass
         except BaseException:
             pass
         finally:
+            if line_iter is not None:
+                try:
+                    await line_iter.aclose()
+                except Exception:
+                    pass
             try:
                 await response.aclose()
             except Exception:
