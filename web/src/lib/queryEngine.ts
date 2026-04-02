@@ -74,6 +74,7 @@ async function* query(
   cwd: string,
   apiKey: string,
   model: string,
+  baseUrl: string,
   maxTurns: number,
   abortSignal: AbortSignal,
 ): AsyncGenerator<StreamEvent> {
@@ -86,13 +87,15 @@ async function* query(
     },
   }))
 
+  const apiUrl = `${baseUrl.replace(/\/+$/, '')}/chat/completions`
+
   for (let turn = 0; turn < maxTurns; turn++) {
     if (abortSignal.aborted) break
 
     yield { type: 'stream_request_start' }
 
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -171,6 +174,9 @@ async function* query(
             }
 
             if (choice.finish_reason === 'stop' || choice.finish_reason === 'tool_calls') {
+              if (json.usage) {
+                yield { type: 'usage', usage: json.usage }
+              }
               break
             }
           } catch {
@@ -274,6 +280,7 @@ export class QueryEngine {
   private vfs: VirtualFS
   private apiKey: string
   private model: string
+  private baseUrl: string
   private maxTurns: number
   private cwd: string
 
@@ -283,6 +290,7 @@ export class QueryEngine {
     this.vfs = config.vfs
     this.apiKey = config.apiKey
     this.model = config.model || 'gpt-4o'
+    this.baseUrl = (config.baseUrl || 'https://api.openai.com/v1').replace(/\/+$/, '')
     this.maxTurns = config.maxTurns || 20
     this.cwd = config.cwd || '/'
   }
@@ -308,6 +316,7 @@ export class QueryEngine {
       this.cwd,
       this.apiKey,
       this.model,
+      this.baseUrl,
       this.maxTurns,
       abortController.signal,
     )

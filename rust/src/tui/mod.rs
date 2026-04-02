@@ -1,5 +1,3 @@
-pub mod app;
-pub mod input;
+pub mod cursive_ui;
 
-pub use app::*;
-pub use input::*;
+pub use cursive_ui::run_tui;

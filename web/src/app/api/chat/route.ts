@@ -5,12 +5,13 @@ import { getTools } from '@/lib/tools'
 
 const sessions = new Map<string, { engine: QueryEngine; vfs: ReturnType<typeof createVirtualFS> }>()
 
-export function getSession(sessionId: string, apiKey: string, model: string) {
+export function getSession(sessionId: string, apiKey: string, model: string, baseUrl: string) {
   if (!sessions.has(sessionId)) {
     const vfs = createVirtualFS()
     const engine = new QueryEngine({
       apiKey,
       model,
+      baseUrl,
       maxTurns: 20,
       tools: getTools(),
       vfs,
@@ -23,7 +24,7 @@ export function getSession(sessionId: string, apiKey: string, model: string) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const { message, apiKey, model } = body
+  const { message, apiKey, model, baseUrl } = body
 
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key required' }), { status: 400 })
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
   }
 
   const sessionId = body.sessionId || crypto.randomUUID()
-  const { engine } = getSession(sessionId, apiKey, model || 'gpt-4o')
+  const { engine } = getSession(sessionId, apiKey, model || 'gpt-4o', baseUrl || 'https://api.openai.com/v1')
 
   const encoder = new TextEncoder()
   const stream = new ReadableStream({

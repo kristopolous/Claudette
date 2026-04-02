@@ -11,11 +11,12 @@ import UsageDisplay, { calculateCost } from './UsageDisplay'
 import SettingsPanel from './SettingsPanel'
 
 interface StreamEvent {
-  type: 'text' | 'tool_use' | 'tool_result' | 'error' | 'done' | 'stream_request_start'
+  type: 'text' | 'tool_use' | 'tool_result' | 'error' | 'done' | 'stream_request_start' | 'usage'
   text?: string
   tool_use?: { id: string; name: string; input: Record<string, unknown> }
   tool_result?: { tool_use_id: string; content: string }
   error?: string
+  usage?: { prompt_tokens: number; completion_tokens: number; total_tokens: number }
   sessionId?: string
 }
 
@@ -51,7 +52,7 @@ type Message = UserMessage | AssistantMessage
 
 type Panel = 'chat' | 'files' | 'viewer'
 
-export default function ChatUI({ apiKey, model }: { apiKey: string; model: string }) {
+export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; model: string; baseUrl: string }) {
   const [messages, setMessages] = useState<Message[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [sessionId, setSessionId] = useState<string | null>(null)
@@ -96,7 +97,7 @@ export default function ChatUI({ apiKey, model }: { apiKey: string; model: strin
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, apiKey, model: currentModel, sessionId, maxTurns }),
+        body: JSON.stringify({ message: text, apiKey, model: currentModel, sessionId, maxTurns, baseUrl }),
         signal: abortRef.current.signal,
       })
 
@@ -167,6 +168,34 @@ export default function ChatUI({ apiKey, model }: { apiKey: string; model: strin
 
               return updated
             })
+
+            if (event.type === 'usage' && event.usage) {
+              setUsageStats(prev => {
+                const inputTokens = prev.inputTokens + event.usage!.prompt_tokens
+                const outputTokens = prev.outputTokens + event.usage!.completion_tokens
+                return {
+                  inputTokens,
+                  outputTokens,
+                  totalTokens: inputTokens + outputTokens,
+                  estimatedCost: calculateCost(inputTokens, outputTokens, currentModel),
+                  requests: prev.requests + 1,
+                }
+              })
+            }
+
+            if (event.type === 'usage' && event.usage) {
+              setUsageStats(prev => {
+                const inputTokens = prev.inputTokens + event.usage!.prompt_tokens
+                const outputTokens = prev.outputTokens + event.usage!.completion_tokens
+                return {
+                  inputTokens,
+                  outputTokens,
+                  totalTokens: inputTokens + outputTokens,
+                  estimatedCost: calculateCost(inputTokens, outputTokens, currentModel),
+                  requests: prev.requests + 1,
+                }
+              })
+            }
           } catch {
             // skip malformed SSE
           }

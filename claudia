@@ -6,9 +6,71 @@ import { spawn } from 'node:child_process';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const scriptPath = join(__dirname, 'claudette-builder', 'dist', 'index.js');
 
-const child = spawn('node', [scriptPath], {
+const args = process.argv.slice(2);
+
+if (args.includes('--help') || args.includes('-h')) {
+  console.log(`
+        .{{}}}}}}.
+       {{{{{}}}}}}}. 
+      {{{{  }}}}}}}}}     
+     }}}}} _   _ {{{{{  
+    }}}}}  6   6  {{{{   Aahhh, I'm here to help but really
+    {{{{{    ^    }}}}}     just run me without arguments
+   {{{{{{\\  -=-  /}}}}}}   
+   {{{{{{{;.___.;}}}}}}}  
+    {{{{{{{)   (}}}}}}}'
+     \`""'"':   :'"'"'\`   
+            \`@' 
+
+    Usage: ./claudia [options]
+
+    Options:
+      --help        Show this message
+      --all         Select all features (including optional)
+      --minimal     Select only required features
+      --features    Comma-separated list of feature IDs to pre-select
+
+    Features:
+      core-agent       AI conversation engine (required)
+      shell-commands   Bash command execution
+      file-operations  Read, write, edit files
+      search           Glob and grep file search
+      web-access       URL fetch + web search
+      sub-agents       Specialized sub-agents
+      terminal-ui      Full REPL interface
+      permissions      Permission prompts
+      slash-commands   /commit, /review, /help, etc.
+      memory           Persistent project memory
+      mcp              Model Context Protocol
+      context-mgmt     Auto-compact conversations
+      cost-tracking    Token usage and budgets
+      skills           Reusable prompt packages
+      keybindings      Custom keyboard shortcuts
+      plugins          Third-party extensibility
+      tasks            Background task system
+      state-mgmt       App state and history
+      remote-mode      Remote execution
+      lsp              Language Server Protocol
+      vim-mode         Vim keybindings
+
+    Claudia is Claudette's manager.
+
+`);
+  process.exit(0);
+}
+
+const child = spawn('node', [scriptPath, ...args], {
   stdio: 'inherit',
   cwd: __dirname,
+});
+
+child.on('close', (code) => {
+  process.exit(code ?? 1);
+});
+
+child.on('error', (err) => {
+  console.error('Failed to start claudette-builder:', err.message);
+  process.exit(1);
 });
 
 child.on('close', (code) => {

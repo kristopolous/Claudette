@@ -387,8 +387,7 @@ async fn main() -> Result<()> {
         }
     });
 
-    let app = App::new();
-    run_tui(app, event_rx, input_tx).await?;
+    run_tui(event_rx, input_tx).await?;
 
     query_handle.abort();
 
@@ -578,8 +577,7 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
         }
     });
 
-    let app = App::new();
-    run_tui(app, event_rx, input_tx).await?;
+    run_tui(event_rx, input_tx).await?;
 
     query_handle.abort();
 

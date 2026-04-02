@@ -22,11 +22,12 @@ export interface ToolUseBlock {
 }
 
 export interface StreamEvent {
-  type: 'text' | 'tool_use' | 'tool_result' | 'error' | 'done' | 'stream_request_start'
+  type: 'text' | 'tool_use' | 'tool_result' | 'error' | 'done' | 'stream_request_start' | 'usage'
   text?: string
   tool_use?: ToolUseBlock
   tool_result?: { tool_use_id: string; content: string }
   error?: string
+  usage?: { prompt_tokens: number; completion_tokens: number; total_tokens: number }
 }
 
 export interface ToolInputJSONSchema {
@@ -75,6 +76,7 @@ export interface VirtualFS {
 export interface QueryEngineConfig {
   apiKey: string
   model?: string
+  baseUrl?: string
   maxTurns?: number
   systemPrompt?: string
   tools: Tool[]
