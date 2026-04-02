@@ -1,7 +1,6 @@
 'use client'
 
 import MarkdownContent from './MarkdownContent'
-import { useState, useEffect } from 'react'
 
 interface MessageBubbleProps {
   role: 'user' | 'assistant'
@@ -10,14 +9,6 @@ interface MessageBubbleProps {
 }
 
 export default function MessageBubble({ role, content, isStreaming }: MessageBubbleProps) {
-  const [html, setHtml] = useState('')
-
-  useEffect(() => {
-    if (role === 'assistant') {
-      Promise.resolve(marked(content)).then(html => setHtml(html))
-    }
-  }, [content, role])
-
   if (role === 'user') {
     return (
       <div className="bg-[#1f2937] rounded-lg p-4 my-2">

@@ -40,13 +40,16 @@ interface MarkdownContentProps {
 }
 
 export default function MarkdownContent({ content }: MarkdownContentProps) {
-  const html = useMemo(() => {
+  const [html, setHtml] = useState('')
+
+  useEffect(() => {
     const renderer = new marked.Renderer()
-    renderer.code = (code, language) => {
-      const lang = typeof language === 'string' ? language : undefined
-      return `__CODEBLOCK__${JSON.stringify({ code: code as string, language: lang })}__CODEBLOCK__`
+    renderer.code = ({ text, lang }: { text: string; lang?: string }) => {
+      return `__CODEBLOCK__${JSON.stringify({ code: text, language: lang })}__CODEBLOCK__`
     }
-    return marked(content, { renderer })
+    Promise.resolve(marked(content, { renderer })).then(result => {
+      setHtml(result)
+    })
   }, [content])
 
   const parts = useMemo(() => {

@@ -5,7 +5,7 @@ import { getTools } from '@/lib/tools'
 
 const sessions = new Map<string, { engine: QueryEngine; vfs: ReturnType<typeof createVirtualFS> }>()
 
-function getSession(sessionId: string, apiKey: string, model: string) {
+export function getSession(sessionId: string, apiKey: string, model: string) {
   if (!sessions.has(sessionId)) {
     const vfs = createVirtualFS()
     const engine = new QueryEngine({

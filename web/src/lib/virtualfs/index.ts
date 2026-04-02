@@ -91,7 +91,7 @@ export class VirtualFSImpl implements VirtualFS {
 
   isDir(path: string): boolean {
     const node = this.findNode(path)
-    return node?.type === 'directory' ?? false
+    return node?.type === 'directory' || false
   }
 
   mkdir(path: string): void {
