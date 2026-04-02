@@ -17,4 +17,7 @@ Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 
 Example? Try `rust/`, `web/`, or for a 90s flare, 'tk/'...
 
-Want to go piecemeal and get something ready to feed in? Run `claudia`.
+Want to go piecemeal? Run `claudia` and she will export a subset as a set of tasks and PRD, ready for your ralph looping.
+
+<img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
+
