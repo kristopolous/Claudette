@@ -22,9 +22,9 @@ Provides fixed-size circular buffer with automatic oldest-item eviction.
 11. Calculates start position based on size vs capacity
 12. `toArray` - gets all items oldest to newest
 13. `clear` - clears all items, resets head and size
-14. `getSize` - gets current item count
-15. `getCapacity` - gets buffer capacity
+14. `length` - gets current item count (not `getSize`)
+15. No `getCapacity` method exists — capacity is only set via constructor
 16. Useful for rolling window of data (logs, messages, etc.)
 
 ## Exports
-- `CircularBuffer<T>` - circular buffer class
+- `CircularBuffer<T>` - generic class with `add`, `addAll`, `getRecent`, `toArray`, `clear`, `length` methods

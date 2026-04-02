@@ -1,4 +1,4 @@
-# FileReadTool/imageProcessor
+# FileReadTool/imageProcessor.ts
 
 ## Purpose
 
@@ -19,7 +19,6 @@ Provides dynamic loading of image processing libraries (Sharp or native `image-p
   - `jpeg(options?)`, `png(options?)`, `webp(options?)` return `SharpInstance`
   - `toBuffer(): Promise<Buffer>`
 - `SharpFunction`: `(input: Buffer) => SharpInstance`
-- `SharpCreator`: `(options: {create: {width, height, channels, background}}) => SharpInstance`
 - `MaybeDefault<T>`: `T | { default: T }` (handles ESM/CJS interop)
 - Module caches: `imageProcessorModule`, `imageCreatorModule`
 
@@ -38,8 +37,7 @@ Provides dynamic loading of image processing libraries (Sharp or native `image-p
 
 ## Exports
 
-- `SharpInstance` type
-- `SharpFunction` type
-- `SharpCreator` type
+- `SharpInstance: type`
+- `SharpFunction: (input: Buffer) => SharpInstance`
 - `getImageProcessor(): Promise<SharpFunction>`
 - `getImageCreator(): Promise<SharpCreator>`

@@ -1,4 +1,4 @@
-# tools/FileReadTool/FileReadTool
+# FileReadTool/FileReadTool.ts
 
 ## Purpose
 Tool for reading files with support for text, images, PDFs, and Jupyter notebooks, including token validation, caching, and security checks.
@@ -25,10 +25,11 @@ Tool for reading files with support for text, images, PDFs, and Jupyter notebook
 10. Supports PDF page extraction to separate images with count limits
 
 ## Exports
-- `FileReadTool` - main tool definition
-- `Input` - input type (file_path, offset?, limit?, pages?)
-- `Output` - output union type (text, image, notebook, pdf, parts, file_unchanged)
-- `registerFileReadListener` - registers callback for file read events
-- `MaxFileReadTokenExceededError` - error class for token limit exceeded
-- `CYBER_RISK_MITIGATION_REMINDER` - security reminder constant
-- `readImageWithTokenBudget` - reads and compresses image to fit token budget
+
+- `FileReadTool: Tool<InputSchema, Output>`
+- `Input: z.infer<InputSchema>`
+- `Output: z.infer<OutputSchema>`
+- `registerFileReadListener(listener: (filePath: string, content: string) => void): () => void`
+- `MaxFileReadTokenExceededError` class
+- `CYBER_RISK_MITIGATION_REMINDER: string`
+- `readImageWithTokenBudget(filePath: string, maxTokens?: number, maxBytes?: number): Promise<ImageResult>`

@@ -1,3 +1,5 @@
+# tools/MCPTool/prompt.ts
+
 ## Purpose
 Defines placeholder prompt and description constants for MCP tools, which are overridden at runtime by the MCP client.
 

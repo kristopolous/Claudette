@@ -1,3 +1,5 @@
+# tools/McpAuthTool/McpAuthTool.ts
+
 ## Purpose
 Factory function that creates pseudo-tools for MCP servers requiring authentication. Allows the model to initiate OAuth flows and provide users with authorization URLs.
 

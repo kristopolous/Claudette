@@ -1,12 +1,17 @@
+# FileEditTool/utils.ts
+
 ## Purpose
+
 Provides utility functions for file editing operations including quote normalization, patch generation, snippet extraction, and edit input normalization.
 
 ## Imports
+
 - **Stdlib**: none
 - **External**: `diff` (structuredPatch, StructuredPatchHunk)
 - **Internal**: `src/utils/log`, `src/utils/path`, `src/utils/stringUtils`, `utils/diff`, `utils/errors`, `utils/file`, `FileEditTool/types`
 
 ## Logic
+
 1. Defines curly quote constants and normalizes curly quotes to straight quotes for matching
 2. Strips trailing whitespace from lines while preserving line endings (skipped for markdown files)
 3. Finds actual strings in file content accounting for quote normalization
@@ -18,21 +23,22 @@ Provides utility functions for file editing operations including quote normaliza
 9. Compares edit equivalence by applying both sets to original content and comparing results
 
 ## Exports
-- `LEFT_SINGLE_CURLY_QUOTE` - constant for left single curly quote character
-- `RIGHT_SINGLE_CURLY_QUOTE` - constant for right single curly quote character
-- `LEFT_DOUBLE_CURLY_QUOTE` - constant for left double curly quote character
-- `RIGHT_DOUBLE_CURLY_QUOTE` - constant for right double curly quote character
-- `normalizeQuotes` - converts curly quotes to straight quotes in a string
-- `stripTrailingWhitespace` - removes trailing whitespace from each line while preserving line endings
-- `findActualString` - finds the actual matching string in file content accounting for quote normalization
-- `preserveQuoteStyle` - applies curly quote style from old string to new string
-- `applyEditToFile` - applies a single or replace-all edit to file content
-- `getPatchForEdit` - generates a patch for a single edit
-- `getPatchForEdits` - generates a patch for multiple edits
-- `getSnippetForTwoFileDiff` - generates a diff snippet between two file versions with byte cap
-- `getSnippetForPatch` - extracts a snippet around patch hunks with line numbers
-- `getSnippet` - extracts a snippet around a single edit with line numbers
-- `getEditsForPatch` - reconstructs edit operations from patch hunks
-- `normalizeFileEditInput` - normalizes edit input by trying desanitization when exact match fails
-- `areFileEditsEquivalent` - compares two sets of edits by applying both to original content
-- `areFileEditsInputsEquivalent` - compares two file edit inputs for semantic equivalence
+
+- `LEFT_SINGLE_CURLY_QUOTE: string`
+- `RIGHT_SINGLE_CURLY_QUOTE: string`
+- `LEFT_DOUBLE_CURLY_QUOTE: string`
+- `RIGHT_DOUBLE_CURLY_QUOTE: string`
+- `normalizeQuotes(str: string): string`
+- `stripTrailingWhitespace(str: string): string`
+- `findActualString(fileContent: string, searchString: string): string | null`
+- `preserveQuoteStyle(oldString: string, actualOldString: string, newString: string): string`
+- `applyEditToFile(originalContent: string, oldString: string, newString: string, replaceAll?: boolean): string`
+- `getPatchForEdit(params: { filePath: string; fileContents: string; oldString: string; newString: string; replaceAll?: boolean }): { patch: StructuredPatchHunk[]; updatedFile: string }`
+- `getPatchForEdits(params: { filePath: string; fileContents: string; edits: FileEdit[] }): { patch: StructuredPatchHunk[]; updatedFile: string }`
+- `getSnippetForTwoFileDiff(fileAContents: string, fileBContents: string): string`
+- `getSnippetForPatch(patch: StructuredPatchHunk[], newFile: string): { formattedSnippet: string; startLine: number }`
+- `getSnippet(originalFile: string, oldString: string, newString: string, contextLines?: number): { snippet: string; startLine: number }`
+- `getEditsForPatch(patch: StructuredPatchHunk[]): FileEdit[]`
+- `normalizeFileEditInput(params: { file_path: string; edits: EditInput[] }): { file_path: string; edits: EditInput[] }`
+- `areFileEditsEquivalent(edits1: FileEdit[], edits2: FileEdit[], originalContent: string): boolean`
+- `areFileEditsInputsEquivalent(input1: { file_path: string; edits: FileEdit[] }, input2: { file_path: string; edits: FileEdit[] }): boolean`

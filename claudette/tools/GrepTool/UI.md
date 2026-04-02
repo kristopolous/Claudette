@@ -1,3 +1,5 @@
+# tools/GrepTool/UI.tsx
+
 ## Purpose
 React components for rendering Grep tool usage and result messages.
 

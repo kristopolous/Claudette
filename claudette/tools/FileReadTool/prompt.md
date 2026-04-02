@@ -1,4 +1,4 @@
-# FileReadTool/prompt
+# FileReadTool/prompt.ts
 
 ## Purpose
 
@@ -25,19 +25,10 @@ Exports constants and a template function for generating the Read tool's prompt.
 
 **Function**:
 - `renderPromptTemplate(lineFormat, maxSizeInstruction, offsetInstruction): string`:
-  - Builds multi-line prompt with:
-    - Tool name and premise ("Reads a file... Assume this tool is able to read all files")
-    - Parameters: `file_path` must be absolute; default reads up to `MAX_LINES_TO_READ` from start; includes `maxSizeInstruction`
-    - `offsetInstruction` and `lineFormat`
-    - Image support note (multimodal visual presentation)
-    - Conditional PDF support: if `isPDFSupported()`, adds paragraph about reading PDFs, mandatory pages parameter for large PDFs (>10 pages), 20-page max per request
-    - Notebook support (.ipynb) with all cells/outputs
-    - Directories note: use BashTool instead
-    - Screenshot encouragement: always read provided screenshot path
-    - Empty file warning note
+  - Builds multi-line prompt with tool capabilities, parameters, image/PDF/notebook support, and usage notes.
   - Returns the complete prompt string
 
-**Note**: The caller (FileReadTool) supplies runtime values for `maxSizeInstruction` (e.g., token/byte limits) and chooses which offset instruction to use.
+**Note**: The caller (FileReadTool) supplies runtime values for `maxSizeInstruction` and chooses which offset instruction to use.
 
 ## Exports
 

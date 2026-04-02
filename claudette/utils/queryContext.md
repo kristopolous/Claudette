@@ -1,38 +1,19 @@
 # utils/queryContext
 
 ## Purpose
-Provides shared helpers for building API cache-key prefix for query() calls.
+Shared helpers for building the API cache-key prefix (systemPrompt, userContext, systemContext) for query() calls. Isolated in its own file to avoid import cycles with context.ts and constants/prompts.ts.
 
 ## Imports
-- **Stdlib**: (none)
-- **External**: (none)
-- **Internal**: commands, constants prompts, context, services mcp types, state AppStateStore, Tool, AgentTool loadAgentsDir, message types, abortController, fileStateCache, forkedAgent, model model, systemPromptType, thinking
+- **Internal**: `../commands` (Command), `../constants/prompts` (getSystemPrompt), `../context` (getSystemContext, getUserContext), `../services/mcp/types` (MCPServerConnection), `../state/AppStateStore` (AppState), `../Tool` (Tools, ToolUseContext), `../tools/AgentTool/loadAgentsDir` (AgentDefinition), `../types/message` (Message), `./abortController`, `./fileStateCache` (FileStateCache), `./forkedAgent` (CacheSafeParams), `./model/model` (getMainLoopModel), `./systemPromptType` (asSystemPrompt), `./thinking` (shouldEnableThinkingByDefault, ThinkingConfig)
 
 ## Logic
-1. Lives in separate file to avoid import cycles (imports from context, constants/prompts)
-2. Only entrypoint-layer files import from here (QueryEngine, cli/print)
-3. `fetchSystemPromptParts` - fetches systemPrompt, userContext, systemContext
-4. When customSystemPrompt set, default getSystemPrompt and getSystemContext skipped
-5. Custom prompt replaces default entirely, systemContext would be appended to unused default
-6. Callers assemble final systemPrompt from defaultSystemPrompt (or custom) + optional extras + appendSystemPrompt
-7. QueryEngine injects coordinator userContext and memory-mechanics prompt
-8. sideQuestion's fallback uses base result directly
-9. `buildCacheSafeParams` - builds CacheSafeParams from raw inputs
-10. Used by SDK side_question handler on resume before turn completes
-11. No stopHooks snapshot yet, mirrors system prompt building
-12. `getLastCacheSafeParams` - gets last cache-safe params
-13. `setLastCacheSafeParams` - sets last cache-safe params
-14. `clearLastCacheSafeParams` - clears last cache-safe params
-15. `getMainLoopModel` - gets main loop model
-16. `asSystemPrompt` - converts to system prompt
-17. `shouldEnableThinkingByDefault`, `ThinkingConfig` - thinking functions/types
-18. `createAbortController` - creates abort controller
-19. `FileStateCache`, `CacheSafeParams` - cache types
+1. File is isolated because it imports from context.ts and constants/prompts.ts which are high in the dependency graph — putting these in systemPrompt.ts or sideQuestion.ts would create cycles
+2. Only entrypoint-layer files import from here (QueryEngine.ts, cli/print.ts)
+3. `fetchSystemPromptParts` fetches systemPrompt parts, userContext, and systemContext in parallel via Promise.all; when customSystemPrompt is set, default systemPrompt and systemContext are skipped entirely
+4. `buildSideQuestionFallbackParams` reconstructs CacheSafeParams from raw inputs for the SDK side_question handler on resume before a turn completes (no stopHooks snapshot yet)
+5. Strips in-progress assistant messages (stop_reason === null) since the SDK can fire side_question mid-turn
+6. Builds ToolUseContext with thinking config (adaptive if enabled, disabled otherwise), abort controller, and no-op state setters
 
 ## Exports
-- `fetchSystemPromptParts` - fetches system prompt parts
-- `buildCacheSafeParams` - builds cache-safe params
-- `getLastCacheSafeParams` - gets last cache-safe params
-- `setLastCacheSafeParams` - sets last cache-safe params
-- `clearLastCacheSafeParams` - clears last cache-safe params
-- (Query context functions)
+- `fetchSystemPromptParts({ tools, mainLoopModel, additionalWorkingDirectories, mcpClients, customSystemPrompt })` - returns `{ defaultSystemPrompt: string[], userContext, systemContext }`; skips default prompt/context when customSystemPrompt is provided
+- `buildSideQuestionFallbackParams({ tools, commands, mcpClients, messages, readFileState, getAppState, setAppState, customSystemPrompt, appendSystemPrompt, thinkingConfig, agents })` - builds CacheSafeParams for SDK side_question handler on resume; mirrors QueryEngine.ts:ask() system prompt assembly

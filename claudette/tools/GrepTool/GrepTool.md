@@ -1,3 +1,5 @@
+# tools/GrepTool/GrepTool.ts
+
 ## Purpose
 Powerful search tool built on ripgrep for searching file contents using regular expressions with various output modes and filtering options.
 

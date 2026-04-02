@@ -1,10 +1,15 @@
+# FileWriteTool/prompt.ts
+
 ## Purpose
+
 Provides tool name, description, and instructions for the Write tool, including pre-read requirement.
 
 ## Imports
+
 - **Internal**: `FILE_READ_TOOL_NAME` from FileReadTool/prompt
 
 ## Logic
+
 Exports:
 - `FILE_WRITE_TOOL_NAME` = 'Write'
 - `DESCRIPTION` = 'Write a file to the local filesystem.'
@@ -17,6 +22,7 @@ Exports:
 The pre-read instruction is conditionally added.
 
 ## Exports
-- `FILE_WRITE_TOOL_NAME` (string)
-- `DESCRIPTION` (string)
+
+- `FILE_WRITE_TOOL_NAME: string`
+- `DESCRIPTION: string`
 - `getWriteToolDescription(): string`

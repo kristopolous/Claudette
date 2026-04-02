@@ -1,3 +1,5 @@
+# tools/NotebookEditTool/NotebookEditTool.ts
+
 ## Purpose
 Tool for editing Jupyter notebook (.ipynb) cells with support for replace, insert, and delete operations.
 

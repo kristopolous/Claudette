@@ -1,12 +1,17 @@
+# AskUserQuestionTool/prompt.ts
+
 ## Purpose
+
 Provides prompt text and constants for the AskUserQuestion tool, which gathers user preferences through multiple-choice questions.
 
 ## Imports
+
 - **Stdlib**: None
 - **External**: None
 - **Internal**: `EXIT_PLAN_MODE_TOOL_NAME` (to reference in usage notes)
 
 ## Logic
+
 This module exports a collection of constants used by the AskUserQuestion tool:
 - `ASK_USER_QUESTION_TOOL_NAME`: tool identifier
 - `ASK_USER_QUESTION_TOOL_CHIP_WIDTH`: UI width (12 characters)
@@ -15,8 +20,9 @@ This module exports a collection of constants used by the AskUserQuestion tool:
 - `ASK_USER_QUESTION_TOOL_PROMPT`: usage instructions covering multi-select, recommendation labeling, and a plan-mode note clarifying when to use this vs `ExitPlanModeTool`
 
 ## Exports
-- `ASK_USER_QUESTION_TOOL_NAME` - string constant `'AskUserQuestion'`
-- `ASK_USER_QUESTION_TOOL_CHIP_WIDTH` - number `12`
-- `DESCRIPTION` - tool description string
-- `PREVIEW_FEATURE_PROMPT` - object with `markdown` and `html` fields
-- `ASK_USER_QUESTION_TOOL_PROMPT` - detailed usage instructions string
+
+- `ASK_USER_QUESTION_TOOL_NAME: string`
+- `ASK_USER_QUESTION_TOOL_CHIP_WIDTH: number`
+- `DESCRIPTION: string`
+- `PREVIEW_FEATURE_PROMPT: { markdown: string; html: string }`
+- `ASK_USER_QUESTION_TOOL_PROMPT: string`

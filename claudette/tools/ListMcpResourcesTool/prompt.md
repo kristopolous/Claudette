@@ -1,4 +1,4 @@
-# ListMcpResourcesTool/prompt
+# tools/ListMcpResourcesTool/prompt.ts
 
 ## Purpose
 

@@ -1,7 +1,11 @@
+# FileWriteTool/FileWriteTool.ts
+
 ## Purpose
+
 Tool for creating new files or overwriting existing files with full content replacement, ensuring atomic writes and comprehensive validation.
 
 ## Imports
+
 - **Stdlib**: `path`
 - **External**: `zod/v4`
 - **Internal**: 
@@ -22,6 +26,7 @@ Tool for creating new files or overwriting existing files with full content repl
   - Local: `FILE_WRITE_TOOL_NAME`, `getWriteToolDescription`, `getToolUseSummary`, `isResultTruncated`, `renderToolResultMessage`, `renderToolUseErrorMessage`, `renderToolUseMessage`, `renderToolUseRejectedMessage`, `userFacingName`
 
 ## Logic
+
 1. Validates: rejects team memory secrets, checks deny rules, UNC paths skip fs ops, requires Read-before-Edit, detects external modifications (mtime + content fallback)
 2. Creates parent directory before write
 3. Backs up file history if enabled
@@ -36,6 +41,7 @@ Tool for creating new files or overwriting existing files with full content repl
 12. Returns type ('create'|'update'), filePath, content, structuredPatch, originalFile?, gitDiff?
 
 ## Exports
-- `FileWriteTool` - Main tool definition
-- `FileWriteToolInput` - Input type (file_path, content)
-- `Output` - Output type (type, filePath, content, structuredPatch, originalFile?, gitDiff?)
+
+- `FileWriteTool: Tool<InputSchema, Output>`
+- `FileWriteToolInput: InputSchema`
+- `Output: z.infer<OutputSchema>`

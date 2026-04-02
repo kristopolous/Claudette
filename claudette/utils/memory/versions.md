@@ -1,18 +1,13 @@
-# versions
+# versions (memory)
 
 ## Purpose
-Note: This is used to check git repo status synchronously
+Synchronously checks whether a directory is inside a git repository.
 
 ## Imports
-- **Internal**: ../git
+- **Internal**: ../git (findGitRoot)
 
-## Items
-
-### projectIsInGitRepo
-**Type**: Function
+## Logic
+Calls `findGitRoot(cwd)` which walks the filesystem (no subprocess) to locate the git root. Returns `true` if found, `false` otherwise. For async checks, prefer `dirIsInGitRepo()`.
 
 ## Exports
-- projectIsInGitRepo
-
-## Source
-`versions`
+- `projectIsInGitRepo(cwd: string)` - Returns `boolean`. Synchronous — uses filesystem walk, not a git subprocess.

@@ -1,4 +1,4 @@
-# FileReadTool/limits
+# FileReadTool/limits.ts
 
 ## Purpose
 
@@ -23,9 +23,6 @@ Defines and computes the output limits for the FileReadTool: maximum file size (
 - `FileReadingLimits`: Interface with `maxTokens`, `maxSizeBytes`, and optional `includeMaxSizeInPrompt`, `targetedRangeNudge`
 
 **Functions**:
-- `getEnvMaxTokens(): number | undefined`:
-  - Reads `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS`
-  - Parses to positive integer; returns undefined if unset, invalid, or <= 0
 - `getDefaultFileReadingLimits(): FileReadingLimits` (memoized):
   - Queries GrowthBook feature `'tengu_amber_wren'` for partial overrides
   - Computes `maxSizeBytes`: GrowthBook value if valid number > 0; else `MAX_OUTPUT_SIZE`
@@ -38,7 +35,6 @@ Defines and computes the output limits for the FileReadTool: maximum file size (
 
 ## Exports
 
-- `FileReadingLimits` type
 - `DEFAULT_MAX_OUTPUT_TOKENS: number`
+- `FileReadingLimits: type`
 - `getDefaultFileReadingLimits(): FileReadingLimits`
-- `getEnvMaxTokens(): number | undefined` (internal but exported)

@@ -1,3 +1,5 @@
+# tools/RemoteTriggerTool/UI.tsx
+
 ## Purpose
 Renders the user-facing UI messages for the Remote Trigger tool, displaying tool use actions and HTTP result information.
 

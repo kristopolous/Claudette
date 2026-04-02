@@ -1,3 +1,5 @@
+# tools/ListMcpResourcesTool/ListMcpResourcesTool.ts
+
 ## Purpose
 Tool for listing available resources from connected MCP (Model Context Protocol) servers.
 

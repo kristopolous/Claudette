@@ -1,3 +1,5 @@
+# tools/NotebookEditTool/UI.tsx
+
 ## Purpose
 React components for rendering NotebookEdit tool usage and result messages for Jupyter notebook cell modifications.
 

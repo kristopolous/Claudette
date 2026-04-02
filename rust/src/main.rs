@@ -46,6 +46,10 @@ struct Cli {
     /// Show version and exit
     #[arg(long)]
     version: bool,
+
+    /// Demo mode — no API key needed, simulated responses
+    #[arg(long)]
+    demo: bool,
 }
 
 #[derive(clap::ValueEnum, Clone, Debug, Default)]
@@ -73,9 +77,29 @@ async fn main() -> Result<()> {
 
     let cwd = std::env::current_dir()?;
 
+    if cli.demo {
+        return run_demo(&cwd).await;
+    }
+
     let provider = match cli.provider {
         Provider::Anthropic => ApiProvider::Anthropic,
         Provider::Openai => ApiProvider::OpenAI,
+    };
+
+    // Auto-detect provider if neither key is set for the chosen one
+    let has_anthropic_key = std::env::var("ANTHROPIC_API_KEY").is_ok();
+    let has_openai_key = std::env::var("OPENAI_API_KEY").is_ok();
+
+    let provider = match (provider, has_anthropic_key, has_openai_key) {
+        (ApiProvider::Anthropic, false, true) => {
+            eprintln!("ANTHROPIC_API_KEY not set, but OPENAI_API_KEY found. Switching to OpenAI provider.");
+            ApiProvider::OpenAI
+        }
+        (ApiProvider::OpenAI, true, false) => {
+            eprintln!("OPENAI_API_KEY not set, but ANTHROPIC_API_KEY found. Switching to Anthropic provider.");
+            ApiProvider::Anthropic
+        }
+        (p, _, _) => p,
     };
 
     let api_key = match provider {
@@ -254,4 +278,123 @@ async fn build_system_prompt(cwd: &std::path::Path) -> String {
     prompt.push_str("- WebSearch: Search the web\n");
 
     prompt
+}
+
+async fn run_demo(cwd: &std::path::Path) -> Result<()> {
+    eprintln!("Running in DEMO mode — no API calls will be made.\n");
+
+    let system_prompt = build_system_prompt(cwd).await;
+
+    let mut tool_registry = ToolRegistry::new();
+    tool_registry.register(Box::new(BashTool::new()));
+    tool_registry.register(Box::new(ReadTool));
+    tool_registry.register(Box::new(WriteTool));
+    tool_registry.register(Box::new(EditTool));
+    tool_registry.register(Box::new(GlobTool));
+    tool_registry.register(Box::new(GrepTool));
+    tool_registry.register(Box::new(TodoWriteTool));
+    tool_registry.register(Box::new(WebFetchTool::new()));
+    tool_registry.register(Box::new(WebSearchTool::new()));
+
+    let mut command_registry = CommandRegistry::new();
+    let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
+    command_registry.register(help_command(tool_names.clone()));
+    command_registry.register(clear_command());
+    command_registry.register(model_command("demo".to_string()));
+
+    let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
+    command_registry.register(cost_command(cost_tracker.clone()));
+
+    let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
+    let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
+
+    let cost_tracker_clone = cost_tracker.clone();
+
+    let query_handle = tokio::spawn(async move {
+        while let Some(input) = input_rx.recv().await {
+            if input.starts_with('/') {
+                if input == "/quit" || input == "/exit" {
+                    let _ = event_tx.send(StreamEvent::MessageEnd {
+                        message: claudette_rs::types::event::AssistantMessage {
+                            content: vec![],
+                            usage: claudette_rs::types::event::Usage::default(),
+                        },
+                    }).await;
+                    break;
+                }
+
+                if let Some(cmd) = command_registry.find(&input) {
+                    let args = input.trim_start_matches('/').split_once(' ').map(|(_, a)| a).unwrap_or("");
+                    match cmd.handler.execute(args).await {
+                        Ok(result) => {
+                            if result == "CLEAR_SESSION" {
+                                let _ = event_tx.send(StreamEvent::TextDelta {
+                                    delta: "\n\n[Session cleared]".to_string(),
+                                }).await;
+                            } else {
+                                let _ = event_tx.send(StreamEvent::TextDelta {
+                                    delta: format!("\n\n{result}"),
+                                }).await;
+                            }
+                            let _ = event_tx.send(StreamEvent::MessageEnd {
+                                message: claudette_rs::types::event::AssistantMessage {
+                                    content: vec![],
+                                    usage: claudette_rs::types::event::Usage::default(),
+                                },
+                            }).await;
+                        }
+                        Err(e) => {
+                            let _ = event_tx.send(StreamEvent::Error {
+                                message: e.to_string(),
+                                retryable: false,
+                            }).await;
+                        }
+                    }
+                    continue;
+                }
+            }
+
+            let tx = event_tx.clone();
+            let tracker = cost_tracker_clone.clone();
+            let input_clone = input.clone();
+
+            tokio::spawn(async move {
+                let demo_responses = [
+                    ("👋 Hi! I'm Claudette running in demo mode.", 200),
+                    ("", 100),
+                    ("I can't make real API calls without a key, but I can show you the TUI and tools.", 300),
+                    ("", 100),
+                    ("Try these tools:", 150),
+                    ("  • Bash — run shell commands", 100),
+                    ("  • Read/Write/Edit — file operations", 100),
+                    ("  • Glob/Grep — search files", 100),
+                    ("  • TodoWrite — track tasks", 100),
+                    ("  • WebFetch/WebSearch — web access", 100),
+                    ("", 100),
+                    ("Type /help for commands, or /quit to exit.", 200),
+                ];
+
+                for (text, delay) in demo_responses {
+                    tokio::time::sleep(std::time::Duration::from_millis(delay)).await;
+                    if !text.is_empty() {
+                        let _ = tx.send(StreamEvent::TextDelta { delta: text.to_string() }).await;
+                    }
+                }
+
+                let _ = tx.send(StreamEvent::MessageEnd {
+                    message: claudette_rs::types::event::AssistantMessage {
+                        content: vec![],
+                        usage: claudette_rs::types::event::Usage::default(),
+                    },
+                }).await;
+            });
+        }
+    });
+
+    let app = App::new();
+    run_tui(app, event_rx, input_tx).await?;
+
+    query_handle.abort();
+
+    Ok(())
 }

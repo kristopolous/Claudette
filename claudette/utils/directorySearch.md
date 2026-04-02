@@ -1,17 +1,16 @@
 # utils/directorySearch
 
 ## Purpose
-Provides directory search utilities for file discovery.
+This source file does not exist. The doc was a stale stub with no actual module to document.
 
 ## Imports
-- **Stdlib**: (none)
-- **External**: (none)
-- **Internal**: (none)
+- (none — file does not exist)
 
 ## Logic
-1. Directory search utilities
-2. File discovery functions
-3. Pattern matching for file searches
+- File does not exist.
 
 ## Exports
-- (Directory search functions)
+- (none — file does not exist)
+
+## Source
+`claude-code/src/utils/directorySearch.ts` — **DOES NOT EXIST**.

@@ -1,3 +1,5 @@
+# tools/ScheduleCronTool/prompt.ts
+
 ## Purpose
 Provides feature gating, tool names, descriptions, and system prompts for the cron scheduling system.
 

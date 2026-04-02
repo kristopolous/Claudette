@@ -1,4 +1,4 @@
-# tools/PowerShellTool/readOnlyValidation
+# tools/PowerShellTool/readOnlyValidation.ts
 
 ## Purpose
 Provides PowerShell read-only command validation utilities.

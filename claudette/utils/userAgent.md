@@ -1,18 +1,13 @@
 # userAgent
 
 ## Purpose
-Provides utility functions: getClaudeCodeUserAgent.
+User-Agent string helper. Kept dependency-free so SDK-bundled code (bridge, cli/transports) can import without pulling in `auth.ts` and its transitive dependency tree.
 
 ## Imports
-(none detected)
+- (none)
 
-## Items
-
-### getClaudeCodeUserAgent
-**Type**: Function
+## Logic
+Returns a User-Agent string in the format `claude-code/<VERSION>` where `MACRO.VERSION` is a build-time constant injected by the bundler.
 
 ## Exports
-- getClaudeCodeUserAgent
-
-## Source
-`userAgent`
+- `getClaudeCodeUserAgent()` — returns the User-Agent string (e.g. `claude-code/2.1.70`)

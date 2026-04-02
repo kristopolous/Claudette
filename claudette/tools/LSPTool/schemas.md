@@ -1,4 +1,4 @@
-# LSPTool/schemas
+# tools/LSPTool/schemas.ts
 
 ## Purpose
 

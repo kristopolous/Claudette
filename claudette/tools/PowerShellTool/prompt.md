@@ -1,4 +1,4 @@
-# tools/PowerShellTool/prompt
+# tools/PowerShellTool/prompt.ts
 
 ## Purpose
 Provides PowerShell tool prompt generation utilities.

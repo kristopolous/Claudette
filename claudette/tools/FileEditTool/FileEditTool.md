@@ -1,7 +1,11 @@
+# FileEditTool/FileEditTool.ts
+
 ## Purpose
+
 Tool for modifying file contents through exact string replacement operations with comprehensive validation and atomic writes.
 
 ## Imports
+
 - **Stdlib**: `path`
 - **Internal**: 
   - Analytics: `logEvent`, `getFeatureValue_CACHED_MAY_BE_STALE`
@@ -18,6 +22,7 @@ Tool for modifying file contents through exact string replacement operations wit
   - Helpers: `areFileEditsInputsEquivalent`, `findActualString`, `getPatchForEdit`, `preserveQuoteStyle`
 
 ## Logic
+
 1. Validates input: checks for secrets, identical strings, permission denies, file existence, size limits, UNC paths
 2. Ensures file was previously read (tracking via readFileState)
 3. Checks for file modifications since last read (timestamp + content comparison fallback for Windows)
@@ -34,4 +39,5 @@ Tool for modifying file contents through exact string replacement operations wit
 11. Returns structured output with patch, metadata
 
 ## Exports
-- `FileEditTool` - Main tool definition
+
+- `FileEditTool: Tool<InputSchema, Output>`

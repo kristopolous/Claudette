@@ -1,39 +1,23 @@
 # utils/truncate
 
 ## Purpose
-Provides width-aware truncation and wrapping utilities for terminal display.
+Width-aware truncation and wrapping utilities for terminal display. Uses `stringWidth()` for correct CJK/emoji measurement and `getGraphemeSegmenter()` for grapheme-boundary-safe splitting.
 
 ## Imports
-- **Stdlib**: (none)
-- **External**: (none)
-- **Internal**: ink stringWidth, intl
+- **Internal**: `../ink/stringWidth`, `./intl`
 
 ## Logic
-1. `truncatePathMiddle` - truncates file path in middle to preserve directory context and filename
-2. Width-aware: uses stringWidth() for correct CJK/emoji measurement
-3. Example: "src/components/deeply/nested/folder/MyComponent" → "src/components/…/MyComponent"
-4. Handles edge cases: very small maxLength, filename alone too long
-5. `truncateToWidth` - truncates string to fit within max display width
-6. Splits on grapheme boundaries to avoid breaking emoji or surrogate pairs
-7. Appends '…' when truncation occurs
-8. Uses getGraphemeSegmenter() for grapheme-safe segmentation
-9. `truncateToWidthNoEllipsis` - truncates without adding ellipsis
-10. `truncateStartToWidth` - truncates from start, keeping tail end
-11. Prepends '…' when truncation occurs
-12. Width-aware and grapheme-safe
-13. `wrapText` - wraps text to specified width
-14. `wrapWords` - wraps on word boundaries
-15. `wrapGraphemes` - wraps on grapheme boundaries
-16. `stringWidth` - gets string width in terminal columns
-17. `getGraphemeSegmenter` - gets grapheme segmenter
+1. `truncatePathMiddle` — truncates file paths in the middle to preserve both directory context and filename. Format: `directory/…/filename`. If filename alone exceeds maxWidth, falls back to `truncateStartToWidth`.
+2. `truncateToWidth` — truncates from the start, appends `…`. Iterates grapheme segments and stops when adding the next segment would exceed `maxWidth - 1` (room for ellipsis).
+3. `truncateStartToWidth` — truncates from the start, keeps the tail, prepends `…`. Iterates grapheme segments in reverse.
+4. `truncateToWidthNoEllipsis` — truncates without adding ellipsis. Used when the caller adds its own separator (e.g. middle-truncation).
+5. `truncate` — general-purpose truncation with optional `singleLine` mode that cuts at the first newline.
+6. `wrapText` — splits text into an array of lines, each fitting within the specified width. Wraps at grapheme boundaries.
 
 ## Exports
-- `truncatePathMiddle` - truncates path in middle
-- `truncateToWidth` - truncates to width with ellipsis
-- `truncateToWidthNoEllipsis` - truncates to width without ellipsis
-- `truncateStartToWidth` - truncates from start
-- `wrapText` - wraps text
-- `wrapWords` - wraps on word boundaries
-- `wrapGraphemes` - wraps on grapheme boundaries
-- `stringWidth` - gets string width
-- `getGraphemeSegmenter` - gets grapheme segmenter
+- `truncatePathMiddle(path, maxLength)` — truncates path in middle, preserving directory and filename
+- `truncateToWidth(text, maxWidth)` — truncates from start with ellipsis
+- `truncateStartToWidth(text, maxWidth)` — truncates from start, keeps tail, prepends ellipsis
+- `truncateToWidthNoEllipsis(text, maxWidth)` — truncates without ellipsis
+- `truncate(str, maxWidth, singleLine?)` — general truncation with optional newline handling
+- `wrapText(text, width)` — wraps text into an array of width-limited lines

@@ -1,3 +1,5 @@
+# tools/GlobTool/GlobTool.ts
+
 ## Purpose
 Tool for finding files by name pattern or wildcard (glob), with results limited and relativized to save tokens.
 

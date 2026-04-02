@@ -1,41 +1,31 @@
 # utils/secureStorage/macOsKeychainHelpers
 
 ## Purpose
-Lightweight helpers shared between keychainPrefetch and macOsKeychainStorage.ts.
+Lightweight helpers for macOS keychain operations shared between keychainPrefetch.ts and macOsKeychainStorage.ts. Must not import heavy dependencies (execa, etc.) to avoid defeating keychain prefetch optimization.
 
 ## Imports
-- **Stdlib**: `crypto`, `os`
+- **Stdlib**: `crypto` (createHash), `os` (userInfo)
 - **External**: (none)
-- **Internal**: oauth constants, envUtils, secureStorage types
+- **Internal**: `src/constants/oauth` (getOauthConfig), `../envUtils` (getClaudeConfigHomeDir), `./types` (SecureStorageData)
 
 ## Logic
-1. MUST NOT import execa, execFileNoThrow, or execFileNoThrowPortable
-2. keychainPrefetch fires at very top of main (before ~65ms module evaluation)
-3. Bun's __esm wrapper evaluates ENTIRE module when any symbol accessed
-4. Heavy transitive import defeats prefetch (execa → human-signals → cross-spawn ~58ms sync init)
-5. Imports below (envUtils, oauth constants, crypto, os) already evaluated by startupProfiler at main:5
-6. `CREDENTIALS_SERVICE_SUFFIX` - '-credentials' suffix for OAuth credentials keychain entry
-7. DO NOT change - part of keychain lookup key, would orphan existing credentials
-8. `getMacOsKeychainStorageServiceName` - gets service name with optional suffix
-9. Uses hash of config dir path for unique but stable suffix
-10. Only adds suffix for non-default directories (backwards compatibility)
-11. `getUsername` - gets username from env or userInfo
-12. Falls back to 'claude-code-user' on error
-13. `KEYCHAIN_CACHE_TTL_MS` (30s) - cache TTL for keychain reads
-14. Bounds staleness for cross-process scenarios without forcing blocking spawnSync on every read
-15. Sync read() path takes ~500ms per security spawn
-16. With 50+ claude.ai MCP connectors, short TTL expiry triggers repeat sync reads (5.5s event-loop stall observed)
-17. 30s cross-process staleness fine: OAuth tokens expire in hours
-18. `keychainCacheState` - { cache, generation, readInFlight }
-19. cache: { data, cachedAt } (cachedAt 0 = invalid)
-20. generation: incremented on every cache invalidation
-21. readInFlight: deduplicates concurrent readAsync() calls
-22. `primeKeychainCacheFromPrefetch` - primes cache from prefetch result
+1. MUST NOT import execa, execFileNoThrow, or execFileNoThrowPortable - keychainPrefetch fires at very top of main before ~65ms module evaluation, and Bun's __esm wrapper evaluates ENTIRE module when any symbol accessed
+2. `CREDENTIALS_SERVICE_SUFFIX` ('-credentials') - suffix for OAuth credentials keychain entry; DO NOT change - part of keychain lookup key, would orphan existing credentials
+3. `getMacOsKeychainStorageServiceName(serviceSuffix?)` - builds service name with optional suffix; adds hash of config dir path for non-default directories (backwards compatibility); format: `Claude Code${OAUTH_FILE_SUFFIX}${serviceSuffix}${dirHash}`
+4. `getUsername()` - returns USER env var or userInfo().username; falls back to 'claude-code-user' on error
+5. `KEYCHAIN_CACHE_TTL_MS` (30000) - cache TTL for keychain reads; balances cross-process staleness with avoiding repeated ~500ms security spawns; 30s is fine since OAuth tokens expire in hours
+6. `keychainCacheState` - shared cache object with three fields:
+   - `cache`: { data: SecureStorageData | null, cachedAt: number } (cachedAt 0 = invalid)
+   - `generation`: incremented on every invalidation; readAsync() skips cache write if newer generation exists
+   - `readInFlight`: deduplicates concurrent readAsync() calls
+7. `clearKeychainCache()` - resets cache, increments generation, clears readInFlight
+8. `primeKeychainCacheFromPrefetch(stdout)` - primes cache from prefetch result; only writes if cache hasn't been touched (cachedAt === 0); parses JSON from stdout; discards if sync read() or update() already ran
 
 ## Exports
-- `CREDENTIALS_SERVICE_SUFFIX` - credentials service suffix constant
-- `getMacOsKeychainStorageServiceName` - gets service name
-- `getUsername` - gets username
-- `KEYCHAIN_CACHE_TTL_MS` - cache TTL constant
-- `keychainCacheState` - cache state object
-- `primeKeychainCacheFromPrefetch` - primes cache from prefetch
+- `CREDENTIALS_SERVICE_SUFFIX` - credentials service suffix constant ('-credentials')
+- `getMacOsKeychainStorageServiceName(serviceSuffix?: string)` - builds keychain service name
+- `getUsername()` - returns username from env or userInfo
+- `KEYCHAIN_CACHE_TTL_MS` - cache TTL constant (30000ms)
+- `keychainCacheState` - shared cache state object (cache, generation, readInFlight)
+- `clearKeychainCache()` - invalidates all cache state
+- `primeKeychainCacheFromPrefetch(stdout: string | null)` - primes cache from prefetch result

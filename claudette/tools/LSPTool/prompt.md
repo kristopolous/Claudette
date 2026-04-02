@@ -1,4 +1,4 @@
-# LSPTool/prompt
+# tools/LSPTool/prompt.ts
 
 ## Purpose
 

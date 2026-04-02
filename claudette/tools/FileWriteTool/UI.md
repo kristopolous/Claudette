@@ -1,4 +1,7 @@
+# FileWriteTool/UI.tsx
+
 ## Purpose
+
 React components for rendering FileWrite tool usage and result messages, including file creation and update displays.
 
 ## Imports

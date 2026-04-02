@@ -1,3 +1,5 @@
+# tools/REPLTool/primitiveTools.ts
+
 ## Purpose
 Provides access to primitive tools that are hidden from direct inference provider use when REPL mode is enabled but still accessible inside the REPL VM context.
 

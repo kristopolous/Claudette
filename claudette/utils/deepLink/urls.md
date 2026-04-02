@@ -1,17 +1,16 @@
 # utils/deepLink/urls
 
 ## Purpose
-Provides deep link URL utilities for claude-cli:// protocol.
+This source file no longer exists. Its functionality was absorbed into `parseDeepLink.ts` which exports `buildDeepLink` (URL generation) and `parseDeepLink` (URL parsing and validation) for the `claude-cli://` protocol.
 
 ## Imports
-- **Stdlib**: (none)
-- **External**: (none)
-- **Internal**: (none)
+- (none — file does not exist)
 
 ## Logic
-1. Deep link URL utilities
-2. URL generation for claude-cli:// protocol
-3. URL parsing and validation
+- File removed. See `parseDeepLink.ts` for deep link URL construction and parsing.
 
 ## Exports
-- (Deep link URL functions)
+- (none — file does not exist)
+
+## Source
+`claude-code/src/utils/deepLink/urls.ts` — **DOES NOT EXIST**. Functionality moved to `parseDeepLink.ts`.
