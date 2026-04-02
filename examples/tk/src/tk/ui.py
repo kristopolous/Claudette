@@ -132,6 +132,30 @@ class MainWindow:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(2, weight=1)
 
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Clear", command=self._on_clear, accelerator="Ctrl+L")
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self._on_exit, accelerator="Alt+F4")
+
+        edit_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Edit", menu=edit_menu)
+        edit_menu.add_command(label="Copy", command=self._on_copy, accelerator="Ctrl+C")
+        edit_menu.add_command(label="Select All", command=self._on_select_all, accelerator="Ctrl+A")
+
+        view_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="View", menu=view_menu)
+        view_menu.add_command(label="Cost Breakdown", command=self._show_cost)
+        view_menu.add_command(label="Configuration", command=self._show_config)
+
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="Help", command=self._show_help, accelerator="F1")
+        help_menu.add_command(label="About", command=self._show_about)
+
         settings_frame = ttk.LabelFrame(self.root, text="Settings", padding=8)
         settings_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=3)
         settings_frame.columnconfigure(1, weight=1)
@@ -299,6 +323,9 @@ class MainWindow:
         self.input_text.bind("<Up>", self._on_history_up)
         self.input_text.bind("<Down>", self._on_history_down)
         self.root.bind("<Control-c>", lambda e: self._on_stop())
+        self.root.bind("<Control-l>", lambda e: self._on_clear())
+        self.root.bind("<F1>", lambda e: self._show_help())
+        self.root.protocol("WM_DELETE_WINDOW", self._on_exit)
 
     def _on_return(self, event):
         if not event.state & 0x1:
