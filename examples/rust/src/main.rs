@@ -451,28 +451,7 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
          }
      }
 
-     let tool_definitions = tool_registry.definitions();
-     let mcp_info_refs: Vec<(&str, &str)> = mcp_clients_info.iter().map(|(n,i)| (n.as_str(), i.as_str())).collect();
 
-    // Build system prompt
-     let system_prompt = build_system_prompt(
-         &cwd,
-         Some(&tool_definitions),
-         Some(("Claude", "claude-sonnet-4-20250514")), // dummy model info for demo
-         Some(&mcp_info_refs), // mcp_clients
-         None, // simple_mode
-         None, // proactive_mode
-         None, // language_preference
-         None, // output_style
-         None, // token_budget
-         None, // enable_scratchpad
-         None, // scratchpad_dir
-         None, // enable_hooks
-         None, // fork_subagent_enabled
-         None, // verification_agent_enabled
-         None, // ant_mode
-         None, // keep_recent
-     ).await;
 
     let mut command_registry = CommandRegistry::new();
     let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
@@ -483,19 +462,10 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
     let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
     command_registry.register(cost_command(cost_tracker.clone()));
 
-    // Then the rest of demo mode...
-    let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
-    command_registry.register(help_command(tool_names.clone()));
-    command_registry.register(clear_command());
-    command_registry.register(model_command("demo".to_string()));
 
-    let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
-    command_registry.register(cost_command(cost_tracker.clone()));
 
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
     let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
-
-    let cost_tracker_clone = cost_tracker.clone();
 
     let query_handle = tokio::spawn(async move {
         while let Some(input) = input_rx.recv().await {
@@ -542,8 +512,6 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
             }
 
             let tx = event_tx.clone();
-            let tracker = cost_tracker_clone.clone();
-            let input_clone = input.clone();
 
             tokio::spawn(async move {
                 let demo_responses = [

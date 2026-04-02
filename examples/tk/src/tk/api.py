@@ -1,6 +1,7 @@
 """API client for any OpenAI-compatible inference provider."""
 
 import json
+import asyncio
 import httpx
 from typing import AsyncGenerator, Optional
 from tk.models import Message, ToolDefinition, StreamEvent
@@ -282,17 +283,31 @@ class APIClient:
         payload = self._build_payload(formatted_messages, system_msg, tools_formatted, max_tokens, temperature)
         endpoint = self._get_endpoint()
 
-        async with self.client.stream("POST", endpoint, headers=headers, json=payload) as response:
+        request = self.client.build_request("POST", endpoint, headers=headers, json=payload)
+        response = await self.client.send(request, stream=True)
+        try:
             if response.status_code != 200:
                 body = await response.aread()
                 yield StreamEvent(type="error", data={
                     "error": f"API error {response.status_code}: {body.decode('utf-8', errors='replace')}\nURL: {endpoint}\nPayload: {json.dumps(payload, indent=2)[:500]}"
                 })
                 return
-            async for line in response.aiter_lines():
-                event = self._parse_stream_event(line)
-                if event:
-                    yield event
+
+            lines = response.aiter_lines()
+            try:
+                async for line in lines:
+                    event = self._parse_stream_event(line)
+                    if event:
+                        yield event
+            except (GeneratorExit, asyncio.CancelledError):
+                pass
+            except BaseException:
+                pass
+        finally:
+            try:
+                await response.aclose()
+            except Exception:
+                pass
 
     async def chat(
         self,

@@ -1,6 +1,6 @@
 use crate::types::{StreamEvent, Usage};
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyModifiers};
-use crossterm::terminal::{self, enable_raw_mode, disable_raw_mode};
+use crossterm::terminal::{enable_raw_mode, disable_raw_mode};
 use ratatui::{
     backend::CrosstermBackend,
     layout::{Constraint, Direction, Layout, Position},
@@ -11,6 +11,7 @@ use ratatui::{
 };
 use std::io::{self, Write};
 use tokio::sync::mpsc;
+use unicode_width::UnicodeWidthStr;
 
 #[derive(Debug, Clone)]
 pub struct MessageEntry {
@@ -26,6 +27,8 @@ pub struct App {
     pub current_response: String,
     pub scroll_offset: usize,
     pub should_quit: bool,
+    pub cursor_position: usize,
+    pub should_submit: bool,
 }
 
 impl App {
@@ -38,6 +41,8 @@ impl App {
             current_response: String::new(),
             scroll_offset: 0,
             should_quit: false,
+            cursor_position: 0,
+            should_submit: false,
         }
     }
 
@@ -48,12 +53,35 @@ impl App {
                     self.should_quit = true;
                     return;
                 }
-                self.input_buffer.push(c);
+                // Insert character at cursor position
+                self.input_buffer.insert(self.cursor_position, c);
+                self.cursor_position += 1;
             }
             KeyCode::Backspace => {
-                self.input_buffer.pop();
+                if self.cursor_position > 0 {
+                    self.input_buffer.remove(self.cursor_position - 1);
+                    self.cursor_position -= 1;
+                }
             }
-            KeyCode::Enter => {}
+            KeyCode::Enter => {
+                self.should_submit = true;
+            }
+            KeyCode::Left => {
+                if self.cursor_position > 0 {
+                    self.cursor_position -= 1;
+                }
+            }
+            KeyCode::Right => {
+                if self.cursor_position < self.input_buffer.len() {
+                    self.cursor_position += 1;
+                }
+            }
+            KeyCode::Home => {
+                self.cursor_position = 0;
+            }
+            KeyCode::End => {
+                self.cursor_position = self.input_buffer.len();
+            }
             KeyCode::Up => {
                 if self.scroll_offset < self.messages.len().saturating_sub(1) {
                     self.scroll_offset += 1;
@@ -72,12 +100,18 @@ impl App {
     }
 
     pub fn submit_input(&mut self) -> Option<String> {
-        let input = self.input_buffer.trim().to_string();
-        if input.is_empty() {
-            return None;
+        if self.should_submit {
+            self.should_submit = false;
+            let input = self.input_buffer.trim().to_string();
+            if input.is_empty() {
+                return None;
+            }
+            self.input_buffer.clear();
+            self.cursor_position = 0;
+            Some(input)
+        } else {
+            None
         }
-        self.input_buffer.clear();
-        Some(input)
     }
 
     pub fn handle_stream_event(&mut self, event: &StreamEvent) {
@@ -234,17 +268,20 @@ pub fn ui(frame: &mut Frame, app: &App) {
         .borders(Borders::ALL)
         .style(Style::default());
 
-    let input_widget = Paragraph::new(app.input_buffer.as_str())
-        .block(input_block)
-        .wrap(Wrap { trim: false });
-    frame.render_widget(input_widget, chunks[1]);
+     let input_widget = Paragraph::new(app.input_buffer.as_str())
+         .block(input_block)
+         .wrap(Wrap { trim: false });
+     frame.render_widget(input_widget, chunks[1]);
 
-    let input_x = 1 + app.input_buffer.len() as u16;
-    let input_y = chunks[1].y + 1;
-    frame.set_cursor_position(Position::new(
-        input_x.min(chunks[1].width - 2 + chunks[1].x),
-        input_y,
-    ));
+     // Compute cursor x position based on text width up to cursor (handling double-width chars)
+     let text_before_cursor = &app.input_buffer[..app.cursor_position];
+     let cursor_x_offset = UnicodeWidthStr::width(text_before_cursor) as u16;
+     let input_x = 1 + cursor_x_offset;
+     let input_y = chunks[1].y + 1;
+     frame.set_cursor_position(Position::new(
+         input_x.min(chunks[1].width - 2 + chunks[1].x),
+         input_y,
+     ));
 
     let status = format!(
         "Tokens: {} in / {} out | Cost: ${:.4}",

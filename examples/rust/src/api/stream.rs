@@ -4,7 +4,7 @@ use crate::types::{Message, StreamEvent as AppStreamEvent, ToolRegistry, ToolRes
 use crate::types::permission::{PermissionContext, PermissionDecision};
 use anyhow::Result;
 use futures::StreamExt;
-use reqwest_eventsource::{Event, EventSource};
+use reqwest_eventsource::Event;
 use serde_json;
 use tokio_util::sync::CancellationToken;
 use tracing::{debug, info};

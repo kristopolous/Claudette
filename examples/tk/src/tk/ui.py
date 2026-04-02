@@ -788,24 +788,25 @@ class MainWindow:
         self.message_frame.columnconfigure(0, weight=1)
         self.message_frame.rowconfigure(0, weight=1)
 
-        self.message_text = tk.Text(
-            self.message_frame,
-            wrap=tk.WORD,
-            state=tk.DISABLED,
-            font=("TkFixedFont", 10),
-            padx=5,
-            pady=5,
-        )
-        scrollbar = ttk.Scrollbar(self.message_frame, orient=tk.VERTICAL, command=self.message_text.yview)
-        self.message_text.configure(yscrollcommand=scrollbar.set)
-        self.message_text.grid(row=0, column=0, sticky="nsew")
-        scrollbar.grid(row=0, column=1, sticky="ns")
+        self.chat_canvas = tk.Canvas(self.message_frame, bg="#f5f5f5", highlightthickness=0)
+        self.chat_scrollbar = ttk.Scrollbar(self.message_frame, orient=tk.VERTICAL, command=self.chat_canvas.yview)
+        self.chat_inner = ttk.Frame(self.chat_canvas)
 
-        self.message_text.tag_configure("user", foreground="blue", font=("TkFixedFont", 10, "bold"))
-        self.message_text.tag_configure("assistant", foreground="black", font=("TkFixedFont", 10))
-        self.message_text.tag_configure("tool", foreground="darkgreen", font=("TkFixedFont", 9))
-        self.message_text.tag_configure("error", foreground="red", font=("TkFixedFont", 10))
-        self.message_text.tag_configure("system", foreground="gray", font=("TkFixedFont", 9, "italic"))
+        self.chat_inner.bind(
+            "<Configure>",
+            lambda e: self.chat_canvas.configure(scrollregion=self.chat_canvas.bbox("all"))
+        )
+
+        self.chat_canvas.create_window((0, 0), window=self.chat_inner, anchor="nw")
+        self.chat_canvas.configure(yscrollcommand=self.chat_scrollbar.set)
+
+        self.chat_canvas.grid(row=0, column=0, sticky="nsew")
+        self.chat_scrollbar.grid(row=0, column=1, sticky="ns")
+
+        self.chat_canvas.bind("<Configure>", lambda e: self.chat_canvas.itemconfig("all", width=e.width))
+
+        self._message_widgets = []
+        self._streaming_label = None
 
         input_frame = ttk.Frame(self.root)
         input_frame.grid(row=3, column=0, sticky="ew", padx=5, pady=3)
@@ -909,38 +910,104 @@ class MainWindow:
         return "break"
 
     def _append_message(self, role: str, content: str):
-        self.message_text.configure(state=tk.NORMAL)
-        prefix_map = {
-            "user": "You",
-            "assistant": "Claudette",
-            "tool": "[Tool]",
-            "error": "[Error]",
-            "system": "[System]",
-        }
-        prefix = prefix_map.get(role, role)
-        tag = role if role in ("user", "assistant", "tool", "error", "system") else "assistant"
+        if role == "user":
+            self._add_user_bubble(content)
+        elif role == "assistant":
+            self._add_assistant_bubble(content)
+        elif role == "tool":
+            self._add_tool_bubble(content)
+        elif role == "error":
+            self._add_error_bubble(content)
+        elif role == "system":
+            self._add_system_bubble(content)
+        self._scroll_to_bottom()
 
-        self.message_text.insert(tk.END, f"\n{prefix}:\n", tag)
-        self.message_text.insert(tk.END, f"{content}\n", tag)
-        self.message_text.see(tk.END)
-        self.message_text.configure(state=tk.DISABLED)
+    def _add_user_bubble(self, text: str):
+        wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+        wrapper.pack(fill=tk.X, pady=2, padx=10)
+        bubble = tk.Label(wrapper, text=text, bg="#0078d4", fg="white",
+                          font=("TkDefaultFont", 10), wraplength=500,
+                          justify=tk.RIGHT, padx=12, pady=8, anchor=tk.E,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(side=tk.RIGHT)
+        self._message_widgets.append(wrapper)
+
+    def _add_assistant_bubble(self, text: str):
+        wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+        wrapper.pack(fill=tk.X, pady=2, padx=10)
+        bubble = tk.Label(wrapper, text=text, bg="#e8e8e8", fg="black",
+                          font=("TkDefaultFont", 10), wraplength=500,
+                          justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(side=tk.LEFT)
+        self._message_widgets.append(wrapper)
+
+    def _add_tool_bubble(self, text: str):
+        wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+        wrapper.pack(fill=tk.X, pady=2, padx=10)
+        bubble = tk.Label(wrapper, text=text, bg="#e0f0e0", fg="darkgreen",
+                          font=("TkFixedFont", 9), wraplength=500,
+                          justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(side=tk.LEFT)
+        self._message_widgets.append(wrapper)
+
+    def _add_error_bubble(self, text: str):
+        wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+        wrapper.pack(fill=tk.X, pady=2, padx=10)
+        bubble = tk.Label(wrapper, text=text, bg="#fde8e8", fg="red",
+                          font=("TkDefaultFont", 10), wraplength=500,
+                          justify=tk.CENTER, padx=12, pady=8,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(fill=tk.X)
+        self._message_widgets.append(wrapper)
+
+    def _add_system_bubble(self, text: str):
+        wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+        wrapper.pack(fill=tk.X, pady=2, padx=10)
+        bubble = tk.Label(wrapper, text=text, bg="#f5f5f5", fg="gray",
+                          font=("TkDefaultFont", 9, "italic"), wraplength=500,
+                          justify=tk.CENTER, padx=12, pady=4,
+                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+        bubble.pack(fill=tk.X)
+        self._message_widgets.append(wrapper)
+
+    def _scroll_to_bottom(self):
+        self.chat_canvas.update_idletasks()
+        self.chat_canvas.yview_moveto(1.0)
 
     def _append_streaming(self, text: str):
-        self.message_text.configure(state=tk.NORMAL)
-        last_tag = self.message_text.tag_names(tk.END + "-2c")
-        if "streaming" not in last_tag:
-            self.message_text.insert(tk.END, text, ("assistant", "streaming"))
-        else:
-            self.message_text.insert(tk.END, text, "streaming")
-        self.message_text.see(tk.END)
-        self.message_text.configure(state=tk.DISABLED)
+        if self._streaming_label is None:
+            wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
+            wrapper.pack(fill=tk.X, pady=2, padx=10)
+            bubble = tk.Label(wrapper, text="", bg="#e8e8e8", fg="black",
+                              font=("TkDefaultFont", 10), wraplength=500,
+                              justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
+                              highlightthickness=0, borderwidth=0, relief=tk.FLAT)
+            bubble.pack(side=tk.LEFT)
+            self._streaming_label = bubble
+            self._streaming_wrapper = wrapper
+            self._streaming_text = ""
+            self._streaming_widgets = [wrapper]
+
+        self._streaming_text += text
+        self._streaming_label.configure(text=self._streaming_text)
+        self._scroll_to_bottom()
 
     def _set_streaming_mode(self, active: bool):
         if active:
-            self.message_text.configure(state=tk.NORMAL)
-            self.message_text.insert(tk.END, "\nClaudette:\n", "assistant")
-            self.message_text.see(tk.END)
-            self.message_text.configure(state=tk.DISABLED)
+            self._streaming_label = None
+            self._streaming_text = ""
+
+    def _on_clear(self):
+        self.query_engine.clear()
+        for w in self._message_widgets:
+            w.destroy()
+        self._message_widgets = []
+        if self._streaming_label:
+            self._streaming_wrapper.destroy()
+        self._streaming_label = None
+        self.status_label.configure(text="Cleared")
 
     def _on_send(self):
         if self._is_processing:
@@ -1019,13 +1086,6 @@ class MainWindow:
         self.query_engine.request_stop()
         self.status_label.configure(text="Stopping...")
 
-    def _on_clear(self):
-        self.query_engine.clear()
-        self.message_text.configure(state=tk.NORMAL)
-        self.message_text.delete("1.0", tk.END)
-        self.message_text.configure(state=tk.DISABLED)
-        self.status_label.configure(text="Cleared")
-
     def _on_exit(self):
         if self._is_processing:
             if not messagebox.askokcancel("Exit", "A request is still running. Exit anyway?"):
@@ -1034,16 +1094,12 @@ class MainWindow:
 
     def _on_copy(self):
         try:
-            text = self.message_text.selection_get()
-            self.root.clipboard_clear()
-            self.root.clipboard_append(text)
+            text = self.root.clipboard_get()
         except tk.TclError:
             pass
 
     def _on_select_all(self):
-        self.message_text.tag_add(tk.SEL, "1.0", tk.END)
-        self.message_text.see(tk.INSERT)
-        return "break"
+        pass
 
     def _show_cost(self):
         CostDialog(self.root, self.query_engine.cost_tracker)

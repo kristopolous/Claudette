@@ -285,6 +285,26 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
     })
   }, [])
 
+  const handleExport = useCallback(async () => {
+    if (!sessionId) return
+    try {
+      const res = await fetch(`/api/files?export=1&sessionId=${sessionId}`)
+      const data = await res.json()
+      if (data.files && data.files.length > 0) {
+        const content = JSON.stringify(data.files, null, 2)
+        const blob = new Blob([content], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `claudette-project-${sessionId.slice(0, 8)}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+      }
+    } catch (e) {
+      console.error('Export failed:', e)
+    }
+  }, [sessionId])
+
   return (
     <div className="flex flex-col h-screen">
       <header className="border-b border-[#30363d] px-4 py-2 flex items-center justify-between bg-[#161b22]">
@@ -296,6 +316,15 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
           >
             New Session
           </button>
+          {sessionId && (
+            <button
+              onClick={handleExport}
+              className="px-2 py-1 text-xs bg-[#21262d] border border-[#30363d] rounded hover:bg-[#30363d] transition-colors"
+              title="Export project as JSON"
+            >
+              Export
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <UsageDisplay stats={usageStats} />

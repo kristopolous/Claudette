@@ -1,21 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-
-interface FileExplorerProps {
-  vfs: {
-    root: {
-      type: 'file' | 'directory'
-      name: string
-      content?: string
-      children?: Map<string, any>
-    }
-    list: (path: string) => string[]
-    isDir: (path: string) => boolean
-  }
-  onFileSelect: (path: string) => void
-  selectedPath?: string
-}
+import { useState, useEffect, useCallback } from 'react'
 
 interface TreeNode {
   name: string
@@ -24,28 +9,11 @@ interface TreeNode {
   children?: TreeNode[]
 }
 
-function buildTree(
-  vfs: FileExplorerProps['vfs'],
-  path: string,
-  name: string
-): TreeNode {
-  const isDir = vfs.isDir(path)
-  const node: TreeNode = { name, path, type: isDir ? 'directory' : 'file' }
-
-  if (isDir) {
-    const entries = vfs.list(path)
-    node.children = entries
-      .sort((a, b) => {
-        const aIsDir = vfs.isDir(`${path}/${a}`)
-        const bIsDir = vfs.isDir(`${path}/${b}`)
-        if (aIsDir && !bIsDir) return -1
-        if (!aIsDir && bIsDir) return 1
-        return a.localeCompare(b)
-      })
-      .map(entry => buildTree(vfs, `${path}/${entry}`, entry))
-  }
-
-  return node
+interface FileExplorerProps {
+  sessionId: string | null
+  onFileSelect: (path: string) => void
+  selectedPath?: string
+  refreshKey?: number
 }
 
 function TreeNodeComponent({
@@ -91,15 +59,21 @@ function TreeNodeComponent({
       </button>
       {node.type === 'directory' && expanded && node.children && (
         <div>
-          {node.children.map(child => (
-            <TreeNodeComponent
-              key={child.path}
-              node={child}
-              depth={depth + 1}
-              onFileSelect={onFileSelect}
-              selectedPath={selectedPath}
-            />
-          ))}
+          {node.children
+            .sort((a, b) => {
+              if (a.type === 'directory' && b.type !== 'directory') return -1
+              if (a.type !== 'directory' && b.type === 'directory') return 1
+              return a.name.localeCompare(b.name)
+            })
+            .map(child => (
+              <TreeNodeComponent
+                key={child.path}
+                node={child}
+                depth={depth + 1}
+                onFileSelect={onFileSelect}
+                selectedPath={selectedPath}
+              />
+            ))}
         </div>
       )}
     </div>
@@ -107,11 +81,37 @@ function TreeNodeComponent({
 }
 
 export default function FileExplorer({
-  vfs,
+  sessionId,
   onFileSelect,
   selectedPath,
+  refreshKey,
 }: FileExplorerProps) {
-  const tree = buildTree(vfs, '/', '/')
+  const [tree, setTree] = useState<TreeNode | null>(null)
+
+  useEffect(() => {
+    if (!sessionId) return
+    fetch(`/api/files?tree=1&sessionId=${sessionId}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.tree) setTree(data.tree)
+      })
+      .catch(() => setTree(null))
+  }, [sessionId, refreshKey])
+
+  if (!tree) {
+    return (
+      <div className="h-full flex flex-col bg-[#0d1117] border-r border-[#30363d]">
+        <div className="px-3 py-2 border-b border-[#30363d]">
+          <h2 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">
+            Files
+          </h2>
+        </div>
+        <div className="flex-1 flex items-center justify-center text-xs text-[#8b949e] p-4 text-center">
+          {sessionId ? 'No files yet' : 'Start a session'}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="h-full flex flex-col bg-[#0d1117] border-r border-[#30363d]">
