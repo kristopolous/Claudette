@@ -7,7 +7,7 @@
 
 > Yo openclaw, clone https://github.com/kristopolous/Claudette and make it in Rust. 
 
-Some guy got 100k stars in 24 hours "re-implementing claude" and now, you can too - effortlessly.
+Someone got 100k stars in 24 hours "re-implementing claude" and now, you can too - effortlessly.
 
 Every module, every pattern, every decision - ready to feed to your agent. 
 
