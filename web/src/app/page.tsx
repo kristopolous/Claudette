@@ -6,11 +6,12 @@ import ChatUI from '@/components/ChatUI'
 
 export default function Home() {
   const [apiKey, setApiKey] = useState<string | null>(null)
-  const [model, setModel] = useState('claude-sonnet-4-20250514')
+  const [model, setModel] = useState('')
+  const [baseUrl, setBaseUrl] = useState('')
 
   if (!apiKey) {
-    return <ApiKeyInput onSubmit={(key, m) => { setApiKey(key); setModel(m) }} />
+    return <ApiKeyInput onSubmit={(key, m, url) => { setApiKey(key); setModel(m); setBaseUrl(url) }} />
   }
 
-  return <ChatUI apiKey={apiKey} model={model} />
+  return <ChatUI apiKey={apiKey} model={model} baseUrl={baseUrl} />
 }

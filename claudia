@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawn } from 'node:child_process';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const scriptPath = join(__dirname, 'claudette-builder', 'dist', 'index.js');
+
+const child = spawn('node', [scriptPath], {
+  stdio: 'inherit',
+  cwd: __dirname,
+});
+
+child.on('close', (code) => {
+  process.exit(code ?? 1);
+});
+
+child.on('error', (err) => {
+  console.error('Failed to start claudette-builder:', err.message);
+  process.exit(1);
+});

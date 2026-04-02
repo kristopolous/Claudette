@@ -15,6 +15,6 @@ Every module, every pattern, every decision - described so you can feed it to an
 
 Python? Go? Rust? QBasic? Brainfuck? Let's do this!
 
-Example? Try `rust/` or `web/` 
+Example? Try `rust/`, `web/`, or for a 90s flare, 'tk/'...
 
-Yeah, you heard me... web.
+Want to go piecemeal and get something ready to feed in? Run `claudia`.
