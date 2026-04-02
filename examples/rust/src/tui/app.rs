@@ -1,9 +1,9 @@
 use crate::types::{StreamEvent, Usage};
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyModifiers};
-use crossterm::terminal::{self, enable_raw_mode, disable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen};
+use crossterm::terminal::{self, enable_raw_mode, disable_raw_mode};
 use ratatui::{
     backend::CrosstermBackend,
-    layout::{Constraint, Direction, Layout},
+    layout::{Constraint, Direction, Layout, Position},
     style::{Color, Modifier, Style},
     text::{Line, Span},
     widgets::{Block, Borders, List, ListItem, Paragraph, Wrap},
@@ -241,7 +241,10 @@ pub fn ui(frame: &mut Frame, app: &App) {
 
     let input_x = 1 + app.input_buffer.len() as u16;
     let input_y = chunks[1].y + 1;
-    frame.set_cursor_position(input_x.min(chunks[1].width - 2 + chunks[1].x), input_y);
+    frame.set_cursor_position(Position::new(
+        input_x.min(chunks[1].width - 2 + chunks[1].x),
+        input_y,
+    ));
 
     let status = format!(
         "Tokens: {} in / {} out | Cost: ${:.4}",
