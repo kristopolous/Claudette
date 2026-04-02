@@ -286,7 +286,7 @@ class APIClient:
             if response.status_code != 200:
                 body = await response.aread()
                 yield StreamEvent(type="error", data={
-                    "error": f"API error {response.status_code}: {body.decode('utf-8', errors='replace')}"
+                    "error": f"API error {response.status_code}: {body.decode('utf-8', errors='replace')}\nURL: {endpoint}\nPayload: {json.dumps(payload, indent=2)[:500]}"
                 })
                 return
             async for line in response.aiter_lines():

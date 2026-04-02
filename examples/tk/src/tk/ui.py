@@ -823,7 +823,7 @@ class MainWindow:
         ttk.Button(btn_frame, text="Clear", command=self._on_clear).pack(side=tk.LEFT, padx=2)
 
         self.stop_btn = ttk.Button(btn_frame, text="Stop", command=self._on_stop, state=tk.DISABLED)
-        self.stop_btn.pack(side=tk.RIGHT, padx=2)
+        self.stop_btn.pack(side=tk.LEFT, padx=2)
 
         self.send_btn = ttk.Button(btn_frame, text="Send (Enter)", command=self._on_send)
         self.send_btn.pack(side=tk.RIGHT, padx=2)
@@ -985,8 +985,8 @@ class MainWindow:
                 error_msg = str(e)
                 self.root.after(0, lambda: self._on_error(error_msg))
             finally:
-                loop.close()
                 self.root.after(0, self._on_done)
+                loop.close()
 
         threading.Thread(target=run_async, daemon=True).start()
 

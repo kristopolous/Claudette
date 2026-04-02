@@ -3,10 +3,11 @@ import { QueryEngine } from '@/lib/queryEngine'
 import { createVirtualFS } from '@/lib/virtualfs'
 import { getTools } from '@/lib/tools'
 
-const sessions = new Map<string, { engine: QueryEngine; vfs: ReturnType<typeof createVirtualFS> }>()
+const sessions = new Map<string, { engine: QueryEngine; vfs: ReturnType<typeof createVirtualFS>; baseUrl: string }>()
 
 export function getSession(sessionId: string, apiKey: string, model: string, baseUrl: string) {
-  if (!sessions.has(sessionId)) {
+  const existing = sessions.get(sessionId)
+  if (!existing) {
     const vfs = createVirtualFS()
     const engine = new QueryEngine({
       apiKey,
@@ -17,7 +18,20 @@ export function getSession(sessionId: string, apiKey: string, model: string, bas
       vfs,
       cwd: '/',
     })
-    sessions.set(sessionId, { engine, vfs })
+    sessions.set(sessionId, { engine, vfs, baseUrl })
+  } else if (existing.baseUrl !== baseUrl) {
+    // Re-create session if baseUrl changed
+    const vfs = createVirtualFS()
+    const engine = new QueryEngine({
+      apiKey,
+      model,
+      baseUrl,
+      maxTurns: 20,
+      tools: getTools(),
+      vfs,
+      cwd: '/',
+    })
+    sessions.set(sessionId, { engine, vfs, baseUrl })
   }
   return sessions.get(sessionId)!
 }

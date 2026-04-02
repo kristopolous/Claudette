@@ -85,8 +85,10 @@ impl QueryEngine {
                 let mut stream_usage: Option<Usage> = None;
 
                 while let Some(event_result) = event_stream.next().await {
-                    let event = match event_result {
-                        Ok(e) => e,
+                    // Handle the Event enum: Open or Message
+                    let msg = match event_result {
+                        Ok(Event::Message(msg)) => msg,
+                        Ok(Event::Open) => continue,
                         Err(e) => {
                             on_event(AppStreamEvent::Error {
                                 message: format!("Stream error: {e}"),
@@ -96,9 +98,21 @@ impl QueryEngine {
                         }
                     };
 
-                    match event.event.as_str() {
+                    // Parse the JSON data payload
+                    let data: serde_json::Value = match serde_json::from_str(&msg.data) {
+                        Ok(v) => v,
+                        Err(e) => {
+                            on_event(AppStreamEvent::Error {
+                                message: format!("JSON parse error: {e}"),
+                                retryable: false,
+                            });
+                            continue;
+                        }
+                    };
+
+                    match msg.event.as_str() {
                         "content_block_delta" => {
-                            if let Some(delta) = event.data.get("delta") {
+                            if let Some(delta) = data.get("delta") {
                                 if let Some(text) = delta.get("text").and_then(|t: &serde_json::Value| t.as_str()) {
                                     current_text.push_str(text);
                                     on_event(AppStreamEvent::TextDelta { delta: text.to_string() });
@@ -111,11 +125,11 @@ impl QueryEngine {
                                 assistant_content.push(ContentBlock::Text { text: current_text.clone() });
                                 current_text.clear();
                             }
-                            if let Some(content_block) = event.data.get("content_block") {
+                            if let Some(content_block) = data.get("content_block") {
                                 if content_block.get("type").and_then(|t: &serde_json::Value| t.as_str()) == Some("tool_use") {
                                     let id = content_block.get("id").and_then(|i| i.as_str()).unwrap_or("").to_string();
                                     let name = content_block.get("name").and_then(|n| n.as_str()).unwrap_or("").to_string();
-                                    let input = content_block.get("input").clone().unwrap_or(serde_json::json!({}));
+                                    let input = content_block.get("input").cloned().unwrap_or(serde_json::json!({}));
                                     assistant_content.push(ContentBlock::ToolUse {
                                         id: id.clone(),
                                         name: name.clone(),
@@ -132,7 +146,7 @@ impl QueryEngine {
                                 current_text.clear();
                             }
                             // Extract usage
-                            let usage = event.data.get("usage").and_then(|u| {
+                            let usage = data.get("usage").and_then(|u| {
                                 Some(Usage {
                                     input_tokens: u.get("input_tokens").and_then(|t| t.as_u64()).unwrap_or(0),
                                     output_tokens: u.get("output_tokens").and_then(|t| t.as_u64()).unwrap_or(0),
