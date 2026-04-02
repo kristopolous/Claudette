@@ -16,17 +16,18 @@ Want to go piecemeal? Run `claudia` and she will export a subset as a set of tas
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
 ## Claudette vibed examples
+Peak in the `examples/` directory for three Claudettes.
+
+### Tkinter
+A 1990s vintage way to toolcall, mcp and sub-agent.
+
+<img width="500" lt="tk" src="https://github.com/user-attachments/assets/5491e0b9-580b-4adb-8fd7-98098a9627a4" />
 
 ### Web
 Includes jsh and virtual file systems.
 
 <img width="500" alt="claude-web" src="https://github.com/user-attachments/assets/b8163d02-91c7-4758-a6c7-f9667db78657" />
 
-### Tkinter
-A 1990s style vintage way to do toolcalling, mcp and sub-agents.
-
-<img width="500" lt="tk" src="https://github.com/user-attachments/assets/5491e0b9-580b-4adb-8fd7-98098a9627a4" />
-
 Also there's a rust version...
 
-Add yours! Reach out!
+Make yours! Reach out!
