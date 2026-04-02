@@ -120,8 +120,7 @@ async fn main() -> Result<()> {
         ApiProvider::OpenAI => "gpt-4o".to_string(),
     });
 
-    let system_prompt = build_system_prompt(&cwd).await;
-
+    // Build tool registry first
     let mut tool_registry = ToolRegistry::new();
     tool_registry.register(Box::new(BashTool::new()));
     tool_registry.register(Box::new(ReadTool));
@@ -132,6 +131,31 @@ async fn main() -> Result<()> {
     tool_registry.register(Box::new(TodoWriteTool));
     tool_registry.register(Box::new(WebFetchTool::new()));
     tool_registry.register(Box::new(WebSearchTool::new()));
+    let tool_definitions = tool_registry.definitions();
+
+    // Build system prompt with comprehensive settings
+    let model_info = match provider {
+        ApiProvider::Anthropic => Some(("Claude", model.as_str())),
+        ApiProvider::OpenAI => Some(("GPT", model.as_str())),
+    };
+    let system_prompt = build_system_prompt(
+        &cwd,
+        Some(&tool_definitions),
+        model_info,
+        None, // mcp_clients
+        None, // simple_mode
+        None, // proactive_mode
+        None, // language_preference
+        None, // output_style
+        None, // token_budget
+        None, // enable_scratchpad
+        None, // scratchpad_dir
+        None, // enable_hooks
+        None, // fork_subagent_enabled
+        None, // verification_agent_enabled
+        None, // ant_mode
+        None, // keep_recent
+    ).await;
 
     let mut command_registry = CommandRegistry::new();
     let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
@@ -264,8 +288,7 @@ async fn main() -> Result<()> {
 async fn run_demo(cwd: &std::path::Path) -> Result<()> {
     eprintln!("Running in DEMO mode — no API calls will be made.\n");
 
-    let system_prompt = build_system_prompt(cwd).await;
-
+    // Build tool registry first
     let mut tool_registry = ToolRegistry::new();
     tool_registry.register(Box::new(BashTool::new()));
     tool_registry.register(Box::new(ReadTool));
@@ -276,8 +299,38 @@ async fn run_demo(cwd: &std::path::Path) -> Result<()> {
     tool_registry.register(Box::new(TodoWriteTool));
     tool_registry.register(Box::new(WebFetchTool::new()));
     tool_registry.register(Box::new(WebSearchTool::new()));
+    let tool_definitions = tool_registry.definitions();
+
+    // Build system prompt
+    let system_prompt = build_system_prompt(
+        &cwd,
+        Some(&tool_definitions),
+        Some(("Claude", "claude-sonnet-4-20250514")), // dummy model info for demo
+        None,
+        None, // simple_mode
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    ).await;
 
     let mut command_registry = CommandRegistry::new();
+    let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
+    command_registry.register(help_command(tool_names.clone()));
+    command_registry.register(clear_command());
+    command_registry.register(model_command("demo".to_string()));
+
+    let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
+    command_registry.register(cost_command(cost_tracker.clone()));
+
+    // Then the rest of demo mode...
     let tool_names: Vec<String> = tool_registry.names().into_iter().map(|s| s.to_string()).collect();
     command_registry.register(help_command(tool_names.clone()));
     command_registry.register(clear_command());
