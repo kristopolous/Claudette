@@ -17,5 +17,5 @@ Want to go piecemeal? Run `claudia` and she will export a subset as a set of tas
 
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
-Examples? Try `rust/`, `web/`, or for a 90s flare, 'tk/'...
+Examples? Try `rust/`, `web/`, or for a 90s flare, `tk/`...
 
