@@ -188,6 +188,8 @@ struct OpenAIResponseMessage {
     #[serde(default)]
     content: Option<String>,
     #[serde(default)]
+    reasoning: Option<String>,
+    #[serde(default)]
     tool_calls: Option<Vec<OpenAIResponseToolCall>>,
 }
 
@@ -344,6 +346,12 @@ fn openai_response_to_content(response: &OpenAIResponse) -> Vec<serde_json::Valu
     let mut blocks = Vec::new();
 
     if let Some(choice) = response.choices.first() {
+        if let Some(reasoning) = &choice.message.reasoning {
+            if !reasoning.is_empty() {
+                blocks.push(serde_json::json!({ "type": "text", "text": format!("<thinking>\n{}\n</thinking>\n", reasoning) }));
+            }
+        }
+
         if let Some(text) = &choice.message.content {
             if !text.is_empty() {
                 blocks.push(serde_json::json!({ "type": "text", "text": text }));

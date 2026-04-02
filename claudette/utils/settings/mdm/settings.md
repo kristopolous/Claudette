@@ -1,42 +1,39 @@
-# utils/settings/mdm/settings
+# settings (mdm)
 
 ## Purpose
-Provides MDM (Mobile Device Management) profile enforcement for Claudette managed settings.
+MDM (Mobile Device Management) profile enforcement for managed settings. Parses raw subprocess output from OS-level MDM configuration into validated settings, applying a "first source wins" priority policy.
 
 ## Imports
-- **Stdlib**: `path`
+- **Stdlib**: `path` (join)
 - **External**: (none)
-- **Internal**: debug, diagLogs, fileRead, fsOperations, json, startupProfiler, settings managedPath/types/validation, mdm constants/rawRead
+- **Internal**: debug, diagLogs, fileRead, fsOperations, json, startupProfiler, managedPath, types, validation, mdm/constants, mdm/rawRead
 
 ## Logic
-1. Reads enterprise settings from OS-level MDM configuration
-2. macOS: `com.anthropic.claudecode` preference domain (MDM profiles at /Library/Managed Preferences/)
-3. Windows: `HKLM\SOFTWARE\Policies\ClaudeCode` (admin-only) and `HKCU\SOFTWARE\Policies\ClaudeCode` (user-writable, lowest priority)
-4. Linux: No MDM equivalent (uses /etc/claude-code/managedsettingson instead)
-5. Policy settings use "first source wins" - highest-priority source that exists provides all policy settings
-6. Priority (highest to lowest): remote → HKLM/plist → managedsettingson → HKCU
-7. Architecture: constants (shared constants), rawRead (subprocess I/O), settings (parsing, caching, first-source-wins)
-8. `MdmResult` - { settings, errors }
-9. `EMPTY_RESULT` - frozen empty result
-10. `mdmCache`, `hkcuCache` - MDM and HKCU result caches
-11. `mdmLoadPromise` - MDM load promise
-12. `startMdmSettingsLoad` - kicks off async MDM/HKCU reads early in startup
-13. Uses startup raw read if cli fired it, otherwise fires fresh one
-14. `consumeRawReadResult` - parses raw read result
-15. `getMdmSettings` - gets MDM settings from cache or loads
-16. `getHkcuSettings` - gets HKCU settings from cache or loads
-17. `refreshMdmSettings` - refreshes MDM settings
-18. `setMdmSettingsCache` - sets MDM settings cache
-19. `isMdmLoaded` - checks if MDM loaded
-20. `waitForMdmLoad` - waits for MDM load
+Architecture split across three files:
+- `constants.ts` — shared constants and plist path builder (zero heavy imports)
+- `rawRead.ts` — subprocess I/O only (fires at main.tsx evaluation)
+- `settings.ts` — parsing, caching, first-source-wins logic (this file)
+
+**Startup flow**: `startMdmSettingsLoad()` kicks off async reads early. Uses the startup raw read if already fired, otherwise fires a fresh one. Results are parsed and cached.
+
+**First-source-wins priority** (highest to lowest):
+1. Remote MDM (macOS plist or Windows HKLM registry)
+2. `managed-settings.json` file or `managed-settings.d/*.json` drop-in files
+3. Windows HKCU registry (user-writable, lowest priority)
+
+**Parsing**: Raw stdout is parsed via `parseCommandOutputAsSettings()` which JSON-parses, filters invalid permission rules (so one bad rule doesn't reject all settings), and validates against `SettingsSchema`. Windows registry output is parsed via `parseRegQueryStdout()` which matches `REG_SZ` and `REG_EXPAND_SZ` lines.
+
+**Caching**: `mdmCache` and `hkcuCache` hold parsed results. `clearMdmSettingsCache()` resets all caches. `setMdmSettingsCache()` allows direct cache updates (used by change detector poll).
+
+**Refresh**: `refreshMdmSettings()` fires a fresh raw read and returns parsed results without updating the cache.
 
 ## Exports
-- `MdmResult` - MDM result type
-- `EMPTY_RESULT` - empty result constant
-- `startMdmSettingsLoad` - starts MDM load
-- `getMdmSettings` - gets MDM settings
-- `getHkcuSettings` - gets HKCU settings
-- `refreshMdmSettings` - refreshes MDM settings
-- `setMdmSettingsCache` - sets MDM cache
-- `isMdmLoaded` - checks if MDM loaded
-- `waitForMdmLoad` - waits for MDM load
+- `startMdmSettingsLoad()` — kicks off async MDM/HKCU reads early in startup
+- `ensureMdmSettingsLoaded()` — awaits the in-flight MDM load; starts it if not already running
+- `getMdmSettings()` — returns cached admin-controlled MDM settings (`{settings, errors}`)
+- `getHkcuSettings()` — returns cached HKCU registry settings (user-writable, Windows only)
+- `clearMdmSettingsCache()` — clears mdmCache, hkcuCache, and mdmLoadPromise
+- `setMdmSettingsCache(mdm, hkcu)` — directly updates session caches
+- `refreshMdmSettings()` — fires fresh raw read, parses and returns `{mdm, hkcu}` without caching
+- `parseCommandOutputAsSettings(stdout, sourcePath)` — parses JSON stdout into validated `{settings, errors}`
+- `parseRegQueryStdout(stdout, valueName?)` — extracts registry string value from `reg query` output

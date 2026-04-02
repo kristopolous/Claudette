@@ -56,12 +56,9 @@ async fn run_app(
                 if key.kind == KeyEventKind::Press {
                     if key.code == KeyCode::Enter && !app.is_loading {
                         if let Some(input) = app.submit_input() {
-                            // Add user message to display
-                            app.messages.push(format!("> {input}"));
+                            app.add_user_message(input.clone());
                             app.is_loading = true;
                             app.current_response.clear();
-
-                            // Send to query engine
                             let _ = input_tx.send(input).await;
                         }
                     } else {
