@@ -6,6 +6,7 @@
 **1,961 skills to vibe a Claude clone derived from the source. Make tokens go burr**
 
 > Yo openclaw, clone https://github.com/kristopolous/Claudette and make it in Rust. 
+
 Some guy got 100k stars in 24 hours "re-implementing claude" and now, you can to.
 
 ---
