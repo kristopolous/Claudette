@@ -26,8 +26,8 @@ A 1990s vintage way to toolcall, mcp and sub-agent.
 ### Web
 Includes jsh and virtual file systems.
 
-<img width="500" alt="claude-web" src="https://github.com/user-attachments/assets/b8163d02-91c7-4758-a6c7-f9667db78657" />
+<img width="500" alt="web" src="https://github.com/user-attachments/assets/5e5b4713-6930-4f22-8b9f-2f03512885d8" />
 
-Also there's a rust version...
-
+### Rust
+Because 
 Make yours! Reach out!
