@@ -1,22 +1,28 @@
 <p align="center">
   <img width="256" alt="claudette" src="https://github.com/user-attachments/assets/b79d06c9-d3b3-4bd0-969f-577cc24235dc" />
-<br/><b>Claudette - Vibe your own claude</b>
+<br/><b>Claudette - Vibe your own Claude Code</b>
 </p>
 
 **1,961 skills to vibe a Claude clone derived from the source. Make tokens go burr**
 
 -----
 
-Someone got 100k stars in a day "re-implementing claude" and now you can too - effortlessly.
+Someone became famous "re-implementing claude" and now you can too - effortlessly.
 
-Every module, every pattern, every decision - ready to feed to your agent. 
+Claudette is every module, every pattern, every decision from the leak - ready to feed to your agent.
 
-Want to go piecemeal? Run `claudia` and she will export a subset as a set of tasks and PRD, ready for your ralph looping.
+Want to go piecemeal? Run `claudia` and she will export a subset. It's completely modular.
+
+Take a Claude code feature and mix it in somewhere else, like opencode. These are the recipes and Claudia will package it up for your agent.
 
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
 ## Claudette vibed examples
-Peak in the `examples/` directory for three Claudettes.
+Peak in the `examples/` directory for three Claudettes. 
+
+Yes they all work. Yes you can use them with any model and any server. 
+
+And yes you can make your own, easily, with Claudette and Claudia. 
 
 ### Tkinter
 A 1990s vintage way to toolcall, mcp and sub-agent.
@@ -35,4 +41,4 @@ Because why not?
 
 ### Yours
 
-Go do it!
+On mobile? Swift? emacs lisp? Windows 95? Go do it!
