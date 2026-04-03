@@ -29,5 +29,10 @@ Includes jsh and virtual file systems.
 <img width="500" alt="web" src="https://github.com/user-attachments/assets/5e5b4713-6930-4f22-8b9f-2f03512885d8" />
 
 ### Rust
-Because 
-Make yours! Reach out!
+Because why not?
+
+<img width="500"  alt="rust" src="https://github.com/user-attachments/assets/f614208e-0ac6-4242-a845-fc98971bc0ba" />
+
+### Yours
+
+Go do it!
