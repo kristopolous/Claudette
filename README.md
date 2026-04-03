@@ -7,9 +7,9 @@
 
 -----
 
-Someone got 100k stars in a day "re-implementing claude" and now you can too - effortlessly.
+Someone became famous "re-implementing claude" and now you can too - effortlessly.
 
-Every module, every pattern, every decision - ready to feed to your agent. 
+Claudette is every module, every pattern, every decision - ready to feed to your agent, straight from the source without including any of it. 
 
 Want to go piecemeal? Run `claudia` and she will export a subset as a set of tasks and PRD, ready for your ralph looping.
 
