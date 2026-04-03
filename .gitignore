@@ -2,3 +2,6 @@ node_modules
 __pycache__
 .envrc
 .direnv
+claudette-builder/dist
+examples/web/.claudette-sessions/
+examples/web/.claudette-workspaces/
