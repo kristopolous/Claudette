@@ -5,7 +5,7 @@ Provides authentication utilities for API keys, OAuth tokens, and AWS/GCP creden
 
 ## Imports
 - **Stdlib**: `child_process`, `fs/promises`, `path`
-- **External**: `chalk`, `execa`, `lodash-es/memoize`
+- **External**: STYLER, `execa`, `lodash-es/memoize`
 - **Internal**: oauth constants, analytics, bootstrap state, mockRateLimits, oauth client/types/getOauthProfile, authFileDescriptor, authPortable, aws/awsAuthStatusManager, betas, config, debug, envUtils, errors, execFileNoThrow, lockfile, log, memoize, secureStorage index/keychainPrefetch/macOsKeychainHelpers, settings, sleep, JSON utils, toolSchemaCache
 
 ## Logic

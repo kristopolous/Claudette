@@ -2,7 +2,7 @@
 Wraps the confirmation step with agent saving, state management, and analytics logging logic.
 
 ## Imports
-- **External**: chalk, REACT, useCallback, useState
+- **External**: STYLER, REACT, useCallback, useState
 - **Internal**: src/services/analytics/index (logEvent, AnalyticsMetadata type),src/state/AppState (useSetAppState),Tool (Tools type),tools/AgentTool/loadAgentsDir (AgentDefinition type, getActiveAgentsFromList),utils/promptEditor (editFileInEditor),wizard/index (useWizard), agentFileUtils (getNewAgentFilePath, saveAgentToFile), types (AgentWizardData type), ConfirmStep (ConfirmStep)
 
 ## Logic

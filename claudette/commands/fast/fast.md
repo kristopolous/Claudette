@@ -2,7 +2,7 @@
 Toggles Fast Mode (research preview using Opus46 model) with interactive picker or shortcut arguments.
 
 ## Imports
-- **External**: REACT, `chalk`
+- **External**: REACT, STYLER
 - **Internal**: Many: `CommandResultDisplay`, `LocalJSXCommandContext`, `Dialog`, `FastIcon`, `Box`, `Link`, `Text`, `useKeybindings`, `logEvent`, `useAppState`, `useSetAppState`, fastMode utils (`clearFastModeCooldown`, `getFastModeModel`, etc.), `formatDuration`, `formatModelPricing`, `getOpus46CostTier`, `updateSettingsForSource`
 
 ## Logic

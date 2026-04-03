@@ -3,7 +3,7 @@ An interactive menu-driven editor for modifying agent configurations, allowing u
 
 ## Imports
 - **Stdlib**: None
-- **External**: `chalk`, `figures`, `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
+- **External**: STYLER, `figures`, `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
 - **Internal**: `state/AppState`, `keybindings/useKeybinding`, `Tool`, `tools/AgentTool/agentColorManager`, `tools/AgentTool/loadAgentsDir`, `utils/promptEditor`, `components/agents/agentFileUtils`, `components/agents/ColorPicker`, `components/agents/ModelSelector`, `components/agents/ToolSelector`, `components/agents/utils`
 
 ## Logic

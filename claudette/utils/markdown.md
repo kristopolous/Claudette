@@ -5,7 +5,7 @@ Renders markdown content to styled terminal text using marked for parsing. Handl
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: chalk, marked (Token, Tokens types), strip-ansi
+- **External**: STYLER, marked (Token, Tokens types), strip-ansi
 - **Internal**: ../components/design-system/color, ../constants/figures (BLOCKQUOTE_BAR), ../ink/stringWidth, ../ink/supports-hyperlinks, ./cliHighlight (CliHighlight type), ./debug (logForDebugging), ./hyperlink (createHyperlink), ./messages (stripPromptXMLTags), ./theme (ThemeName type)
 
 ## Logic
@@ -15,7 +15,7 @@ Renders markdown content to styled terminal text using marked for parsing. Handl
    - **Blockquote**: prefixes each line with dim vertical bar, keeps text italic
    - **Code**: syntax highlights if CliHighlight provided and language supported, falls back to plaintext
    - **Codespan**: colors with theme 'permission' color
-   - **Em/Strong**: italic/bold via chalk
+   - **Em/Strong**: italic/bold via STYLER
    - **Heading**: h1 = bold+italic+underline, h2+/h3+ = bold, all followed by double newline
    - **HR**: renders as '---'
    - **Image**: renders href as plain text

@@ -25,7 +25,7 @@ Entry point that parses CLI arguments, initializes the application, and launches
 
 ## Imports
 - **Stdlib**: `fs`, `path`, `child_process`
-- **External**: `commander`, `chalk`, REACT
+- **External**: `commander`, STYLER, REACT
 - **Internal**: `init`, `launchRepl`, `getCommands`, `getTools`
 
 ## Logic

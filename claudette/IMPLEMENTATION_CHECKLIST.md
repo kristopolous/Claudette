@@ -37,7 +37,7 @@ These are proprietary Anthropic features. **Do not build these:**
 ## Phase 1: Foundation
 
 - [ ] **1.1** Set up project structure (TypeScript or your language of choice)
-- [ ] **1.2** Install core dependencies: inference provider SDK (OpenAI-compatible), HTTP client (axios equivalent), schema validation (zod equivalent), chalk (ANSI colors), execa (subprocess), ignore (gitignore patterns), picomatch (glob), semver, lru-cache, diff, marked, chokidar, fuse (fuzzy search), shell-quote
+- [ ] **1.2** Install core dependencies: inference provider SDK (OpenAI-compatible), HTTP client (axios equivalent), schema validation (zod equivalent), STYLER (ANSI colors), execa (subprocess), ignore (gitignore patterns), picomatch (glob), semver, lru-cache, diff, marked, chokidar, fuse (fuzzy search), shell-quote
 - [ ] **1.3** Set up terminal UI framework (Ink/React or equivalent for your language)
 - [ ] **1.4** Create `START-HERE.md` dependency lookup for your port
 - [ ] **1.5** Implement basic CLI argument parsing (entry point with `--help`, `--version`, etc.)

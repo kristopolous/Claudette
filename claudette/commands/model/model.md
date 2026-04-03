@@ -5,7 +5,7 @@ Allows users to select or set the AI model for Claudette. Supports interactive m
 
 ## Imports
 ### External
-- `chalk` (for colored terminal output)
+- STYLER (for colored terminal output)
 
 ### Stdlib
 - REACT (including `useState`, `useEffect`)

@@ -5,7 +5,7 @@ Resumes a previous conversation either by session ID, custom title, or search te
 
 ## Imports
 ### External
-- `chalk` (for colored terminal text)
+- STYLER (for colored terminal text)
 - `figures` (for unicode icons)
 - REACT (including `useState`, `useEffect`, `useCallback`)
 

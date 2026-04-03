@@ -5,7 +5,7 @@ Toggles a searchable tag on the current session. Tags appear after the branch na
 
 ## Imports
 ### External
-- `chalk` (for colored output)
+- STYLER (for colored output)
 
 ### Stdlib
 - `crypto` (`UUID` type)

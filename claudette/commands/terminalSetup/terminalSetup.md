@@ -10,7 +10,7 @@ Also optionally installs shell completions (internal) and marks onboarding compl
 
 ## Imports
 ### External
-- `chalk` (for colored output)
+- STYLER (for colored output)
 - `crypto` (`randomBytes` for backup suffixes)
 - `fs/promises` (`mkdir`, `readFile`, `writeFile`, `copyFile`)
 - `os` (`homedir`, `platform`)

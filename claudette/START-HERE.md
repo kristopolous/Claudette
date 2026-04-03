@@ -14,7 +14,7 @@ When porting to another language, focus on the **capability** (what the jargon t
 | **RECONCILER** | react-reconciler | Diff-and-patch rendering: maps a component tree to a display buffer | The hardest piece to port. Need a way to map a component tree to screen output with dirty diffing. |
 | **INK** | ink (forked) | Terminal UI engine: renders components to ANSI with Yoga layout, keyboard/mouse input, screen buffer diffing, frame rendering | Look for a terminal UI framework with flexbox layout, or build simpler immediate-mode rendering. |
 | **YOGA** | yoga-layout | Flexbox layout engine for terminal UI | Any flexbox layout implementation. Yoga is cross-platform C++. |
-| **ANSI** | chalk | Terminal text coloring (foreground, background, bold, dim, chained styling) | Any ANSI color library. Most languages have one. |
+| **STYLER** | chalk | Text styling: colors, bold, dim, italic, underline, chained styling | Terminal: ANSI color library. Web: CSS classes/inline styles. Mobile: NSAttributedString (iOS), SpannableString (Android). Desktop: Pango markup (GTK), TextBlock (WPF). |
 | **FIGURES** | figures | Cross-platform Unicode symbols with ASCII fallbacks | Small module of Unicode symbols (checkmarks, arrows, bullets, etc.). |
 | **ANSI_TOKENS** | @alcalzone/ansi-tokenize | Parse ANSI escape sequences into tokens for screen buffer management and string slicing | ANSI escape sequence parser. Needed for accurate cell-width calculation. |
 | **ANSI_STRIP** | strip-ansi | Remove ANSI escape codes from strings | Regex-based ANSI removal. Essential for any terminal app. |

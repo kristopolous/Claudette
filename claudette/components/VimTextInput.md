@@ -3,7 +3,7 @@ A text input component that integrates vim-style editing modes with the terminal
 
 ## Imports
 - **Stdlib**: None
-- **External**: chalk, REACT, REACT/compiler-runtime
+- **External**: STYLER, REACT, REACT/compiler-runtime
 - **Internal**: hooks/useClipboardImageHint (useClipboardImageHint), hooks/useVimInput (useVimInput), ink (Box, color, useTerminalFocus, useTheme), types/textInputTypes (VimTextInputProps), utils/textHighlighting (TextHighlight), BaseTextInput (BaseTextInput)
 
 ## Logic

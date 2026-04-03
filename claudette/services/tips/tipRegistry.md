@@ -5,7 +5,7 @@ Provides tip registry for contextual tips shown during Claudette startup spinner
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `chalk`
+- **External**: STYLER
 - **Internal**: debug, fileHistory, settings, terminalSetup, DesktopUpsell, design-system color, OverageCreditUpsell, keybindings, ScheduleCronTool, auth, concurrentSessions, config, effort, env, fileStateCache, git, ide, model model, platform, plugins installedPluginsManager/marketplaceManager/officialMarketplace, sessionStorage, growthbook, API overageCreditGrant/referral, tipHistory, types
 
 ## Logic

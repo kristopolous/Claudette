@@ -5,7 +5,7 @@ Provides border rendering utilities for Ink components.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `chalk`, `cli-boxes`
+- **External**: STYLER, `cli-boxes`
 - **Internal**: ink colorize, ink dom, ink output, ink stringWidth, ink styles
 
 ## Logic
@@ -26,8 +26,8 @@ Provides border rendering utilities for Ink components.
 15. Ensures position is valid (max 1, min borderLength - textLength - 1)
 16. Returns [before, text, after] tuple
 17. `styleBorderLine` - styles border line with color and dim
-18. Uses applyColor for color, chalk.dim for dim
-19. `chalk` - chalk library
+18. Uses applyColor for color, STYLER.dim for dim
+19. STYLER - STYLER library
 20. `cliBoxes`, `Boxes`, `BoxStyle` - cli-boxes types
 21. `applyColor` - applies color to string
 22. `DOMNode` - DOM node type

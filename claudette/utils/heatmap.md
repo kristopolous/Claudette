@@ -4,7 +4,7 @@
 Generates a GitHub-style contribution heatmap for terminal display, showing daily message activity over the past N weeks with intensity levels based on percentiles.
 
 ## Imports
-- **External**: `chalk`
+- **External**: STYLER
 - **Internal**: `./stats` (DailyActivity type), `./statsCache` (toDateString)
 
 ## Logic

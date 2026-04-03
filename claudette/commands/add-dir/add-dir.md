@@ -2,7 +2,7 @@
 Command handler for /add-dir - adds a directory to the workspace/permissions.
 
 ## Imports
-- **External**: React, chalk, figures
+- **External**: React, STYLER, figures
 - **Internal**: Bootstrap state, permissions utils, sandbox manager, validation, UI components
 
 ## Logic

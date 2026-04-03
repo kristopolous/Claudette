@@ -4,7 +4,7 @@
 Text rendering utilities for terminal display: wrapping, truncation, and ANSI-aware slicing.
 
 ## Imports
-- **External**: chalk
+- **External**: STYLER
 - **Internal**: ../components/CtrlOToExpand, ../ink/stringWidth, ./sliceAnsi
 
 ## Logic

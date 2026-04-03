@@ -5,7 +5,7 @@ Provides memory file selector component for choosing memory files.
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`
-- **External**: BUILDFLAGS, `chalk`, REACT, REACT_COMPILER
+- **External**: BUILDFLAGS, STYLER, REACT, REACT_COMPILER
 - **Internal**: bootstrap state, hooks useExitOnCtrlCDWithKeybindings, ink, keybindings useKeybinding, memdir paths, analytics, autoDream config/consolidationLock, state AppState, AgentTool agentMemory, browser, claudemd, envUtils, file, format, memory versions, settings settings, CustomSelect index, design-system ListItem
 
 ## Logic

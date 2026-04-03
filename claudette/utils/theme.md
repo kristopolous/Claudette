@@ -5,7 +5,7 @@ Provides theme configuration for Claudette UI colors.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `chalk`
+- **External**: STYLER
 - **Internal**: env
 
 ## Logic
@@ -35,12 +35,12 @@ Provides theme configuration for Claudette UI colors.
 24. `rainbow_red`, `rainbow_orange`, `rainbow_yellow`, `rainbow_green`, `rainbow_blue`, `rainbow_indigo` - ultrathink keyword highlighting colors
 25. `getTheme` - gets current theme
 26. `setTheme` - sets theme
-27. `getChalkForTheme` - gets chalk instance for theme
+27. `getSTYLERForTheme` - gets STYLER instance for theme
 28. `env` - environment utilities
 
 ## Exports
 - `Theme` - theme type
 - `getTheme` - gets current theme
 - `setTheme` - sets theme
-- `getChalkForTheme` - gets chalk instance for theme
+- `getSTYLERForTheme` - gets STYLER instance for theme
 - (Theme color constants)

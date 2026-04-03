@@ -3,7 +3,7 @@ Renders conversation messages with virtualization, grouping, collapsing, and str
 
 ## Imports
 - **Stdlib**: None
-- **External**: REACT, `chalk`
+- **External**: REACT, STYLER
 - **Internal**: `ink`, `MessageRow`, `VirtualMessageList`, `StreamingMarkdown`, `LogoV2`, `StatusNotices`, `Divider`, `AssistantThinkingMessage`, `OffscreenFreeze`, message utilities, collapse utilities, grouping utilities, terminal hooks, keybinding hooks, permission components
 
 ## Logic

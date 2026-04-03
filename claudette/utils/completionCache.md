@@ -5,7 +5,7 @@ Provides shell completion script caching and setup for zsh, bash, and fish.
 
 ## Imports
 - **Stdlib**: `fs/promises`, `os`, `path`, `url`
-- **External**: `chalk`
+- **External**: STYLER
 - **Internal**: design-system color, ink supports-hyperlinks, debug, errors, execFileNoThrow, log, theme
 
 ## Logic

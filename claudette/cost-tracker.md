@@ -5,7 +5,7 @@ Tracks API costs, token usage, and duration metrics for a Claudette session, wit
 
 ## Imports
 - **Stdlib**: None
-- **External**: `@anthropic-ai/sdk` (BetaUsage type), `chalk` (terminal formatting)
+- **External**: `@anthropic-ai/sdk` (BetaUsage type), STYLER (terminal formatting)
 - **Internal**: 
   - `/bootstrap/state` (state management functions)
   - `/entrypoints/agentSdkTypes` (ModelUsage type)

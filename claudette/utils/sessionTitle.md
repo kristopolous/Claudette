@@ -1,7 +1,7 @@
 # sessionTitle
 
 ## Purpose
-Generates AI-powered sentence-case session titles using Haiku LLM. Single source of truth for AI-generated titles across all surfaces (SDK print path, CCR remote session path). Designed as a standalone module with minimal dependencies to avoid pulling in React/chalk/git chains when imported from print.ts.
+Generates AI-powered sentence-case session titles using Haiku LLM. Single source of truth for AI-generated titles across all surfaces (SDK print path, CCR remote session path). Designed as a standalone module with minimal dependencies to avoid pulling in React/STYLER/git chains when imported from print.ts.
 
 ## Logic
 1. `extractConversationText` flattens message arrays into text, skipping meta/non-human messages, tail-slicing to last 1000 chars so recent context wins

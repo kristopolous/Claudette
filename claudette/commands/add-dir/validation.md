@@ -2,7 +2,7 @@
 Validation logic for /add-dir - verifies directory can be added to workspace.
 
 ## Imports
-- **External**: fs/promises (stat), path (resolve, dirname), chalk
+- **External**: fs/promises (stat), path (resolve, dirname), STYLER
 - **Internal**: PermissionContext, error utils, path expansion, working directory utils
 
 ## Logic

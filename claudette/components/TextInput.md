@@ -3,7 +3,7 @@ Provides the main text input component with voice recording waveform cursor, cli
 
 ## Imports
 - **Stdlib**: BUILDFLAGS (feature)
-- **External**: chalk, REACT (React, useMemo, useRef)
+- **External**: STYLER, REACT (React, useMemo, useRef)
 - **Internal**: ../context/voice (useVoiceState), ./hooks/useClipboardImageHint (useClipboardImageHint), ./hooks/useSettings (useSettings), ./hooks/useTextInput (useTextInput), ./ink (Box, color, useAnimationFrame, useTerminalFocus, useTheme), ./types/textInputTypes (BaseTextInputProps), ./utils/envUtils (isEnvTruthy), ../utils/textHighlighting (TextHighlight), ./BaseTextInput (BaseTextInput), ./Spinner/utils (hueToRgb)
 
 ## Logic

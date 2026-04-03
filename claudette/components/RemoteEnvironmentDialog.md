@@ -2,7 +2,7 @@
 A UI module that allows users to select and configure their default remote execution environment from a list of available resources.
 
 ## Imports
-- **External**: `chalk`, `figures`
+- **External**: STYLER, `figures`
 - **Internal**: 
     - UI: `ink`, `ConfigurableShortcutHint`, `CustomSelect/select`, `design-system/Byline`, `design-system/Dialog`, `design-system/KeyboardShortcutHint`, `design-system/LoadingState`
     - State/Logic: `keybindings/useKeybinding`, `utils/errors`, `utils/log`, `utils/settings/constants`, `utils/settings/settings`, `utils/teleport/environmentSelection`, `utils/teleport/environments`

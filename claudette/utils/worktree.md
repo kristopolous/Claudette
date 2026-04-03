@@ -5,7 +5,7 @@ Provides git worktree management utilities.
 
 ## Imports
 - **Stdlib**: `child_process`, `fs/promises`, `path`
-- **External**: BUILDFLAGS, `chalk`, `ignore`
+- **External**: BUILDFLAGS, STYLER, `ignore`
 - **Internal**: config, cwd, debug, errors, execFileNoThrow, git gitConfigParser/gitFilesystem/git, hooks, path, platform, settings settings, sleep, swarm backends/detection
 
 ## Logic
@@ -43,7 +43,7 @@ Provides git worktree management utilities.
 32. `sleep` - sleep function
 33. `isInITerm2` - checks if in iTerm2
 34. `feature` - feature flag checker
-35. `chalk` - chalk for terminal colors
+35. STYLER - STYLER for terminal colors
 36. `spawnSync` - sync spawn
 37. `copyFile`, `mkdir`, `readdir`, `readFile`, `stat`, `symlink`, `utimes` - fs/promises functions
 38. `ignore` - ignore library

@@ -5,7 +5,7 @@ Implements the update command that checks for newer versions, detects installati
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `chalk`
+- **External**: STYLER
 - **Internal**: analytics, autoUpdater, completionCache, config, debug, doctorDiagnostic, gracefulShutdown, localInstaller, nativeInstaller, semver, settings, process utils
 
 ## Logic

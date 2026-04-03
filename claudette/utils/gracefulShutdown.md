@@ -5,7 +5,7 @@ Provides graceful shutdown handling with terminal cleanup and session persistenc
 
 ## Imports
 - **Stdlib**: `fs`
-- **External**: `chalk`, `lodash-es/memoize`, `signal-exit`
+- **External**: STYLER, `lodash-es/memoize`, `signal-exit`
 - **Internal**: agentSdkTypes, bootstrap state, ink instances/termio, analytics, state, cleanupRegistry, debug, diagLogs, envUtils, sessionStorage, sleep, startupProfiler
 
 ## Logic

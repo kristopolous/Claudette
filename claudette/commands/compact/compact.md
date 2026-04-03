@@ -5,7 +5,7 @@ Compacts the conversation history into a summary, reducing token usage while pre
 
 ## Imports
 ### External
-- `chalk` (for colored terminal output)
+- STYLER (for colored terminal output)
 
 ### Internal
 - `feature` from BUILDFLAGS (feature flagging)
