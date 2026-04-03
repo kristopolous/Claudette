@@ -41,4 +41,4 @@ Because why not?
 
 ### Yours
 
-Go do it!
+On mobile? Swift? Windows 95? Go do it!
