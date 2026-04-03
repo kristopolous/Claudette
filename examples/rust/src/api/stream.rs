@@ -328,6 +328,13 @@ impl QueryEngine {
                     input: tool_input.clone(),
                 });
 
+                // Emit tool result content to the UI for display
+                if !result.content.is_empty() {
+                    on_event(AppStreamEvent::TextDelta {
+                        delta: result.content.clone(),
+                    });
+                }
+
                 let result_msg = Message::tool_result(
                     tool_id,
                     result.content.clone(),

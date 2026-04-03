@@ -4,6 +4,37 @@ use async_trait::async_trait;
 use serde_json::json;
 use tokio::fs;
 
+fn guess_language_from_path(path: &std::path::Path) -> &'static str {
+    match path.extension().and_then(|s| s.to_str()) {
+        Some("rs") => "rust",
+        Some("js") => "javascript",
+        Some("ts") => "typescript",
+        Some("py") => "python",
+        Some("sh") => "bash",
+        Some("zsh") => "bash",
+        Some("html") => "html",
+        Some("css") => "css",
+        Some("scss") => "scss",
+        Some("json") => "json",
+        Some("md") => "markdown",
+        Some("yaml") | Some("yml") => "yaml",
+        Some("toml") => "toml",
+        Some("xml") => "xml",
+        Some("sql") => "sql",
+        Some("java") => "java",
+        Some("go") => "go",
+        Some("c") => "c",
+        Some("cpp") | Some("cc") | Some("cxx") => "cpp",
+        Some("h") => "c",
+        Some("hpp") => "cpp",
+        Some("rb") => "ruby",
+        Some("php") => "php",
+        Some("swift") => "swift",
+        Some("kt") => "kotlin",
+        _ => "",
+    }
+}
+
 pub struct EditTool;
 
 #[async_trait]
@@ -77,15 +108,25 @@ impl Tool for EditTool {
 
         fs::write(path, &new_content).await?;
 
-        // Generate a diff-like summary
+        // Generate a diff-like summary plus the new content
         let old_lines: Vec<&str> = old_string.lines().collect();
         let new_lines: Vec<&str> = new_string.lines().collect();
         let mut result = format!("Successfully edited {file_path}\n");
         result.push_str(&format!(
-            "Replaced {} line(s) with {} line(s)",
+            "Replaced {} line(s) with {} line(s)\n",
             old_lines.len(),
             new_lines.len()
         ));
+
+        // Include the new file content in a fenced code block
+        let lang = guess_language_from_path(path);
+        if !new_content.is_empty() {
+            if lang.is_empty() {
+                result.push_str(&format!("```\n{}\n```", new_content));
+            } else {
+                result.push_str(&format!("```{}\n{}\n```", lang, new_content));
+            }
+        }
 
         Ok(ToolResult::success(result))
     }

@@ -550,9 +550,10 @@ class McpServersDialog:
         if not server:
             return
 
+        # Create a temporary status label below the button frame
         self.status_var = tk.StringVar(value="Connecting...")
         status_lbl = ttk.Label(self.dialog, textvariable=self.status_var, foreground="gray")
-        status_lbl.pack(pady=5)
+        status_lbl.grid(row=4, column=0, sticky="w", pady=5)
 
         def do_connect():
             try:
@@ -571,12 +572,12 @@ class McpServersDialog:
         self._populate_servers()
         color = "green" if "Connected" in result else "red"
         self.status_var = tk.StringVar(value=result)
-        ttk.Label(self.dialog, textvariable=self.status_var, foreground=color).pack(pady=5)
+        ttk.Label(self.dialog, textvariable=self.status_var, foreground=color).grid(row=4, column=0, sticky="w", pady=5)
 
     def _on_connect_failed(self, error, label):
         label.destroy()
         self.status_var = tk.StringVar(value=f"Error: {error}")
-        ttk.Label(self.dialog, textvariable=self.status_var, foreground="red").pack(pady=5)
+        ttk.Label(self.dialog, textvariable=self.status_var, foreground="red").grid(row=4, column=0, sticky="w", pady=5)
 
     def _add_server(self):
         dlg = AddMcpServerDialog(self.dialog)
@@ -1471,7 +1472,38 @@ F1             - Show this help"""
         self._append_message("system", help_text)
 
     def _show_about(self):
-        messagebox.showinfo("About", "tk-claudette v0.1.0\n\nA desktop GUI AI coding agent built with Python and Tkinter.\nSupports any OpenAI-compatible endpoint.")
+        dlg = tk.Toplevel(self.root)
+        dlg.title("About tk-claudette")
+        dlg.transient(self.root)
+        dlg.grab_set()
+        dlg.resizable(False, False)
+
+        frame = ttk.Frame(dlg, padding=20)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        try:
+            from PIL import Image, ImageTk
+            img = Image.open(Path(__file__).parent / "claudette.png")
+            img.thumbnail((128, 128))
+            photo = ImageTk.PhotoImage(img)
+            logo = ttk.Label(frame, image=photo)
+            logo.image = photo
+            logo.pack(pady=(0, 10))
+        except Exception:
+            pass
+
+        ttk.Label(frame, text="tk-claudette v0.1.0", font=("TkDefaultFont", 12, "bold")).pack(pady=(0, 5))
+        ttk.Label(frame, text="A desktop GUI AI coding agent built with Python and Tkinter.", foreground="gray").pack(pady=(0, 2))
+        ttk.Label(frame, text="Supports any OpenAI-compatible endpoint.", foreground="gray").pack(pady=(0, 10))
+
+        ttk.Button(frame, text="Close", command=dlg.destroy, width=10).pack()
+
+        dlg.update_idletasks()
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dlg.winfo_width() // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dlg.winfo_height() // 2)
+        dlg.geometry(f"+{x}+{y}")
+
+        dlg.wait_window()
 
     def _handle_command(self, cmd: str):
         parts = cmd.split(maxsplit=1)

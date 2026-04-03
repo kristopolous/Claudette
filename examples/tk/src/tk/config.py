@@ -38,6 +38,7 @@ class Config:
         self.permission_defaults: dict[str, str] = {}
         self.input_cost_per_million: float = 3.0
         self.output_cost_per_million: float = 15.0
+        self.mcp_servers: list[dict] = []
         self._load()
 
     def _load(self):
@@ -60,6 +61,7 @@ class Config:
                 self.max_tokens = data.get("max_tokens", self.max_tokens)
                 self.temperature = data.get("temperature", self.temperature)
                 self.permission_defaults = data.get("permission_defaults", {})
+                self.mcp_servers = data.get("mcp_servers", [])
             except (json.JSONDecodeError, IOError):
                 pass
 
@@ -85,6 +87,7 @@ class Config:
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
             "permission_defaults": self.permission_defaults,
+            "mcp_servers": self.mcp_servers,
         }
         with open(DEFAULT_SETTINGS_FILE, "w") as f:
             json.dump(data, f, indent=2)

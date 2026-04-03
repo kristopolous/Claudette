@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import MessageBubble from './MessageBubble'
 import PromptInput from './PromptInput'
 import ToolResult from './ToolResult'
+import WriteResult from './WriteResult'
 import TerminalOutput from './TerminalOutput'
 import FileExplorer from './FileExplorer'
 import FileViewer from './FileViewer'
@@ -64,7 +65,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
   const [selectedFilePath, setSelectedFilePath] = useState<string | null>(null)
   const [fileContent, setFileContent] = useState('')
   const [isDirty, setIsDirty] = useState(false)
-  const [vfs, setVfs] = useState<any>(null)
+  const [fileRefreshKey, setFileRefreshKey] = useState(0)
   const [usageStats, setUsageStats] = useState<UsageStats>({
     inputTokens: 0,
     outputTokens: 0,
@@ -156,6 +157,10 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
                       ? { ...tu, result: event.tool_result!.content, running: false }
                       : tu
                   )
+                  // Refresh file explorer after tool result
+                  setFileRefreshKey(k => k + 1)
+                  // Refresh file explorer after tool result
+                  setFileRefreshKey(k => k + 1)
                 } else if (event.type === 'error' && event.error) {
                   assistant.text += `\n\nError: ${event.error}`
                   assistant.isStreaming = false
@@ -386,6 +391,13 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
                                   parseInt(tu.result.match(/\[Exit code: (\d+)\]/)?.[1] || '0') : 
                                   (tu.running ? -1 : 0)
                                 }
+                                isRunning={tu.running}
+                              />
+                            ) : tu.name === 'Write' ? (
+                              <WriteResult
+                                key={tu.id}
+                                toolInput={tu.input}
+                                content={tu.result || ''}
                                 isRunning={tu.running}
                               />
                             ) : (

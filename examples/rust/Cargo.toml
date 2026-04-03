@@ -52,8 +52,10 @@ notify = "7"
 ignore = "0.4"
  fuzzy-matcher = "0.3"
  urlencoding = "2"
- pulldown-cmark = "0.10"
- md-tui = "0.9"
+  pulldown-cmark = "0.10"
+  md-tui = "0.9"
+  syntect = { version = "5", features = ["yaml-load", "html"] }
+  lazy_static = "1"
 
  [[bin]]
 name = "claudette"

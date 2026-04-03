@@ -98,7 +98,7 @@ Examples:
     )
 
     tool_registry = create_tool_registry()
-    mcp_manager = McpManager()
+    mcp_manager = McpManager(config)
 
     cost_tracker = CostTracker(
         input_cost_per_million=config.input_cost_per_million,

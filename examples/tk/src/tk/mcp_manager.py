@@ -10,18 +10,28 @@ from tk.models import ToolDefinition, ToolResult
 class McpManager:
     """Manages MCP server connections and tool discovery."""
 
-    def __init__(self):
+    def __init__(self, config=None):
         self._servers: list[dict] = []
         self._connections: dict[str, dict] = {}
         self._mcp_tools: dict[str, list[ToolDefinition]] = {}
+        self.config = config
+        if config and hasattr(config, 'mcp_servers'):
+            self._servers = list(config.mcp_servers)
+
+    def _persist(self):
+        if self.config and hasattr(self.config, 'mcp_servers'):
+            self.config.mcp_servers = list(self._servers)
+            self.config.save()
 
     def add_server(self, server: dict):
         self._servers.append(server)
+        self._persist()
 
     def remove_server(self, name: str):
         self._servers = [s for s in self._servers if s.get("name") != name]
         self._connections.pop(name, None)
         self._mcp_tools.pop(name, None)
+        self._persist()
 
     def get_server(self, name: str) -> Optional[dict]:
         for s in self._servers:
@@ -46,6 +56,7 @@ class McpManager:
                 break
         self._connections.pop(old_name, None)
         self._mcp_tools.pop(old_name, None)
+        self._persist()
 
     def get_all_tool_definitions(self) -> list[ToolDefinition]:
         tools = []
