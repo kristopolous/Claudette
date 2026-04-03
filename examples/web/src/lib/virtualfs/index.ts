@@ -1,133 +1,108 @@
 import picomatch from 'picomatch'
+import * as fs from 'fs'
+import * as path from 'path'
 import { VirtualFSNode, VirtualFS } from '../../types'
 
-function resolvePath(path: string): string[] {
-  const parts = path.split('/').filter(Boolean)
+function resolvePath(input: string): string[] {
+  const parts = input.split('/').filter(Boolean)
   const resolved: string[] = []
   for (const part of parts) {
-    if (part === '..') {
-      resolved.pop()
-    } else if (part !== '.') {
-      resolved.push(part)
-    }
+    if (part === '..') resolved.pop()
+    else if (part !== '.') resolved.push(part)
   }
   return resolved
 }
 
-function getNode(root: VirtualFSNode, pathParts: string[]): VirtualFSNode | null {
-  let current: VirtualFSNode = root
-  for (const part of pathParts) {
-    if (current.type !== 'directory' || !current.children) return null
-    const child = current.children.get(part)
-    if (!child) return null
-    current = child
-  }
-  return current
-}
-
-function ensureDir(root: VirtualFSNode, pathParts: string[]): VirtualFSNode {
-  let current: VirtualFSNode = root
-  for (const part of pathParts) {
-    if (current.type !== 'directory') throw new Error(`Not a directory: ${part}`)
-    if (!current.children) current.children = new Map()
-    let child = current.children.get(part)
-    if (!child) {
-      child = { type: 'directory', name: part, children: new Map(), modifiedAt: new Date() }
-      current.children.set(part, child)
-    }
-    current = child
-  }
-  return current
-}
-
-function createDefaultRoot(): VirtualFSNode {
-  return {
-    type: 'directory',
-    name: '/',
-    children: new Map([
-      ['README.md', {
-        type: 'file',
-        name: 'README.md',
-        content: '# Welcome to Claudette Web\n\nThis is a virtualized environment. You can create, edit, and run files here.\n\nTry asking me to create a file or run a command!',
-        modifiedAt: new Date(),
-      }],
-      ['src', {
-        type: 'directory',
-        name: 'src',
-        children: new Map([
-          ['index.ts', {
-            type: 'file',
-            name: 'index.ts',
-            content: 'console.log("Hello from Claudette Web!")\n',
-            modifiedAt: new Date(),
-          }],
-        ]),
-        modifiedAt: new Date(),
-      }],
-    ]),
-    modifiedAt: new Date(),
-  }
-}
-
 export class VirtualFSImpl implements VirtualFS {
   root: VirtualFSNode
+  private baseDir: string
 
-  constructor() {
-    this.root = createDefaultRoot()
+  constructor(baseDir?: string) {
+    this.baseDir = baseDir || path.join(process.cwd(), '.claudette-workspace')
+    if (!fs.existsSync(this.baseDir)) {
+      fs.mkdirSync(this.baseDir, { recursive: true })
+    }
+    this.root = this._buildTree('/')
   }
 
-  private getPathParts(path: string): string[] {
-    return resolvePath(path)
+  private _realPath(vfsPath: string): string {
+    const parts = resolvePath(vfsPath)
+    return path.join(this.baseDir, ...parts)
   }
 
-  private findNode(path: string): VirtualFSNode | null {
-    const parts = this.getPathParts(path)
-    return getNode(this.root, parts)
+  private _buildTree(dirPath: string): VirtualFSNode {
+    const realPath = this._realPath(dirPath)
+    const name = path.basename(dirPath) || '/'
+    if (!fs.existsSync(realPath)) {
+      return { type: 'directory', name, children: new Map(), modifiedAt: new Date() }
+    }
+    const stat = fs.statSync(realPath)
+    if (!stat.isDirectory()) {
+      return {
+        type: 'file',
+        name,
+        content: fs.readFileSync(realPath, 'utf-8'),
+        modifiedAt: stat.mtime,
+      }
+    }
+    const children = new Map<string, VirtualFSNode>()
+    const entries = fs.readdirSync(realPath)
+    for (const entry of entries) {
+      const childPath = dirPath === '/' ? `/${entry}` : `${dirPath}/${entry}`
+      children.set(entry, this._buildTree(childPath))
+    }
+    return { type: 'directory', name, children, modifiedAt: stat.mtime }
   }
 
-  exists(path: string): boolean {
-    return this.findNode(path) !== null
+  private _refreshTree(dirPath: string) {
+    this.root = this._buildTree('/')
   }
 
-  isDir(path: string): boolean {
-    const node = this.findNode(path)
-    return node?.type === 'directory' || false
+  private _getPathParts(vfsPath: string): string[] {
+    return resolvePath(vfsPath)
   }
 
-  mkdir(path: string): void {
-    const parts = this.getPathParts(path)
-    ensureDir(this.root, parts)
+  exists(vfsPath: string): boolean {
+    return fs.existsSync(this._realPath(vfsPath))
   }
 
-  list(path: string): string[] {
-    const node = this.findNode(path)
-    if (!node || node.type !== 'directory' || !node.children) return []
-    return Array.from(node.children.keys())
+  isDir(vfsPath: string): boolean {
+    try {
+      return fs.statSync(this._realPath(vfsPath)).isDirectory()
+    } catch {
+      return false
+    }
   }
 
-  async read(path: string): Promise<string> {
-    const node = this.findNode(path)
-    if (!node) throw new Error(`File not found: ${path}`)
-    if (node.type === 'directory') throw new Error(`Is a directory: ${path}`)
-    return node.content ?? ''
+  mkdir(vfsPath: string): void {
+    fs.mkdirSync(this._realPath(vfsPath), { recursive: true })
+    this._refreshTree(vfsPath)
   }
 
-  async write(path: string, content: string): Promise<void> {
-    const parts = this.getPathParts(path)
-    const fileName = parts.pop()
-    if (!fileName) throw new Error('Invalid path')
-    const parent = ensureDir(this.root, parts)
-    if (parent.type !== 'directory' || !parent.children) throw new Error('Not a directory')
-    parent.children.set(fileName, {
-      type: 'file',
-      name: fileName,
-      content,
-      modifiedAt: new Date(),
-    })
+  list(vfsPath: string): string[] {
+    const realPath = this._realPath(vfsPath)
+    if (!fs.existsSync(realPath) || !fs.statSync(realPath).isDirectory()) return []
+    return fs.readdirSync(realPath)
   }
 
-  async edit(path: string, oldString: string, newString: string): Promise<string> {
-    const content = await this.read(path)
+  async read(vfsPath: string): Promise<string> {
+    const realPath = this._realPath(vfsPath)
+    if (!fs.existsSync(realPath)) throw new Error(`File not found: ${vfsPath}`)
+    const stat = fs.statSync(realPath)
+    if (stat.isDirectory()) throw new Error(`Is a directory: ${vfsPath}`)
+    return fs.readFileSync(realPath, 'utf-8')
+  }
+
+  async write(vfsPath: string, content: string): Promise<void> {
+    const realPath = this._realPath(vfsPath)
+    const dir = path.dirname(realPath)
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    fs.writeFileSync(realPath, content)
+    this._refreshTree(vfsPath)
+  }
+
+  async edit(vfsPath: string, oldString: string, newString: string): Promise<string> {
+    const content = await this.read(vfsPath)
     if (!content.includes(oldString)) {
       const lines = content.split('\n')
       const oldLines = oldString.split('\n')
@@ -147,33 +122,15 @@ export class VirtualFSImpl implements VirtualFS {
         const before = lines.slice(0, bestMatch).join('\n')
         const after = lines.slice(bestMatch + oldLines.length).join('\n')
         const newContent = [before, newString, after].filter(Boolean).join('\n')
-        const parts = this.getPathParts(path)
-        const fileName = parts.pop()!
-        const parent = ensureDir(this.root, parts)
-        if (parent.children) {
-          parent.children.set(fileName, {
-            type: 'file',
-            name: fileName,
-            content: newContent,
-            modifiedAt: new Date(),
-          })
-        }
+        fs.writeFileSync(this._realPath(vfsPath), newContent)
+        this._refreshTree(vfsPath)
         return newContent
       }
-      throw new Error(`Could not find text to replace in ${path}`)
+      throw new Error(`Could not find text to replace in ${vfsPath}`)
     }
     const newContent = content.replace(oldString, newString)
-    const parts = this.getPathParts(path)
-    const fileName = parts.pop()!
-    const parent = ensureDir(this.root, parts)
-    if (parent.children) {
-      parent.children.set(fileName, {
-        type: 'file',
-        name: fileName,
-        content: newContent,
-        modifiedAt: new Date(),
-      })
-    }
+    fs.writeFileSync(this._realPath(vfsPath), newContent)
+    this._refreshTree(vfsPath)
     return newContent
   }
 
@@ -181,69 +138,87 @@ export class VirtualFSImpl implements VirtualFS {
     const results: string[] = []
     const isMatch = picomatch(pattern)
 
-    const walk = (node: VirtualFSNode, currentPath: string) => {
-      const fullPath = currentPath ? `${currentPath}/${node.name}` : node.name
-      if (node.name !== '/' && isMatch(fullPath)) {
-        results.push(fullPath)
-      }
-      if (node.type === 'directory' && node.children) {
-        for (const child of node.children.values()) {
-          walk(child, fullPath === '/' ? '' : fullPath)
+    const walk = (dir: string) => {
+      if (!fs.existsSync(dir)) return
+      const entries = fs.readdirSync(dir)
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry)
+        const relativePath = path.relative(this.baseDir, fullPath)
+        if (isMatch(relativePath)) {
+          results.push('/' + relativePath)
+        }
+        if (fs.statSync(fullPath).isDirectory()) {
+          walk(fullPath)
         }
       }
     }
 
-    walk(this.root, '')
+    walk(this.baseDir)
     return results
   }
 
   async grep(pattern: string, searchPath?: string): Promise<{ file: string; line: number; match: string }[]> {
     const results: Array<{ file: string; line: number; match: string }> = []
     const regex = new RegExp(pattern, 'i')
+    const searchRealPath = searchPath ? this._realPath(searchPath) : this.baseDir
 
-    const walk = (node: VirtualFSNode, currentPath: string) => {
-      const fullPath = currentPath ? `${currentPath}/${node.name}` : node.name
-      if (node.type === 'file' && node.content) {
-        const effectivePath = fullPath === '/' ? '.' : fullPath
-        if (searchPath && !effectivePath.startsWith(searchPath)) return
-        const lines = node.content.split('\n')
-        lines.forEach((line, idx) => {
-          if (regex.test(line)) {
-            results.push({ file: effectivePath, line: idx + 1, match: line.trim() })
-          }
-        })
-      }
-      if (node.type === 'directory' && node.children) {
-        for (const child of node.children.values()) {
-          walk(child, fullPath === '/' ? '' : fullPath)
+    const walk = (dir: string) => {
+      if (!fs.existsSync(dir)) return
+      const entries = fs.readdirSync(dir)
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry)
+        if (fs.statSync(fullPath).isDirectory()) {
+          walk(fullPath)
+        } else {
+          const relativePath = '/' + path.relative(this.baseDir, fullPath)
+          if (searchPath && !relativePath.startsWith(searchPath)) continue
+          const content = fs.readFileSync(fullPath, 'utf-8')
+          content.split('\n').forEach((line, idx) => {
+            if (regex.test(line)) {
+              results.push({ file: relativePath, line: idx + 1, match: line.trim() })
+            }
+          })
         }
       }
     }
 
-    walk(this.root, '')
+    if (fs.statSync(searchRealPath).isDirectory()) {
+      walk(searchRealPath)
+    } else {
+      const content = fs.readFileSync(searchRealPath, 'utf-8')
+      const relativePath = '/' + path.relative(this.baseDir, searchRealPath)
+      content.split('\n').forEach((line, idx) => {
+        if (regex.test(line)) {
+          results.push({ file: relativePath, line: idx + 1, match: line.trim() })
+        }
+      })
+    }
+
     return results
   }
 
   exportAll(): Array<{ path: string; content: string }> {
     const results: Array<{ path: string; content: string }> = []
 
-    const walk = (node: VirtualFSNode, currentPath: string) => {
-      const fullPath = currentPath ? `${currentPath}/${node.name}` : node.name
-      if (node.type === 'file' && node.content !== undefined) {
-        results.push({ path: fullPath === '/' ? node.name : fullPath, content: node.content })
-      }
-      if (node.type === 'directory' && node.children) {
-        for (const child of node.children.values()) {
-          walk(child, fullPath === '/' ? '' : fullPath)
+    const walk = (dir: string) => {
+      if (!fs.existsSync(dir)) return
+      const entries = fs.readdirSync(dir)
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry)
+        if (fs.statSync(fullPath).isDirectory()) {
+          walk(fullPath)
+        } else {
+          const relativePath = '/' + path.relative(this.baseDir, fullPath)
+          results.push({ path: relativePath, content: fs.readFileSync(fullPath, 'utf-8') })
         }
       }
     }
 
-    walk(this.root, '')
+    walk(this.baseDir)
     return results
   }
 }
 
-export function createVirtualFS(): VirtualFS {
-  return new VirtualFSImpl()
+export function createVirtualFS(baseDir?: string): VirtualFS {
+  return new VirtualFSImpl(baseDir)
 }

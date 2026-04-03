@@ -3,11 +3,14 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import asyncio
-import threading
 import json
+import os
+import subprocess
+import sys
+import threading
 from pathlib import Path
 from typing import Optional
-from tk.models import CostTracker
+from tk.models import CostTracker, ToolCall, Message
 from tk.api import detect_provider
 
 HOST_PRESETS = {
@@ -66,6 +69,7 @@ class PermissionDialog:
         self.dialog.transient(parent)
         self.dialog.grab_set()
         self.dialog.resizable(False, False)
+        self.dialog.withdraw()
 
         x = parent.winfo_x() + 100
         y = parent.winfo_y() + 100
@@ -82,6 +86,7 @@ class PermissionDialog:
         ttk.Button(btn_frame, text="Allow Once", command=self._allow_once).pack(side=tk.LEFT, padx=5)
         ttk.Button(btn_frame, text="Deny", command=self._deny).pack(side=tk.LEFT, padx=5)
 
+        self.dialog.deiconify()
         self.dialog.wait_window()
 
     def _allow_once(self):
@@ -100,6 +105,7 @@ class CostDialog:
         self.dialog.transient(parent)
         self.dialog.grab_set()
         self.dialog.resizable(False, False)
+        self.dialog.withdraw()
 
         x = parent.winfo_x() + 100
         y = parent.winfo_y() + 100
@@ -119,6 +125,7 @@ class CostDialog:
 
         ttk.Button(self.dialog, text="Close", command=self.dialog.destroy).pack(pady=15)
 
+        self.dialog.deiconify()
         self.dialog.wait_window()
 
 
@@ -327,6 +334,7 @@ class ToolsDialog:
         self.dialog.transient(parent)
         self.dialog.grab_set()
         self.dialog.resizable(False, False)
+        self.dialog.withdraw()
 
         self._build_ui()
 
@@ -336,6 +344,7 @@ class ToolsDialog:
         x = parent.winfo_x() + 50
         y = parent.winfo_y() + 50
         self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+        self.dialog.deiconify()
 
         self.dialog.wait_window()
 
@@ -430,6 +439,74 @@ class ToolsDialog:
         self._populate_mcp_tools()
 
 
+class EditMcpServerDialog:
+    def __init__(self, parent, server: dict):
+        self.server = server
+        self.result = None
+        self.dialog = tk.Toplevel(parent)
+        self.dialog.title("Edit MCP Server")
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
+        self.dialog.resizable(True, True)
+        self.dialog.withdraw()
+
+        self._build_ui()
+
+        self.dialog.update_idletasks()
+        w = min(self.dialog.winfo_reqwidth() + 40, 650)
+        h = min(self.dialog.winfo_reqheight() + 40, 500)
+        x = parent.winfo_x() + 50
+        y = parent.winfo_y() + 50
+        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+        self.dialog.deiconify()
+
+        self.dialog.wait_window()
+
+    def _build_ui(self):
+        self.dialog.columnconfigure(0, weight=1)
+        self.dialog.rowconfigure(0, weight=1)
+
+        frame = ttk.Frame(self.dialog, padding=15)
+        frame.grid(row=0, column=0, sticky="nsew")
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
+
+        ttk.Label(frame, text="Server Configuration (JSON)", font=("TkDefaultFont", 10, "bold")).grid(row=0, column=0, sticky=tk.W, pady=(0, 5))
+
+        self.text = tk.Text(frame, font=("TkFixedFont", 10), wrap=tk.NONE, height=15, width=60)
+        display = {k: v for k, v in self.server.items() if k not in ("status", "tool_count")}
+        self.text.insert("1.0", json.dumps(display, indent=2))
+        self.text.grid(row=1, column=0, sticky="nsew", pady=(0, 10))
+
+        text_scroll = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=self.text.yview)
+        text_scroll.grid(row=1, column=1, sticky="ns", pady=(0, 10))
+        self.text.configure(yscrollcommand=text_scroll.set)
+
+        self.error_label = ttk.Label(frame, text="", foreground="red", font=("TkDefaultFont", 9))
+        self.error_label.grid(row=2, column=0, sticky=tk.W)
+
+        btn_frame = ttk.Frame(frame)
+        btn_frame.grid(row=3, column=0, sticky=tk.E)
+        ttk.Button(btn_frame, text="Save", command=self._ok, width=10).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="Cancel", command=self.dialog.destroy, width=10).pack(side=tk.LEFT, padx=5)
+
+    def _ok(self):
+        raw = self.text.get("1.0", tk.END).strip()
+        try:
+            config = json.loads(raw)
+        except json.JSONDecodeError as e:
+            self.error_label.configure(text=f"Invalid JSON: {e}")
+            return
+
+        if not config.get("name"):
+            self.error_label.configure(text="'name' is required")
+            return
+
+        config.setdefault("enabled", True)
+        self.result = config
+        self.dialog.destroy()
+
+
 class McpServersDialog:
     def __init__(self, parent, mcp_manager):
         self.manager = mcp_manager
@@ -439,6 +516,7 @@ class McpServersDialog:
         self.dialog.transient(parent)
         self.dialog.grab_set()
         self.dialog.resizable(False, False)
+        self.dialog.withdraw()
 
         self._build_ui()
 
@@ -448,6 +526,7 @@ class McpServersDialog:
         x = parent.winfo_x() + 50
         y = parent.winfo_y() + 50
         self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+        self.dialog.deiconify()
 
         self.dialog.wait_window()
 
@@ -601,6 +680,7 @@ class AddMcpServerDialog:
         self.dialog.transient(parent)
         self.dialog.grab_set()
         self.dialog.resizable(True, True)
+        self.dialog.withdraw()
 
         self._build_ui()
 
@@ -610,6 +690,7 @@ class AddMcpServerDialog:
         x = parent.winfo_x() + 50
         y = parent.winfo_y() + 50
         self.dialog.geometry(f"{w}x{h}+{x}+{y}")
+        self.dialog.deiconify()
 
         self.dialog.wait_window()
 
@@ -668,138 +749,6 @@ class AddMcpServerDialog:
         self.dialog.destroy()
 
 
-class EditMcpServerDialog:
-    def __init__(self, parent, server: dict):
-        self.server = server
-        self.result = None
-        self.dialog = tk.Toplevel(parent)
-        self.dialog.title("Edit MCP Server")
-        self.dialog.transient(parent)
-        self.dialog.grab_set()
-        self.dialog.resizable(True, True)
-
-        self._build_ui()
-
-        self.dialog.update_idletasks()
-        w = min(self.dialog.winfo_reqwidth() + 40, 650)
-        h = min(self.dialog.winfo_reqheight() + 40, 500)
-        x = parent.winfo_x() + 50
-        y = parent.winfo_y() + 50
-        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
-
-        self.dialog.wait_window()
-
-    def _build_ui(self):
-        self.dialog.columnconfigure(0, weight=1)
-        self.dialog.rowconfigure(0, weight=1)
-
-        frame = ttk.Frame(self.dialog, padding=15)
-        frame.grid(row=0, column=0, sticky="nsew")
-        frame.columnconfigure(0, weight=1)
-        frame.rowconfigure(0, weight=1)
-
-        ttk.Label(frame, text="Server Configuration (JSON)", font=("TkDefaultFont", 10, "bold")).grid(row=0, column=0, sticky=tk.W, pady=(0, 5))
-
-        self.text = tk.Text(frame, font=("TkFixedFont", 10), wrap=tk.NONE, height=15, width=60)
-        display = {k: v for k, v in self.server.items() if k not in ("status", "tool_count")}
-        self.text.insert("1.0", json.dumps(display, indent=2))
-        self.text.grid(row=1, column=0, sticky="nsew", pady=(0, 10))
-
-        text_scroll = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=self.text.yview)
-        text_scroll.grid(row=1, column=1, sticky="ns", pady=(0, 10))
-        self.text.configure(yscrollcommand=text_scroll.set)
-
-        self.error_label = ttk.Label(frame, text="", foreground="red", font=("TkDefaultFont", 9))
-        self.error_label.grid(row=2, column=0, sticky=tk.W)
-
-        btn_frame = ttk.Frame(frame)
-        btn_frame.grid(row=3, column=0, sticky=tk.E)
-        ttk.Button(btn_frame, text="Save", command=self._ok, width=10).pack(side=tk.LEFT, padx=5)
-        ttk.Button(btn_frame, text="Cancel", command=self.dialog.destroy, width=10).pack(side=tk.LEFT, padx=5)
-
-    def _ok(self):
-        raw = self.text.get("1.0", tk.END).strip()
-        try:
-            config = json.loads(raw)
-        except json.JSONDecodeError as e:
-            self.error_label.configure(text=f"Invalid JSON: {e}")
-            return
-
-        if not config.get("name"):
-            self.error_label.configure(text="'name' is required")
-            return
-
-        config.setdefault("enabled", True)
-        self.result = config
-        self.dialog.destroy()
-
-
-class EditMcpServerDialog:
-    def __init__(self, parent, server: dict):
-        self.server = server
-        self.result = None
-        self.dialog = tk.Toplevel(parent)
-        self.dialog.title("Edit MCP Server")
-        self.dialog.transient(parent)
-        self.dialog.grab_set()
-        self.dialog.resizable(True, True)
-
-        self._build_ui()
-
-        self.dialog.update_idletasks()
-        w = min(self.dialog.winfo_reqwidth() + 40, 650)
-        h = min(self.dialog.winfo_reqheight() + 40, 500)
-        x = parent.winfo_x() + 50
-        y = parent.winfo_y() + 50
-        self.dialog.geometry(f"{w}x{h}+{x}+{y}")
-
-        self.dialog.wait_window()
-
-    def _build_ui(self):
-        self.dialog.columnconfigure(0, weight=1)
-        self.dialog.rowconfigure(0, weight=1)
-
-        frame = ttk.Frame(self.dialog, padding=15)
-        frame.grid(row=0, column=0, sticky="nsew")
-        frame.columnconfigure(0, weight=1)
-        frame.rowconfigure(0, weight=1)
-
-        ttk.Label(frame, text="Server Configuration (JSON)", font=("TkDefaultFont", 10, "bold")).grid(row=0, column=0, sticky=tk.W, pady=(0, 5))
-
-        self.text = tk.Text(frame, font=("TkFixedFont", 10), wrap=tk.NONE, height=15, width=60)
-        display = {k: v for k, v in self.server.items() if k not in ("status", "tool_count")}
-        self.text.insert("1.0", json.dumps(display, indent=2))
-        self.text.grid(row=1, column=0, sticky="nsew", pady=(0, 10))
-
-        text_scroll = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=self.text.yview)
-        text_scroll.grid(row=1, column=1, sticky="ns", pady=(0, 10))
-        self.text.configure(yscrollcommand=text_scroll.set)
-
-        self.error_label = ttk.Label(frame, text="", foreground="red", font=("TkDefaultFont", 9))
-        self.error_label.grid(row=2, column=0, sticky=tk.W)
-
-        btn_frame = ttk.Frame(frame)
-        btn_frame.grid(row=3, column=0, sticky=tk.E)
-        ttk.Button(btn_frame, text="Save", command=self._ok, width=10).pack(side=tk.LEFT, padx=5)
-        ttk.Button(btn_frame, text="Cancel", command=self.dialog.destroy, width=10).pack(side=tk.LEFT, padx=5)
-
-    def _ok(self):
-        raw = self.text.get("1.0", tk.END).strip()
-        try:
-            config = json.loads(raw)
-        except json.JSONDecodeError as e:
-            self.error_label.configure(text=f"Invalid JSON: {e}")
-            return
-
-        if not config.get("name"):
-            self.error_label.configure(text="'name' is required")
-            return
-
-        config.setdefault("enabled", True)
-        self.result = config
-        self.dialog.destroy()
-
-
 class MainWindow:
     def __init__(self, config, query_engine, tool_registry=None, mcp_manager=None):
         self.config = config
@@ -815,6 +764,8 @@ class MainWindow:
         self._history_index = -1
         self._is_processing = False
         self._cwd = None
+        self._attachments = []
+        self._dirty = False
 
         self._build_ui()
         self._bind_events()
@@ -830,7 +781,12 @@ class MainWindow:
         file_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=file_menu)
         file_menu.add_command(label="New", command=self._on_new, accelerator="Ctrl+N")
-        file_menu.add_command(label="Open Folder...", command=self._on_open_folder, accelerator="Ctrl+O")
+        file_menu.add_command(label="New Window", command=self._on_new_window, accelerator="Ctrl+Shift+N")
+        file_menu.add_command(label="Open...", command=self._on_open_conversation, accelerator="Ctrl+O")
+        file_menu.add_command(label="Open Directory...", command=self._on_open_folder)
+        file_menu.add_command(label="Save...", command=self._on_save, accelerator="Ctrl+S")
+        file_menu.add_separator()
+        file_menu.add_command(label="Add Attachment...", command=self._add_attachment, accelerator="Ctrl+T")
         file_menu.add_separator()
         file_menu.add_command(label="Clear", command=self._on_clear, accelerator="Ctrl+L")
         file_menu.add_separator()
@@ -860,8 +816,14 @@ class MainWindow:
         self._new_btn = ttk.Button(toolbar, text=f"{ICON_NEW} New", width=8, command=self._on_new)
         self._new_btn.pack(side=tk.LEFT, padx=1)
 
-        self._open_btn = ttk.Button(toolbar, text=f"{ICON_OPEN} Open", width=8, command=self._on_open_folder)
+        self._open_btn = ttk.Button(toolbar, text=f"{ICON_OPEN} Open", width=8, command=self._on_open_conversation)
         self._open_btn.pack(side=tk.LEFT, padx=1)
+
+        self._save_btn = ttk.Button(toolbar, text=f"{ICON_SAVE} Save", width=8, command=self._on_save)
+        self._save_btn.pack(side=tk.LEFT, padx=1)
+
+        self._open_dir_btn = ttk.Button(toolbar, text="Open Dir", width=10, command=self._on_open_folder)
+        self._open_dir_btn.pack(side=tk.LEFT, padx=1)
 
         ttk.Separator(toolbar, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=4)
 
@@ -920,12 +882,24 @@ class MainWindow:
         input_frame = ttk.Frame(self.root)
         input_frame.grid(row=3, column=0, sticky="ew", padx=5, pady=3)
         input_frame.columnconfigure(0, weight=1)
+        input_frame.rowconfigure(0, weight=1)
+
+        self.attach_frame = ttk.Frame(input_frame)
+        self.attach_frame.grid(row=0, column=0, sticky="ew", pady=(0, 2))
+        self.attach_frame.columnconfigure(0, weight=1)
+
+        self.attach_label = ttk.Label(self.attach_frame, text="", foreground="gray", font=("TkDefaultFont", 8))
+        self.attach_label.grid(row=0, column=0, sticky=tk.W)
+
+        self.remove_attach_btn = ttk.Button(self.attach_frame, text="✕", width=2, command=self._remove_attachment)
+        self.remove_attach_btn.grid(row=0, column=1, sticky=tk.E)
+        self.remove_attach_btn.grid_remove()
 
         self.input_text = tk.Text(input_frame, height=4, wrap=tk.WORD, font=("TkFixedFont", 10))
         input_scrollbar = ttk.Scrollbar(input_frame, orient=tk.VERTICAL, command=self.input_text.yview)
         self.input_text.configure(yscrollcommand=input_scrollbar.set)
-        self.input_text.grid(row=0, column=0, sticky="nsew")
-        input_scrollbar.grid(row=0, column=1, sticky="ns")
+        self.input_text.grid(row=1, column=0, sticky="nsew")
+        input_scrollbar.grid(row=1, column=1, sticky="ns")
 
         btn_frame = ttk.Frame(self.root)
         btn_frame.grid(row=4, column=0, sticky="ew", padx=5, pady=(0, 5))
@@ -935,6 +909,9 @@ class MainWindow:
 
         self.send_btn = ttk.Button(btn_frame, text="Send (Enter)", command=self._on_send)
         self.send_btn.pack(side=tk.RIGHT, padx=2)
+
+        self.attach_btn = ttk.Button(btn_frame, text="Attach", command=self._add_attachment)
+        self.attach_btn.pack(side=tk.RIGHT, padx=2)
 
         self.status_bar = ttk.Frame(self.root)
         self.status_bar.grid(row=5, column=0, sticky="ew", padx=5, pady=2)
@@ -953,10 +930,106 @@ class MainWindow:
         cwd = self.query_engine.cwd
         self.cwd_label.configure(text=f"CWD: {cwd}")
 
+    def _add_attachment(self):
+        filepath = filedialog.askopenfilename(title="Select File to Attach")
+        if not filepath:
+            return
+        self._attachments.append(filepath)
+        self._refresh_attachments()
+
+    def _remove_attachment(self):
+        if self._attachments:
+            self._attachments.pop()
+            self._refresh_attachments()
+
+    def _refresh_attachments(self):
+        if self._attachments:
+            names = [Path(f).name for f in self._attachments]
+            self.attach_label.configure(text="Attached: " + ", ".join(names))
+            self.remove_attach_btn.grid()
+        else:
+            self.attach_label.configure(text="")
+            self.remove_attach_btn.grid_remove()
+
     def _on_new(self):
+        if not self._prompt_save():
+            return
         self._on_clear()
         self._cwd = None
         self.cwd_label.configure(text="")
+
+    def _on_new_window(self):
+        src_dir = str(Path(__file__).parent.parent)
+        env = os.environ.copy()
+        env["PYTHONPATH"] = src_dir
+        subprocess.Popen([sys.executable, "-m", "tk.main"], env=env)
+
+    def _on_save(self):
+        filepath = filedialog.asksaveasfilename(
+            title="Save Conversation",
+            defaultextension=".cnv",
+            filetypes=[("Conversation files", "*.cnv"), ("All files", "*.*")],
+        )
+        if not filepath:
+            return
+        data = []
+        for msg in self.query_engine.messages:
+            if msg.role == "system":
+                continue
+            entry = {"role": msg.role, "content": msg.content}
+            if msg.tool_calls:
+                entry["tool_calls"] = [
+                    {"id": tc.id, "name": tc.name, "arguments": tc.arguments}
+                    for tc in msg.tool_calls
+                ]
+            if msg.tool_call_id:
+                entry["tool_call_id"] = msg.tool_call_id
+            if msg.name:
+                entry["name"] = msg.name
+            data.append(entry)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        self._dirty = False
+        self.status_label.configure(text=f"Saved to {Path(filepath).name}")
+
+    def _on_open_conversation(self):
+        filepath = filedialog.askopenfilename(
+            title="Open Conversation",
+            filetypes=[("Conversation files", "*.cnv"), ("All files", "*.*")],
+        )
+        if not filepath:
+            return
+        self._on_clear()
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for entry in data:
+                role = entry["role"]
+                content = entry["content"]
+                tool_calls = None
+                if "tool_calls" in entry:
+                    tool_calls = [
+                        ToolCall(tc["id"], tc["name"], tc["arguments"])
+                        for tc in entry["tool_calls"]
+                    ]
+                tool_call_id = entry.get("tool_call_id")
+                name = entry.get("name")
+                self.query_engine.messages.append(Message(
+                    role=role, content=content, tool_calls=tool_calls,
+                    tool_call_id=tool_call_id, name=name,
+                ))
+                if role == "user":
+                    self._add_user_bubble(content)
+                elif role == "assistant":
+                    self._add_assistant_bubble(content)
+                elif role == "tool":
+                    self._add_tool_bubble(content)
+                elif role == "error":
+                    self._add_error_bubble(content)
+            self._scroll_to_bottom()
+            self.status_label.configure(text=f"Loaded {Path(filepath).name}")
+        except Exception as e:
+            self._append_message("error", f"Failed to open file: {e}")
 
     def _on_open_folder(self):
         folder = filedialog.askdirectory(title="Select Working Directory")
@@ -989,7 +1062,8 @@ class MainWindow:
         self.root.bind("<Control-c>", lambda e: self._on_stop())
         self.root.bind("<Control-l>", lambda e: self._on_clear())
         self.root.bind("<Control-n>", lambda e: self._on_new())
-        self.root.bind("<Control-o>", lambda e: self._on_open_folder())
+        self.root.bind("<Control-o>", lambda e: self._on_open_conversation())
+        self.root.bind("<Control-s>", lambda e: self._on_save())
         self.root.bind("<F1>", lambda e: self._show_help())
         self.root.protocol("WM_DELETE_WINDOW", self._on_exit)
 
@@ -1019,6 +1093,8 @@ class MainWindow:
         return "break"
 
     def _append_message(self, role: str, content: str):
+        if role not in ("system",):
+            self._dirty = True
         if role == "user":
             self._add_user_bubble(content)
         elif role == "assistant":
@@ -1113,6 +1189,7 @@ class MainWindow:
             self._streaming_text = ""
 
     def _on_clear(self):
+        self._dirty = False
         self.query_engine.clear()
         for w in self._message_widgets:
             w.destroy()
@@ -1126,14 +1203,28 @@ class MainWindow:
         if self._is_processing:
             return
         user_input = self.input_text.get("1.0", tk.END).strip()
-        if not user_input:
+        if not user_input and not self._attachments:
             return
         self.input_text.delete("1.0", tk.END)
+
+        attachment_text = ""
+        for filepath in self._attachments:
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    content = f.read()
+                attachment_text += f"\n\n--- Attached file: {Path(filepath).name} ---\n{content}\n"
+            except (UnicodeDecodeError, IOError):
+                attachment_text += f"\n\n--- Attached file: {Path(filepath).name} ---\n[Binary file, unable to display content]\n"
+
+        self._attachments.clear()
+        self._refresh_attachments()
+
+        full_message = user_input + attachment_text if user_input else attachment_text.strip()
         self._command_history.append(user_input)
         self._history_index = -1
 
-        if user_input.startswith("/"):
-            self._handle_command(user_input)
+        if full_message.startswith("/"):
+            self._handle_command(full_message)
             return
 
         self._is_processing = True
@@ -1141,7 +1232,7 @@ class MainWindow:
         self.stop_btn.configure(state=tk.NORMAL)
         self.status_label.configure(text="Thinking...")
 
-        self._append_message("user", user_input)
+        self._append_message("user", full_message)
         self._set_streaming_mode(True)
 
         self.query_engine.on_text = self._on_text_chunk
@@ -1159,7 +1250,7 @@ class MainWindow:
             asyncio.set_event_loop(loop)
             try:
                 async def main():
-                    async for event in self.query_engine.submit(user_input):
+                    async for event in self.query_engine.submit(full_message):
                         pass
                 loop.run_until_complete(main())
             except Exception as e:
@@ -1207,11 +1298,26 @@ class MainWindow:
         self.cost_label.configure(text=f"Cost: ${tracker.total_cost:.4f}")
         self.token_label.configure(text=f"Tokens: {tracker.total_tokens:,}")
 
+    def _prompt_save(self):
+        if not self._dirty:
+            return True
+        result = messagebox.askyesnocancel(
+            "Unsaved Changes",
+            "You have unsaved conversation changes.\n\nSave before closing?",
+        )
+        if result is None:
+            return False
+        if result:
+            self._on_save()
+        return True
+
     def _on_stop(self):
         self.query_engine.request_stop()
         self.status_label.configure(text="Stopping...")
 
     def _on_exit(self):
+        if not self._prompt_save():
+            return
         if self._is_processing:
             if not messagebox.askokcancel("Exit", "A request is still running. Exit anyway?"):
                 return
@@ -1230,25 +1336,121 @@ class MainWindow:
         CostDialog(self.root, self.query_engine.cost_tracker)
 
     def _show_help(self):
-        help_text = """Available commands:
-/help          - Show this help
-/clear         - Clear conversation
-/model <name>  - Change model
-/host <url>    - Change API host
-/key <key>     - Change API key
-/cost          - Show cost breakdown
-/config        - Show configuration
+        dlg = tk.Toplevel(self.root)
+        dlg.title("Help - tk-claudette")
+        dlg.transient(self.root)
+        dlg.grab_set()
+        dlg.resizable(True, True)
+        dlg.withdraw()
 
-Keyboard shortcuts:
-Enter          - Send message
-Shift+Enter    - New line
-Up/Down        - Command history
-Ctrl+N         - New conversation
-Ctrl+O         - Open folder
-Ctrl+C         - Stop current request
-Ctrl+L         - Clear conversation
-F1             - Show this help"""
-        self._append_message("system", help_text)
+        frame = ttk.Frame(dlg, padding=20)
+        frame.pack(fill=tk.BOTH, expand=True)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(1, weight=1)
+
+        ttk.Label(frame, text="tk-claudette", font=("TkDefaultFont", 16, "bold")).grid(row=0, column=0, sticky=tk.W, pady=(0, 10))
+
+        text = tk.Text(frame, font=("TkFixedFont", 10), wrap=tk.WORD, height=25, width=65, state=tk.NORMAL)
+        text.grid(row=1, column=0, sticky="nsew")
+
+        scrollbar = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=text.yview)
+        scrollbar.grid(row=1, column=1, sticky="ns")
+        text.configure(yscrollcommand=scrollbar.set)
+
+        help_content = """
+  Welcome to Claudette
+
+  Claudette is the latest in AI coding assistance. She was built
+  for one purpose: to be the fastest, most direct way to get code
+  written. No browser tabs, no bloated web interfaces, no
+  distractions. Just you, your code, and the most capable AI
+  assistant on the planet.
+
+  Claudette connects to any AI model -- Anthropic, OpenAI,
+  OpenRouter, Ollama, LiteLLM, vLLM, or any custom endpoint.
+  She doesn't lock you into a single provider or pricing tier.
+  You bring the model, she brings the power.
+
+  Claudette comes with a full suite of built-in tools. She can
+  read and write files, edit code in place, run shell commands,
+  search your codebase with grep and glob, and fetch live
+  information from the web. She connects to MCP servers to
+  extend her reach even further. She doesn't just answer
+  questions -- she takes action.
+
+  Everything is instant. Everything is local. There is no build
+  step, no framework, no overhead. Claudette launches in a
+  fraction of a second, stays out of your way, and gets to work
+  the moment you hit Enter. This is how coding with AI was
+  always meant to feel.
+
+  ─────────────────────────────────────
+  Available Commands
+  ─────────────────────────────────────
+
+  /help            Show this help
+  /clear           Clear conversation
+  /model <name>    Change model
+  /host <url>      Change API host
+  /key <key>       Change API key
+  /cost            Show cost breakdown
+  /config          Show configuration
+
+  ─────────────────────────────────────
+  Keyboard Shortcuts
+  ─────────────────────────────────────
+
+  Enter            Send message
+  Shift+Enter      New line
+  Up / Down        Command history
+  Ctrl+N           New conversation
+  Ctrl+Shift+N     New window
+  Ctrl+O           Open conversation
+  Ctrl+S           Save conversation
+  Ctrl+T           Add attachment
+  Ctrl+C           Stop current request
+  Ctrl+L           Clear conversation
+  F1               Show this help
+
+  ─────────────────────────────────────
+  Menu Reference
+  ─────────────────────────────────────
+
+  File > New             Clear the conversation
+  File > New Window      Open a new session
+  File > Open...         Load a saved conversation
+  File > Open Directory  Set working directory
+  File > Save...         Save conversation to file
+  File > Add Attachment  Attach a file to message
+  File > Clear           Clear the conversation
+  File > Exit            Quit Claudette
+
+  Edit > Connection      Configure API settings
+  Edit > Tools           Enable/disable built-in tools
+  Edit > MCP Servers     Manage MCP server connections
+
+  View > Cost Breakdown  See token and cost details
+
+  Help > Help            You are here
+  Help > About           Learn more about Claudette
+"""
+
+        text.insert("1.0", help_content.strip())
+        text.configure(state=tk.DISABLED)
+
+        btn_frame = ttk.Frame(frame)
+        btn_frame.grid(row=2, column=0, columnspan=2, pady=(15, 0))
+        ttk.Button(btn_frame, text="Close", command=dlg.destroy, width=10).pack(side=tk.LEFT, padx=5)
+
+        dlg.update_idletasks()
+        w = min(dlg.winfo_reqwidth() + 40, 700)
+        h = min(dlg.winfo_reqheight() + 40, 600)
+        x = self.root.winfo_x() + 50
+        y = self.root.winfo_y() + 50
+        dlg.geometry(f"{w}x{h}+{x}+{y}")
+        dlg.deiconify()
+
+        dlg.wait_window()
 
     def _show_about(self):
         dlg = tk.Toplevel(self.root)
@@ -1256,6 +1458,7 @@ F1             - Show this help"""
         dlg.transient(self.root)
         dlg.grab_set()
         dlg.resizable(False, False)
+        dlg.withdraw()
 
         frame = ttk.Frame(dlg, padding=20)
         frame.pack(fill=tk.BOTH, expand=True)
@@ -1281,6 +1484,7 @@ F1             - Show this help"""
         x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dlg.winfo_width() // 2)
         y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dlg.winfo_height() // 2)
         dlg.geometry(f"+{x}+{y}")
+        dlg.deiconify()
 
         dlg.wait_window()
 
@@ -1290,15 +1494,7 @@ F1             - Show this help"""
         args = parts[1] if len(parts) > 1 else ""
 
         if command == "/help":
-            help_text = """Available commands:
-/help          - Show this help
-/clear         - Clear conversation
-/model <name>  - Change model
-/host <url>    - Change API host
-/key <key>     - Change API key
-/cost          - Show cost breakdown
-/config        - Show configuration"""
-            self._append_message("system", help_text)
+            self._show_help()
 
         elif command == "/clear":
             self._on_clear()

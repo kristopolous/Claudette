@@ -26,6 +26,7 @@ pub enum StreamEvent {
         message: String,
         retryable: bool,
     },
+    ClearScreen,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

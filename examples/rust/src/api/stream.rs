@@ -341,9 +341,13 @@ impl QueryEngine {
                     result.is_error,
                 );
 
-                on_event(AppStreamEvent::TextDelta {
-                    delta: format!("\n[Tool result: {}]", if result.is_error { "error" } else { "ok" }),
-                });
+                // Only emit error status; success is silent
+                if result.is_error {
+                    let status = format!("\n\n[Tool result: error]\n\n");
+                    on_event(AppStreamEvent::TextDelta {
+                        delta: status,
+                    });
+                }
 
                 self.messages.push(result_msg);
             }

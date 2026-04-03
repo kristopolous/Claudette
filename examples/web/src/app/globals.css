@@ -54,3 +54,33 @@ pre, code {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
+
+/* highlight.js GitHub Dark theme overrides */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-name, .hljs-tag {
+  color: #ff7b72;
+}
+.hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type {
+  color: #a5d6ff;
+}
+.hljs-comment, .hljs-quote {
+  color: #8b949e;
+}
+.hljs-number, .hljs-regexp, .hljs-symbol, .hljs-variable, .hljs-template-variable, .hljs-link, .hljs-selector-attr, .hljs-selector-pseudo {
+  color: #79c0ff;
+}
+.hljs-function, .hljs-deletion, .hljs-meta {
+  color: #d2a8ff;
+}
+.hljs-title.function_ {
+  color: #d2a8ff;
+}
+.hljs-title.class_ {
+  color: #ffa657;
+}
+.hljs-operator, .hljs-punctuation {
+  color: #c9d1d9;
+}

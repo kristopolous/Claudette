@@ -7,14 +7,14 @@ use ratatui::{
     backend::CrosstermBackend,
     layout::{Alignment, Constraint, Direction, Layout, Position, Rect},
     style::{Color, Modifier, Style},
-    text::Text,
-    widgets::{Block, Borders, Paragraph, Wrap},
+    text::{Line, Span, Text},
+    widgets::{Block, Borders, Paragraph},
     Frame, Terminal,
 };
 use serde::{Deserialize, Serialize};
 use std::io::{self, Write};
 use tokio::sync::mpsc;
-use unicode_width::UnicodeWidthStr;
+use unicode_width::{UnicodeWidthStr, UnicodeWidthChar};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct PersistentHistory {
@@ -38,6 +38,7 @@ pub struct App {
     pub usage: Usage,
     pub current_response: String,
     pub scroll_offset: usize,
+    pub auto_scroll: bool,
     pub should_quit: bool,
     pub cursor_position: usize,
     pub should_submit: bool,
@@ -74,6 +75,7 @@ impl App {
             usage: Usage::default(),
             current_response: String::new(),
             scroll_offset: 0,
+            auto_scroll: true,
             should_quit: false,
             cursor_position: 0,
             should_submit: false,
@@ -198,29 +200,32 @@ impl App {
                 if self.scroll_offset > 0 {
                     self.scroll_offset -= 1;
                 }
+                self.auto_scroll = false;
             }
             KeyCode::Down => {
                 self.scroll_offset += 1;
             }
             KeyCode::PageUp => {
-                // Approximate lines per page: terminal height minus input/status/borders
                 if let Ok((_, height)) = crossterm::terminal::size() {
-                    let lines_per_page = height.saturating_sub(5) as usize; // account for borders, input, status
+                    let lines_per_page = height.saturating_sub(10) as usize;
                     self.scroll_offset = self.scroll_offset.saturating_sub(lines_per_page);
                 } else {
                     self.scroll_offset = self.scroll_offset.saturating_sub(20);
                 }
+                self.auto_scroll = false;
             }
             KeyCode::PageDown => {
                 if let Ok((_, height)) = crossterm::terminal::size() {
-                    let lines_per_page = height.saturating_sub(5) as usize;
+                    let lines_per_page = height.saturating_sub(10) as usize;
                     self.scroll_offset += lines_per_page;
                 } else {
                     self.scroll_offset += 20;
                 }
+                self.auto_scroll = false;
             }
             KeyCode::Home => {
                 self.scroll_offset = 0;
+                self.auto_scroll = false;
             }
             KeyCode::End => {
                 self.scroll_offset = 1_000_000; // will be clamped in rendering
@@ -351,11 +356,11 @@ impl App {
             }
             StreamEvent::ToolUseStart { name, .. } => {
                 self.current_response
-                    .push_str(&format!("\n🔧 Using tool: {}...\n", name));
+                    .push_str(&format!("\n🔧 Using tool: {}...\n\n", name));
             }
             StreamEvent::ToolUseEnd { name, .. } => {
                 self.current_response
-                    .push_str(&format!("\n✅ Tool '{}' completed\n", name));
+                    .push_str(&format!("\n✅ Tool '{}' completed\n\n", name));
             }
             StreamEvent::MessageEnd { message } => {
                 if !self.current_response.is_empty() {
@@ -373,6 +378,12 @@ impl App {
                     .push_str(&format!("\n❌ Error: {}", message));
                 self.is_loading = false;
             }
+            StreamEvent::ClearScreen => {
+                self.messages.clear();
+                self.current_response.clear();
+                self.scroll_offset = 0;
+                self.auto_scroll = true;
+            }
             _ => {}
         }
     }
@@ -382,7 +393,7 @@ impl App {
             role: "user".to_string(),
             content: text,
         });
-        self.scroll_offset = 1_000_000; // scroll to bottom to show new message
+        self.auto_scroll = true;
     }
 }
 
@@ -392,10 +403,111 @@ impl Default for App {
     }
 }
 
-pub fn ui(frame: &mut Frame, app: &App) {
+// Word wrapping: split a line into chunks by spaces, then pack into lines.
+fn split_line_into_chunks(line: &Line) -> Vec<(Style, String)> {
+    let mut chunks = Vec::new();
+    for span in &line.spans {
+        let style = span.style;
+        let content = &span.content;
+        let mut start = 0;
+        let bytes = content.as_bytes();
+        for i in 0..bytes.len() {
+            if bytes[i] == b' ' {
+                if start < i {
+                    chunks.push((style, content[start..i].to_string()));
+                }
+                chunks.push((style, " ".to_string()));
+                start = i + 1;
+            }
+        }
+        if start < content.len() {
+            chunks.push((style, content[start..].to_string()));
+        }
+    }
+    chunks
+}
+
+fn wrap_chunks(chunks: Vec<(Style, String)>, max_width: usize) -> Vec<Line<'static>> {
+    let mut result = Vec::new();
+    let mut current_line: Vec<Span<'static>> = Vec::new();
+    let mut current_width = 0;
+
+    for (style, chunk) in chunks.into_iter() {
+        let chunk_width = chunk.width();
+        if chunk_width == 0 {
+            continue;
+        }
+        if current_width == 0 {
+            current_line.push(Span::styled(chunk.clone(), style));
+            current_width = chunk_width;
+        } else {
+            if current_width + chunk_width <= max_width {
+                current_line.push(Span::styled(chunk.clone(), style));
+                current_width += chunk_width;
+            } else {
+                // Flush current line
+                result.push(Line::from(current_line));
+                current_line = Vec::new();
+                if chunk_width > max_width {
+                    // Split the long word into pieces of max_width (character-level)
+                    let mut start = 0;
+                    while start < chunk.len() {
+                        let mut line_width = 0;
+                        let mut end = start;
+                        for (i, c) in chunk[start..].char_indices() {
+                            let cw = c.width().unwrap_or(1);
+                            if line_width + cw > max_width {
+                                break;
+                            }
+                            line_width += cw;
+                            end = start + i + c.len_utf8();
+                        }
+                        if end == start {
+                            if let Some(c) = chunk[start..].chars().next() {
+                                end = start + c.len_utf8();
+                            } else {
+                                break;
+                            }
+                        }
+                        let part = &chunk[start..end];
+                        result.push(Line::from(Span::styled(part.to_string(), style)));
+                        start = end;
+                    }
+                    current_line = Vec::new();
+                    current_width = 0;
+                } else {
+                    current_line.push(Span::styled(chunk.clone(), style));
+                    current_width = chunk_width;
+                }
+            }
+        }
+    }
+    if !current_line.is_empty() {
+        result.push(Line::from(current_line));
+    }
+    result
+}
+
+fn wrap_text(text: &Text, max_width: u16) -> Vec<Line<'static>> {
+    let max_width = max_width as usize;
+    if max_width == 0 {
+        return Vec::new();
+    }
+    let mut result = Vec::new();
+    for line in &text.lines {
+        let chunks = split_line_into_chunks(line);
+        let wrapped = wrap_chunks(chunks, max_width);
+        result.extend(wrapped);
+    }
+    result
+}
+
+pub fn ui(frame: &mut Frame, app: &mut App) {
+    let outer_margin = 1;
+    let inner_padding = 1;
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .margin(1)
+        .margin(outer_margin)
         .constraints([
             Constraint::Min(1),
             Constraint::Length(3),
@@ -403,82 +515,192 @@ pub fn ui(frame: &mut Frame, app: &App) {
         ])
         .split(frame.area());
 
-    // Render messages with alignment
+    // Render messages block
     let message_area = chunks[0];
+    let title_style = Style::default().fg(Color::Rgb(0, 150, 255)).add_modifier(Modifier::BOLD);
     let message_block = Block::default()
         .title(format!("Messages{}", if app.is_loading { " [thinking...]" } else { "" }))
         .borders(Borders::ALL)
-        .style(Style::default());
+        .border_style(Style::default().fg(Color::Rgb(120, 120, 120)))
+        .title_style(title_style);
     frame.render_widget(message_block, message_area);
 
-    // Inner area (inside borders)
+    // Inner area with padding
     let inner = Rect::new(
-        message_area.x + 1,
-        message_area.y + 1,
-        message_area.width.saturating_sub(2),
-        message_area.height.saturating_sub(2),
+        message_area.x + inner_padding + 1,
+        message_area.y + inner_padding + 1,
+        message_area.width.saturating_sub(2 * (inner_padding + 1)),
+        message_area.height.saturating_sub(2 * (inner_padding + 1)),
     );
 
-    // Pre-render all messages and current response
-    let mut message_texts: Vec<(String, Text<'static>)> = Vec::new();
+    // Pre-render all messages and current_response as message bundles (role + lines)
+    #[allow(unused)]
+    enum MessageRole {
+        User,
+        Assistant,
+        Spacing,
+    }
+    let mut bundles: Vec<(MessageRole, Vec<Line<'static>>)> = Vec::new();
     for msg in &app.messages {
-        let text = render_markdown(&msg.content);
-        message_texts.push((msg.role.clone(), text));
+        let raw = render_markdown(&msg.content);
+        let is_user = msg.role == "user";
+        let wrap_width = if is_user { inner.width } else { inner.width.saturating_sub(1) };
+        let mut wrapped = wrap_text(&raw, wrap_width);
+        // For assistant, color tool result lines and add left margin
+        if !is_user {
+            // Color status lines
+            for line in &mut wrapped {
+                let plain: String = line.spans.iter().map(|s| s.content.as_ref()).collect();
+                if plain == "[Tool result: ok]" {
+                    *line = Line::from(Span::styled(
+                        plain,
+                        Style::default().fg(Color::Green).add_modifier(Modifier::BOLD),
+                    ));
+                } else if plain == "[Tool result: error]" {
+                    *line = Line::from(Span::styled(
+                        plain,
+                        Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
+                    ));
+                }
+            }
+            // Add left margin space
+            for line in &mut wrapped {
+                let mut new_spans = vec![Span::raw(" ")];
+                new_spans.extend(line.spans.clone());
+                *line = Line::from(new_spans);
+            }
+        }
+        let role = if is_user { MessageRole::User } else { MessageRole::Assistant };
+        bundles.push((role, wrapped));
+        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
     }
     if !app.current_response.is_empty() {
-        let text = render_markdown(&app.current_response);
-        message_texts.push(("assistant".to_string(), text));
+        let raw = render_markdown(&app.current_response);
+        // assistant response: wrap with width-1 and add left margin
+        let wrap_width = inner.width.saturating_sub(1);
+        let mut wrapped = wrap_text(&raw, wrap_width);
+        // Color status lines
+        for line in &mut wrapped {
+            let plain: String = line.spans.iter().map(|s| s.content.as_ref()).collect();
+            if plain == "[Tool result: ok]" {
+                *line = Line::from(Span::styled(
+                    plain,
+                    Style::default().fg(Color::Green).add_modifier(Modifier::BOLD),
+                ));
+            } else if plain == "[Tool result: error]" {
+                *line = Line::from(Span::styled(
+                    plain,
+                    Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
+                ));
+            }
+        }
+        // Add left margin space
+        for line in &mut wrapped {
+            let mut new_spans = vec![Span::raw(" ")];
+            new_spans.extend(line.spans.clone());
+            *line = Line::from(new_spans);
+        }
+        bundles.push((MessageRole::Assistant, wrapped));
+        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
+    }
+    let mut bundles: Vec<(MessageRole, Vec<Line<'static>>)> = Vec::new();
+    for msg in &app.messages {
+        let raw = render_markdown(&msg.content);
+        let is_user = msg.role == "user";
+        let wrap_width = if is_user { inner.width } else { inner.width.saturating_sub(1) };
+        let mut wrapped = wrap_text(&raw, wrap_width);
+        // For assistant, prepend a space as left margin
+        if !is_user {
+            for line in &mut wrapped {
+                let mut new_spans = vec![Span::raw(" ")];
+                new_spans.extend(line.spans.clone());
+                *line = Line::from(new_spans);
+            }
+        }
+        let role = if is_user { MessageRole::User } else { MessageRole::Assistant };
+        bundles.push((role, wrapped));
+        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
+    }
+    if !app.current_response.is_empty() {
+        let raw = render_markdown(&app.current_response);
+        // assistant response: wrap with width-1 and add left margin space
+        let wrap_width = inner.width.saturating_sub(1);
+        let mut wrapped = wrap_text(&raw, wrap_width);
+        for line in &mut wrapped {
+            let mut new_spans = vec![Span::raw(" ")];
+            new_spans.extend(line.spans.clone());
+            *line = Line::from(new_spans);
+        }
+        bundles.push((MessageRole::Assistant, wrapped));
+        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
     }
 
-    // Compute total height for scroll bounds
-    let total_height: usize = message_texts.iter().map(|(_, text)| text.lines.len() + 1).sum();
-    let max_scroll = if total_height > inner.height as usize {
-        total_height - inner.height as usize
-    } else {
-        0
-    };
-    let scroll_offset = app.scroll_offset.min(max_scroll);
+    // Compute total height for scroll
+    let total_lines: usize = bundles.iter().map(|(_, lines)| lines.len()).sum();
+    let visible = inner.height as usize;
+    let max_scroll = if total_lines > visible { total_lines - visible } else { 0 };
 
-    // Render visible messages with appropriate alignment
+    // Auto-scroll handling
+    if app.auto_scroll {
+        app.scroll_offset = max_scroll;
+    } else if app.scroll_offset > max_scroll {
+        app.scroll_offset = max_scroll;
+    }
+    if app.scroll_offset == max_scroll {
+        app.auto_scroll = true;
+    }
+    let scroll_offset = app.scroll_offset;
+
+    // Render visible message bundles with backgrounds as whole paragraphs
     let mut y: usize = 0;
-    for (role, text) in message_texts {
-        let msg_height = text.lines.len() + 1; // +1 for spacing
-
-        // Skip messages entirely above the viewport
-        if y + msg_height <= scroll_offset {
-            y += msg_height;
+    for (role, lines) in &bundles {
+        let h = lines.len();
+        // Skip if entirely above viewport
+        if y + h <= scroll_offset {
+            y += h;
             continue;
         }
-        // Stop if we've scrolled past the viewport bottom
-        if y >= scroll_offset + inner.height as usize {
+        // Stop if beyond bottom
+        if y >= scroll_offset + visible {
             break;
         }
-
         let render_y = inner.y + (y as u16).saturating_sub(scroll_offset as u16);
-        let available = inner.height.saturating_sub(render_y - inner.y);
-        let render_height = std::cmp::min(msg_height as u16, available);
-
-        let area = Rect::new(inner.x, render_y, inner.width, render_height);
-        let alignment = if role == "user" { Alignment::Right } else { Alignment::Left };
-        let para = Paragraph::new(text.clone())
-            .alignment(alignment)
-            .wrap(Wrap { trim: true });
-        frame.render_widget(para, area);
-
-        y += msg_height;
+        let avail = inner.height.saturating_sub(render_y - inner.y);
+        let render_h = std::cmp::min(h as u16, avail);
+        let area = Rect::new(inner.x, render_y, inner.width, render_h);
+        let text = Text::from_iter(lines.iter().cloned());
+        match role {
+            MessageRole::User => {
+                let para = Paragraph::new(text)
+                    .alignment(Alignment::Right);
+                frame.render_widget(para, area);
+            }
+            MessageRole::Assistant => {
+                let para = Paragraph::new(text)
+                    .style(Style::default().bg(Color::Rgb(20, 20, 20))) // dark grey #141414
+                    .alignment(Alignment::Left);
+                frame.render_widget(para, area);
+            }
+            MessageRole::Spacing => {
+                // blank line, no background
+                frame.render_widget(Paragraph::new(text), area);
+            }
+        }
+        y += h;
     }
 
-    // Input area
+    // Input area with muted border
     let input_block = Block::default()
         .title("Input (Ctrl+C to quit, ↑↓ scroll, Tab autocomplete)")
         .borders(Borders::ALL)
-        .style(Style::default());
+        .border_style(Style::default().fg(Color::Rgb(120, 120, 120)))
+        .title_style(Style::default().fg(Color::Rgb(200, 200, 200)));
 
     let input_widget = Paragraph::new(app.input_buffer.as_str())
         .block(input_block);
     frame.render_widget(input_widget, chunks[1]);
 
-    // Cursor: multi-line aware positioning
+    // Cursor positioning
     let before_cursor = &app.input_buffer[..app.cursor_position];
     let mut line_count = 0usize;
     let mut last_newline_pos = 0usize;
@@ -498,14 +720,14 @@ pub fn ui(frame: &mut Frame, app: &App) {
     let cursor_y = cursor_y.min(chunks[1].y + chunks[1].height - 2);
     frame.set_cursor_position(Position::new(cursor_x, cursor_y));
 
-    // Status bar
+    // Status bar with modern color
     let status = format!(
         "Tokens: {} in / {} out | Cost: ${:.4}",
         app.usage.input_tokens, app.usage.output_tokens, 0.0
     );
     let status_bar = Paragraph::new(status).style(
         Style::default()
-            .fg(Color::Cyan)
+            .fg(Color::Rgb(0, 200, 150))
             .add_modifier(Modifier::BOLD),
     );
     frame.render_widget(status_bar, chunks[2]);
@@ -526,7 +748,7 @@ pub async fn run_tui(
     let mut terminal = Terminal::new(backend)?;
 
     loop {
-        terminal.draw(|f| ui(f, &app))?;
+        terminal.draw(|f| ui(f, &mut app))?;
 
         // Handle input events
         if event::poll(std::time::Duration::from_millis(50))? {
@@ -537,7 +759,10 @@ pub async fn run_tui(
                         break;
                     }
                     if let Some(input) = app.submit_input() {
-                        app.add_user_message(input.clone());
+                        // Don't add slash commands to message history
+                        if !input.starts_with('/') {
+                            app.add_user_message(input.clone());
+                        }
                         if let Err(e) = input_tx.send(input).await {
                             eprintln!("Failed to send input: {}", e);
                         }
@@ -547,9 +772,11 @@ pub async fn run_tui(
                     use crossterm::event::MouseEventKind;
                     match mouse_event.kind {
                         MouseEventKind::ScrollUp => {
+                            app.auto_scroll = false;
                             app.scroll_offset = app.scroll_offset.saturating_sub(3);
                         }
                         MouseEventKind::ScrollDown => {
+                            app.auto_scroll = false;
                             app.scroll_offset += 3;
                         }
                         _ => {}

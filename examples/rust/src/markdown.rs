@@ -90,16 +90,19 @@ pub fn render_markdown(input: &str) -> Text<'static> {
             return Vec::new();
         }
         let mut widths = vec![0; col_count];
+        // Helper to measure cell width in display columns
+        let measure =
+            |cell: &Vec<Span>| -> usize { cell.iter().map(|span| span.content.width()).sum() };
         // Headers
         for (col_i, cell) in table.headers.iter().enumerate() {
-            let w: usize = cell.iter().map(|s| s.content.len()).sum();
+            let w = measure(cell);
             widths[col_i] = w.max(widths[col_i]);
         }
         // Rows
         for row in &table.rows {
             for (col_i, cell) in row.iter().enumerate() {
                 if col_i < col_count {
-                    let w: usize = cell.iter().map(|s| s.content.len()).sum();
+                    let w = measure(cell);
                     widths[col_i] = w.max(widths[col_i]);
                 }
             }
@@ -110,13 +113,11 @@ pub fn render_markdown(input: &str) -> Text<'static> {
     fn render_table(table: Table) -> Vec<Line<'static>> {
         let widths = compute_column_widths(&table);
         let mut out = Vec::new();
-
-        // Build a line from a vector of strings (simple, borders added separately)
-        let build_line = |parts: Vec<String>| -> Line<'static> {
-            let text = parts.join("");
-            Line::from(Span::raw(text))
-        };
-
+        let n = widths.len();
+        if n == 0 {
+            return out;
+        }
+        // Helper to build a horizontal line
         let horizontal = |edges: &str, fill: &str, mids: &str, edges2: &str| {
             let mut line = String::from(edges);
             for (i, &w) in widths.iter().enumerate() {
@@ -129,41 +130,36 @@ pub fn render_markdown(input: &str) -> Text<'static> {
             }
             Line::from(Span::raw(line))
         };
-
+        // Build a row from raw cell strings
+        let build_row = |cells: Vec<String>| -> Line<'static> {
+            let mut line = String::from("│");
+            for (i, cell) in cells.iter().enumerate() {
+                // Each cell segment is exactly widths[i] + 2 chars: one leading space, content left-aligned, then padding to fill
+                let segment = format!(" {:<width$}", cell, width = widths[i] + 1);
+                line.push_str(&segment);
+                line.push('│');
+            }
+            Line::from(Span::raw(line))
+        };
         // Top border
         out.push(horizontal("┌", "─", "┬", "┐"));
-
         // Header row
-        let mut header_parts = vec!["│".to_string()];
-        for (i, cell) in table.headers.iter().enumerate() {
-            header_parts.push(" ".to_string());
-            let cell_text: String = cell.iter().map(|s| &*s.content).collect();
-            header_parts.push(cell_text);
-            header_parts.push(" ".to_string());
-            if i + 1 < widths.len() {
-                header_parts.push(" │ ".to_string());
-            } else {
-                header_parts.push("│".to_string());
-            }
-        }
-        out.push(build_line(header_parts));
-
+        let header_cells: Vec<String> = table
+            .headers
+            .iter()
+            .map(|cell| cell.iter().map(|s| s.content.as_ref()).collect())
+            .collect();
+        out.push(build_row(header_cells));
         // Header separator
         out.push(horizontal("├", "─", "┼", "┤"));
-
         // Data rows
         for row in table.rows {
-            for cell in row {
-                let mut cell_parts = vec!["│".to_string()];
-                let cell_text: String = cell.iter().map(|s| &*s.content).collect();
-                cell_parts.push(" ".to_string());
-                cell_parts.push(cell_text);
-                cell_parts.push(" ".to_string());
-                cell_parts.push("│".to_string());
-                out.push(build_line(cell_parts));
-            }
+            let row_cells: Vec<String> = row
+                .iter()
+                .map(|cell| cell.iter().map(|s| s.content.as_ref()).collect())
+                .collect();
+            out.push(build_row(row_cells));
         }
-
         // Bottom border
         out.push(horizontal("└", "─", "┴", "┘"));
         out

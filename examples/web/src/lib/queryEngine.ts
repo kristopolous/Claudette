@@ -202,11 +202,14 @@ export class QueryEngine {
       ? userMessage.content
       : userMessage.content.filter((b: any) => b.type === 'text').map((b: any) => b.text).join('')
 
+    console.log('[QueryEngine] submitMessage:', textContent.slice(0, 100))
+
     if (textContent.startsWith('/')) {
       const parts = textContent.slice(1).split(/\s+/)
       const cmdName = parts[0]
       const args = parts.slice(1).join(' ')
 
+      console.log('[QueryEngine] Executing command:', cmdName, args)
       const cmdResult = await this.executeCommand(cmdName, args)
       yield { type: 'command_result', command_result: { command: cmdName, output: cmdResult.output } }
 
@@ -225,6 +228,7 @@ export class QueryEngine {
     this.abortController = new AbortController()
 
     const allTools = [...this.tools]
+    console.log('[QueryEngine] Tools available:', allTools.map(t => t.name).join(', '))
 
     const systemPrompt = buildSystemPrompt({
       tools: allTools,
@@ -237,10 +241,15 @@ export class QueryEngine {
       customPrompt: this.customSystemPrompt,
     })
 
+    console.log('[QueryEngine] System prompt length:', systemPrompt.length)
+
     let apiMessages = buildApiMessages(this.messages, systemPrompt)
+    console.log('[QueryEngine] API messages count:', apiMessages.length)
 
     for (let turn = 0; turn < this.maxTurns; turn++) {
       if (this.abortController.signal.aborted) break
+
+      console.log(`[QueryEngine] Turn ${turn + 1}/${this.maxTurns}`)
 
       if (shouldCompact(apiMessages, MODEL_MAX_TOKENS[this.model] || 128000)) {
         apiMessages = compactMessages(apiMessages, MODEL_MAX_TOKENS[this.model] || 128000)
@@ -258,7 +267,10 @@ export class QueryEngine {
           },
         }))
 
-        const response = await fetch(`${this.baseUrl}/chat/completions`, {
+        const apiUrl = `${this.baseUrl}/chat/completions`
+        console.log('[QueryEngine] Calling API:', apiUrl, 'model:', this.model, 'messages:', apiMessages.length, 'tools:', toolDefinitions.length)
+
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -273,8 +285,11 @@ export class QueryEngine {
           signal: this.abortController.signal,
         })
 
+        console.log('[QueryEngine] API response status:', response.status)
+
         if (!response.ok) {
           const errorText = await response.text()
+          console.error('[QueryEngine] API error body:', errorText.slice(0, 500))
           yield { type: 'error', error: `API error ${response.status}: ${errorText}` }
           break
         }
@@ -290,6 +305,7 @@ export class QueryEngine {
         let fullContent = ''
         let toolCalls: Array<{ id: string; name: string; argumentsStr: string }> = []
         let finished = false
+        let lineCount = 0
 
         while (!finished) {
           const { done, value } = await reader.read()
@@ -301,21 +317,25 @@ export class QueryEngine {
 
           for (const line of lines) {
             const trimmed = line.trim()
-            if (!trimmed || trimmed === 'data: [DONE]') {
+            if (!trimmed) continue
+            if (trimmed === 'data: [DONE]') {
+              console.log('[QueryEngine] SSE DONE after', lineCount, 'lines')
               finished = true
               continue
             }
             if (!trimmed.startsWith('data: ')) continue
 
+            lineCount++
             try {
               const json = JSON.parse(trimmed.slice(6))
               const choice = json.choices?.[0]
               if (!choice) continue
 
               const delta = choice.delta
-              if (delta?.content) {
-                fullContent += delta.content
-                yield { type: 'text', text: delta.content }
+              const text = delta?.content || delta?.reasoning || ''
+              if (text) {
+                fullContent += text
+                yield { type: 'text', text }
               }
 
               if (delta?.tool_calls) {
@@ -352,7 +372,10 @@ export class QueryEngine {
           }
         }
 
+        console.log('[QueryEngine] After stream: fullContent length:', fullContent.length, 'toolCalls:', toolCalls.length)
+
         if (toolCalls.length > 0) {
+          console.log('[QueryEngine] Processing', toolCalls.length, 'tool calls')
           const assistantBlocks: Array<Record<string, unknown>> = []
           const openaiToolCalls: Array<Record<string, unknown>> = []
 
@@ -370,7 +393,10 @@ export class QueryEngine {
               // best effort
             }
 
+            console.log('[QueryEngine] Tool call:', tc.name, JSON.stringify(input).slice(0, 100))
+
             const perm = checkPermission(tc.name, input, this.permissionContext)
+            console.log('[QueryEngine] Permission result:', perm)
             if (perm === 'deny') {
               const result = `Permission denied for tool: ${tc.name}`
               yield { type: 'tool_use', tool_use: { type: 'tool_use', id: tc.id, name: tc.name, input } }
@@ -391,9 +417,11 @@ export class QueryEngine {
             yield { type: 'tool_use', tool_use: { type: 'tool_use', id: tc.id, name: tc.name, input } }
 
             const tool = allTools.find(t => t.name === tc.name)
+            console.log('[QueryEngine] Tool found:', !!tool, 'name:', tc.name)
             let result: string
             if (tool) {
               result = await tool.execute(input, toolCtx)
+              console.log('[QueryEngine] Tool result length:', result.length)
             } else {
               result = `Unknown tool: ${tc.name}`
             }
@@ -407,15 +435,18 @@ export class QueryEngine {
           if (openaiToolCalls.length > 0) assistantMsg.tool_calls = openaiToolCalls
           apiMessages.push({ role: 'assistant', ...assistantMsg })
 
+          console.log('[QueryEngine] Continuing to next turn')
           continue
         }
 
+        console.log('[QueryEngine] No tool calls, breaking loop')
         if (fullContent) {
           apiMessages.push({ role: 'assistant', content: fullContent })
         }
         break
 
       } catch (e) {
+        console.error('[QueryEngine] Turn error:', e)
         if (e instanceof DOMException && e.name === 'AbortError') break
         yield { type: 'error', error: e instanceof Error ? e.message : String(e) }
         break

@@ -6,6 +6,8 @@ import { getCommands } from '@/lib/commands/registry'
 interface PromptInputProps {
   onSend: (message: string) => void
   disabled?: boolean
+  showStop?: boolean
+  onStop?: () => void
 }
 
 interface CommandSuggestion {
@@ -13,7 +15,7 @@ interface CommandSuggestion {
   description: string
 }
 
-export default function PromptInput({ onSend, disabled }: PromptInputProps) {
+export default function PromptInput({ onSend, disabled, showStop, onStop }: PromptInputProps) {
   const [value, setValue] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [suggestions, setSuggestions] = useState<CommandSuggestion[]>([])
@@ -153,13 +155,23 @@ export default function PromptInput({ onSend, disabled }: PromptInputProps) {
             </div>
           )}
         </div>
-        <button
-          onClick={handleSubmit}
-          disabled={disabled || !value.trim()}
-          className="px-4 py-2 bg-[#58a6ff] text-white rounded-lg text-sm font-medium hover:bg-[#79b8ff] disabled:opacity-50 disabled:cursor-not-allowed transition-colors h-[40px]"
-        >
-          Send
-        </button>
+        <div className="flex gap-2 items-end">
+          {showStop && (
+            <button
+              onClick={onStop}
+              className="px-3 bg-[#f8514966] border border-[#f85149] rounded-lg text-xs font-medium text-[#f85149] hover:bg-[#f8514933] transition-colors h-[40px] flex items-center"
+            >
+              Stop
+            </button>
+          )}
+          <button
+            onClick={handleSubmit}
+            disabled={disabled || !value.trim()}
+            className="px-4 py-2 bg-[#58a6ff] text-white rounded-lg text-sm font-medium hover:bg-[#79b8ff] disabled:opacity-50 disabled:cursor-not-allowed transition-colors h-[40px]"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   )

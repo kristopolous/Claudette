@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { getSession } from '../chat/route'
+import { getSession } from '@/lib/session'
 
 function buildTree(vfs: any, path: string): any {
   const isDir = vfs.isDir(path)
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
     return new Response(JSON.stringify({ error: 'sessionId required' }), { status: 400 })
   }
 
-  const session = getSession(sessionId, '', '', '')
+  const session = getSession(sessionId)
   if (!session) {
     return new Response(JSON.stringify({ error: 'Session not found' }), { status: 404 })
   }
@@ -56,7 +56,8 @@ export async function GET(request: NextRequest) {
   }
 
   if (tree) {
-    return new Response(JSON.stringify({ tree: buildTree(session.vfs, '/') }))
+    const treeData = buildTree(session.vfs, '/')
+    return new Response(JSON.stringify({ tree: treeData }))
   }
 
   if (!path) {
@@ -79,7 +80,7 @@ export async function PUT(request: NextRequest) {
     return new Response(JSON.stringify({ error: 'Path, content, and sessionId required' }), { status: 400 })
   }
 
-  const session = getSession(sessionId, '', '', '')
+  const session = getSession(sessionId)
   if (!session) {
     return new Response(JSON.stringify({ error: 'Session not found' }), { status: 404 })
   }

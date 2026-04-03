@@ -310,95 +310,96 @@ async fn main() -> Result<()> {
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
     let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
 
-     let cost_tracker_clone = cost_tracker.clone();
-     let model_clone = model.clone();
-     let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
-     let query_handle = tokio::spawn(async move {
-         while let Some(input) = input_rx.recv().await {
-            if input.starts_with('/') {
-                if input == "/quit" || input == "/exit" {
-                    let _ = event_tx.send(StreamEvent::MessageEnd {
-                        message: claudette_rs::types::event::AssistantMessage {
-                            content: vec![],
-                            usage: claudette_rs::types::event::Usage::default(),
-                        },
-                    }).await;
-                    break;
-                }
+      let cost_tracker_clone = cost_tracker.clone();
+      let model_clone = model.clone();
+      let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
+      let query_handle = tokio::spawn(async move {
+          while let Some(input) = input_rx.recv().await {
+             if input.starts_with('/') {
+                 if input == "/quit" || input == "/exit" {
+                     let _ = event_tx.send(StreamEvent::MessageEnd {
+                         message: claudette_rs::types::event::AssistantMessage {
+                             content: vec![],
+                             usage: claudette_rs::types::event::Usage::default(),
+                         },
+                     }).await;
+                     break;
+                 }
 
-                if let Some(cmd) = command_registry.find(&input) {
-                    let args = input.trim_start_matches('/').split_once(' ').map(|(_, a)| a).unwrap_or("");
-                    match cmd.handler.execute(args).await {
-                        Ok(result) => {
-                            if result == "CLEAR_SESSION" {
-                                let _ = event_tx.send(StreamEvent::TextDelta {
-                                    delta: "\n\n[Session cleared]".to_string(),
-                                }).await;
-                            } else {
-                                let _ = event_tx.send(StreamEvent::TextDelta {
-                                    delta: format!("\n\n{result}"),
-                                }).await;
-                            }
-                            let _ = event_tx.send(StreamEvent::MessageEnd {
-                                message: claudette_rs::types::event::AssistantMessage {
-                                    content: vec![],
-                                    usage: claudette_rs::types::event::Usage::default(),
-                                },
-                            }).await;
-                        }
-                        Err(e) => {
-                            let _ = event_tx.send(StreamEvent::Error {
-                                message: e.to_string(),
-                                retryable: false,
-                            }).await;
-                        }
-                    }
-                    continue;
-                }
-            }
+                 if let Some(cmd) = command_registry.find(&input) {
+                     let args = input.trim_start_matches('/').split_once(' ').map(|(_, a)| a).unwrap_or("");
+                     match cmd.handler.execute(args).await {
+                         Ok(result) => {
+                             if result == "CLEAR_SESSION" {
+                                 let _ = event_tx.send(StreamEvent::ClearScreen).await;
+                                 let _ = event_tx.send(StreamEvent::TextDelta {
+                                     delta: "\n\n[Session cleared]".to_string(),
+                                 }).await;
+                             } else {
+                                 let _ = event_tx.send(StreamEvent::TextDelta {
+                                     delta: format!("\n\n{result}"),
+                                 }).await;
+                             }
+                             let _ = event_tx.send(StreamEvent::MessageEnd {
+                                 message: claudette_rs::types::event::AssistantMessage {
+                                     content: vec![],
+                                     usage: claudette_rs::types::event::Usage::default(),
+                                 },
+                             }).await;
+                         }
+                         Err(e) => {
+                             let _ = event_tx.send(StreamEvent::Error {
+                                 message: e.to_string(),
+                                 retryable: false,
+                             }).await;
+                         }
+                     }
+                     continue;
+                 }
+             }
 
-            let msg = Message::user_text(&input);
-            let tx = event_tx.clone();
-            let tracker = cost_tracker_clone.clone();
-            let model_name = model_clone.clone();
+             let msg = Message::user_text(&input);
+             let tx = event_tx.clone();
+             let tracker = cost_tracker_clone.clone();
+             let model_name = model_clone.clone();
 
-            match query_engine.submit_message(msg, move |event| {
-                let tx = tx.clone();
-                let tracker = tracker.clone();
-                let model_name = model_name.clone();
+             match query_engine.submit_message(msg, move |event| {
+                 let tx = tx.clone();
+                 let tracker = tracker.clone();
+                 let model_name = model_name.clone();
 
-                if let StreamEvent::MessageEnd { message } = &event {
-                    let mut t = tracker.lock();
-                    t.add_usage(&model_name, &message.usage);
-                }
+                 if let StreamEvent::MessageEnd { message } = &event {
+                     let mut t = tracker.lock();
+                     t.add_usage(&model_name, &message.usage);
+                 }
 
-                tokio::spawn(async move {
-                    let _ = tx.send(event).await;
-                });
-            }).await {
-                Ok(()) => {
-                    let usage = query_engine.get_usage();
-                    let _ = event_tx.send(StreamEvent::MessageEnd {
-                        message: claudette_rs::types::event::AssistantMessage {
-                            content: vec![],
-                            usage: claudette_rs::types::event::Usage {
-                                input_tokens: usage.input_tokens,
-                                output_tokens: usage.output_tokens,
-                                cache_creation_input_tokens: usage.cache_creation_input_tokens,
-                                cache_read_input_tokens: usage.cache_read_input_tokens,
-                            },
-                        },
-                    }).await;
-                }
-                Err(e) => {
-                    let _ = event_tx.send(StreamEvent::Error {
-                        message: e.to_string(),
-                        retryable: true,
-                    }).await;
-                }
-            }
-        }
-    });
+                 tokio::spawn(async move {
+                     let _ = tx.send(event).await;
+                 });
+             }).await {
+                 Ok(()) => {
+                     let usage = query_engine.get_usage();
+                     let _ = event_tx.send(StreamEvent::MessageEnd {
+                         message: claudette_rs::types::event::AssistantMessage {
+                             content: vec![],
+                             usage: claudette_rs::types::event::Usage {
+                                 input_tokens: usage.input_tokens,
+                                 output_tokens: usage.output_tokens,
+                                 cache_creation_input_tokens: usage.cache_creation_input_tokens,
+                                 cache_read_input_tokens: usage.cache_read_input_tokens,
+                             },
+                         },
+                     }).await;
+                 }
+                 Err(e) => {
+                     let _ = event_tx.send(StreamEvent::Error {
+                         message: e.to_string(),
+                         retryable: true,
+                     }).await;
+                 }
+             }
+         }
+     });
 
     let app = App::new(Some(command_names.clone()));
     run_tui(app, event_rx, input_tx).await?;
@@ -482,51 +483,52 @@ async fn run_demo(_cwd: &std::path::Path) -> Result<()> {
 
      let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
 
-     let query_handle = tokio::spawn(async move {
-        while let Some(input) = input_rx.recv().await {
-            if input.starts_with('/') {
-                if input == "/quit" || input == "/exit" {
-                    let _ = event_tx.send(StreamEvent::MessageEnd {
-                        message: claudette_rs::types::event::AssistantMessage {
-                            content: vec![],
-                            usage: claudette_rs::types::event::Usage::default(),
-                        },
-                    }).await;
-                    break;
-                }
+      let query_handle = tokio::spawn(async move {
+         while let Some(input) = input_rx.recv().await {
+             if input.starts_with('/') {
+                 if input == "/quit" || input == "/exit" {
+                     let _ = event_tx.send(StreamEvent::MessageEnd {
+                         message: claudette_rs::types::event::AssistantMessage {
+                             content: vec![],
+                             usage: claudette_rs::types::event::Usage::default(),
+                         },
+                     }).await;
+                     break;
+                 }
 
-                if let Some(cmd) = command_registry.find(&input) {
-                    let args = input.trim_start_matches('/').split_once(' ').map(|(_, a)| a).unwrap_or("");
-                    match cmd.handler.execute(args).await {
-                        Ok(result) => {
-                            if result == "CLEAR_SESSION" {
-                                let _ = event_tx.send(StreamEvent::TextDelta {
-                                    delta: "\n\n[Session cleared]".to_string(),
-                                }).await;
-                            } else {
-                                let _ = event_tx.send(StreamEvent::TextDelta {
-                                    delta: format!("\n\n{result}"),
-                                }).await;
-                            }
-                            let _ = event_tx.send(StreamEvent::MessageEnd {
-                                message: claudette_rs::types::event::AssistantMessage {
-                                    content: vec![],
-                                    usage: claudette_rs::types::event::Usage::default(),
-                                },
-                            }).await;
-                        }
-                        Err(e) => {
-                            let _ = event_tx.send(StreamEvent::Error {
-                                message: e.to_string(),
-                                retryable: false,
-                            }).await;
-                        }
-                    }
-                    continue;
-                }
-            }
+                 if let Some(cmd) = command_registry.find(&input) {
+                     let args = input.trim_start_matches('/').split_once(' ').map(|(_, a)| a).unwrap_or("");
+                     match cmd.handler.execute(args).await {
+                         Ok(result) => {
+                             if result == "CLEAR_SESSION" {
+                                 let _ = event_tx.send(StreamEvent::ClearScreen).await;
+                                 let _ = event_tx.send(StreamEvent::TextDelta {
+                                     delta: "\n\n[Session cleared]".to_string(),
+                                 }).await;
+                             } else {
+                                 let _ = event_tx.send(StreamEvent::TextDelta {
+                                     delta: format!("\n\n{result}"),
+                                 }).await;
+                             }
+                             let _ = event_tx.send(StreamEvent::MessageEnd {
+                                 message: claudette_rs::types::event::AssistantMessage {
+                                     content: vec![],
+                                     usage: claudette_rs::types::event::Usage::default(),
+                                 },
+                             }).await;
+                         }
+                         Err(e) => {
+                             let _ = event_tx.send(StreamEvent::Error {
+                                 message: e.to_string(),
+                                 retryable: false,
+                             }).await;
+                         }
+                     }
+                     continue;
+                 }
+             }
 
-             let tx = event_tx.clone();
+              let tx = event_tx.clone();
 
              tokio::spawn(async move {
                 let demo_responses = [

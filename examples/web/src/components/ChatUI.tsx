@@ -6,6 +6,7 @@ import PromptInput from './PromptInput'
 import ToolResult from './ToolResult'
 import WriteResult from './WriteResult'
 import TerminalOutput from './TerminalOutput'
+import ResizeHandle from './ResizeHandle'
 import FileExplorer from './FileExplorer'
 import FileViewer from './FileViewer'
 import UsageDisplay, { calculateCost } from './UsageDisplay'
@@ -80,6 +81,8 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
     estimatedCost: 0,
     requests: 0,
   })
+  const [sidebarWidth, setSidebarWidth] = useState(256)
+  const [viewerWidth, setViewerWidth] = useState(384)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const abortRef = useRef<AbortController | null>(null)
 
@@ -92,6 +95,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
   }, [messages, scrollToBottom])
 
   const handleSend = useCallback(async (text: string) => {
+    console.log('[ChatUI] handleSend called with:', text)
     const userMsg: UserMessage = { type: 'user', text }
     setMessages(prev => [...prev, userMsg])
     setIsProcessing(true)
@@ -102,6 +106,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
     abortRef.current = new AbortController()
 
     try {
+      console.log('[ChatUI] Fetching /api/chat with:', { message: text, model: currentModel, sessionId, baseUrl })
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -109,19 +114,29 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
         signal: abortRef.current.signal,
       })
 
+      console.log('[ChatUI] Response status:', response.status, response.statusText)
+
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`)
+        const errorBody = await response.text()
+        console.error('[ChatUI] Error response:', errorBody)
+        throw new Error(`HTTP ${response.status}: ${errorBody}`)
       }
 
       const reader = response.body?.getReader()
       if (!reader) throw new Error('No response body')
 
+      console.log('[ChatUI] Got reader, starting SSE stream')
+
       const decoder = new TextDecoder()
       let buffer = ''
+      let eventCount = 0
 
       while (true) {
         const { done, value } = await reader.read()
-        if (done) break
+        if (done) {
+          console.log('[ChatUI] Stream done. Total events:', eventCount)
+          break
+        }
 
         buffer += decoder.decode(value, { stream: true })
         const lines = buffer.split('\n')
@@ -129,11 +144,16 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
 
         for (const line of lines) {
           const trimmed = line.trim()
-          if (!trimmed || trimmed === 'data: [DONE]') continue
+          if (!trimmed || trimmed === 'data: [DONE]') {
+            console.log('[ChatUI] Got DONE signal')
+            continue
+          }
           if (!trimmed.startsWith('data: ')) continue
 
           try {
             const event: StreamEvent = JSON.parse(trimmed.slice(6))
+            eventCount++
+            console.log(`[ChatUI] Event #${eventCount}:`, event.type, event.text ? `"${event.text.slice(0, 50)}..."` : '')
 
             if (event.sessionId && !sessionId) {
               setSessionId(event.sessionId)
@@ -154,6 +174,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
               }
 
               if (lastMsg?.type !== 'assistant') {
+                console.warn('[ChatUI] Last message is not assistant type:', lastMsg?.type)
                 return updated
               }
 
@@ -202,26 +223,13 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
                 }
               })
             }
-
-            if (event.type === 'usage' && event.usage) {
-              setUsageStats(prev => {
-                const inputTokens = prev.inputTokens + event.usage!.prompt_tokens
-                const outputTokens = prev.outputTokens + event.usage!.completion_tokens
-                return {
-                  inputTokens,
-                  outputTokens,
-                  totalTokens: inputTokens + outputTokens,
-                  estimatedCost: calculateCost(inputTokens, outputTokens, currentModel),
-                  requests: prev.requests + 1,
-                }
-              })
-            }
-          } catch {
-            // skip malformed SSE
+          } catch (parseErr) {
+            console.error('[ChatUI] SSE parse error:', parseErr, 'line:', line)
           }
         }
       }
     } catch (e) {
+      console.error('[ChatUI] handleSend error:', e)
       if (e instanceof DOMException && e.name === 'AbortError') return
       setMessages(prev => {
         const updated = [...prev]
@@ -266,8 +274,8 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
         setFileContent(data.content)
         setIsDirty(false)
       }
-    } catch {
-      setFileContent('Error loading file')
+    } catch (e) {
+      console.error('Failed to load file:', e)
     }
   }, [sessionId, apiKey])
 
@@ -365,7 +373,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        <div className="w-64 flex-shrink-0 hidden lg:block">
+        <div className="hidden lg:block" style={{ width: sidebarWidth, minWidth: 160, maxWidth: 600, flexShrink: 0 }}>
           <FileExplorer
             sessionId={sessionId}
             onFileSelect={handleFileSelect}
@@ -373,6 +381,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
             refreshKey={fileRefreshKey}
           />
         </div>
+        <ResizeHandle orientation="vertical" onResize={(d) => setSidebarWidth(w => Math.max(160, Math.min(600, w + d)))} />
 
         <div className="flex-1 flex flex-col min-w-0">
           <div className="flex-1 overflow-y-auto px-4 py-4">
@@ -388,7 +397,11 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
                       <div className="px-3 py-2 text-sm text-[#c9d1d9] whitespace-pre-wrap">{msg.output}</div>
                     </div>
                   ) : msg.type === 'user' ? (
-                    <MessageBubble role="user" content={msg.text} />
+                    <div className="flex justify-end">
+                      <div className="max-w-[80%]">
+                        <MessageBubble role="user" content={msg.text} />
+                      </div>
+                    </div>
                   ) : (
                     <>
                       {msg.toolUses.length > 0 && (
@@ -435,30 +448,25 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
             </div>
           </div>
 
-          <div className="relative">
-            {isProcessing && (
-              <button
-                onClick={handleAbort}
-                className="absolute top-2 right-2 z-10 px-3 py-1 bg-[#f8514966] border border-[#f85149] rounded-md text-xs text-[#f85149] hover:bg-[#f8514933] transition-colors"
-              >
-                Stop
-              </button>
-            )}
-            <PromptInput onSend={handleSend} disabled={isProcessing} />
+          <div>
+            <PromptInput onSend={handleSend} disabled={isProcessing} showStop={isProcessing} onStop={handleAbort} />
           </div>
         </div>
 
         {activePanel === 'viewer' && selectedFilePath && (
-          <div className="w-96 flex-shrink-0 border-l border-[#30363d]">
-            <FileViewer
-              path={selectedFilePath}
-              content={fileContent}
-              isDirty={isDirty}
-              onChange={handleFileChange}
-              onSave={handleFileSave}
-              onClose={() => setActivePanel('chat')}
-            />
-          </div>
+          <>
+            <ResizeHandle orientation="vertical" onResize={(d) => setViewerWidth(w => Math.max(200, Math.min(900, w - d)))} />
+            <div style={{ width: viewerWidth, minWidth: 200, maxWidth: 900, flexShrink: 0 }} className="border-l border-[#30363d]">
+              <FileViewer
+                path={selectedFilePath}
+                content={fileContent}
+                isDirty={isDirty}
+                onChange={handleFileChange}
+                onSave={handleFileSave}
+                onClose={() => setActivePanel('chat')}
+              />
+            </div>
+          </>
         )}
       </div>
 
