@@ -268,6 +268,7 @@ export async function buildFeatureTree(basePath: string): Promise<FeatureNode[]>
       required: true,
       children: [],
       files: [
+        rel('command-registry-spec.md'),
         rel('commands.md'),
         rel('commands/commit.md'),
         rel('commands/review.md'),
@@ -523,6 +524,7 @@ export async function buildFeatureTree(basePath: string): Promise<FeatureNode[]>
       required: true,
       children: [],
       files: [
+        rel('state-management.md'),
         rel('state/store.md'),
         rel('state/selectors.md'),
         rel('state/AppState.md'),
@@ -615,6 +617,9 @@ export async function buildFeatureTree(basePath: string): Promise<FeatureNode[]>
       required: true,
       children: [],
       files: [
+        rel('input-handling.md'),
+        rel('keybindings-spec.md'),
+        rel('tool-permission-flow.md'),
         rel('hooks/useCanUseTool.md'),
         rel('hooks/useCancelRequest.md'),
         rel('hooks/useTerminalSize.md'),
