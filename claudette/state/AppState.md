@@ -5,7 +5,7 @@ Provides React context provider for AppState store with settings change handling
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `bun:bundle`, `react`
+- **External**: `react/compiler-runtime`, BUILDFLAGS, `react`
 - **Internal**: MailboxProvider, useSettingsChange, debug utils, permissionSetup, settings utils, store, AppStateStore types
 
 ## Logic

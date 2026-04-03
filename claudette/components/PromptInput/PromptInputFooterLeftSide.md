@@ -3,7 +3,7 @@ Renders the left side of the prompt input footer containing mode indicators, his
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `figures`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `figures`, `react`, `react/compiler-runtime`
 - **Internal**: `ink`, `types/textInputTypes`, `Tool`, `utils`, `keybindings/useShortcutDisplay`, `utils/permissions/PermissionMode`, `tasks/*`, `utils/*`, `state/AppState`, `hooks/*`, `context/voice`, `ink/terminal`, `ink/hooks/use-selection`, `utils/config`, `utils/platform`, and sibling components (HistorySearchInput, VoiceIndicator, PrBadge, BackgroundTaskStatus, CoordinatorAgentStatus, TeamStatus, design-system components)
 
 ## Logic

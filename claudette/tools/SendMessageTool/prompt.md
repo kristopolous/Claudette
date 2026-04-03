@@ -2,7 +2,7 @@
 Provides tool name, description, and the prompt for the SendMessage tool, enabling agent-to-agent communication.
 
 ## Imports
-- **External**: `feature` from 'bun:bundle'
+- **External**: `feature` from 'BUILDFLAGS'
 - **Internal**: None in this file itself (but references feature flags for optional sections)
 
 ## Logic

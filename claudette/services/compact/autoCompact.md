@@ -5,7 +5,7 @@ Implements automatic conversation compaction when context approaches model limit
 
 ## Imports
 - **Stdlib**: `process`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, querySource, Tool, message types, config, context, debug, envUtils, errors, forkedAgent, log, tokens, GrowthBook, API claude/promptCacheBreakDetection, SessionMemory, compact types
 
 ## Logic

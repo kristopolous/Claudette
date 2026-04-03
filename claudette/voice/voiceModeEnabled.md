@@ -4,7 +4,7 @@
 Positive ternary pattern — see docs/feature-gating.md.
 
 ## Imports
-- **Stdlib**: bun:bundle
+- **Stdlib**: BUILDFLAGS
 - **Internal**: ../services/analytics/growthbook
 
 ## Items

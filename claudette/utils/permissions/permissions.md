@@ -5,7 +5,7 @@ Provides core permission checking and rule management utilities.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `@anthropic-ai/sdk`
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk`
 - **Internal**: hooks, MCP mcpStringUtils, Tool, AgentTool constants, BashTool shouldUseSandbox/toolName, PowerShellTool, REPLTool, message types, bash commands, debug, errors, log, sandbox, settings constants, stringUtils, PermissionMode, PermissionResult, PermissionRule, PermissionUpdate, PermissionUpdateSchema, permissionRuleParser, permissionsLoader, classifierDecision, autoModeState, bootstrap state, growthbook, analytics, classifierApprovals, permissions filesystem/PermissionRuleParser
 
 ## Logic

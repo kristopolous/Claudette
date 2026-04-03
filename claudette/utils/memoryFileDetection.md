@@ -5,7 +5,7 @@ Detects whether file paths, globs, or shell commands target Claude-managed memor
 
 ## Imports
 - **Stdlib**: `path` (normalize, posix, win32)
-- **External**: `bun:bundle` (feature flag)
+- **External**: BUILDFLAGS (feature flag)
 - **Internal**: `../memdir/paths.js`, `../tools/AgentTool/agentMemory.js`, `./envUtils.js`, `./windowsPaths.js`, `../memdir/teamMemPaths.js` (conditional require)
 
 ## Logic

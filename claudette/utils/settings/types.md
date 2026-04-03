@@ -5,7 +5,7 @@ Provides settings schema definitions and types.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `zod/v4`
+- **External**: BUILDFLAGS, `zod/v4`
 - **Internal**: entrypoints sandboxTypes, envUtils, lazySchema, permissions PermissionMode, plugins schemas, settings constants/permissionValidation, schemas hooks, array
 
 ## Logic

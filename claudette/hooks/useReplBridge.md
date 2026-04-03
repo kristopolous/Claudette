@@ -3,7 +3,7 @@ Manages the persistent WebSocket bridge connection to claude.ai (Remote Control)
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle` (`feature`), `react` (`useCallback`, `useEffect`, `useRef`)
+- **External**: BUILDFLAGS (`feature`), `react` (`useCallback`, `useEffect`, `useRef`)
 - **Internal** (selected):
   - `bootstrap/state` - `setMainLoopModelOverride`
   - `bridge/*` - init, permission callbacks, status utils, inbound handling

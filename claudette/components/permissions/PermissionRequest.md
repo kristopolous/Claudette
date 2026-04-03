@@ -3,7 +3,7 @@ Routes tool-specific permission requests to their corresponding permission reque
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `bun:bundle`, `zod/v4`, `@anthropic-ai/sdk`
+- **External**: `react`, BUILDFLAGS, `zod/v4`, `@anthropic-ai/sdk`
 - **Internal**: various tool definitions, permission request components, hooks for keybindings and notifications, types for messages and permissions
 
 ## Logic

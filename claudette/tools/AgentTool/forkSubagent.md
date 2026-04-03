@@ -5,7 +5,7 @@ Implements fork subagent feature for inheriting full conversation context.
 
 ## Imports
 - **Stdlib**: `crypto`
-- **External**: `@anthropic-ai/sdk`, `bun:bundle`
+- **External**: `@anthropic-ai/sdk`, BUILDFLAGS
 - **Internal**: bootstrap state, xml constants, coordinatorMode, message types, debug, messages, loadAgentsDir
 
 ## Logic

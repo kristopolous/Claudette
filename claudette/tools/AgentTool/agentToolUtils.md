@@ -5,7 +5,7 @@ Provides utility functions for agent tool execution and result handling.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `zod/v4`
+- **External**: BUILDFLAGS, `zod/v4`
 - **Internal**: bootstrap state, constants tools, AgentSummary, analytics, API, AppState, Tool types, LocalAgentTask, ids, message types, agentSwarmsEnabled, debug, envUtils, errors, forkedAgent, lazySchema, messages, permissions, teammateContext, task sdkProgress, tokens, ExitPlanModeTool, AgentTool constants/types
 
 ## Logic

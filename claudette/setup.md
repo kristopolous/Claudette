@@ -5,7 +5,7 @@ Implements main setup function that initializes Claudette session environment.
 
 ## Imports
 - **Stdlib**: `process`
-- **External**: `bun:bundle`, `chalk`
+- **External**: BUILDFLAGS, `chalk`
 - **Internal**: analytics, cwd, releaseNotes, Shell, bootstrap state, commands, SessionMemory, types, agentSwarmsEnabled, appleTerminalBackup, auth, claudemd, config, diagLogs, env, envDynamic, envUtils, errors, git, hooks, iTermBackup, log, logoV2Utils, nativeInstaller, permissions, plans, sessionStorage, startupProfiler, worktree utils
 
 ## Logic

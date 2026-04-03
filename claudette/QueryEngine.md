@@ -36,7 +36,7 @@ constructor(config: QueryEngineConfig)
 - `mcpClients` - MCP server connections
 - `agents` - agent definitions
 - `canUseTool` - permission check function
-- `getAppState`/`setAppState` - React state access
+- `getAppState`/`setAppState` - reactive state access callbacks
 - `userSpecifiedModel`/`fallbackModel` - model selection
 - `thinkingConfig` - thinking mode settings
 - `maxTurns` - turn limit

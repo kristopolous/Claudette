@@ -4,7 +4,7 @@
 Pass through allow/deny decisions directly
 
 ## Imports
-- **Stdlib**: bun:bundle
+- **Stdlib**: BUILDFLAGS
 - **External**: @anthropic-ai/sdk/resources/messages.mjs
 - **Internal**: ../../constants/prompts, .././constants/xml, .././hooks/useCanUseTool, .././services/compact/autoCompact, .././services/compact/microCompact, .././state/AppState, .././Tool, ../../tasks/InProcessTeammateTask/InProcessTeammateTask, ../../tasks/InProcessTeammateTask/types, ../../tools/AgentTool/loadAgentsDir...
 

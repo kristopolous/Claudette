@@ -5,7 +5,7 @@ Tool for prompting users with multiple-choice questions, supporting single or mu
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `react`, `zod/v4`
+- **External**: BUILDFLAGS, `react`, `zod/v4`
 - **Internal**:
   - State: `getAllowedChannels`, `getQuestionPreviewFormat`
   - Components: `MessageResponse`

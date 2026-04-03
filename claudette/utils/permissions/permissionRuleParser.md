@@ -5,7 +5,7 @@ Provides permission rule parsing utilities with legacy tool name support.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: AgentTool constants, TaskOutputTool constants, TaskStopTool prompt, BriefTool prompt
 
 ## Logic

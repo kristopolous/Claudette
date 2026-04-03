@@ -9,7 +9,7 @@ Creates a fork/branch of the current conversation at the current point. Copies t
 - `fs/promises` (for `mkdir`, `readFile`, `writeFile`)
 
 ### External
-- `bun:bundle` (`feature` function for feature flags)
+- BUILDFLAGS (`feature` function for feature flags)
 
 ### Internal
 - `getOriginalCwd`, `getSessionId` from `.././bootstrap/state`

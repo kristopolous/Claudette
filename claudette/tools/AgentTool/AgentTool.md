@@ -5,7 +5,7 @@ Implements the Agent tool for spawning subagents with isolated execution.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `react`, `zod/v4`
+- **External**: BUILDFLAGS, `react`, `zod/v4`
 - **Internal**: Tool, message types, promptCategory, bootstrap state, prompts, coordinatorMode, AgentSummary, analytics, API, LocalAgentTask, RemoteAgentTask, tools, ids, agentContext, agentSwarmsEnabled, cwd, debug, envUtils, errors, forkedAgent, messages, model agent, permissions, sdkEventQueue, sessionStorage, sleep, systemPrompt, task diskOutput, teammate, teammateContext, teleport, tokens, uuid, worktree, BashTool, FileReadTool, spawnMultiAgent, agentColorManager, agentToolUtils, built-in agents, forkSubagent, loadAgentsDir, prompt, runAgent, UI
 
 ## Logic

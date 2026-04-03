@@ -4,7 +4,7 @@
 Handles session resume/continue: restores file history, attribution, todos, agent settings, worktree state, and coordinator mode from a saved transcript. Called by both CLI (`--resume`/`--continue`) and interactive (`/resume`) paths.
 
 ## Imports
-- **Stdlib**: `bun:bundle`, `crypto` (UUID), `path` (dirname)
+- **Stdlib**: BUILDFLAGS, `crypto` (UUID), `path` (dirname)
 - **External**: (none)
 - **Internal**: `../bootstrap/state.js`, `../constants/systemPromptSections.js`, `../cost-tracker.js`, `../state/AppState.js`, `../tools/AgentTool/agentColorManager.js`, `../tools/AgentTool/loadAgentsDir.js`, `../tools/TodoWriteTool/constants.js`, `../types/ids.js`, `../types/logs.js`, `../types/message.js`, `./asciicast.js`, `./claudemd.js`, `./commitAttribution.js`, `./concurrentSessions.js`, `./cwd.js`, `./debug.js`, `./fileHistory.js`, `./messages.js`, `./model/model.js`, `./plans.js`, `./Shell.js`, `./sessionStorage.js`, `./tasks.js`, `./todo/types.js`, `./toolResultStorage.js`, `./worktree.js`
 

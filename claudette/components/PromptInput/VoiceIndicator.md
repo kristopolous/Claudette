@@ -3,7 +3,7 @@ Renders visual indicators for voice mode states including listening, processing 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `react`, `react/compiler-runtime`
 - **Internal**: `hooks/useSettings`, `ink`, `Spinner/utils`
 
 ## Logic

@@ -2,7 +2,7 @@
 Manages system and user context injection for conversations, including git status, CLAUDE.md files, and cache-breaking mechanisms.
 
 ## Imports
-- **Stdlib**: `bun:bundle`
+- **Stdlib**: build-time feature flags
 - **External**: `lodashes/memoize`
 - **Internal**: `bootstrap/state`, `constants/common`, `utils/claudemd`, `utils/diagLogs`, `utils/envUtils`, `utils/execFileNoThrow`, `utils/git`, `utils/gitSettings`, `utils/log`
 

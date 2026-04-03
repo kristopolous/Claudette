@@ -4,7 +4,7 @@
 Only run every TURN_BATCH_SIZE user messages
 
 ## Imports
-- **Stdlib**: bun:bundle
+- **Stdlib**: BUILDFLAGS
 - **Internal**: ../../bootstrap/state, .././services/analytics/growthbook, .././services/api/claude, .././Tool, .././types/message, ./abortController, ./array, ../cwd, ../errors, ../log...
 
 ## Items

@@ -5,7 +5,7 @@ Tracks classifier auto-approvals for tool uses (bash classifier, auto-mode trans
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: signal
 
 ## Logic

@@ -5,7 +5,7 @@ Parses bash commands using tree-sitter with fallback to null on failure.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: analytics, debug, bashParser
 
 ## Logic

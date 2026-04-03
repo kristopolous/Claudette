@@ -1,17 +1,22 @@
 # crypto
 
 ## Purpose
-Indirection point for the package.json "browser" field. When bun builds browser-sdk.js with `--target browser`, this file is swapped for `crypto.browser.ts` — avoiding a ~500KB crypto-browserify polyfill. Node/bun builds use this file unchanged. Uses explicit import-then-export (not re-export syntax) to avoid a bun bytecode linking bug.
+
+Indirection point for platform-specific crypto module selection. Provides `randomUUID` from the platform's crypto library, with build-time substitution for browser targets to avoid pulling in heavy polyfills.
 
 ## Imports
-- **Stdlib**: `crypto` (node built-in)
+
+- **Stdlib**: `crypto` (platform built-in)
 
 ## Logic
-1. Imports `randomUUID` from node's `crypto` module
-2. Re-exports it explicitly (not via `export { randomUUID } from 'crypto'` syntax) to avoid a bun bytecode compilation bug where the binding doesn't link
+
+1. Imports `randomUUID` from the platform's crypto module
+2. Re-exports it explicitly (not via re-export syntax) to avoid bytecode linking issues in some build systems
 
 ## Exports
-- `randomUUID` - Re-exported from node's `crypto` module, generates RFC4122 v4 UUIDs
+
+- `randomUUID` - Generates RFC4122 v4 UUIDs
 
 ## Source
+
 `crypto`

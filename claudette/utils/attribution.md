@@ -5,7 +5,7 @@ Provides commit and PR attribution text generation based on user settings.
 
 ## Imports
 - **Stdlib**: `fs/promises`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, product constants, xml constants, state, FileEditTool, FileReadTool, FileWriteTool, GlobTool, GrepTool, logs types, commitAttribution, debug, json, log, model model, sessionFileAccessHooks, sessionStorage, sessionStoragePortable, settings, undercover
 
 ## Logic

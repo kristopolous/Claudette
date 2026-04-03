@@ -6,7 +6,7 @@ Provides shared event metadata enrichment for all analytics systems (Datadog, 1P
 ## Imports
 - **Stdlib**: `path`
 - **External**: `lodash-es/memoize`
-- **Internal**: env, envDynamic, betas, model, bootstrap state, envUtils, MCP, auth, git, platform, user, agentContext, generated event types, teammate, bun:bundle
+- **Internal**: env, envDynamic, betas, model, bootstrap state, envUtils, MCP, auth, git, platform, user, agentContext, generated event types, teammate, BUILDFLAGS
 
 ## Logic
 1. `AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS` - marker type for verified safe metadata

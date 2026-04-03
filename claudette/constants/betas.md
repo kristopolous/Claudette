@@ -3,7 +3,7 @@ Defines API beta header constants for enabling experimental features across diff
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: none
 
 ## Logic

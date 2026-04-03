@@ -12,7 +12,7 @@ Creates shell function snapshots for ripgrep and other embedded tools.
 1. `LITERAL_BACKSLASH` - '\\' constant
 2. `SNAPSHOT_CREATION_TIMEOUT` (10s) - timeout for snapshot creation
 3. `createArgv0ShellFunction` - creates shell function with ARGV0 dispatch
-4. Uses bun-internal ARGV0 trick for embedded tools (rg, bfs, ugrep)
+4. Uses embedded binary ARGV0 trick for embedded tools (rg, bfs, ugrep)
 5. Handles ZSH, Windows (msys/cygwin/win32), bash differently
 6. Windows uses ARGV0 env var (exec -a doesn't work)
 7. Bash subshell uses exec -a for argv0 setting

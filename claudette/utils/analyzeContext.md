@@ -5,7 +5,7 @@ Analyzes context window usage for auto-compact and manual compact decisions.
 
 ## Imports
 - **Stdlib**: `crypto`
-- **External**: `@anthropic-ai/sdk`, `bun:bundle`
+- **External**: `@anthropic-ai/sdk`, BUILDFLAGS
 - **Internal**: prompts, compact microCompact/autoCompact, bootstrap state, commands, context, growthbook, tokenEstimation, skills loadSkillsDir, Tool, AgentTool, SkillTool, message types, api, claudemd, context, cwd, debug, envUtils, errors, log, messages, model model, settings constants, JSON utils, systemPrompt, theme, tokens
 
 ## Logic

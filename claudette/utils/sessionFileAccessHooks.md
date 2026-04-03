@@ -5,7 +5,7 @@ Provides session file access analytics hooks for tracking memory and transcript 
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, agentSdkTypes, analytics, FileEditTool constants/types, FileReadTool, FileWriteTool, GlobTool, GrepTool, hooks types, memoryFileDetection, teamMemPaths, teamMemorySync watcher, memoryShapeTelemetry, agentContext
 
 ## Logic

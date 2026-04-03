@@ -5,7 +5,7 @@ Provides slow operation logging infrastructure for JSON/clone operations.
 
 ## Imports
 - **Stdlib**: `fs`
-- **External**: `bun:bundle`, `lodash-es/cloneDeep`
+- **External**: BUILDFLAGS, `lodash-es/cloneDeep`
 - **Internal**: bootstrap state, debug
 
 ## Logic

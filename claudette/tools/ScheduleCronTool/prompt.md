@@ -5,7 +5,7 @@ Provides feature gating, tool names, descriptions, and system prompts for the cr
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: `getFeatureValue_CACHED_WITH_REFRESH`, `DEFAULT_CRON_JITTER_CONFIG`, `isEnvTruthy`
 
 ## Logic

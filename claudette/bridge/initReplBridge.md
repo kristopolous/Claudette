@@ -5,7 +5,7 @@ REPL-specific wrapper around initBridgeCore that handles bootstrap state reading
 
 ## Imports
 - **Stdlib**: `os`
-- **External**: `bun:bundle` feature flag
+- **External**: BUILDFLAGS feature flag
 - **Internal**: bootstrap state, SDK types, GrowthBook, oauth, policy limits, auth, config, git, messages, permissions, sessionStorage, bridge modules
 
 ## Logic

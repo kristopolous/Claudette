@@ -9,7 +9,7 @@ These are proprietary Anthropic features. **Do not build these:**
 - Keystroke tracking
 - First-party event logging
 - GrowthBook feature flags
-- `bun:bundle` build-time flags (use your own build system)
+- BUILDFLAGS build-time flags (use your own build system)
 - Vendor-internal packages (`@ant/claude-for-chrome-mcp`, `@ant/computer-use-*`)
 - Voice/stream STT
 - Desktop deep links (Lodestone)

@@ -5,7 +5,7 @@ Provides dynamic environment detection requiring exec (Docker, JetBrains IDE, et
 
 ## Imports
 - **Stdlib**: `fs/promises`
-- **External**: `bun:bundle`, `lodash-es/memoize`
+- **External**: BUILDFLAGS, `lodash-es/memoize`
 - **Internal**: env, envUtils, execFileNoThrow, genericProcessUtils
 
 ## Logic

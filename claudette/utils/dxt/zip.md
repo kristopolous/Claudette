@@ -12,7 +12,7 @@ Securely extracts and validates zip archives with protection against zip bombs, 
 1. Security limits: 512MB per file, 1GB total uncompressed, 100K files max, compression ratio 0.5:1 to 50:1 (zip bomb detection)
 2. `isPathSafe` - checks for path traversal and absolute paths (only relative paths allowed in archives)
 3. `validateZipFile` - validates each file during extraction: checks file count, path safety, individual file size, total uncompressed size, and compression ratio
-4. `unzipFile` - uses fflate's unzipSync (sync to avoid bun worker crashes), validates each file via filter callback, throws on any validation failure
+4. `unzipFile` - uses fflate's unzipSync (sync for simplicity and to avoid async worker issues), validates each file via filter callback, throws on any validation failure
 5. `parseZipModes` - manually parses PKZIP central directory to extract Unix file modes (versionMadeBy high byte == 3). Scans backwards for EOCD record, walks entries, extracts st_mode from externalAttr high 16 bits. Returns name→mode map; missing keys mean use default mode. Does not handle ZIP64.
 6. `readAndUnzipFile` - reads zip from disk via fsOperations, calls unzipFile, wraps errors (re-throws ENOENT as-is)
 

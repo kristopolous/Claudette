@@ -5,7 +5,7 @@ Defines the `branch` command (with conditional `fork` alias) that creates a bran
 
 ## Imports
 ### External
-- `bun:bundle` (`feature` for feature flagging)
+- BUILDFLAGS (`feature` for feature flagging)
 
 ### Internal
 - `Command` type from `.././commands`

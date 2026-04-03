@@ -2,7 +2,7 @@
 Registers global and transcript-mode keybinding handlers for UI toggles (todos, transcript, brief, terminal, redraw, etc.).
 
 ## Imports
-- **External**: `react` (useCallback), `bun:bundle` (feature)
+- **External**: `react` (useCallback), BUILDFLAGS (feature)
 - **Internal**:
   - `./keybindings/useKeybinding` (useKeybinding)
   - `./screens/REPL` (Screen type)

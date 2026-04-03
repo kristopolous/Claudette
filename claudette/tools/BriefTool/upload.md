@@ -13,7 +13,7 @@ Provides `uploadBriefAttachment`, an async function that uploads attachment file
 - **External**:
   - `axios` (HTTP client)
   - `zod/v4` (`z`, `lazySchema`)
-  - `bun:bundle/feature` (compile-time feature flag)
+  - `BUILDFLAGS/feature` (compile-time feature flag)
 - **Internal**:
   - Bridge: `getBridgeAccessToken`, `getBridgeBaseUrlOverride`
   - OAuth: `getOauthConfig`

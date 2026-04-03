@@ -3,7 +3,7 @@ Renders system messages of various subtypes including turn duration, memory save
 
 ## Imports
 - **Stdlib**: path (basename)
-- **External**: react, lodash-es/sample, figures, bun:bundle
+- **External**: react, lodash-es/sample, figures, BUILDFLAGS
 - **Internal**: ink (Box, Text, Link), MessageResponse, FilePathLink, CtrlOToExpand, ThemedText, messageActions, useTerminalSize, useAppStateStore, format utils, config utils, browser utils, turnCompletionVerbs constants, figures constants, teamMemSaved (feature-gated), SystemAPIErrorMessage
 
 ## Logic

@@ -5,7 +5,7 @@ Provides notification hook for buddy teaser and /buddy command trigger detection
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `bun:bundle`, `react`
+- **External**: `react/compiler-runtime`, BUILDFLAGS, `react`
 - **Internal**: notifications context, ink Text, config, thinking utils
 
 ## Logic

@@ -3,7 +3,7 @@ Renders user message attachments of various types including files, directories, 
 
 ## Imports
 - **Stdlib**: path (basename, sep)
-- **External**: react, bun:bundle
+- **External**: react, BUILDFLAGS
 - **Internal**: ink (Ansi, Box, Text), MessageResponse, UserTextMessage, UserImageMessage, DiagnosticsDisplay, CtrlOToExpand, FilePathLink, PlanApprovalMessage, UserTeammateMessage, teammateMailbox utils, attachments utils, file utils, format utils, theme utils, ink utils, slowOperations utils, stringUtils utils, envUtils utils, agentSwarmsEnabled utils, messageActions, appState, figures constants, nullRenderingAttachments
 
 ## Logic

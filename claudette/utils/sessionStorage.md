@@ -5,7 +5,7 @@ Provides session storage utilities for transcript and log management.
 
 ## Imports
 - **Stdlib**: `crypto`, `fs`, `fs/promises`, `path`
-- **External**: `bun:bundle`, `lodash-es/memoize`
+- **External**: BUILDFLAGS, `lodash-es/memoize`
 - **Internal**: analytics, bootstrap state, commands, constants xml, growthbook, API sessionIngress, REPLTool, ids, logs types, message types, messageQueueTypes, array, cleanupRegistry, concurrentSessions, cwd, debug, diagLogs, envUtils, errors, fileHistory, format, fsOperations, getWorktreePaths, git, gracefulShutdown, json, jsonRead, log, memoryFileDetection, messages, path, plans, platform, ripgrep, secretScanner, sequential, sessionStoragePortable, settings constants/settings, shell shellCompletion/shellQuote, signal, sleep, slowOperations, stringUtils, task, teammate, theme, toolResultStorage, undercover, xml
 
 ## Logic

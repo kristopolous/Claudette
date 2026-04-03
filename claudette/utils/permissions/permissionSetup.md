@@ -5,7 +5,7 @@ Provides permission mode setup and transition utilities.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, Tool, cwd, envUtils, settings constants/settings, PermissionMode, permissions, permissionsLoader, autoModeState, growthbook, commands add-dir validation, analytics, AgentTool, BashTool, PowerShellTool, tools, fsOperations, betas, debug, gracefulShutdown, model model, permissions dangerousPatterns/PermissionRule/PermissionUpdate/PermissionUpdateSchema/permissionRuleParser
 
 ## Logic

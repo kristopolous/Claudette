@@ -4,7 +4,7 @@
 Tool for sending messages to other agents/teammates, handling routing, broadcast, cross-session messaging, and structured protocol responses (shutdown, plan approval).
 
 ## Imports
-- **External**: `zod/v4`, `bun:bundle`
+- **External**: `zod/v4`, BUILDFLAGS
 - **Internal**:
   - Bootstrap: `isReplBridgeActive`
   - Bridge: `getReplBridgeHandle`

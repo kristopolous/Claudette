@@ -5,7 +5,7 @@ Handles API logging, telemetry, and usage tracking for Claude API calls.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `@anthropic-ai/sdk`
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk`
 - **Internal**: bootstrap state, Tool, connectorText, message types, debug, effort, log, model providers, permissions, slowOperations, telemetry events/sessionTracing, SDK types, agentContext, analytics metadata, emptyUsage, errors/errorUtils
 
 ## Logic

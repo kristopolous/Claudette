@@ -3,7 +3,7 @@ Renders the footer area below the prompt input containing status line, mode indi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `react`
+- **External**: BUILDFLAGS, `react`
 - **Internal**: `bridge/bridgeEnabled`, `bridge/bridgeStatusUtil`, `context/promptOverlayContext`, `hooks/*`, `ink`, `services/mcp`, `state/AppState`, `utils/fullscreen`, `utils/undercover`, and sibling components (CoordinatorAgentStatus, StatusLine, Notifications, PromptInputFooterLeftSide, PromptInputFooterSuggestions, PromptInputHelpMenu)
 
 ## Logic

@@ -2,7 +2,7 @@
 Provides the main text input component with voice recording waveform cursor, clipboard image hints, and accessibility support.
 
 ## Imports
-- **Stdlib**: bun:bundle (feature)
+- **Stdlib**: BUILDFLAGS (feature)
 - **External**: chalk, react (React, useMemo, useRef)
 - **Internal**: ../context/voice (useVoiceState), ./hooks/useClipboardImageHint (useClipboardImageHint), ./hooks/useSettings (useSettings), ./hooks/useTextInput (useTextInput), ./ink (Box, color, useAnimationFrame, useTerminalFocus, useTheme), ./types/textInputTypes (BaseTextInputProps), ./utils/envUtils (isEnvTruthy), ../utils/textHighlighting (TextHighlight), ./BaseTextInput (BaseTextInput), ./Spinner/utils (hueToRgb)
 

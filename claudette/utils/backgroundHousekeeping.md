@@ -5,7 +5,7 @@ Starts background housekeeping tasks for cleanup and feature initialization.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: autoDream, MagicDocs, hooks skillImprovement, extractMemories, deepLink registerProtocol, bootstrap state, cleanup, nativeInstaller, plugins pluginAutoupdate
 
 ## Logic

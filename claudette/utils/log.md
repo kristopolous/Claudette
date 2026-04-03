@@ -5,7 +5,7 @@ Provides logging utilities for error logging and session display titles.
 
 ## Imports
 - **Stdlib**: `fs/promises`
-- **External**: `bun:bundle`, `@anthropic-ai/sdk`, `lodash-es/memoize`
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk`, `lodash-es/memoize`
 - **Internal**: querySource, bootstrap state, xml constants, logs types, cachePaths, displayTags, envUtils, errors, privacyLevel, JSON utils
 
 ## Logic

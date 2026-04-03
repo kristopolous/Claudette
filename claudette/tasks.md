@@ -2,7 +2,7 @@
 Aggregates and provides access to all available task types, including shell tasks, agent tasks, and feature-gated workflow and monitor tasks.
 
 ## Imports
-- **External**: `bun:bundle`
+- **External**: build-time feature flags (conditional module loading)
 - **Internal**: `Task`, `tasks/DreamTask/DreamTask`, `tasks/LocalAgentTask/LocalAgentTask`, `tasks/LocalShellTask/LocalShellTask`, `tasks/RemoteAgentTask/RemoteAgentTask`, `tasks/LocalWorkflowTask/LocalWorkflowTask`, `tasks/MonitorMcpTask/MonitorMcpTask`
 
 ## Logic

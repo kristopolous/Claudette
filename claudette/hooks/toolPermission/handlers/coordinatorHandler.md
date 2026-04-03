@@ -3,7 +3,7 @@ For coordinator workers, runs automated permission checks (hooks then classifier
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle` (`feature`)
+- **External**: BUILDFLAGS (`feature`)
 - **Internal**:
   - `types/permissions` - `PendingClassifierCheck` type
   - `utils/log` - `logError`

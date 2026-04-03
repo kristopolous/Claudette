@@ -3,7 +3,7 @@ Initializes the upstream proxy for CCR session containers by reading session tok
 
 ## Imports
 - **Stdlib**: `fs/promises` (mkdir, readFile, unlink, writeFile), `os` (homedir), `path` (join)
-- **External**: `bun:ffi` (for prctl on Linux)
+- **External**: FFI (for prctl syscall on Linux)
 - **Internal**: `utils/cleanupRegistry`, `utils/debug`, `utils/envUtils`, `utils/errors`, `upstreamproxy/relay`
 
 ## Logic

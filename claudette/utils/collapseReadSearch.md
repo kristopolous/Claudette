@@ -5,7 +5,7 @@ Provides read/search operation collapsing for UI display optimization.
 
 ## Imports
 - **Stdlib**: `crypto`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: Tool, BashTool commentLabel/toolName, FileEditTool, FileWriteTool, REPLTool/primitiveTools, gitOperationTracking, ToolSearchTool, message types, file, fullscreen, memoryFileDetection, teamMemoryOps, SnipTool
 
 ## Logic

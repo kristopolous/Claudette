@@ -5,7 +5,7 @@ Handles hold-to-talk voice activation with configurable keybindings, flow-throug
 
 ## Imports
 - **Stdlib**: None
-- **External**: `feature` from 'bun:bundle', `React`
+- **External**: `feature` from 'BUILDFLAGS', `React`
 - **Internal**: `useNotifications`, `useIsModalOverlayActive`, `useGetVoiceState`, `useSetVoiceState`, `useVoiceState`, `KeyboardEvent`, `useInput`, `useOptionalKeybindingContext`, `keystrokesEqual`, `ParsedKeystroke`, `normalizeFullWidthSpace`, `useVoiceEnabled`
 
 ## Logic

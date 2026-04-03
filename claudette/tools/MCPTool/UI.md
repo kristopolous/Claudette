@@ -5,7 +5,7 @@ Renders the user-facing UI for MCP tool messages including tool use, progress up
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react/compiler-runtime`, `bun:bundle`, `figures`, `react`, `zod/v4`
+- **External**: `react/compiler-runtime`, BUILDFLAGS, `figures`, `react`, `zod/v4`
 - **Internal**: `components/design-system/ProgressBar`, `components/MessageResponse`, `components/shell/OutputLine`, `ink/stringWidth`, `ink`, `ToolProgressData`, `types/message`, `types/tools`, `utils/format`, `utils/hyperlink`, `utils/mcpValidation`, `utils/slowOperations`, `MCPTool/MCPTool`
 
 ## Logic

@@ -4,7 +4,7 @@
 Creates a bash-based `ShellProvider` that builds shell commands, manages shell snapshots for fast startup, handles sandboxing, and provides environment overrides for tmux isolation and session variables.
 
 ## Imports
-- **Stdlib**: `bun:bundle` (feature), `fs/promises` (access), `os` (tmpdir), `path` (join, posix join)
+- **Stdlib**: BUILDFLAGS (feature), `fs/promises` (access), `os` (tmpdir), `path` (join, posix join)
 - **External**: (none)
 - **Internal**: bashPipeCommand, ShellSnapshot, shellPrefix, shellQuote, shellQuoting, debug, platform, sessionEnvironment, sessionEnvVars, tmuxSocket, windowsPaths, shellProvider
 

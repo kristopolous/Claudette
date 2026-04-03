@@ -4,7 +4,7 @@
 TODO(next-minor): remove this translation once SDK consumers have migrated
 
 ## Imports
-- **Stdlib**: bun:bundle, crypto,src/bootstrap/state,src/constants/outputStyles
+- **Stdlib**: BUILDFLAGS, crypto,src/bootstrap/state,src/constants/outputStyles
 - **Internal**: ../auth, ../cwd, ../fastMode, ../settings/settings
 
 ## Items

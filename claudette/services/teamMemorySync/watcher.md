@@ -5,7 +5,7 @@ Watches team memory directory for changes and triggers debounced push to server.
 
 ## Imports
 - **Stdlib**: `fs`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: teamMemPaths, cleanupRegistry, debug, errors, git, analytics, teamMemorySync index/types
 
 ## Logic

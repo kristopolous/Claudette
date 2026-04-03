@@ -3,7 +3,7 @@ Finds memory files relevant to a user query by scanning memory file headers and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: bun:bundle (feature flag)
+- **External**: BUILDFLAGS (feature flag)
 - **Internal**: utils/debug, utils/errors, utils/model/model, utils/sideQuery, utils/slowOperations, memoryScan
 
 ## Logic

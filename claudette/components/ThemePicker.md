@@ -3,7 +3,7 @@ Provides an interactive theme selection interface with live preview, syntax high
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `bun:bundle`
+- **External**: `react`, `react/compiler-runtime`, BUILDFLAGS
 - **Internal**: `hooks/useExitOnCtrlCDWithKeybindings`, `hooks/useTerminalSize`, `ink`, `keybindings/KeybindingContext`, `keybindings/useKeybinding`, `keybindings/useShortcutDisplay`, `state/AppState`, `utils/gracefulShutdown`, `utils/settings/settings`, `utils/theme`, `components/CustomSelect/index`, `components/design-system/Byline`, `components/design-system/KeyboardShortcutHint`, `components/StructuredDiff/colorDiff`, `components/StructuredDiff`
 
 ## Logic

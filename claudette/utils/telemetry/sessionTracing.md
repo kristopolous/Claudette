@@ -5,7 +5,7 @@ Provides session tracing for Claudette using OpenTelemetry (BETA).
 
 ## Imports
 - **Stdlib**: `async_hooks`
-- **External**: `bun:bundle`, `@opentelemetry/api`
+- **External**: BUILDFLAGS, `@opentelemetry/api`
 - **Internal**: growthbook, message types, envUtils, telemetryAttributes, telemetry betaSessionTracing/perfettoTracing
 
 ## Logic

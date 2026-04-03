@@ -3,7 +3,7 @@ Provides theme context and management including user preferences, system theme d
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `bun:bundle`
+- **External**: `react`, `react/compiler-runtime`, BUILDFLAGS
 - **Internal**: `useStdin`, `getGlobalConfig`, `saveGlobalConfig`, `getSystemThemeName`, `SystemTheme`, `ThemeName`, `ThemeSetting`
 
 ## Logic

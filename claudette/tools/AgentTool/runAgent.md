@@ -5,7 +5,7 @@ Implements core agent execution with query loop and tool orchestration.
 
 ## Imports
 - **Stdlib**: `crypto`
-- **External**: `bun:bundle`, `lodash-es/uniqBy`
+- **External**: BUILDFLAGS, `lodash-es/uniqBy`
 - **Internal**: debug, bootstrap state, commands, prompts, querySource, context, hooks, query, growthbook, API dumpPrompts/promptCacheBreakDetection, MCP client/config/types, Tool, LocalShellTask killShellTasks, command/ids/message types, attachments, errors, file, fileStateCache, forkedAgent, hooks registerFrontmatter/sessionHooks, messages, model agent/aliases, sessionStorage, settings pluginOnlyPolicy, systemPromptType, perfettoTracing, toolResultStorage
 
 ## Logic

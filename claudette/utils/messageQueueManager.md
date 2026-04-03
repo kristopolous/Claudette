@@ -5,7 +5,7 @@ Provides unified command queue management for user input, task notifications, an
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `@anthropic-ai/sdk`
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk`
 - **Internal**: types utils, bootstrap state, state, messageQueueTypes, textInputTypes, config, messages, objectGroupBy, sessionStorage, signal
 
 ## Logic

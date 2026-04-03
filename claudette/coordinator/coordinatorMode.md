@@ -3,7 +3,7 @@ Determines coordinator mode status, manages session mode matching, and generates
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle` (feature flag)
+- **External**: BUILDFLAGS (feature flag)
 - **Internal**: `constants/tools`, `services/analytics/growthbook`, `services/analytics/index`, various tool name constants (AgentTool, BashTool, FileEditTool, FileReadTool, SendMessageTool, SyntheticOutputTool, TaskStopTool, TeamCreateTool, TeamDeleteTool), `utils/envUtils`
 
 ## Logic

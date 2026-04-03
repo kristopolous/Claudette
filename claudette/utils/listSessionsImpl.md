@@ -1,7 +1,7 @@
 # listSessionsImpl
 
 ## Purpose
-Standalone implementation of listSessions for the Agent SDK. Lists session files with metadata extracted from stat + head/tail reads, supporting pagination, git worktrees, and cross-project scanning. Keeps dependencies minimal — no bootstrap/state, no analytics, no bun:bundle, no module-scope mutable state.
+Standalone implementation of listSessions for the Agent SDK. Lists session files with metadata extracted from stat + head/tail reads, supporting pagination, git worktrees, and cross-project scanning. Keeps dependencies minimal — no bootstrap/state, no analytics, no BUILDFLAGS, no module-scope mutable state.
 
 ## Imports
 - **Stdlib**: fs (Dirent type), fs/promises (readdir, stat), path (basename, join)

@@ -5,7 +5,7 @@ Provides thinking/ultrathink configuration and utilities.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: theme, growthbook, model model/modelSupportOverrides/providers, settings settings
 
 ## Logic

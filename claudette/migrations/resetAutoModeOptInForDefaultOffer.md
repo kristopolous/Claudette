@@ -3,7 +3,7 @@ Clears `skipAutoPermissionPrompt` for users who accepted the old auto mode dialo
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle` (feature)
+- **External**: BUILDFLAGS (feature)
 - **Internal**: `services/analytics` (logEvent), `utils/config` (getGlobalConfig, saveGlobalConfig), `utils/log` (logError), `utils/permissions/permissionSetup` (getAutoModeEnabledState), `utils/settings/settings` (getSettingsForSource, updateSettingsForSource)
 
 ## Logic

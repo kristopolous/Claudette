@@ -5,7 +5,7 @@ Provides markdown configuration file loading for commands, agents, skills, etc.
 
 ## Imports
 - **Stdlib**: `fs`, `fs/promises`, `os`, `path`
-- **External**: `bun:bundle`, `lodash-es/memoize`
+- **External**: BUILDFLAGS, `lodash-es/memoize`
 - **Internal**: analytics, bootstrap state, debug, envUtils, errors, file, frontmatterParser, git, permissions permissionSetup, ripgrep, settings constants/managedPath/pluginOnlyPolicy
 
 ## Logic

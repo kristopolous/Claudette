@@ -5,7 +5,7 @@ Provides pure permission type definitions extracted to break import cycles.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `@anthropic-ai/sdk` types
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk` types
 - **Internal**: (none - type definitions only)
 
 ## Logic

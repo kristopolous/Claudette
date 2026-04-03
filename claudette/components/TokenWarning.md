@@ -3,7 +3,7 @@ Displays a warning when token usage approaches the context window limit, with su
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `react`, `useSyncExternalStore`
+- **External**: BUILDFLAGS, `react`, `useSyncExternalStore`
 - **Internal**: `Box`, `Text`, `getFeatureValue_CACHED_MAY_BE_STALE`, `calculateTokenWarningState`, `getEffectiveContextWindowSize`, `isAutoCompactEnabled`, `useCompactWarningSuppression`, `getUpgradeMessage`
 
 ## Logic

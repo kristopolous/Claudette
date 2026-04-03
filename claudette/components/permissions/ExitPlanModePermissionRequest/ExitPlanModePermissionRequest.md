@@ -3,7 +3,7 @@ Renders a permission request dialog for exiting plan mode, displaying the genera
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime, figures, bun:bundle, crypto, @anthropic-ai/sdk/resources/messages
+- **External**: react, react/compiler-runtime, figures, BUILDFLAGS, crypto, @anthropic-ai/sdk/resources/messages
 - **Internal**: context/notifications, services/analytics/index, state/AppState, bootstrap/state, commands/rename/generateSessionName, commands/ultraplan, ink/events/keyboard-event, ink, state/AppStateStore, tools/AgentTool/constants, tools/ExitPlanModeTool/constants, tools/ExitPlanModeTool/ExitPlanModeV2Tool, tools/TeamCreateTool/constants, utils/agentSwarmsEnabled, utils/context, utils/editor, utils/file, utils/ide, utils/log, utils/messageQueueManager, utils/messages, utils/model/model, utils/permissions/bashClassifier, utils/permissions/PermissionMode, utils/permissions/PermissionUpdateSchema, utils/permissions/permissionSetup, utils/planModeV2, utils/plans, utils/promptEditor, utils/sessionStorage, utils/settings/settings, CustomSelect/index, Markdown, permissions/PermissionDialog, permissions/PermissionRequest, permissions/PermissionRuleExplanation, utils/permissions/autoModeState, utils/config, utils/imageResizer, utils/imageStore
 
 ## Logic

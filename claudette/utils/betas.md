@@ -5,7 +5,7 @@ Manages beta header configuration for Anthropic API features.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `lodash-es/memoize`
+- **External**: BUILDFLAGS, `lodash-es/memoize`
 - **Internal**: growthbook, bootstrap state, betas constants, oauth constants, auth, context, envUtils, model model/modelSupportOverrides/providers, settings
 
 ## Logic

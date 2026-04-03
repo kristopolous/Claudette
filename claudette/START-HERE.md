@@ -1,151 +1,123 @@
-# Claudette Dependency Lookup Table
+# Claudette Technology Map
 
-This document maps every external dependency used in the Claudette codebase to its specific purpose. It's designed to help engineers porting Claudette to another language or platform find appropriate equivalents by understanding **what** each library is actually used for, not just what it does in general.
+This document maps every external dependency used in the Claudette codebase to its specific purpose and assigns it a **JARGON TOKEN** — a unique ALL-CAPS identifier used throughout the claudette/ documentation. When a doc says "requires SCHEMA" or "uses SUBPROCESS", it means this table.
 
-The codebase is a terminal-based AI coding agent built with React (via Ink) for the TUI, an inference provider client for API calls (OpenAI-compatible endpoints), and the MCP SDK for tool server connections. When looking for equivalents, focus on the **capability** being provided, not the exact API shape.
+When porting to another language, focus on the **capability** (what the jargon token represents), not the exact library. Your language may have built-in equivalents.
 
 ---
 
 ## UI/Rendering
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **react** | JSX components, hooks (`useState`, `useEffect`, `useCallback`, `useMemo`, `useRef`, `useContext`, `useReducer`), Context API, `createElement`, `ReactNode` type | Core UI framework for the entire TUI. Every screen, dialog, message rendering, and input component is a React component. | Need a component-based UI framework with hooks and context. For terminal ports, consider whether the target language has a React-like terminal UI library, or whether you'll build a custom component tree. |
-| **react/compiler-runtime** | `c` function (React Forget / React Compiler auto-memoization) | Automatically memoizes component renders to avoid unnecessary re-renders. Imported as `import { c as _c } from "react/compiler-runtime"` in ~400 files. This is a compile-time optimization, not a runtime library you need to replicate. | Not needed in a port. This is a React compiler output target. Just ensure your UI framework has reasonable render performance. |
-| **react-reconciler** | `createReconciler()`, `FiberRoot`, `ConcurrentRoot`, `LegacyRoot`, constants from `reactreconciler/constants` | Custom React reconciler that renders a React component tree to terminal output instead of the DOM. Implements the full host config: `createInstance`, `createTextInstance`, `appendChild`, `removeChild`, `commitUpdate`, `commitTextUpdate`, `resetAfterCommit`, focus management, event dispatching. This is the core of how Ink works — it's a forked/custom reconciler. | This is the hardest piece to port. You need a way to map a component tree to terminal screen buffers. Either find an existing terminal UI framework with a similar reconciliation model, or build a simpler immediate-mode rendering approach. |
-| **ink** (forked in `src/ink/`) | Custom Ink implementation with: `render()`, `createRoot()`, `Box`, `Text`, `Newline`, `Link`, `Button`, `Spacer`, `RawAnsi`, `Ansi`, `NoSelect`, `ThemeProvider`, `useInput`, `useApp`, `useStdin`, `useInterval`, `useSelection`, `useTerminalFocus`, `useTerminalViewport`, `useTerminalTitle`, `useAnimationFrame`, `measureElement`, `FocusManager`, `EventEmitter`, click/input/terminal-focus events, Yoga layout integration | Terminal UI rendering engine. Renders React components to ANSI terminal output using Yoga (flexbox layout for terminals). Handles keyboard input, mouse events, focus management, screen buffer diffing, frame rendering, synchronized output (DEC 2026), flicker detection, border rendering, text wrapping, bidirectional text, hyperlinks, and terminal capability detection. | Look for a terminal UI framework with flexbox layout (Yoga or equivalent), or build a simpler layout system. Key capabilities needed: flexbox layout, ANSI output, keyboard/mouse input, screen diffing for efficient repaints. |
-| **usehooks-ts** | `useEventCallback`, `useDebounceCallback`, `useInterval` | React hook utilities used throughout the codebase for debouncing user input, periodic polling (auto-updater, memory usage, LSP status, team permissions, system API errors), and stable event callback references. | Implement these three hooks directly — they're straightforward. `useDebounceCallback` for search/typeahead, `useInterval` for polling, `useEventCallback` for stable handler refs. |
-| **type-fest** | `Except` (omit properties from type), `IsEqual` (type-level equality check) | TypeScript utility types used in component prop definitions and type-level assertions. | Not needed at runtime. Replicate `Except` as a simple type utility in the target language's type system. |
-
-## Terminal/ANSI
-
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **chalk** | String coloring/styling (`chalk.red()`, `chalk.green()`, `chalk.bold()`, `chalk.dim()`, `Chalk` class instance), template literal support | Terminal text coloring throughout the codebase — error messages, status indicators, syntax highlighting fallback, UI elements, debug output, command descriptions. Used in ~47 files. | Any ANSI color library. Most languages have one. Need support for foreground/background colors, bold, dim, and chained styling. |
-| **figures** | Unicode symbols (`figures.tick`, `figures.cross`, `figures.arrowRight`, `figures.pointer`, `figures.line`, `figures.bullet`, etc.) | Cross-platform Unicode symbols for UI elements: checkmarks, arrows, bullets, lines, pointers, warning signs, info icons. Used extensively in menus, lists, status indicators, and permission dialogs. | Build a small module of Unicode symbols with ASCII fallbacks for terminals that don't support them. |
-| **strip-ansi** | `stripAnsi()` function | Removes ANSI escape codes from strings. Used when: computing string width for layout, exporting/rendering plain text output, mapping messages to SDK format, rendering stats, shell output display, markdown processing, text input handling, terminal title setting. | Essential for any terminal app that processes ANSI-colored text. Most languages have an equivalent regex-based implementation. |
-| **@alcalzone/ansi-tokenize** | Tokenization of ANSI escape sequences, used in `src/ink/screen`, `src/ink/output`, `src/ink/log-update`, `src/utils/sliceAnsi`, `src/utils/textHighlighting` | Parses ANSI escape sequences into tokens for: screen buffer cell management, accurate string slicing that respects ANSI codes, text highlighting/syntax coloring, incremental terminal output updates. This is the foundation for all ANSI-aware string operations in the custom Ink fork. | Need an ANSI escape sequence parser/tokenizer. This is used for accurate cell-width calculation and string manipulation when ANSI codes are present. |
-| **supports-hyperlinks** | `supportsHyperlinksLib` to detect terminal hyperlink support | Detects whether the current terminal supports OSC 8 hyperlinks (clickable links in terminal output). Used in `src/ink/supports-hyperlinks` to conditionally render hyperlinks. | Check terminal environment variables (`TERM_PROGRAM`, `VTE_VERSION`, etc.) for hyperlink support. Most modern terminals support this. |
-| **emoji-regex** | `emojiRegex()` for detecting emoji characters | Used in `src/ink/stringWidth` to identify emoji characters when computing display width. Emoji are typically double-width in terminals. | Regex or Unicode property-based emoji detection. Needed for accurate terminal cell width calculation. |
-| **get-east-asian-width** | `eastAsianWidth()` function | Determines the display width of CJK (Chinese, Japanese, Korean) characters. East Asian characters are typically double-width in terminals. Combined with emoji detection for accurate string width calculation. | Unicode East Asian Width property lookup. Needed for accurate terminal cell width calculation. |
-| **wrap-ansi** | `wrapAnsiNpm()` for wrapping ANSI-colored text to terminal width | Wraps text with ANSI escape codes to a specified column width without breaking escape sequences. Used in the custom Ink fork's text wrapping logic. | Text wrapping that preserves ANSI codes. Must handle escape sequences as atomic units. |
-| **indent-string** | `indentString()` for adding indentation to multi-line strings | Used in `src/ink/render-node-to-output` to indent rendered output nodes. Part of the Ink rendering pipeline for nested layouts. | Simple string prefixing utility. |
-| **cli-boxes** | Box style definitions (`cliBoxes` object with named box styles like `single`, `double`, `round`, `bold`, etc.) | Provides predefined box-drawing character sets for rendering bordered boxes around UI elements (dialogs, menus, panels). Used in `src/ink/render-border`. | Box-drawing character sets (Unicode box drawing characters: `─`, `│`, `┌`, `┐`, `└`, `┘`, etc.). |
-| **bidi-js** | Bidirectional text algorithm (`bidiFactory()`) | Implements the Unicode Bidirectional Algorithm for rendering RTL text (Arabic, Hebrew) correctly in terminals. Windows terminals don't implement bidi natively, so this provides software-level reordering. Used in `src/ink/bidi` to reorder character clusters from logical to visual order before terminal output. | Unicode Bidi Algorithm implementation. Only needed for Windows terminal support. Can be skipped for macOS/Linux-only ports. |
-| **qrcode** | `toString()` for generating QR codes as terminal strings | Generates QR codes for session sharing (`/session` command) and bridge dialogs. Renders QR codes as ASCII/Unicode strings that can be displayed in the terminal. | QR code generation library that can output text/ASCII art. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **REACT** | react | Component-based UI framework with hooks and context | Need a component tree model. For terminal ports, consider immediate-mode rendering instead. |
+| **RECONCILER** | react-reconciler | Diff-and-patch rendering: maps a component tree to a display buffer | The hardest piece to port. Need a way to map a component tree to screen output with dirty diffing. |
+| **INK** | ink (forked) | Terminal UI engine: renders components to ANSI with Yoga layout, keyboard/mouse input, screen buffer diffing, frame rendering | Look for a terminal UI framework with flexbox layout, or build simpler immediate-mode rendering. |
+| **YOGA** | yoga-layout | Flexbox layout engine for terminal UI | Any flexbox layout implementation. Yoga is cross-platform C++. |
+| **ANSI** | chalk | Terminal text coloring (foreground, background, bold, dim, chained styling) | Any ANSI color library. Most languages have one. |
+| **FIGURES** | figures | Cross-platform Unicode symbols with ASCII fallbacks | Small module of Unicode symbols (checkmarks, arrows, bullets, etc.). |
+| **ANSI_TOKENS** | @alcalzone/ansi-tokenize | Parse ANSI escape sequences into tokens for screen buffer management and string slicing | ANSI escape sequence parser. Needed for accurate cell-width calculation. |
+| **ANSI_STRIP** | strip-ansi | Remove ANSI escape codes from strings | Regex-based ANSI removal. Essential for any terminal app. |
+| **ANSI_WRAP** | wrap-ansi | Wrap text to terminal width while preserving ANSI codes | Text wrapping that treats escape sequences as atomic units. |
+| **CELL_WIDTH** | emoji-regex + get-east-asian-width | Calculate display width of characters (emoji=double, CJK=double, ASCII=single) | Unicode property lookups for accurate terminal cell width. |
+| **HYPERLINKS** | supports-hyperlinks | Detect OSC 8 hyperlink support in terminal | Check TERM_PROGRAM, VTE_VERSION env vars. |
+| **BOX_CHARS** | cli-boxes | Unicode box-drawing character sets for bordered UI elements | Unicode box characters: ─ │ ┌ ┐ └ ┘ etc. |
+| **BIDI** | bidi-js | Unicode Bidirectional Algorithm for RTL text rendering | Only needed for Windows terminal support. Skip for macOS/Linux-only. |
+| **QR_CODE** | qrcode | Generate QR codes as ASCII/Unicode terminal strings | QR code library with text/ASCII output. |
 
 ## Data/Validation
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **zod** (v3) | `z` namespace, schema definitions | Used in a few places (slack channel suggestions, chrome native host) for runtime validation. Most of the codebase uses zod/v4. | Runtime schema validation library. |
-| **zod/v4** | `z` namespace, `toJSONSchema()`, `ZodError`, `ZodIssue`, `ZodTypeAny`, `ZodIssueCode` types | **Primary validation library** used across the entire codebase. Validates: tool inputs (every tool has a zod schema), settings schemas, permission rules, plugin manifests, agent definitions, task types, MCP elicitation parameters, LSP schemas, session types, webhook payloads, cron configurations, and more. Also used to generate JSON Schema from zod schemas for tool definitions sent to the API. | Essential. Need a runtime schema validation library that can: define complex nested schemas, validate at runtime, produce detailed error messages, and ideally export to JSON Schema (for API tool definitions). |
-| **ajv** | `Ajv` class for JSON Schema validation | Used in `src/tools/SyntheticOutputTool/SyntheticOutputTool` to validate structured output from the model against JSON schemas. Any inference provider can return structured output, and AJV validates it matches the expected schema. | JSON Schema validator. Used specifically for validating AI-generated structured output. |
-| **jsonc-parser** | `parse()`, `printParseErrorCode()`, `ParseErrorCode` from `jsoncparser/lib/esm/main` | Parses JSON with comments (JSONC). Used in `src/utils/json` for reading configuration files that may contain comments —CLAUDEon, settings files, and other config files where users may add comments. | JSON-with-comments parser. Many config files in the Claude ecosystem support `//` and `/* */` comments. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **SCHEMA** | zod/v4 | Runtime schema validation with JSON Schema export | Essential. Validates tool inputs, settings, permissions, plugin manifests. Must support nested schemas and detailed errors. |
+| **JSON_SCHEMA** | ajv | Validate AI-generated structured output against JSON Schema | JSON Schema validator for model output validation. |
+| **JSONC** | jsonc-parser | Parse JSON with comments (// and /* */) | JSON-with-comments parser for config files. |
 
 ## API/Network
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **Inference provider SDK** (e.g. `@anthropic-ai/sdk`, `openai`, or any OpenAI-compatible client) | Client instance, `Stream` (streaming responses), types: `Usage`, `ContentBlock`, `ToolUnion`, `ToolUseBlock`, `MessageStreamParams`, `MessageParam`, `ContentBlockParam`, `TextBlockParam`, `ImageBlockParam`, `ToolUseBlockParam`, `ToolResultBlockParam`, `Base64ImageSource`, `APIError`, `APIUserAbortError`, `ClientOptions`, error classes | **Core API client** for all inference provider interactions. Used for: streaming text/tool responses, handling tool use blocks, image inputs, usage tracking (token counts, costs), error handling (rate limits, aborts, network errors), client configuration (base URL, API key, betas), message parameters construction. The types from this SDK define the shape of every API request and response throughout the codebase. | Need an HTTP client for an OpenAI-compatible Chat Completions API with streaming support (SSE). The types define the entire message protocol: content blocks, tool use, tool results, images, usage stats. Any provider that supports the OpenAI-style message/tool protocol works — Anthropic, OpenAI, OpenRouter, LiteLLM, vLLM, Ollama, etc. Key capabilities: streaming, tool_use/tool_result content blocks, image input, usage tracking, error classes. |
-| **axios** | `axios` instances, `AxiosRequestConfig`, `AxiosResponse`, `AxiosError`, interceptors | HTTP client for all non-inference API calls: bootstrap data, plugin marketplace, auto-updater, telemetry export, session ingress, OAuth, bridge communication, teleport, settings sync, policy limits, usage reports, feedback submission, release notes, marketplace install counts, GCS downloads, IDE integration, SSRF-guarded HTTP hooks, BigQuery export, Datadog metrics, AWS/GCP credential fetching. Used in ~60+ files. | HTTP client with interceptors, error handling, and configurable timeouts. Axios is used everywhere except the inference provider API itself. |
-| **ws** | `WebSocket` class | WebSocket connections for: voice stream speech-to-text (`src/services/voiceStreamSTT`), MCP WebSocket transport (`src/utils/mcpWebSocketTransport`), CLI WebSocket transport (`src/cli/transports/WebSocketTransport`). | WebSocket client library. |
-| **undici** | Type imports only (`import type * as undici from 'undici'`) | Type definitions used in proxy configuration (`src/utils/proxy`, `src/utils/mtls`). The actual HTTP requests go through axios. | Not directly needed — types only for proxy/MTLS configuration. |
-| **https-proxy-agent** | `HttpsProxyAgent`, `HttpsProxyAgentOptions` | HTTP/HTTPS proxy support. Used in `src/utils/proxy` and `src/utils/telemetry/instrumentation` to route requests through corporate proxies. | HTTP proxy agent/connector. |
-| **google-auth-library** | `GoogleAuth` type import | Type import in `src/services/api/client` for Google Cloud (Vertex AI) authentication. The actual auth is handled by the inference provider SDK's Vertex support. | Google OAuth/service account authentication. Only needed if supporting Vertex AI as a backend. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **INFERENCE** | @anthropic-ai/sdk / openai | OpenAI-compatible Chat Completions API with streaming, tool use, content blocks | HTTP client for SSE streaming with tool_use/tool_result blocks, image input, usage tracking. |
+| **HTTP** | axios | HTTP client with interceptors for non-inference API calls | HTTP client with interceptors, error handling, configurable timeouts. |
+| **WEBSOCKET** | ws | WebSocket connections for voice, MCP, CLI transport | WebSocket client library. |
+| **PROXY** | https-proxy-agent | HTTP/HTTPS proxy support for corporate environments | HTTP proxy connector. |
 
 ## MCP (Model Context Protocol)
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **@modelcontextprotocol/sdk** | `Client`, `Server`, `StdioClientTransport`, `StdioServerTransport`, `SSEClientTransport`, `StreamableHTTPClientTransport`, `Transport` interface, `JSONRPCMessage`, types: `Tool`, `Resource`, `Prompt`, `ElicitRequestFormParams`, `ElicitRequestURLParams`, `ElicitResult`, `PrimitiveSchemaDefinition`, `ReadResourceResult`, `ServerCapabilities`, `InitializeParams`, `PublishDiagnosticsParams`, auth modules (client/auth`, server/auth/errors`, shared/auth`), `UnauthorizedError` | MCP SDK for connecting to external tool servers. Used for: stdio-based MCP servers (local processes), SSE-based MCP servers (remote), Streamable HTTP transport, MCP authentication (OAuth), MCP elicitation (user prompts from servers), MCP resource reading, MCP tool calling, custom transports (in-process, WebSocket, SDK control). The MCP protocol is how Claude Code discovers and uses external tools. | Need an MCP client implementation supporting stdio, SSE, and Streamable HTTP transports. MCP auth (OAuth) is also needed for authenticated servers. |
-| **@anthropic-ai/mcpb** | `McpbManifest` type, MCPB extraction/parsing functions | MCP Bundle (MCPB) format parsing. MCPB files are bundled MCP server packages (like `.zip` files with a manifest). Used in `src/utils/plugins/mcpbHandler` and `src/utils/dxt/helpers` for installing and managing bundled MCP servers. | ZIP extraction + manifest parsing for bundled MCP server packages. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **MCP** | @modelcontextprotocol/sdk | Connect to external tool servers via stdio, SSE, Streamable HTTP | MCP client with stdio/SSE/HTTP transports and OAuth auth. |
+| **MCPB** | @anthropic-ai/mcpb | Parse MCP Bundle files (bundled MCP server packages) | ZIP extraction + manifest parsing. |
 
 ## Utilities
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **lodash-es** | `memoize` (~80 files — function result caching), `uniqBy` (~10 files — deduplication by key), `isEqual` (~5 files — deep comparison), `mapValues` (~4 files — object value transformation), `pickBy` (~3 files — object filtering), `last` (~3 files — last array element), `mergeWith` (~1 file — deep merge with customizer), `cloneDeep` (~1 file — deep clone), `partition` (~1 file — split array by predicate), `sample` (~2 files — random element), `omit` (~1 file — object property removal), `reject` (~2 files — filter out by predicate), `zipObject` (~1 file — arrays to object), `throttle` (~1 file — rate limiting), `noop` (~2 files — empty function), `capitalize` (~1 file — string capitalization), `isObject` (~1 file — type check), `isPlainObject` (~1 file — plain object check) | Utility functions used throughout. `memoize` is by far the most used — for caching config reads, file operations, model capabilities, plugin loading, etc. `uniqBy` for deduplicating tool/command lists. `isEqual` for change detection. | Most of these are trivial to reimplement. `memoize` needs a Map-based cache. `uniqBy` needs a Set-based dedup. `isEqual` needs recursive deep comparison. Consider whether your target language has equivalents built-in. |
-| **diff** | `structuredPatch`, `createPatch`, `diffLines`, `diffWordsWithSpace`, `diffArrays`, `StructuredPatchHunk` type | Generates and parses unified diffs. Used for: file edit tool diff generation and display, prompt cache break detection (comparing tool descriptions), file history tracking, color-diff native module, structured diff UI components, turn diff tracking. | Unified diff generation and parsing library. Needed for showing file changes to users and for cache optimization. |
-| **marked** | `marked()` for markdown-to-HTML/token parsing, `Lexer` for tokenization, `Token`/`Tokens` types, `type Tokens` | Markdown parsing for: rendering markdown messages in the TUI, markdown table rendering, CLAUDE.md file parsing, copy command markdown extraction, markdown config loading. | Markdown parser that can output tokens (for custom rendering) or HTML/text. |
-| **chokidar** | `chokidar.watch()`, `FSWatcher` type, file system events | File system watching for: settings file changes (hot-reload), skill directory changes (dynamic skill discovery), keybinding file changes, file change watchers for hooks. | File system watcher with recursive directory support and debounced events. |
-| **ignore** | `ignore()` for .gitignore-style pattern matching | .gitignore-style pattern matching for: file permission validation (allowed/denied paths), CLAUDE.md file inclusion filtering, skill directory file filtering, file suggestion filtering, worktree path filtering. | .gitignore pattern matching library. Used for path-based allow/deny lists. |
-| **picomatch** | `picomatch()` for glob pattern matching | Glob pattern matching used alongside `ignore` in `src/utils/claudemd` for matching file patterns in CLAUDE.md includes. | Glob pattern matching library. |
-| *fuse** | `Fuse` for fuzzy string search | Fuzzy search for: command suggestions (typeahead), plugin recommendation search, log selector filtering, unified suggestions across multiple sources. | Fuzzy string matching library for typeahead/search. |
-| **execa** | `execa()`, `execaSync()`, `ExecaError`, `Options` type | Subprocess execution for: running shell commands (which, git, gh auth, keychain access, PowerShell parsing, image paste handling, doctor diagnostics, user info lookup, secure storage, thinkback, remote setup, GitHub App installation). Used in ~20 files. | Subprocess execution library with promise API, error handling, and stdout/stderr capture. |
-| **shell-quote** | `parse()`, `quote()`, `ParseEntry`, `ControlOperator` types | Shell argument parsing and quoting. Used in `src/utils/bash/shellQuote` and `src/utils/bash/commands` for parsing bash commands into structured representations (for permission checking and command analysis). | Shell argument parser/quoter. Needed for analyzing and validating shell commands before execution. |
-| **proper-lockfile** | `CheckOptions`, `LockOptions`, `UnlockOptions` types | File locking types imported in `src/utils/lockfile`. The actual lockfile implementation appears to be custom, using these types for compatibility. | File locking library for concurrent access protection. |
-| **lru-cache** | `LRUCache` class | LRU (Least Recently Used) cache for: directory completion caching, memoization utility, file state cache, web fetch tool response caching, LSP diagnostic registry caching. | LRU cache implementation. |
-| **semver** | `coerce`, `major`, `minor`, `patch` | Semantic version parsing and comparison. Used for: terminal capability detection (checking terminal version), update notification (comparing current vs. latest version), release notes version extraction, desktop deep link version coercion. | Semantic versioning library. |
-| **commander** (via `@commander-js/extra-typings`) | `Command`, `Option` type imports | CLI argument parsing for MCP subcommands only (`src/commands/mcp/addCommand`, `src/commands/mcp/xaaIdpCommand`). Used as type imports for typed command definitions. | CLI argument parsing library with subcommand support and typed options. |
-| **auto-bind** | NOT imported | Not used in the codebase. | Not needed. |
-| **signal-exit** | `onExit()` callback registration | Process exit handling. Used in `src/ink/ink` and `src/utils/gracefulShutdown` to register cleanup callbacks that run on process exit (SIGINT, SIGTERM, uncaught exceptions). | Process signal/exit handler. |
-| **env-paths** | `envPaths()` for platform-specific config/cache/data directories | Determines platform-appropriate directories for storing config, cache, and data files. Used in `src/utils/cachePaths` to find where to store Claude Code's configuration and cache. | Platform-specific config directory resolution (XDG on Linux, ~/Library on macOS, AppData on Windows). |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **UTILS** | lodash-es | Utility functions: memoize (caching), uniqBy (dedup), isEqual (deep compare), throttle, noop | Most are trivial to reimplement. memoize needs Map cache, uniqBy needs Set dedup. |
+| **DIFF** | diff | Generate and parse unified diffs | Unified diff library for file edits and cache break detection. |
+| **MARKDOWN** | marked | Parse markdown to tokens/HTML | Markdown parser with token output for custom rendering. |
+| **FILEWATCH** | chokidar | Watch files/directories for changes with debounced events | Recursive file watcher with debouncing. |
+| **PATHSPEC** | ignore | .gitignore-style pattern matching for path allow/deny | .gitignore pattern matching library. |
+| **GLOB** | picomatch | Glob pattern matching for file discovery | Glob pattern matching library. |
+| **FUZZY** | fuse | Fuzzy string search for typeahead and suggestions | Fuzzy matching library for autocomplete. |
+| **SUBPROCESS** | execa | Execute shell commands with promise API, stdout/stderr capture | Subprocess execution with timeout and output capture. |
+| **SHELL_QUOTE** | shell-quote | Parse and quote shell arguments for command analysis | Shell argument parser/quoter for permission checking. |
+| **LOCKFILE** | proper-lockfile | File locking for concurrent access protection | File locking library. |
+| **LRUCACHE** | lru-cache | Least Recently Used cache for config, files, web responses | LRU cache implementation. |
+| **SEMVER** | semver | Semantic version parsing and comparison | Semantic versioning library. |
+| **CLI_ARGS** | commander | CLI argument parsing with subcommands and typed options | CLI argument parser with subcommand support. |
+| **SIGNALS** | signal-exit | Register cleanup callbacks on process exit (SIGINT, SIGTERM) | Process signal/exit handler. |
+| **XDG** | env-paths | Platform-specific config/cache/data directory resolution | XDG on Linux, ~/Library on macOS, AppData on Windows. |
 
-## Observability
+## Build/Runtime
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **@opentelemetry/api** | `trace`, `diag`, `context`, `Span`, `Attributes`, `HrTime`, `DiagLogger`, `MetricOptions` | OpenTelemetry API for distributed tracing and metrics. Used for: session tracing, beta session tracing, telemetry instrumentation, event logging, performance monitoring. | OpenTelemetry SDK or equivalent observability framework. |
-| **@opentelemetry/api-logs** | `logs` namespace, `Logger`, `AnyValueMap` | OpenTelemetry Logs API for structured logging. Used in the first-party event logger for sending log events to the backend telemetry service. | Structured logging with OpenTelemetry log format. |
-| **@opentelemetry/resources** | `resourceFromAttributes`, `Resource` | OpenTelemetry resource detection. Used to identify the service, host, and environment in telemetry data. | Resource attribute collection (service name, version, host info). |
-| **@opentelemetry/sdk-logs** | `LoggerProvider`, `LogRecordProcessor`, `BatchLogRecordProcessor`, `ReadableLogRecord` | OpenTelemetry Logs SDK for batching and exporting log records. | Log record batching and export. |
-| **@opentelemetry/sdk-metrics** | `MeterProvider`, `MetricReader`, `PeriodicExportingMetricReader`, `Aggregation`, `Histogram`, `AggregationTemporality` | OpenTelemetry Metrics SDK for collecting and exporting metrics (frame duration, API latency, token counts, etc.). | Metrics collection and export. |
-| **@opentelemetry/sdk-trace-base** | `SpanProcessor`, `BatchSpanProcessor`, `ReadableSpan`, `SpanExporter` | OpenTelemetry Tracing SDK for collecting and exporting trace spans. | Trace span collection and export. |
-| **@opentelemetry/core** | `ExportResult`, `ExportResultCode` | OpenTelemetry core types for export result handling. Used in custom exporters (BigQuery, first-party event logging). | Export result types. |
-| **@opentelemetry/semantic-conventions** | Semantic attribute constants (resource and span attributes) | Standardized attribute names for telemetry (e.g., `http.method`, `db.system`). Used in instrumentation setup and first-party event logging. | Standard telemetry attribute names. |
-
-## Auth/Cloud
-
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **@aws-sdk/client-bedrock-runtime** | `CountTokensCommandInput` type only | Type import for AWS Bedrock token counting. Used in `src/services/tokenEstimation` for estimating token counts when using Bedrock as the API backend. | AWS Bedrock SDK types. Only needed if supporting AWS Bedrock as an API backend. |
-| **@growthbook/growthbook** | `GrowthBook` class, feature gates, experiments | Feature flag and A/B testing platform. Used for: gating experimental features (coordinator mode, assistant mode, bridge mode, voice mode, proactive mode, history snip, workflow scripts, CCR remote setup, fork subagent, buddy, UDS inbox, torch, ultraplan, context collapse, terminal panel, web browser tool, transcript classifier, upload user settings, direct connect, Lodestone (deep links), SSH remote, and many more. GrowthBook attributes include user ID, session ID, platform, subscription type, organization. | Feature flag service. Used extensively with `bun:bundle` feature flags — GrowthBook provides server-controlled feature flags while `bun:bundle` provides build-time flags. |
-
-## Native/Bun-Specific
-
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **bun:bundle** | `feature()` function for build-time feature flags | **Build-time feature flag system.** Used in ~200 files to conditionally include/exclude code at build time. Controls: coordinator mode, assistant mode (Kairos), bridge mode, voice mode, proactive mode, history snip, workflow scripts, CCR remote setup, fork subagent, buddy, UDS inbox, torch, ultraplan, context collapse, terminal panel, web browser tool, transcript classifier, upload user settings, direct connect, Lodestone (deep links), SSH remote, and many more. This is a Bun-specific import that resolves at compile time. | Build-time feature flag system. In other languages, this could be compiler directives, build tags, or environment-based dead code elimination. Critical for producing different builds (internal Anthropic builds vs. public builds). |
-| **bun:ffi** | Foreign Function Interface | Used in native modules for calling C/C++ code from Bun. The native modules (color-diff-napi, image-processor-napi, yoga-layout) use NAPI rather than FFI directly, but bun:ffi is available for direct C interop. | FFI or native module system for calling C/C++ code. |
-| **color-diff-napi** | Native diff rendering | Native (NAPI) module for colorized diff rendering. Uses `diffArrays` from the `diff` package andhighlight types for syntax-aware colored diff output. | Native diff rendering with syntax highlighting. Can be replaced with a pure-JS equivalent if performance is acceptable. |
-| **image-processor-napi** | Native image processing | Native (NAPI) module for image processing operations. Used for image resizing, format conversion, and optimization before sending to the Claude API. | Image processing library (resize, format conversion, optimization). |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **BUILDFLAGS** | BUILDFLAGS | Build-time feature flags — conditionally include/exclude code at compile time | Compiler directives, build tags, or environment-based dead code elimination. Used in ~200 files. |
+| **FFI** | bun:ffi | Foreign Function Interface for calling C/C++ code | FFI or native module system (NAPI, ctypes, etc.). |
+| **COLORDIFF** | color-diff-napi | Native module for syntax-highlighted colored diff rendering | Can be replaced with pure-language equivalent if performance acceptable. |
+| **IMAGEPROC** | image-processor-napi | Native module for image resize/format/optimization | Image processing library (resize, format conversion). |
 
 ## LSP (Language Server Protocol)
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **vscode-languageserver-protocol** | `InitializeParams`, `PublishDiagnosticsParams`, protocol message types | LSP protocol types and message definitions. Used in the LSP service for connecting to language servers, receiving diagnostics, and managing LSP server instances. | Language Server Protocol implementation. |
-| **vscode-languageserver-types** | Diagnostic types, position/range types, symbol types | LSP type definitions for diagnostics, positions, ranges, symbols, and other LSP data structures. Used in the LSP tool for formatting and displaying language server results. | LSP type definitions. |
-| **vscode-jsonrpc** | JSON-RPC types from `vscodejsonrpc/node` | JSON-RPC protocol implementation for LSP communication. Used in `src/services/lsp/LSPClient` for the JSON-RPC transport layer that LSP is built on. | JSON-RPC 2.0 implementation. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **LSP** | vscode-languageserver-protocol + vscode-languageserver-types | Language Server Protocol implementation for diagnostics, definitions, references | LSP client with protocol types. |
+| **JSONRPC** | vscode-jsonrpc | JSON-RPC 2.0 transport layer for LSP communication | JSON-RPC 2.0 implementation. |
 
-## Other / Vendor-Internal
+## Runtime Feature Flags
 
-| Library | Features Used | Purpose | Porting Guidance |
-|---------|--------------|---------|-----------------|
-| **@ant/claude-for-chrome-mcp** | `BROWSER_TOOLS` constant, Chrome MCP server integration | Chrome browser integration MCP server. Used in `src/utils/claudeInChrome/` for the browser integration feature — allows the agent to interact with the browser. | Browser automation MCP server. Vendor-internal package. |
-| **@ant/computer-use-mcp** | `buildComputerUseTools`, `bindSessionContext`, `ComputerUseSessionContext`, `CuCallToolResult`, `CuPermissionRequest`, `CuPermissionResponse`, `DEFAULT_GRANT_FLAGS`, `ScreenshotDims`, `CoordinateMode`, `CuSubGates`, `getSentinelCategory`, `API_RESIZE_PARAMS`, `targetImageSize` | Computer Use MCP integration. Used in `src/utils/computerUse/` for the computer use feature — allows the agent to control the desktop (mouse, keyboard, screenshots). Includes permission system, screenshot handling, and sentinel app categorization. | Desktop automation / computer use integration. Vendor-internal package. |
-| **@ant/computer-use-swift** | `ComputerUseAPI` type | Type definitions for the Swift-based computer use backend on macOS. | macOS native computer use backend types. Vendor-internal package. |
-| **@ant/computer-use-input** | Input loading functions | Input handling for computer use feature. | Input handling for desktop automation. Vendor-internal package. |
-| **code-excerpt** | `codeExcerpt()`, `CodeExcerpt` type | Extracts a relevant excerpt from a source file around an error location. Used in `src/ink/components/ErrorOverview` to show code context in error messages. | Source code excerpt extraction around a line number. |
-| **stack-utils** | `StackUtils` class for parsing and formatting stack traces | Parses JavaScript stack traces for cleaner error display. Used in `src/ink/components/ErrorOverview` to format error stack traces in the TUI. | Stack trace parser/formatter. |
-| **asciichart** | `plot()` for ASCII chart rendering | Renders ASCII line charts. Used in `src/components/Stats` to display cost/usage charts in the terminal. | ASCII art chart/graph rendering library. |
+| Jargon | Library | Capability | Porting Guidance |
+|--------|---------|------------|-----------------|
+| **FEATUREFLAGS** | @growthbook/growthbook | Server-controlled runtime feature flags and A/B testing | Feature flag service. Controls experimental features at runtime (vs BUILDFLAGS which are compile-time). |
+
+## Excluded (Vendor-Internal / Telemetry)
+
+These are NOT needed for a community port:
+
+| Jargon | Library | Reason |
+|--------|---------|--------|
+| **TELEMETRY** | @opentelemetry/* | First-party observability. Excluded from Claudette. |
+| **VENDOR** | @ant/* packages | Anthropic-internal packages (browser automation, desktop control). |
 
 ---
 
-## Notes on Partial Matches
+## Critical Path
 
-When porting, **exact API compatibility is not required**. Focus on matching the **capability**:
+The minimum set of jargon tokens you MUST find equivalents for:
 
-- If your target language has a built-in JSON parser that handles comments, you don't need `jsonc-parser`.
-- If your terminal UI framework has built-in flexbox layout, you don't need the Yoga + react-reconciler combination.
-- If your language's standard library includes subprocess execution, you don't need `execa`.
-- Feature flags (`bun:bundle`) can be replaced with any build-time conditional compilation mechanism.
-- The `@ant/*` packages are vendor-internal and can be skipped for a community port — they provide browser automation and desktop control features.
+1. **INFERENCE** — OpenAI-compatible API client with streaming and tool use
+2. **INK** + **RECONCILER** + **YOGA** — Terminal UI rendering (or equivalent)
+3. **SCHEMA** — Runtime validation for tool inputs
+4. **MCP** — External tool server connections
+5. **SUBPROCESS** — Shell command execution
+6. **BUILDFLAGS** — Build-time feature gating
 
-The most critical dependencies to find equivalents for are:
-1. **Terminal UI rendering** (Ink + react-reconciler + Yoga) — the entire TUI
-2. **Inference provider client** (OpenAI-compatible) — streaming, tool use, content blocks
-3. **MCP SDK** — external tool server connections
-4. **Schema validation** (zod) — tool input validation throughout
-5. **Feature flags** (bun:bundle + GrowthBook) — build-time and runtime feature gating
+## Jargon Usage
+
+Throughout the claudette/ documentation, you'll see references like:
+- "Uses SCHEMA for tool input validation"
+- "Requires SUBPROCESS for shell execution"
+- "BUILDFLAGS control feature inclusion at compile time"
+
+Each token maps to the capability described in this table. Find an equivalent in your target language — exact API compatibility is not required.

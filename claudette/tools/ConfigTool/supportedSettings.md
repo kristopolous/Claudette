@@ -7,7 +7,7 @@ Defines all supported configuration settings with their types, descriptions, opt
 ## Imports
 
 - **Stdlib**: none
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: `utils/config`, `utils/configConstants`, `utils/model/modelOptions`, `utils/model/validateModel`, `utils/theme`
 
 ## Logic

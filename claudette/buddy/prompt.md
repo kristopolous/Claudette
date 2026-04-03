@@ -5,7 +5,7 @@ Provides companion intro attachment and system prompt helpers for the buddy feat
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle` feature flag
+- **External**: BUILDFLAGS feature flag
 - **Internal**: Message type, Attachment utils, config, companion
 
 ## Logic

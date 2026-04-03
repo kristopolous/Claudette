@@ -5,7 +5,7 @@ Provides retry logic for API requests with exponential backoff and error handlin
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `@anthropic-ai/sdk`, `bun:bundle`
+- **External**: `@anthropic-ai/sdk`, BUILDFLAGS
 - **Internal**: querySource, message types, aws, debug, log, messages, model providers, auth, envUtils, errors, fastMode, model, proxy, sleep, thinking, growthbook, analytics, rateLimitMocking, errors/errorUtils
 
 ## Logic

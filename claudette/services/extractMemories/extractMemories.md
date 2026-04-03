@@ -5,7 +5,7 @@ Extracts durable memories from session transcript and writes to auto-memory dire
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, hooks, memdir, memoryScan/paths, Tool, BashTool, FileEditTool, FileReadTool, FileWriteTool, GlobTool, GrepTool, REPLTool, message types, abortController, array utils, debug, forkedAgent, hooks postSampling, messages, growthbook, analytics metadata, extractMemories prompts
 
 ## Logic

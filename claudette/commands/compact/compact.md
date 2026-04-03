@@ -8,7 +8,7 @@ Compacts the conversation history into a summary, reducing token usage while pre
 - `chalk` (for colored terminal output)
 
 ### Internal
-- `feature` from `bun:bundle` (feature flagging)
+- `feature` from BUILDFLAGS (feature flagging)
 - `markPostCompaction` from src/bootstrap/state`
 - `getSystemPrompt` from `.././constants/prompts`
 - `getSystemContext`, `getUserContext` from `.././context`

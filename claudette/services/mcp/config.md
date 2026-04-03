@@ -5,7 +5,7 @@ Manages MCP server configuration loading from multiple sources (user, project, l
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`
-- **External**: `bun:bundle`, `lodash-es/mapValues/memoize`
+- **External**: BUILDFLAGS, `lodash-es/mapValues/memoize`
 - **Internal**: platform, plugin types, claudeInChrome, config, cwd, debug, errors, fsOperations, JSON utils, log, plugins, settings, analytics, claudeai, envExpansion, types, utils
 
 ## Logic

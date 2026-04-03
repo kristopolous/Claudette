@@ -3,7 +3,7 @@ For swarm workers, forwards tool permission requests to the leader via mailbox, 
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle` (`feature`), `@anthropic-ai/sdk` (`ContentBlockParam`)
+- **External**: BUILDFLAGS (`feature`), `@anthropic-ai/sdk` (`ContentBlockParam`)
 - **Internal**:
   - `types/permissions` - `PendingClassifierCheck`
   - `utils/agentSwarmsEnabled` - `isAgentSwarmsEnabled`

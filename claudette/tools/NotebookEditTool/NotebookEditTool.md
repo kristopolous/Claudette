@@ -4,7 +4,7 @@
 Tool for editing Jupyter notebook (.ipynb) cells with support for replace, insert, and delete operations.
 
 ## Imports
-- **External**: `zod/v4`, `bun:bundle`
+- **External**: `zod/v4`, BUILDFLAGS
 - **Stdlib**: `path`
 - **Internal**:
   - Tool: `buildTool`, `ToolDef`, `ToolUseContext`

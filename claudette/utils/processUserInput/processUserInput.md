@@ -4,7 +4,7 @@
 Main entry point for processing all user input (text, slash commands, bash commands, images, attachments). Routes to specialized handlers, executes UserPromptSubmit hooks, and handles bridge/remote command safety.
 
 ## Imports
-- **Stdlib**: `bun:bundle` (feature), `crypto` (randomUUID)
+- **Stdlib**: BUILDFLAGS (feature), `crypto` (randomUUID)
 - **External**: `@anthropic-ai/sdk/resources/messages.mjs` (Base64ImageSource, ContentBlockParam, ImageBlockParam)
 - **Internal**: `src/constants/querySource.js` (QuerySource), `src/services/analytics/index.js` (logEvent), `src/utils/messages.js` (getContentText), `../../commands.js` (findCommand, getCommandName, isBridgeSafeCommand, LocalJSXCommandContext), `../../hooks/useCanUseTool.js` (CanUseToolFn), `../../hooks/useIdeSelection.js` (IDESelection), `../../Tool.js` (SetToolJSXFn, ToolUseContext), `../../types/message.js` (AssistantMessage, AttachmentMessage, Message, ProgressMessage, SystemMessage, UserMessage), `../../types/permissions.js` (PermissionMode), `../../types/textInputTypes.js` (isValidImagePaste, PromptInputMode), `../attachments.js` (AgentMentionAttachment, createAttachmentMessage, getAttachmentMessages), `../config.js` (PastedContent), `../effort.js` (EffortValue), `../generators.js` (toArray), `../hooks.js` (executeUserPromptSubmitHooks, getUserPromptSubmitHookBlockingMessage), `../imageResizer.js` (createImageMetadataText, maybeResizeAndDownsampleImageBlock), `../imageStore.js` (storeImages), `../messages.js` (createCommandInputMessage, createSystemMessage, createUserMessage), `../queryProfiler.js` (queryCheckpoint), `../slashCommandParsing.js` (parseSlashCommand), `../ultraplan/keyword.js` (hasUltraplanKeyword, replaceUltraplanKeyword), `./processTextPrompt.js` (processTextPrompt)
 

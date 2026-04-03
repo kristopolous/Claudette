@@ -5,7 +5,7 @@ Provides prompt templates for background memory extraction agent.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: memoryTypes, tool constants
 
 ## Logic

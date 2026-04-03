@@ -5,7 +5,7 @@ Renders the companion (buddy) sprite in the terminal UI with idle animation, spe
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `bun:bundle`, `figures`, `react`
+- **External**: `react/compiler-runtime`, BUILDFLAGS, `figures`, `react`
 - **Internal**: terminalSize, stringWidth, ink components, AppState, config, fullscreen, theme, companion, sprites, types
 
 ## Logic

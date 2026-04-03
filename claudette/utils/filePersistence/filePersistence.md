@@ -4,7 +4,7 @@
 Orchestrates file persistence at end of each turn, uploading modified files to the Files API in BYOC mode or reading file IDs via xattrs in Cloud mode.
 
 ## Imports
-- **Stdlib**: `bun:bundle` (feature), `path` (join, relative)
+- **Stdlib**: BUILDFLAGS (feature), `path` (join, relative)
 - **Internal**: ../../services/analytics/index (logEvent, AnalyticsMetadata), ../../services/api/filesApi (FilesApiConfig, uploadSessionFiles), ../cwd (getCwd), ../errors (errorMessage), ../log (logError), ../sessionIngressAuth (getSessionIngressAuthToken), ./outputsScanner (findModifiedFiles, getEnvironmentKind, logDebug), ./types (DEFAULT_UPLOAD_CONCURRENCY, FailedPersistence, FILE_COUNT_LIMIT, FilesPersistedEventData, OUTPUTS_SUBDIR, PersistedFile, TurnStartTime)
 
 ## Logic

@@ -5,7 +5,7 @@ Provides background tasks dialog component for viewing and managing background t
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `figures`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `figures`, `react`, `react/compiler-runtime`
 - **Internal**: coordinator coordinatorMode, hooks useTerminalSize, state AppState/teammateViewHelpers, Tool, tasks DreamTask/InProcessTeammateTask/LocalAgentTask/LocalShellTask/LocalWorkflowTask/MonitorMcpTask/RemoteAgentTask/types, types utils, array, swarm constants, commands ultraplan, commands, context overlayContext, hooks useExitOnCtrlCDWithKeybindings, ink events keyboard-event, ink, keybindings useKeybinding/useShortcutDisplay, design-system Byline/Dialog/KeyboardShortcutHint, tasks AsyncAgentDetailDialog/BackgroundTask/DreamDetailDialog/InProcessTeammateDetailDialog/RemoteSessionDetailDialog/ShellDetailDialog
 
 ## Logic

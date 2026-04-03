@@ -5,7 +5,7 @@ Manages CLAUDE.md memory file loading with priority ordering and @include suppor
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`, `ignore`, `lodash-es/memoize`, `marked`, `picomatch`
+- **External**: BUILDFLAGS, `ignore`, `lodash-es/memoize`, `marked`, `picomatch`
 - **Internal**: analytics, bootstrap state, memdir memdir/paths, growthbook, config, debug, diagLogs, envUtils, errors, file, fileStateCache, frontmatterParser, fsOperations, git, hooks, memory types, path, permissions filesystem, settings constants/settings, teamMemoryOps
 
 ## Logic

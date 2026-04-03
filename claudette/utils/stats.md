@@ -4,7 +4,7 @@
 Aggregates usage statistics from all Claude Code session files across all projects, including session counts, message counts, daily activity, streaks, model usage, and speculation time saved. Uses a disk cache to avoid reprocessing historical data.
 
 ## Imports
-- **Stdlib**: `bun:bundle`, `fs/promises`, `path`
+- **Stdlib**: BUILDFLAGS, `fs/promises`, `path`
 - **External**: none
 - **Internal**: `src/entrypoints/agentSdkTypes`, `../types/logs`, `./debug`, `./errors`, `./fsOperations`, `./json`, `./messages`, `./sessionStorage`, `./shell/shellToolUtils`, `./slowOperations`, `./statsCache`
 

@@ -5,7 +5,7 @@ Provides settings loading and management utilities.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`, `lodash-es/mergeWith`, `zod/v4`
+- **External**: BUILDFLAGS, `lodash-es/mergeWith`, `zod/v4`
 - **Internal**: bootstrap state, remoteManagedSettings syncCacheState, array, debug, diagLogs, envUtils, errors, file, fileRead, fsOperations, git gitignore, json, log, platform, JSON utils, startupProfiler, settings constants/internalWrites/managedPath/mdm/settings/settingsCache/types/validation
 
 ## Logic

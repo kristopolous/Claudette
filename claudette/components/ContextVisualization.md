@@ -3,7 +3,7 @@ Visualizes context usage breakdown including token counts per category, MCP tool
 
 ## Imports
 - **Stdlib**: None
-- **External**: bun:bundle (feature), react, react/compiler-runtime
+- **External**: BUILDFLAGS (feature), react, react/compiler-runtime
 - **Internal**: ink (Box, Text), utils/analyzeContext (ContextData), utils/contextSuggestions (generateContextSuggestions), utils/file (getDisplayPath), utils/format (formatTokens), utils/settings/constants (getSourceDisplayName, SettingSource), utils/stringUtils (plural), ContextSuggestions (ContextSuggestions)
 
 ## Logic

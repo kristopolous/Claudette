@@ -3,7 +3,7 @@ Renders different message types (user, assistant, system, tool use, etc.) by del
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `bun:bundle` (feature), `@anthropic-ai/sdk` (BetaContentBlock, ImageBlockParam, TextBlockParam, ThinkingBlockParam, ToolResultBlockParam, ToolUseBlockParam types)
+- **External**: `react`, `react/compiler-runtime`, BUILDFLAGS (feature), `@anthropic-ai/sdk` (BetaContentBlock, ImageBlockParam, TextBlockParam, ThinkingBlockParam, ToolResultBlockParam, ToolUseBlockParam types)
 - **Internal**: `ink` (Box), `hooks/useTerminalSize`, `types/connectorText` (ConnectorTextBlock, isConnectorTextBlock), `types/message` (various message types), `utils/advisor` (AdvisorBlock, isAdvisorBlock), `utils/fullscreen` (isFullscreenEnvEnabled), `utils/log` (logError), `utils/messages` (buildMessageLookups), `components/CompactSummary`, `components/messages/AdvisorMessage`, `components/messages/AssistantRedactedThinkingMessage`, `components/messages/AssistantTextMessage`, `components/messages/AssistantThinkingMessage`, `components/messages/AssistantToolUseMessage`, `components/messages/AttachmentMessage`, `components/messages/CollapsedReadSearchContent`, `components/messages/CompactBoundaryMessage`, `components/messages/GroupedToolUseContent`, `components/messages/SystemTextMessage`, `components/messages/UserImageMessage`, `components/messages/UserTextMessage`, `components/messages/UserToolResultMessage`, `components/OffscreenFreeze`, `components/shell/ExpandShellOutputContext`
 
 ## Logic

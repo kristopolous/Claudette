@@ -2,7 +2,7 @@
 Renders an error message for a failed tool use, handling various rejection and interruption scenarios.
 
 ## Imports
-- **External**: `react`, `bun:bundle`, `@anthropic-ai/sdk`
+- **External**: `react`, BUILDFLAGS, `@anthropic-ai/sdk`
 - **Internal**: `constants/figures`, `ink`, `Tool`, `types/message`, `utils/messages`, `components/FallbackToolUseErrorMessage`, `components/InterruptedByUser`, `components/MessageResponse`, `components/messages/UserToolResultMessage/RejectedPlanMessage`, `components/messages/UserToolResultMessage/RejectedToolUseMessage`
 
 ## Logic

@@ -3,7 +3,7 @@ Provides system prompt prefix selection and API request attribution header gener
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: `services/analytics/growthbook`, `utils/debug`, `utils/envUtils`, `utils/model/providers`, `utils/workloadContext`
 
 ## Logic

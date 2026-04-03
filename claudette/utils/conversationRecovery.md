@@ -5,7 +5,7 @@ Provides conversation recovery utilities for session resume and consistency chec
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: cwd, bootstrap state, ids, logs types, message types, permissions, attachments, fileHistory, log, messages, plans, sessionStart, sessionStorage, toolResultStorage
 
 ## Logic

@@ -5,7 +5,7 @@ Implements microcompact for clearing old tool results to reduce context size.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `@anthropic-ai/sdk`, `bun:bundle`
+- **External**: `@anthropic-ai/sdk`, BUILDFLAGS
 - **Internal**: querySource, Tool, tool constants, message types, debug, model, shell utils, JSON utils, analytics, promptCacheBreakDetection, tokenEstimation, compactWarningState, timeBasedMCConfig
 
 ## Logic

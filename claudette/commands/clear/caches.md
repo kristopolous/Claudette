@@ -2,7 +2,7 @@
 Clear all session-related caches without affecting messages or session ID.
 
 ## Imports
-- **External**: `bun:bundle` (feature flags)
+- **External**: BUILDFLAGS (feature flags)
 - **Internal**: Extensive list of caches from across codebase: state, commands, context, services, utils, skills, etc.
 
 ## Logic

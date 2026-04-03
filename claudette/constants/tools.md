@@ -3,7 +3,7 @@ Defines tool availability sets for different agent execution modes including asy
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: tool name constants from individual tool modules, shell tool utilities
 
 ## Logic

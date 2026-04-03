@@ -5,7 +5,7 @@ Provides memory type definitions.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: (none)
 
 ## Logic

@@ -18,7 +18,7 @@ Renders ANSI-escaped terminal text directly to PNG image without SVG intermediat
 7. `FONT_B64` - packed Fira Code Regular font (SIL OFL 1.1)
 8. Format: [count:u16le][codepoint:u32le, alpha:GLYPH_BYTES]...
 9. Covers printable ASCII plus unicode chars for /stats output
-10. Regenerate via: bun scripts/generate-bitmap-font
+10. Regenerate font via: `scripts/generate-bitmap-font`
 11. `DEFAULT_FG`, `DEFAULT_BG` - default foreground/background colors
 12. `parseAnsi` - parses ANSI escape sequences
 13. `ansiToPng` - converts parsed lines to PNG

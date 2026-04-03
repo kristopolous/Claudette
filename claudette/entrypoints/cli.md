@@ -5,7 +5,7 @@ Bootstrap entrypoint for Claudette CLI with fast-paths for common flags and spec
 
 ## Imports
 - **Stdlib**: `process`
-- **External**: `bun:bundle` feature flag
+- **External**: build-time feature flags
 - **Internal**: Dynamic imports for config, model, prompts, claudeInChrome, various entrypoints
 
 ## Logic

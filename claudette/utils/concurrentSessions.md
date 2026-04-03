@@ -5,7 +5,7 @@ Manages concurrent session tracking with PID files for `claude ps` visibility.
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: bootstrap state, cleanupRegistry, debug, envUtils, errors, genericProcessUtils, platform, JSON utils, teammate
 
 ## Logic

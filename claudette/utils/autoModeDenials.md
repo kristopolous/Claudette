@@ -5,7 +5,7 @@ Tracks commands recently denied by the auto mode classifier.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: (none)
 
 ## Logic

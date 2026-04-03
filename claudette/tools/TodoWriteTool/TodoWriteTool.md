@@ -4,7 +4,7 @@
 Tool for updating the session's task checklist (todo list), replacing the entire list. Designed for tracking progress during a session.
 
 ## Imports
-- **External**: `bun:bundle`, `zod/v4`
+- **External**: BUILDFLAGS, `zod/v4`
 - **Internal**:
   - State: `getSessionId`
   - Analytics: `getFeatureValue_CACHED_MAY_BE_STALE`

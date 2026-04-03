@@ -4,7 +4,7 @@
 Merges and filters tool pools from multiple sources (built-in, MCP, initial props), applying coordinator-mode restrictions and PR activity subscription tool allowances.
 
 ## Imports
-- **Stdlib**: `bun:bundle`, `lodash-es/partition`, `lodash-es/uniqBy`
+- **Stdlib**: BUILDFLAGS, `lodash-es/partition`, `lodash-es/uniqBy`
 - **Internal**: `../constants/tools`, `../services/mcp/utils`, `../Tool`
 
 ## Logic

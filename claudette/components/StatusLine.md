@@ -2,7 +2,7 @@
 Displays a configurable status line showing model, cost, context window, and workspace information.
 
 ## Imports
-- **Stdlib**: bun:bundle (feature)
+- **Stdlib**: BUILDFLAGS (feature)
 - **External**: react (React, memo, useCallback, useEffect, useRef)
 - **Internal**: src/services/analytics/index (logEvent),src/state/AppState (useAppState, useSetAppState),src/utils/permissions/PermissionMode (PermissionMode), ./bootstrap/state (getIsRemoteMode, getKairosActive, getMainThreadAgentType, getOriginalCwd, getSdkBetas, getSessionId), ./constants/outputStyles (DEFAULT_OUTPUT_STYLE_NAME), ./context/notifications (useNotifications), ../costtracker (getTotalAPIDuration, getTotalCost, getTotalDuration, getTotalInputTokens, getTotalLinesAdded, getTotalLinesRemoved, getTotalOutputTokens), ./hooks/useMainLoopModel (useMainLoopModel), ./hooks/useSettings (ReadonlySettings, useSettings), ./ink (Ansi, Box, Text), ./services/claudeAiLimits (getRawUtilization), ./types/message (Message), ./types/statusLine (StatusLineCommandInput), ./types/textInputTypes (VimMode), ./utils/config (checkHasTrustDialogAccepted), ./utils/context (calculateContextPercentages, getContextWindowForModel), ./utils/cwd (getCwd), ./utils/debug (logForDebugging), ./utils/fullscreen (isFullscreenEnvEnabled), ./utils/hooks (createBaseHookInput, executeStatusLineCommand), ./utils/messages (getLastAssistantMessage), ./utils/model/model (getRuntimeMainLoopModel, ModelName, renderModelName), ./utils/sessionStorage (getCurrentSessionTitle), ../utils/tokens (doesMostRecentAssistantMessageExceed200k, getCurrentUsage), ../utils/worktree (getCurrentWorktreeSession), ./PromptInput/utils (isVimModeEnabled)
 

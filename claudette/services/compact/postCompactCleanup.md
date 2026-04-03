@@ -5,7 +5,7 @@ Runs cleanup of caches and tracking state after compaction to free memory held b
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: querySource, systemPromptSections, context, BashTool, classifierApprovals, claudemd, sessionStorage, betaSessionTracing, microCompact
 
 ## Logic

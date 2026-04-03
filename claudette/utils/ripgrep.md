@@ -13,7 +13,7 @@ Provides ripgrep command configuration and execution utilities.
 2. `getRipgrepConfig` - memoized config getter
 3. Checks USE_BUILTIN_RIPGREP env var (falsy = use system ripgrep)
 4. System ripgrep: finds 'rg' via findExecutable, uses command name 'rg' (not path) for PATH hijacking protection
-5. Bundled mode: ripgrep statically compiled into bun-internal, dispatches based on argv[0]
+5. Bundled mode: ripgrep statically compiled into the binary, dispatches based on argv[0]
 6. Spawns self with argv0='rg'
 7. Builtin mode: uses vendored ripgrep from vendor/ripgrep directory
 8. Platform-specific paths: {arch}-win32/rg.exe or {arch}-{platform}/rg

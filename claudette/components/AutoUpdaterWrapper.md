@@ -4,7 +4,7 @@ A higher-order component that abstracts the logic for detecting the application'
 ## Imports
 - **Stdlib**: None
 - **External**: `react`, `react/compiler-runtime`
-- **Internal**: `feature` (bun:bundle), `AutoUpdaterResult` (utils/autoUpdater, type only), `isAutoUpdaterDisabled` (utils/config), `logForDebugging` (utils/debug), `getCurrentInstallationType` (utils/doctorDiagnostic), `AutoUpdater`, `NativeAutoUpdater`, `PackageManagerAutoUpdater`
+- **Internal**: `feature` (BUILDFLAGS), `AutoUpdaterResult` (utils/autoUpdater, type only), `isAutoUpdaterDisabled` (utils/config), `logForDebugging` (utils/debug), `getCurrentInstallationType` (utils/doctorDiagnostic), `AutoUpdater`, `NativeAutoUpdater`, `PackageManagerAutoUpdater`
 
 ## Logic
 1. **Environment Detection**:

@@ -3,7 +3,7 @@ Provides a searchable, navigable settings panel for configuring all application 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `figures`, `chalk`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `figures`, `chalk`, `react`, `react/compiler-runtime`
 - **Internal**: `ink`, `ink/events/keyboard-event`, `keybindings/useKeybinding`, `utils/config`, `utils/authPortable`, `utils/permissions/PermissionMode`, `utils/permissions/permissionSetup`, `utils/log`, `services/analytics/index`, `bridge/bridgeEnabled`, `components/ThemePicker`, `state/AppState`, `components/ModelPicker`, `utils/model/model`, `utils/extraUsage`, `components/ClaudeMdExternalIncludesDialog`, `components/ChannelDowngradeDialog`, `components/design-system/Dialog`, `components/CustomSelect/index`, `components/OutputStylePicker`, `components/LanguagePicker`, `utils/claudemd`, `components/design-system/KeyboardShortcutHint`, `components/ConfigurableShortcutHint`, `components/design-system/Byline`, `components/design-system/Tabs`, `context/modalContext`, `components/SearchBox`, `utils/ide`, `utils/settings/settings`, `bootstrap/state`, `constants/outputStyles`, `utils/envUtils`, `commands`, `services/analytics/growthbook`, `utils/agentSwarmsEnabled`, `utils/swarm/backends/teammateModeSnapshot`, `utils/swarm/teammateModel`, `hooks/useSearchInput`, `hooks/useTerminalSize`, `utils/fastMode`, `utils/fullscreen`
 
 ## Logic

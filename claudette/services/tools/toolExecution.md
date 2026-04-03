@@ -5,7 +5,7 @@ Executes tools with permission checks, progress tracking, and analytics.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `@anthropic-ai/sdk`
+- **External**: BUILDFLAGS, `@anthropic-ai/sdk`
 - **Internal**: analytics, analytics metadata, bootstrap state, hooks toolPermission, hooks, Tool, BashTool, FileEditTool, FileReadTool, FileWriteTool, NotebookEditTool, PowerShellTool, gitOperationTracking, ToolSearchTool, tools, hooks types, message types, array utils, attachments, debug, errors, hooks execution, log, messages, permissions, toolErrors, MCP utils, types
 
 ## Logic

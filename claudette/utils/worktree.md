@@ -5,7 +5,7 @@ Provides git worktree management utilities.
 
 ## Imports
 - **Stdlib**: `child_process`, `fs/promises`, `path`
-- **External**: `bun:bundle`, `chalk`, `ignore`
+- **External**: BUILDFLAGS, `chalk`, `ignore`
 - **Internal**: config, cwd, debug, errors, execFileNoThrow, git gitConfigParser/gitFilesystem/git, hooks, path, platform, settings settings, sleep, swarm backends/detection
 
 ## Logic

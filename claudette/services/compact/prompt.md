@@ -5,7 +5,7 @@ Provides compact summary prompts and instructions for conversation summarization
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: message types, proactive module (conditional)
 
 ## Logic

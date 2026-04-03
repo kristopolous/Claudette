@@ -5,7 +5,7 @@ Provides system prompt building utilities based on priority rules.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: analytics, Tool, AgentTool loadAgentsDir, envUtils, systemPromptType, proactive index
 
 ## Logic

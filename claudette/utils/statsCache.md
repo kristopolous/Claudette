@@ -4,7 +4,7 @@
 Persisted stats cache stored on disk. Contains aggregated historical stats (daily activity, model tokens, session stats, hour counts, speculation time, shot distribution) that won't change. Provides atomic read/write with version migration and in-memory locking.
 
 ## Imports
-- **Stdlib**: bun:bundle (feature flag), crypto (randomBytes), fs/promises (open), path
+- **Stdlib**: BUILDFLAGS (feature flag), crypto (randomBytes), fs/promises (open), path
 - **External**: (none)
 - **Internal**: ../entrypoints/agentSdkTypes, ./debug, ./envUtils, ./errors, ./fsOperations, ./log, ./slowOperations, ./stats
 

@@ -47,7 +47,7 @@ Central registry and loader for all Claudette slash commands, including built-in
 
 ## Imports
 - **Stdlib**: `lodash-es/memoize`
-- **External**: `bun:bundle` (feature flags)
+- **External**: BUILDFLAGS (feature flags)
 - **Internal**: Over 70 command modules from `./commands/*`, skill loaders (`getSkillDirCommands`, `getBundledSkills`, `getPluginSkills`), auth utilities (`isUsing3PServices`, `isAiSubscriber`), and type definitions from `./types/command`
 
 ## Logic

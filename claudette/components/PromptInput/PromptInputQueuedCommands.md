@@ -3,7 +3,7 @@ Displays queued commands (such as task notifications and bash commands) as rende
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle`, `react`
+- **External**: BUILDFLAGS, `react`
 - **Internal**: `ink`, `state/AppState`, `constants/xml`, `context/QueuedMessageContext`, `hooks/useCommandQueue`, `types/textInputTypes`, `utils/messageQueueManager`, `utils/messages`, `utils/slowOperations`, `Message`
 
 ## Logic

@@ -5,7 +5,7 @@ Provides filesystem permission utilities for path validation and dangerous file/
 
 ## Imports
 - **Stdlib**: `crypto`, `os`, `path`
-- **External**: `bun:bundle`, `ignore`, `lodash-es/memoize`, `zod/v4`
+- **External**: BUILDFLAGS, `ignore`, `lodash-es/memoize`, `zod/v4`
 - **Internal**: memdir paths, AgentTool agentMemory, FileEditTool constants, bootstrap state, growthbook, Tool, FileReadTool, cwd, envUtils, fsOperations, path, plans, platform, sessionStorage, settings constants/settings, shell readOnlyCommandValidation, toolResultStorage, windowsPaths, permissions PermissionResult/PermissionRule/PermissionUpdate/PermissionUpdateSchema
 
 ## Logic

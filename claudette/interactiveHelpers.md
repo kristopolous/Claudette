@@ -5,7 +5,7 @@ Provides helper functions for Ink rendering, dialog display, and graceful exit w
 
 ## Imports
 - **Stdlib**: `fs`
-- **External**: `bun:bundle`, `react`
+- **External**: BUILDFLAGS, `react`
 - **Internal**: analytics, gracefulShutdown, bootstrap state, commands, stats context, systemContext, init entrypoints, ink terminal/components, keybindings, main, GrowthBook, API/services, MCP, state, authPortable, config, deepLink, envUtils, fpsTracker, githubRepoPathMapping, managedEnv, permissions, renderOptions, settings utils
 
 ## Logic

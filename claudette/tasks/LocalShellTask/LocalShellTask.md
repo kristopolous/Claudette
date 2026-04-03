@@ -5,7 +5,7 @@ Manages local shell task execution with stall detection and output handling.
 
 ## Imports
 - **Stdlib**: `fs/promises`
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: xml constants, PromptSuggestion speculation, state, Task types, ids, cleanupRegistry, fsOperations, log, messageQueueManager, ShellCommand, task diskOutput/framework, xml utils, LocalAgentTask, LocalMainSessionTask, guards, killShellTasks
 
 ## Logic

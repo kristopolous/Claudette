@@ -3,7 +3,7 @@ Manages the interactive permission dialog for tool use, racing local hooks, clas
 
 ## Imports
 - **Stdlib**: `crypto.randomUUID`
-- **External**: `bun:bundle` (`feature`), `@anthropic-ai/sdk` (`ContentBlockParam` type)
+- **External**: BUILDFLAGS (`feature`), `@anthropic-ai/sdk` (`ContentBlockParam` type)
 - **Internal** (selected):
   - `bootstrap/state` - `getAllowedChannels`, classifier approval setters
   - `bridge/bridgePermissionCallbacks` - `BridgePermissionCallbacks`

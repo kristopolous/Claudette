@@ -5,7 +5,7 @@ Provides voice mode availability notice component.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `react`, `react/compiler-runtime`
 - **Internal**: config, settings settings, voice voiceModeEnabled, LogoV2 AnimatedAsterisk/Opus1mMergeNotice
 
 ## Logic

@@ -5,7 +5,7 @@ Reloads plugins in the current session, activating pending changes. In remote/CC
 
 ## Imports
 ### External
-- `bun:bundle` (`feature` for feature flags)
+- BUILDFLAGS (`feature` for feature flags)
 
 ### Internal
 - `getIsRemoteMode` from `.././bootstrap/state`

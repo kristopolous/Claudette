@@ -2,7 +2,7 @@
 Shows a one-shot notification when the user wraps past auto mode in the permission mode carousel, explaining why auto mode is unavailable.
 
 ## Imports
-- **External**: `bun:bundle` (feature), `react` (useEffect, useRef)
+- **External**: BUILDFLAGS (feature), `react` (useEffect, useRef)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - `.././bootstrap/state` (getIsRemoteMode)

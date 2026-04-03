@@ -4,7 +4,7 @@
 Provides utility functions for retrieving timeout settings and generating the Bash tool system prompt.
 
 ## Imports
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**:
   - `constants/prompts` - `prependBullets`
   - `utils/attribution` - `getAttributionTexts`

@@ -7,7 +7,7 @@ Generates prompt documentation for the configuration tool that allows getting an
 ## Imports
 
 - **Stdlib**: None
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: `utils/model/modelOptions`, `voice/voiceModeEnabled`, `ConfigTool/supportedSettings`
 
 ## Logic

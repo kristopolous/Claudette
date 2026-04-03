@@ -5,7 +5,7 @@ Initializes all bundled skills at startup by calling their register functions.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle` feature flag
+- **External**: BUILDFLAGS feature flag
 - **Internal**: All bundled skill register functions, claudeInChrome setup, batch skill
 
 ## Logic

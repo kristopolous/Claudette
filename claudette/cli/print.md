@@ -5,7 +5,7 @@ Main entry point for headless/SDK mode execution, handling prompt processing, to
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`, `process`, `crypto`
-- **External**: `bun:bundle`, `axios`, `lodash-es`, `@anthropic-ai/sdk`
+- **External**: BUILDFLAGS, `axios`, `lodash-es`, `@anthropic-ai/sdk`
 - **Internal**: settings sync, remote managed settings, IO handlers, commands, tools, analytics, GrowthBook, debug/diag utils, types, messages, session state, MCP, plugins, permissions, hooks, file state cache, auth, model utils, and many more core modules
 
 ## Logic

@@ -5,7 +5,7 @@ Provides incremental history search with fuzzy matching, navigating through comm
 
 ## Imports
 - **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef`, `useState` from 'react'
-- **External**: `feature` from 'bun:bundle'
+- **External**: `feature` from 'BUILDFLAGS'
 - **Internal**: `getModeFromInput`, `getValueFromInput`, `makeHistoryReader`, `KeyboardEvent`, `useInput`, `useKeybinding`, `useKeybindings`, `PromptInputMode`, `HistoryEntry`
 
 ## Logic

@@ -3,7 +3,7 @@ Constructs system prompts for the agent, assembling static and dynamic sections 
 
 ## Imports
 - **Stdlib**: `os`
-- **External**: `bun:bundle`
+- **External**: build-time feature flags
 - **Internal**: `utils/env`, `utils/git`, `utils/cwd`, `bootstrap/state`, `utils/worktree`, `constants/common`, `utils/settings/settings`, tool constants from individual tool modules, `Tool`, `types/command`, `utils/model/model`, `commands`, `constants/outputStyles`, `services/mcp/types`, `utils/embeddedTools`, `tools/AgentTool/built-in/exploreAgent`, `tools/AgentTool/builtInAgents`, `utils/permissions/filesystem`, `utils/envUtils`, `tools/REPLTool/constants`, `services/analytics/growthbook`, `utils/betas`, `tools/AgentTool/forkSubagent`, `constants/systemPromptSections`, `constants/xml`, `utils/debug`, `memdir/memdir`, `utils/undercover`, `utils/mcpInstructionsDelta`, and conditional imports for cached microcompact, proactive, brief, and skill search modules
 
 ## Logic

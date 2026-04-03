@@ -3,7 +3,7 @@ Factory for creating the permission context object used during tool use authoriz
 
 ## Imports
 - **Stdlib**: None
-- **External**: `@anthropic-ai/sdk` (type only), `bun:bundle` (`feature`)
+- **External**: `@anthropic-ai/sdk` (type only), BUILDFLAGS (`feature`)
 - **Internal** (selected):
   - `services/analytics/*` - `logEvent`, `sanitizeToolNameForAnalytics`
   - `components/permissions/PermissionRequest` - `ToolUseConfirm` type

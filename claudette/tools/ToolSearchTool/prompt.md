@@ -2,7 +2,7 @@
 Provides the prompt string for the ToolSearch tool, explaining when and how to use it to fetch deferred tool schemas.
 
 ## Imports
-- **External**: `feature` from 'bun:bundle'
+- **External**: `feature` from 'BUILDFLAGS'
 - **Internal**:
   - `isReplBridgeActive` from bootstrap/state
   - `getFeatureValue_CACHED_MAY_BE_STALE` from services/analytics/growthbook

@@ -4,7 +4,7 @@
 Generates Chrome Trace Event format traces for visualization in ui.perfetto.dev. Ant-only feature (eliminated from external builds via `feature('PERFETTO_TRACING')`). Traces agent hierarchy, API requests (TTFT, TTLT, cache stats), tool executions, and user input wait times.
 
 ## Imports
-- **Stdlib**: bun:bundle, fs, fs/promises, path
+- **Stdlib**: BUILDFLAGS, fs, fs/promises, path
 - **Internal**: ../../bootstrap/state, ../cleanupRegistry, ../debug, ../envUtils, ../errors, ../hash, ../slowOperations, ../teammate
 
 ## Logic

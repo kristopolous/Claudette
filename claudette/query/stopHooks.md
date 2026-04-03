@@ -3,7 +3,7 @@ Executes stop hooks, teammate idle hooks, and task completed hooks after a query
 
 ## Imports
 - **Stdlib**: none
-- **External**: bun:bundle (feature)
+- **External**: BUILDFLAGS (feature)
 - **Internal**: keybindings/shortcutFormat (getShortcutDisplay), memdir/paths (isExtractModeActive), services/analytics/index (logEvent), Tool (ToolUseContext), types/hooks (HookProgress), types/message (AssistantMessage, Message, RequestStartEvent, StopHookInfo, StreamEvent, TombstoneMessage, ToolUseSummaryMessage), utils/attachments (createAttachmentMessage), utils/debug (logForDebugging), utils/errors (errorMessage), utils/hooks/postSamplingHooks (REPLHookContext), utils/hooks (executeStopHooks, executeTaskCompletedHooks, executeTeammateIdleHooks, getStopHookMessage, getTaskCompletedHookMessage, getTeammateIdleHookMessage), utils/messages (createStopHookSummaryMessage, createSystemMessage, createUserInterruptionMessage, createUserMessage), utils/systemPromptType (SystemPrompt), utils/tasks (getTaskListId, listTasks), utils/teammate (getAgentName, getTeamName, isTeammate), constants/querySource (QuerySource), services/autoDream/autoDream (executeAutoDream), services/PromptSuggestion/promptSuggestion (executePromptSuggestion), utils/envUtils (isBareMode, isEnvDefinedFalsy), utils/forkedAgent (createCacheSafeParams, saveCacheSafeParams)
 
 ## Logic

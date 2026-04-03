@@ -5,7 +5,7 @@ Loads agent definitions from markdown files in agent directories.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `bun:bundle`, `lodash-es/memoize`, `zod/v4`
+- **External**: BUILDFLAGS, `lodash-es/memoize`, `zod/v4`
 - **Internal**: settings constants, analytics, MCP types, Tool, debug, effor, envUtils, frontmatterParser, lazySchema, log, markdownConfigLoader, permissions, plugins, settings types, JSON utils, FileEdit/Read/WriteTool, agentColorManager, agentMemory, agentMemorySnapshot, builtInAgents
 
 ## Logic

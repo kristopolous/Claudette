@@ -3,7 +3,7 @@ Centralized telemetry for tool permission decisions: logs analytics events, Open
 
 ## Imports
 - **Stdlib**: None
-- **External**: `bun:bundle` (`feature`)
+- **External**: BUILDFLAGS (`feature`)
 - **Internal** (selected):
   - `services/analytics/index` - `logEvent` and types
   - `services/analytics/metadata` - `sanitizeToolNameForAnalytics`

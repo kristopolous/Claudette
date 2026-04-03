@@ -4,7 +4,7 @@
 Direct version - match internal format too (e.g. 1.0.30-dev.shaf4937ce)
 
 ## Imports
-- **Stdlib**: bun:bundle, axios, crypto, fs/promises, path, src/services/analytics/index
+- **Stdlib**: BUILDFLAGS, axios, crypto, fs/promises, path, src/services/analytics/index
 - **Internal**: ../config, ../debug, ../errors, ../execFileNoThrow, ../fsOperations, ../log, ../sleep, ../slowOperations, ./installer
 
 ## Items

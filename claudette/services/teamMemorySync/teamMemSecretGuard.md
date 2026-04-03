@@ -5,7 +5,7 @@ Prevents model from writing secrets into team memory files shared with collabora
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`
+- **External**: BUILDFLAGS
 - **Internal**: teamMemPaths, secretScanner (dynamic imports)
 
 ## Logic

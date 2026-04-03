@@ -5,7 +5,7 @@ Syncs user settings and memory files across Claudette environments (interactive 
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`
-- **External**: `bun:bundle`, `axios`, `lodash-es/pickBy`
+- **External**: BUILDFLAGS, `axios`, `lodash-es/pickBy`
 - **Internal**: bootstrap state, oauth constants, auth utils, claudemd, config, diagLogs, errors, git, model providers, settings utils, sleep, userAgent, GrowthBook, analytics, API withRetry, settingsSync types
 
 ## Logic

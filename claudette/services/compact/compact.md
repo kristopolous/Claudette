@@ -5,7 +5,7 @@ Handles conversation compaction (summarization) to manage context window size. C
 
 ## Imports
 - **Stdlib**: `crypto` (UUID type), `lodash-es/uniqBy`
-- **External**: `@anthropic-ai/sdk` (APIUserAbortError), feature flags via `bun:bundle`
+- **External**: `@anthropic-ai/sdk` (APIUserAbortError), feature flags via BUILDFLAGS
 - **Internal**: Session transcript, bootstrap state, hooks, tools (FileReadTool, ToolSearchTool), message types, API client, token utilities, attachment generators, analytics, forked agent utilities
 
 ## Logic

@@ -4,7 +4,7 @@
 Checks both the cached isAutoModeAvailable (set at startup by
 
 ## Imports
-- **Stdlib**: bun:bundle
+- **Stdlib**: BUILDFLAGS
 - **Internal**: ../../Tool, ../debug, ./PermissionMode
 
 ## Items

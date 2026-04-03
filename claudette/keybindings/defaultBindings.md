@@ -3,7 +3,7 @@ Defines the default keybindings that ship with Claudette, organized by UI contex
 
 ## Imports
 - **Stdlib**: none
-- **External**: `bun:bundle` (feature)
+- **External**: BUILDFLAGS (feature)
 - **Internal**: `utils/semver` (satisfies), `utils/bundledMode` (isRunningWithBun), `utils/platform` (getPlatform), `types` (KeybindingBlock)
 
 ## Logic

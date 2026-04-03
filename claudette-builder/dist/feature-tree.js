@@ -495,6 +495,18 @@ export async function buildFeatureTree(basePath) {
         },
         // ─── FOUNDATION: plumbing every layer needs ───────────────────────
         {
+            id: 'tech-map',
+            label: 'Technology Map & Porting Guide',
+            description: 'START-HERE.md — the authoritative dependency lookup table. Maps every library to its abstract capability and porting guidance. Read this FIRST before choosing tech stack.',
+            path: basePath,
+            required: true,
+            children: [],
+            files: [
+                rel('START-HERE.md'),
+            ],
+            isLeaf: true,
+        },
+        {
             id: 'state-management',
             label: 'State Management',
             description: 'App state store, selectors, reactive context, command history',

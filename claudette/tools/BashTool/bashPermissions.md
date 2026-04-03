@@ -5,7 +5,7 @@ Core permission system for the Bash tool: evaluates commands against user-define
 
 ## Imports
 - **Stdlib**: None
-- **External**: `@anthropic-ai/sdk` (`APIUserAbortError`), `bun:bundle` (`feature`), `zod/v4` (`z`)
+- **External**: `@anthropic-ai/sdk` (`APIUserAbortError`), BUILDFLAGS (`feature`), `zod/v4` (`z`)
 - **Internal** (selected):
   - `services/analytics/*` - `getFeatureValue_CACHED_MAY_BE_STALE`, analytics types, `logEvent`
   - Tool` - `ToolPermissionContext`, `ToolUseContext`

@@ -4,7 +4,7 @@
 Processes slash commands (/command args). Routes to command handlers based on type (local-jsx, local, prompt), supports forked sub-agent execution, handles MCP commands, and manages progress UI and telemetry.
 
 ## Imports
-- **Stdlib**: bun:bundle, crypto
+- **Stdlib**: BUILDFLAGS, crypto
 - **External**: @anthropic-ai/sdk/resources
 - **Internal**: ../../bootstrap/state, ../../constants/xml, ../../hooks/useCanUseTool, ../../services/analytics, ../../services/api/dumpPrompts, ../../services/compact/compact, ../../services/compact/microCompact, ../../tools/AgentTool/AgentTool, ../../tools/AgentTool/runAgent, ../../tools/AgentTool/UI, ../abortController, ../agentContext, ../attachments, ../debug, ../envUtils, ../errors, ../file, ../forkedAgent, ../fsOperations, ../fullscreen, ../generators, ../hooks/registerSkillHooks, ../log, ../messageQueueManager, ../messages, ../model/aliases, ../permissions/permissionSetup, ../permissions/permissions, ../plugins/pluginIdentifier, ../settings/pluginOnlyPolicy, ../slashCommandParsing, ../sleep, ../suggestions/skillUsageTracking, ../telemetry/events, ../telemetry/pluginTelemetry, ../tokens, ../uuid, ../workloadContext, ./processUserInput
 

@@ -5,7 +5,7 @@ Implements the env-less Remote Control bridge core that connects directly to ses
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `axios`
+- **External**: BUILDFLAGS, `axios`
 - **Internal**: replBridgeTransport, workSecret, sessionIdCompat, flushGate, jwtUtils, trustedDevice, envLessBridgeConfig, bridgeMessaging, debugUtils, analytics, utils
 
 ## Logic

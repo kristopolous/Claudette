@@ -4,7 +4,7 @@
 Tool for updating individual tasks in the task list (Todo V2). Supports field updates, status changes, blocking relationships, and deletion.
 
 ## Imports
-- **External**: `bun:bundle`, `zod/v4`
+- **External**: BUILDFLAGS, `zod/v4`
 - **Internal**:
   - Analytics: `getFeatureValue_CACHED_MAY_BE_STALE`
   - Tool: `buildTool`, `ToolDef`

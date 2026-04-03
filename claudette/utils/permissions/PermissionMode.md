@@ -5,7 +5,7 @@ Provides permission mode configuration and schema definitions.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `bun:bundle`, `zod/v4`
+- **External**: BUILDFLAGS, `zod/v4`
 - **Internal**: constants figures, types permissions, lazySchema
 
 ## Logic

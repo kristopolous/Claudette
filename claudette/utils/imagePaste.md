@@ -4,7 +4,7 @@
 Native NSPasteboard reader. GrowthBook gate tengu_collage_kaleidoscope is
 
 ## Imports
-- **Stdlib**: bun:bundle, crypto, execa, path
+- **Stdlib**: BUILDFLAGS, crypto, execa, path
 - **Internal**: ../services/analytics/growthbook, ./tools/FileReadTool/imageProcessor, /debug, ./execFileNoThrow, ./fsOperations, ./log
 
 ## Items

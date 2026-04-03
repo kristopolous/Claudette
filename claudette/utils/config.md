@@ -5,7 +5,7 @@ Manages global and project configuration with file watching and migration suppor
 
 ## Imports
 - **Stdlib**: `crypto`, `fs`, `path`
-- **External**: `bun:bundle`, `lodash-es/memoize/pickBy`
+- **External**: BUILDFLAGS, `lodash-es/memoize/pickBy`
 - **Internal**: bootstrap state, memdir paths, analytics, oauth types, cwd, cleanupRegistry, debug, diagLogs, env, envUtils, errors, file, fsOperations, git, json, jsonRead, lockfile, log, memory types, path, privacyLevel, settings managedPath, theme, teamMemPaths, bridge bridgeEnabled, imageResizer, model modelOptions, JSON utils
 
 ## Logic

@@ -8,7 +8,7 @@ Provides attachment handling utilities for BriefTool: validation of attachment p
 
 - **Stdlib**:
   - `fs/promises/stat`
-  - `bun:bundle/feature` (compile-time feature flag)
+  - `BUILDFLAGS/feature` (compile-time feature flag)
 - **External**: None
 - **Internal**:
   - Types: `ValidationResult` (from Tool)
