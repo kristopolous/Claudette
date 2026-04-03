@@ -18,7 +18,9 @@ Take a Claude code feature and mix it in somewhere else, like opencode. These ar
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
 ## Claudette vibed examples
-Peak in the `examples/` directory for three Claudettes.
+Peak in the `examples/` directory for three Claudettes. 
+
+Yes they all work. Yes you can use them with any model and any server. 
 
 ### Tkinter
 A 1990s vintage way to toolcall, mcp and sub-agent.
