@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Text, useApp, useInput, useStdout, render } from 'ink';
 import { buildFeatureTree, resolveFeaturePaths } from './feature-tree.js';
 import { flattenTree, getAllDescendantIds, getSelectedFiles, getRequiredIds } from './tree-utils.js';
-import { generatePRD } from './prd-generator.js';
+import { generateArtifacts } from './artifact-generator.js';
 import { mkdir, writeFile, readdir, stat as fsStat, copyFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { existsSync } from 'node:fs';
@@ -302,8 +302,15 @@ async function packageAndSave(outputPath, rootNodes, selectedIds) {
             }
         }
     }
-    const prd = generatePRD(actuallyCopied, claudetteDir);
-    await writeFile(join(targetDir, 'PRD.md'), prd);
+    // Generate all spec-kit artifacts
+    const artifacts = generateArtifacts(actuallyCopied, rootNodes, selectedIds, claudetteDir);
+    await writeFile(join(targetDir, 'PRD.md'), artifacts.prd);
+    await writeFile(join(targetDir, 'SPEC.md'), artifacts.spec);
+    await writeFile(join(targetDir, 'PLAN.md'), artifacts.plan);
+    await writeFile(join(targetDir, 'TASKS.md'), artifacts.tasks);
+    await writeFile(join(targetDir, 'CHECKLIST.md'), artifacts.checklist);
+    await writeFile(join(targetDir, 'CONSTITUTION.md'), artifacts.constitution);
+    await writeFile(join(targetDir, 'INSTRUCTIONS.md'), artifacts.instructions);
     await copyFile(join(claudetteDir, 'IMPLEMENTATION_CHECKLIST.md'), join(targetDir, 'IMPLEMENTATION_CHECKLIST.md'));
     await copyFile(join(claudetteDir, 'START-HERE.md'), join(targetDir, 'START-HERE.md'));
 }
