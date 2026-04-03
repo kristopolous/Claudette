@@ -41,4 +41,4 @@ Because why not?
 
 ### Yours
 
-On mobile? Swift? Windows 95? Go do it!
+On mobile? Swift? emacs lisp? Windows 95? Go do it!
