@@ -10,6 +10,7 @@ export interface JshResult {
   stdout: string
   stderr: string
   exitCode: number
+  cwd: string
 }
 
 function parseCommand(cmd: string): { command: string; args: string[] } {
@@ -33,30 +34,30 @@ async function handleCd(ctx: JshContext, args: string[]): Promise<JshResult> {
   const target = args[0] || '/'
   const resolved = resolvePath(ctx.cwd, target)
   if (!ctx.vfs.isDir(resolved)) {
-    return { stdout: '', stderr: `jsh: cd: ${target}: No such directory`, exitCode: 1 }
+    return { stdout: '', stderr: `jsh: cd: ${target}: No such directory`, exitCode: 1, cwd: ctx.cwd }
   }
   ctx.cwd = resolved
-  return { stdout: '', stderr: '', exitCode: 0 }
+  return { stdout: '', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleLs(ctx: JshContext, args: string[]): Promise<JshResult> {
   const target = args.find(a => !a.startsWith('-')) || ctx.cwd
   const resolved = resolvePath(ctx.cwd, target)
   const entries = ctx.vfs.list(resolved)
-  if (entries.length === 0) return { stdout: '', stderr: '', exitCode: 0 }
+  if (entries.length === 0) return { stdout: '', stderr: '', exitCode: 0, cwd: ctx.cwd }
   const showLong = args.includes('-l') || args.includes('-la')
   if (showLong) {
     const lines = entries.map(name => {
       const isDir = ctx.vfs.isDir(resolvePath(resolved, name))
       return `${isDir ? 'd' : '-'}rwxr-xr-x  1 user  group  0  Jan 01 00:00  ${name}`
     })
-    return { stdout: lines.join('\n') + '\n', stderr: '', exitCode: 0 }
+    return { stdout: lines.join('\n') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
   }
-  return { stdout: entries.join('  ') + '\n', stderr: '', exitCode: 0 }
+  return { stdout: entries.join('  ') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleCat(ctx: JshContext, args: string[]): Promise<JshResult> {
-  if (args.length === 0) return { stdout: '', stderr: 'jsh: cat: missing operand', exitCode: 1 }
+  if (args.length === 0) return { stdout: '', stderr: 'jsh: cat: missing operand', exitCode: 1, cwd: ctx.cwd }
   const outputs: string[] = []
   for (const file of args) {
     if (file.startsWith('-')) continue
@@ -64,10 +65,10 @@ async function handleCat(ctx: JshContext, args: string[]): Promise<JshResult> {
     try {
       outputs.push(await ctx.vfs.read(resolved))
     } catch {
-      return { stdout: '', stderr: `jsh: cat: ${file}: No such file`, exitCode: 1 }
+      return { stdout: '', stderr: `jsh: cat: ${file}: No such file`, exitCode: 1, cwd: ctx.cwd }
     }
   }
-  return { stdout: outputs.join(''), stderr: '', exitCode: 0 }
+  return { stdout: outputs.join(''), stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleMkdir(ctx: JshContext, args: string[]): Promise<JshResult> {
@@ -76,7 +77,7 @@ async function handleMkdir(ctx: JshContext, args: string[]): Promise<JshResult> 
     const resolved = resolvePath(ctx.cwd, dir)
     ctx.vfs.mkdir(resolved)
   }
-  return { stdout: '', stderr: '', exitCode: 0 }
+  return { stdout: '', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleTouch(ctx: JshContext, args: string[]): Promise<JshResult> {
@@ -87,20 +88,20 @@ async function handleTouch(ctx: JshContext, args: string[]): Promise<JshResult> 
       await ctx.vfs.write(resolved, '')
     }
   }
-  return { stdout: '', stderr: '', exitCode: 0 }
+  return { stdout: '', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleEcho(ctx: JshContext, args: string[]): Promise<JshResult> {
   let output = args.join(' ')
   if (args[0] === '-n') {
     output = args.slice(1).join(' ')
-    return { stdout: output, stderr: '', exitCode: 0 }
+    return { stdout: output, stderr: '', exitCode: 0, cwd: ctx.cwd }
   }
-  return { stdout: output + '\n', stderr: '', exitCode: 0 }
+  return { stdout: output + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handlePwd(ctx: JshContext): Promise<JshResult> {
-  return { stdout: ctx.cwd + '\n', stderr: '', exitCode: 0 }
+  return { stdout: ctx.cwd + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleTree(ctx: JshContext, args: string[]): Promise<JshResult> {
@@ -128,7 +129,7 @@ async function handleTree(ctx: JshContext, args: string[]): Promise<JshResult> {
     const childPath = resolvePath(resolved, entries[i])
     output += await buildTree(childPath, '', i === entries.length - 1)
   }
-  return { stdout: output, stderr: '', exitCode: 0 }
+  return { stdout: output, stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleFind(ctx: JshContext, args: string[]): Promise<JshResult> {
@@ -146,12 +147,12 @@ async function handleFind(ctx: JshContext, args: string[]): Promise<JshResult> {
   }
 
   await walk(resolved)
-  return { stdout: results.join('\n') + '\n', stderr: '', exitCode: 0 }
+  return { stdout: results.join('\n') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleWc(ctx: JshContext, args: string[]): Promise<JshResult> {
   const files = args.filter(a => !a.startsWith('-'))
-  if (files.length === 0) return { stdout: '      0       0       0\n', stderr: '', exitCode: 0 }
+  if (files.length === 0) return { stdout: '      0       0       0\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
   const outputs: string[] = []
   for (const file of files) {
     const resolved = resolvePath(ctx.cwd, file)
@@ -162,10 +163,10 @@ async function handleWc(ctx: JshContext, args: string[]): Promise<JshResult> {
       const chars = content.length
       outputs.push(`${String(lines).padStart(7)} ${String(words).padStart(7)} ${String(chars).padStart(7)} ${file}`)
     } catch {
-      return { stdout: '', stderr: `jsh: wc: ${file}: No such file`, exitCode: 1 }
+      return { stdout: '', stderr: `jsh: wc: ${file}: No such file`, exitCode: 1, cwd: ctx.cwd }
     }
   }
-  return { stdout: outputs.join('\n') + '\n', stderr: '', exitCode: 0 }
+  return { stdout: outputs.join('\n') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
 }
 
 async function handleHead(ctx: JshContext, args: string[]): Promise<JshResult> {
@@ -175,13 +176,13 @@ async function handleHead(ctx: JshContext, args: string[]): Promise<JshResult> {
     if (arg.startsWith('-n')) n = parseInt(arg.slice(2), 10) || 10
     else if (arg !== '-n') files.push(arg)
   }
-  if (files.length === 0) return { stdout: '', stderr: 'jsh: head: missing operand', exitCode: 1 }
+  if (files.length === 0) return { stdout: '', stderr: 'jsh: head: missing operand', exitCode: 1, cwd: ctx.cwd }
   const resolved = resolvePath(ctx.cwd, files[0])
   try {
     const content = await ctx.vfs.read(resolved)
-    return { stdout: content.split('\n').slice(0, n).join('\n') + '\n', stderr: '', exitCode: 0 }
+    return { stdout: content.split('\n').slice(0, n).join('\n') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
   } catch {
-    return { stdout: '', stderr: `jsh: head: ${files[0]}: No such file`, exitCode: 1 }
+    return { stdout: '', stderr: `jsh: head: ${files[0]}: No such file`, exitCode: 1, cwd: ctx.cwd }
   }
 }
 
@@ -192,13 +193,13 @@ async function handleTail(ctx: JshContext, args: string[]): Promise<JshResult> {
     if (arg.startsWith('-n')) n = parseInt(arg.slice(2), 10) || 10
     else if (arg !== '-n') files.push(arg)
   }
-  if (files.length === 0) return { stdout: '', stderr: 'jsh: tail: missing operand', exitCode: 1 }
+  if (files.length === 0) return { stdout: '', stderr: 'jsh: tail: missing operand', exitCode: 1, cwd: ctx.cwd }
   const resolved = resolvePath(ctx.cwd, files[0])
   try {
     const content = await ctx.vfs.read(resolved)
-    return { stdout: content.split('\n').slice(-n).join('\n') + '\n', stderr: '', exitCode: 0 }
+    return { stdout: content.split('\n').slice(-n).join('\n') + '\n', stderr: '', exitCode: 0, cwd: ctx.cwd }
   } catch {
-    return { stdout: '', stderr: `jsh: tail: ${files[0]}: No such file`, exitCode: 1 }
+    return { stdout: '', stderr: `jsh: tail: ${files[0]}: No such file`, exitCode: 1, cwd: ctx.cwd }
   }
 }
 
@@ -220,7 +221,7 @@ const BUILTINS: Record<string, (ctx: JshContext, args: string[]) => Promise<JshR
 export async function jsh(command: string, vfs: VirtualFS, cwd: string): Promise<JshResult> {
   const ctx: JshContext = { vfs, cwd, env: new Map() }
   const trimmed = command.trim()
-  if (!trimmed) return { stdout: '', stderr: '', exitCode: 0 }
+  if (!trimmed) return { stdout: '', stderr: '', exitCode: 0, cwd: ctx.cwd }
 
   const { command: cmd, args } = parseCommand(trimmed)
 
@@ -233,6 +234,7 @@ export async function jsh(command: string, vfs: VirtualFS, cwd: string): Promise
       stdout: '',
       stderr: `jsh: ${cmd}: runtime execution is simulated. Use Read/Write tools to create files instead.`,
       exitCode: 1,
+      cwd: ctx.cwd,
     }
   }
 
@@ -241,6 +243,7 @@ export async function jsh(command: string, vfs: VirtualFS, cwd: string): Promise
       stdout: '',
       stderr: `jsh: ${cmd}: destructive operations are not allowed in virtualized environment`,
       exitCode: 1,
+      cwd: ctx.cwd,
     }
   }
 
@@ -248,5 +251,6 @@ export async function jsh(command: string, vfs: VirtualFS, cwd: string): Promise
     stdout: '',
     stderr: `jsh: command not found: ${cmd}\n\nAvailable commands: cd, ls, cat, mkdir, touch, echo, pwd, tree, find, wc, head, tail`,
     exitCode: 127,
+    cwd: ctx.cwd,
   }
 }

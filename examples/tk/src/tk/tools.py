@@ -86,7 +86,7 @@ class BashTool(BaseTool):
                 command,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
-                cwd=cwd or os.getcwd(),
+                cwd=cwd,
             )
             stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=timeout)
             output = ""
@@ -128,7 +128,7 @@ class ReadTool(BaseTool):
             return ToolResult(tool_call_id="", content="No file path provided", is_error=True)
         path = Path(file_path)
         if not path.is_absolute():
-            path = Path(cwd or os.getcwd()) / path
+            path = Path(cwd) / path
         if not path.exists():
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=f"File not found: {file_path}", is_error=True)
         if not path.is_file():
@@ -168,7 +168,7 @@ class WriteTool(BaseTool):
             return ToolResult(tool_call_id="", content="No file path provided", is_error=True)
         path = Path(file_path)
         if not path.is_absolute():
-            path = Path(cwd or os.getcwd()) / path
+            path = Path(cwd) / path
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
             with open(path, "w") as f:
@@ -203,7 +203,7 @@ class EditTool(BaseTool):
             return ToolResult(tool_call_id="", content="No file path provided", is_error=True)
         path = Path(file_path)
         if not path.is_absolute():
-            path = Path(cwd or os.getcwd()) / path
+            path = Path(cwd) / path
         if not path.exists():
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=f"File not found: {file_path}", is_error=True)
         try:
@@ -240,7 +240,7 @@ class GrepTool(BaseTool):
 
     async def execute(self, arguments: dict, cwd: str | None = None) -> ToolResult:
         pattern = arguments.get("pattern", "")
-        search_path = arguments.get("path", cwd or os.getcwd())
+        search_path = arguments.get("path", cwd)
         include = arguments.get("include", "*")
         case_sensitive = arguments.get("case_sensitive", False)
         max_results = arguments.get("max_results", 50)
@@ -269,7 +269,7 @@ class GrepTool(BaseTool):
                 with open(fpath, "r", errors="replace") as f:
                     for line_num, line in enumerate(f, 1):
                         if compiled.search(line):
-                            rel = fpath.relative_to(cwd or os.getcwd()) if cwd else fpath
+                            rel = fpath.relative_to(cwd) if cwd else fpath
                             results.append(f"{rel}:{line_num}: {line.rstrip()}")
                             if len(results) >= max_results:
                                 break
@@ -297,7 +297,7 @@ class GlobTool(BaseTool):
 
     async def execute(self, arguments: dict, cwd: str | None = None) -> ToolResult:
         pattern = arguments.get("pattern", "")
-        search_path = Path(arguments.get("path", cwd or os.getcwd()))
+        search_path = Path(arguments.get("path", cwd))
         if not search_path.exists():
             return ToolResult(tool_call_id=arguments.get("tool_call_id", ""), content=f"Path not found: {search_path}", is_error=True)
         try:
@@ -309,7 +309,7 @@ class GlobTool(BaseTool):
             rel_files = []
             for f in files[:100]:
                 try:
-                    rel_files.append(str(f.relative_to(cwd or os.getcwd())))
+                    rel_files.append(str(f.relative_to(cwd)))
                 except ValueError:
                     rel_files.append(str(f))
             output = "\n".join(rel_files)

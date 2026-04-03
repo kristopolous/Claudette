@@ -1,5 +1,5 @@
 use crate::markdown::render_markdown;
-use crate::types::{StreamEvent, Usage};
+use crate::types::StreamEvent;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyModifiers};
 use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
 use dirs;
@@ -35,7 +35,6 @@ pub struct App {
     pub messages: Vec<MessageEntry>,
     pub input_buffer: String,
     pub is_loading: bool,
-    pub usage: Usage,
     pub current_response: String,
     pub scroll_offset: usize,
     pub auto_scroll: bool,
@@ -72,7 +71,6 @@ impl App {
             messages,
             input_buffer: String::new(),
             is_loading: false,
-            usage: Usage::default(),
             current_response: String::new(),
             scroll_offset: 0,
             auto_scroll: true,
@@ -362,7 +360,7 @@ impl App {
                 self.current_response
                     .push_str(&format!("\n✅ Tool '{}' completed\n\n", name));
             }
-            StreamEvent::MessageEnd { message } => {
+            StreamEvent::MessageEnd { message: _ } => {
                 if !self.current_response.is_empty() {
                     self.messages.push(MessageEntry {
                         role: "assistant".to_string(),
@@ -370,7 +368,6 @@ impl App {
                     });
                 }
                 self.current_response.clear();
-                self.usage.accumulate(&message.usage);
                 self.is_loading = false;
             }
             StreamEvent::Error { message, .. } => {
@@ -495,6 +492,21 @@ fn wrap_text(text: &Text, max_width: u16) -> Vec<Line<'static>> {
     }
     let mut result = Vec::new();
     for line in &text.lines {
+        // Check if this line is a code line (starts with sentinel)
+        if let Some(first_span) = line.spans.first() {
+            if first_span.content.starts_with('\u{200B}') {
+                // Strip the sentinel and push line as-is (no wrap)
+                let stripped: Vec<Span> = line
+                    .spans
+                    .iter()
+                    .skip(1)
+                    .map(|s| Span::styled(s.content.to_string(), s.style))
+                    .collect();
+                result.push(Line::from(stripped));
+                continue;
+            }
+        }
+        // Normal text: perform word wrapping
         let chunks = split_line_into_chunks(line);
         let wrapped = wrap_chunks(chunks, max_width);
         result.extend(wrapped);
@@ -511,7 +523,6 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         .constraints([
             Constraint::Min(1),
             Constraint::Length(3),
-            Constraint::Length(1),
         ])
         .split(frame.area());
 
@@ -635,6 +646,11 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         bundles.push((MessageRole::Spacing, vec![Line::from("")]));
     }
 
+    // Remove trailing spacing line if present
+    if let Some((MessageRole::Spacing, _)) = bundles.last() {
+        bundles.pop();
+    }
+
     // Compute total height for scroll
     let total_lines: usize = bundles.iter().map(|(_, lines)| lines.len()).sum();
     let visible = inner.height as usize;
@@ -719,18 +735,6 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
     // Clamp Y to inner height
     let cursor_y = cursor_y.min(chunks[1].y + chunks[1].height - 2);
     frame.set_cursor_position(Position::new(cursor_x, cursor_y));
-
-    // Status bar with modern color
-    let status = format!(
-        "Tokens: {} in / {} out | Cost: ${:.4}",
-        app.usage.input_tokens, app.usage.output_tokens, 0.0
-    );
-    let status_bar = Paragraph::new(status).style(
-        Style::default()
-            .fg(Color::Rgb(0, 200, 150))
-            .add_modifier(Modifier::BOLD),
-    );
-    frame.render_widget(status_bar, chunks[2]);
 }
 
 

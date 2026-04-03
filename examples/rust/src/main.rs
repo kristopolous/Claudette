@@ -1,14 +1,13 @@
 use anyhow::{Result, anyhow};
 use clap::Parser;
 use claudette_rs::api::{ApiConfig, ApiProvider, LlmClient, QueryEngine};
-use claudette_rs::commands::{clear_command, cost_command, help_command, model_command};
+use claudette_rs::commands::{clear_command, help_command, model_command};
 use claudette_rs::mcp::{McpClient, McpToolWrapper};
 use claudette_rs::tools::{BashTool, EditTool, GlobTool, GrepTool, ReadTool, TodoWriteTool, WebFetchTool, WebSearchTool, WriteTool};
 use claudette_rs::tui::{App, run_tui};
-use claudette_rs::types::{CommandRegistry, Message, ToolRegistry, CostTracker, StreamEvent};
+use claudette_rs::types::{CommandRegistry, Message, StreamEvent, ToolRegistry};
 use claudette_rs::types::permission::{PermissionContext, PermissionMode, ToolPermissionRule};
 use claudette_rs::utils::system_prompt::build_system_prompt;
-use parking_lot::Mutex;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::{mpsc, Mutex as TokioMutex};
@@ -263,9 +262,6 @@ async fn main() -> Result<()> {
     command_registry.register(clear_command());
     command_registry.register(model_command(model.clone()));
 
-    let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
-    command_registry.register(cost_command(cost_tracker.clone()));
-
     let config = ApiConfig {
         api_key,
         model: model.clone(),
@@ -310,11 +306,9 @@ async fn main() -> Result<()> {
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);
     let (event_tx, event_rx) = mpsc::channel::<StreamEvent>(256);
 
-      let cost_tracker_clone = cost_tracker.clone();
-      let model_clone = model.clone();
-      let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
-      let query_handle = tokio::spawn(async move {
-          while let Some(input) = input_rx.recv().await {
+    let command_names: Vec<String> = command_registry.names().into_iter().map(|s| s.to_string()).collect();
+    let query_handle = tokio::spawn(async move {
+        while let Some(input) = input_rx.recv().await {
              if input.starts_with('/') {
                  if input == "/quit" || input == "/exit" {
                      let _ = event_tx.send(StreamEvent::MessageEnd {
@@ -358,46 +352,30 @@ async fn main() -> Result<()> {
                  }
              }
 
-             let msg = Message::user_text(&input);
-             let tx = event_tx.clone();
-             let tracker = cost_tracker_clone.clone();
-             let model_name = model_clone.clone();
+              let msg = Message::user_text(&input);
+              let tx = event_tx.clone();
 
-             match query_engine.submit_message(msg, move |event| {
-                 let tx = tx.clone();
-                 let tracker = tracker.clone();
-                 let model_name = model_name.clone();
-
-                 if let StreamEvent::MessageEnd { message } = &event {
-                     let mut t = tracker.lock();
-                     t.add_usage(&model_name, &message.usage);
-                 }
-
-                 tokio::spawn(async move {
-                     let _ = tx.send(event).await;
-                 });
-             }).await {
-                 Ok(()) => {
-                     let usage = query_engine.get_usage();
-                     let _ = event_tx.send(StreamEvent::MessageEnd {
-                         message: claudette_rs::types::event::AssistantMessage {
-                             content: vec![],
-                             usage: claudette_rs::types::event::Usage {
-                                 input_tokens: usage.input_tokens,
-                                 output_tokens: usage.output_tokens,
-                                 cache_creation_input_tokens: usage.cache_creation_input_tokens,
-                                 cache_read_input_tokens: usage.cache_read_input_tokens,
-                             },
-                         },
-                     }).await;
-                 }
-                 Err(e) => {
-                     let _ = event_tx.send(StreamEvent::Error {
-                         message: e.to_string(),
-                         retryable: true,
-                     }).await;
-                 }
-             }
+              match query_engine.submit_message(msg, move |event| {
+                  let tx = tx.clone();
+                  tokio::spawn(async move {
+                      let _ = tx.send(event).await;
+                  });
+              }).await {
+                  Ok(()) => {
+                      let _ = event_tx.send(StreamEvent::MessageEnd {
+                          message: claudette_rs::types::event::AssistantMessage {
+                              content: vec![],
+                              usage: claudette_rs::types::event::Usage::default(),
+                          },
+                      }).await;
+                  }
+                  Err(e) => {
+                      let _ = event_tx.send(StreamEvent::Error {
+                          message: e.to_string(),
+                          retryable: true,
+                      }).await;
+                  }
+              }
          }
      });
 
@@ -472,10 +450,6 @@ async fn run_demo(_cwd: &std::path::Path) -> Result<()> {
     command_registry.register(help_command(tool_names.clone()));
     command_registry.register(clear_command());
     command_registry.register(model_command("demo".to_string()));
-
-    let cost_tracker = Arc::new(Mutex::new(CostTracker::new()));
-    command_registry.register(cost_command(cost_tracker.clone()));
-
 
 
     let (input_tx, mut input_rx) = mpsc::channel::<String>(32);

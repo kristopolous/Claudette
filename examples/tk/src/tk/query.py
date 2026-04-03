@@ -31,7 +31,7 @@ class QueryEngine:
         self.mcp_manager = mcp_manager
         self.cost_tracker = cost_tracker
         self.config = config
-        self.cwd = cwd or os.getcwd()
+        self._cwd = cwd or os.getcwd()
         self.messages: list[Message] = []
         self.on_text = on_text or (lambda t: None)
         self.on_tool_start = on_tool_start or (lambda n, a: None)
@@ -40,6 +40,18 @@ class QueryEngine:
         self.on_error = on_error or (lambda e: None)
         self.on_cost_update = on_cost_update or (lambda c: None)
         self._stop_requested = False
+
+    @property
+    def cwd(self):
+        return self._cwd
+
+    @cwd.setter
+    def cwd(self, value):
+        self._cwd = value
+        for i, msg in enumerate(self.messages):
+            if msg.role == "system":
+                self.messages[i] = Message(role="system", content=build_system_prompt(self.tool_registry, value))
+                break
 
     def add_system_message(self):
         system_prompt = build_system_prompt(self.tool_registry, self.cwd)

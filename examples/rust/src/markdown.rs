@@ -35,7 +35,10 @@ fn highlight_code(code: &str, lang: Option<&str>) -> Vec<Line<'static>> {
             if spans.is_empty() {
                 spans.push(Span::raw(Cow::Owned(line.to_string())));
             }
-            lines.push(Line::from(spans));
+            // Prepend a zero-width space marker to indicate this line is from code (no wrap)
+            let mut marked = vec![Span::raw("\u{200B}")];
+            marked.extend(spans);
+            lines.push(Line::from(marked));
         }
         lines
     } else {
@@ -91,8 +94,11 @@ pub fn render_markdown(input: &str) -> Text<'static> {
         }
         let mut widths = vec![0; col_count];
         // Helper to measure cell width in display columns
-        let measure =
-            |cell: &Vec<Span>| -> usize { cell.iter().map(|span| span.content.width()).sum() };
+        let measure = |cell: &Vec<Span>| -> usize {
+            cell.iter()
+                .map(|span| unicode_width::UnicodeWidthStr::width(span.content.as_ref()))
+                .sum()
+        };
         // Headers
         for (col_i, cell) in table.headers.iter().enumerate() {
             let w = measure(cell);
@@ -108,6 +114,25 @@ pub fn render_markdown(input: &str) -> Text<'static> {
             }
         }
         widths
+    }
+
+    /// Apply styling to tool output lines based on prefix
+    fn maybe_style_tool_output(part: &str, spans: &mut Vec<Span<'static>>) {
+        let trimmed = part.trim();
+        let style = if trimmed.starts_with("🔧 Using tool") || trimmed.starts_with("✅ Tool") {
+            Some(Style::default().fg(Color::Rgb(221, 153, 238))) // purple
+        } else if trimmed.starts_with("Successfully") || trimmed.starts_with("Wrote") {
+            Some(Style::default().fg(Color::Rgb(150, 150, 150))) // muted gray
+        } else if trimmed.starts_with("❌ Error") || trimmed.starts_with("[Tool result: error]") {
+            Some(Style::default().fg(Color::Red).add_modifier(Modifier::BOLD))
+        } else {
+            None
+        };
+        if let Some(s) = style {
+            spans.push(Span::styled(part.to_string(), s));
+        } else {
+            spans.push(Span::raw(part.to_string()));
+        }
     }
 
     fn render_table(table: Table) -> Vec<Line<'static>> {
@@ -325,9 +350,26 @@ pub fn render_markdown(input: &str) -> Text<'static> {
                     if in_code_block {
                         code_content.push_str(&text);
                     } else if in_table {
+                        // Table cell: treat each line as separate cell spans? Simpler: treat as raw
                         current_cell.push(Span::raw(text.to_string()));
                     } else {
-                        current_spans.push(Span::raw(text.to_string()));
+                        // Split on newlines to preserve line breaks
+                        let mut first = true;
+                        for part in text.split('\n') {
+                            if first {
+                                first = false;
+                                if !part.is_empty() {
+                                    maybe_style_tool_output(part, &mut current_spans);
+                                }
+                            } else {
+                                flush_line(&mut current_spans, &mut lines);
+                                if part.is_empty() {
+                                    lines.push(Line::from(""));
+                                } else {
+                                    maybe_style_tool_output(part, &mut current_spans);
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -10,7 +10,7 @@ import sys
 import threading
 from pathlib import Path
 from typing import Optional
-from tk.models import CostTracker, ToolCall, Message
+from tk.models import ToolCall, Message
 from tk.api import detect_provider
 
 HOST_PRESETS = {
@@ -58,7 +58,6 @@ ICON_SAVE = "\U0001f4be"
 ICON_TOOLS = "\U0001f527"
 ICON_MCP = "\U0001f50c"
 ICON_SETTINGS = "\u2699"
-ICON_COST = "\U0001f4b0"
 
 
 class PermissionDialog:
@@ -96,37 +95,6 @@ class PermissionDialog:
     def _deny(self):
         self.result = False
         self.dialog.destroy()
-
-
-class CostDialog:
-    def __init__(self, parent, cost_tracker: CostTracker):
-        self.dialog = tk.Toplevel(parent)
-        self.dialog.title("Cost Breakdown")
-        self.dialog.transient(parent)
-        self.dialog.grab_set()
-        self.dialog.resizable(False, False)
-        self.dialog.withdraw()
-
-        x = parent.winfo_x() + 100
-        y = parent.winfo_y() + 100
-        self.dialog.geometry(f"+{x}+{y}")
-
-        ttk.Label(self.dialog, text="Session Cost", font=("TkDefaultFont", 12, "bold")).pack(padx=20, pady=(15, 10))
-
-        info = [
-            f"Input tokens:  {cost_tracker.input_tokens:,}",
-            f"Output tokens: {cost_tracker.output_tokens:,}",
-            f"Total tokens:  {cost_tracker.total_tokens:,}",
-            "",
-            f"Total cost:    ${cost_tracker.total_cost:.4f}",
-        ]
-        for line in info:
-            ttk.Label(self.dialog, text=line, font=("TkFixedFont", 10)).pack(anchor=tk.W, padx=20)
-
-        ttk.Button(self.dialog, text="Close", command=self.dialog.destroy).pack(pady=15)
-
-        self.dialog.deiconify()
-        self.dialog.wait_window()
 
 
 class ConnectionDialog:
@@ -803,7 +771,7 @@ class MainWindow:
 
         view_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="View", menu=view_menu)
-        view_menu.add_command(label="Cost Breakdown", command=self._show_cost)
+        view_menu.add_command(label="Statistics...", command=self._show_stats)
 
         help_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Help", menu=help_menu)
@@ -838,9 +806,6 @@ class MainWindow:
         self._conn_btn = ttk.Button(toolbar, text=f"{ICON_SETTINGS} Connection", width=12, command=self._show_connection)
         self._conn_btn.pack(side=tk.LEFT, padx=1)
 
-        self._cost_btn = ttk.Button(toolbar, text=f"{ICON_COST} Cost", width=8, command=self._show_cost)
-        self._cost_btn.pack(side=tk.LEFT, padx=1)
-
         status_frame = ttk.Frame(self.root)
         status_frame.grid(row=1, column=0, sticky="ew", padx=5, pady=2)
         status_frame.columnconfigure(0, weight=1)
@@ -850,9 +815,6 @@ class MainWindow:
 
         self.cwd_label = ttk.Label(status_frame, text="", font=("TkDefaultFont", 8), foreground="gray")
         self.cwd_label.grid(row=1, column=0, sticky=tk.W)
-
-        self.status_label = ttk.Label(status_frame, text="Ready", foreground="gray", font=("TkDefaultFont", 8))
-        self.status_label.grid(row=0, column=1, sticky=tk.E)
 
         self.message_frame = ttk.Frame(self.root)
         self.message_frame.grid(row=2, column=0, sticky="nsew", padx=5, pady=3)
@@ -915,12 +877,13 @@ class MainWindow:
 
         self.status_bar = ttk.Frame(self.root)
         self.status_bar.grid(row=5, column=0, sticky="ew", padx=5, pady=2)
-
-        self.cost_label = ttk.Label(self.status_bar, text="Cost: $0.0000", foreground="gray", font=("TkDefaultFont", 8))
-        self.cost_label.pack(side=tk.LEFT)
+        self.status_bar.columnconfigure(0, weight=1)
 
         self.token_label = ttk.Label(self.status_bar, text="Tokens: 0", foreground="gray", font=("TkDefaultFont", 8))
-        self.token_label.pack(side=tk.LEFT, padx=10)
+        self.token_label.grid(row=0, column=0, sticky=tk.W)
+
+        self.status_label = ttk.Label(self.status_bar, text="Ready", foreground="gray", font=("TkDefaultFont", 8))
+        self.status_label.grid(row=0, column=1, rowspan=2, sticky=tk.E)
 
     def _sync_settings_to_ui(self):
         provider = self.query_engine.api_client.provider
@@ -1053,6 +1016,44 @@ class MainWindow:
             McpServersDialog(self.root, self.mcp_manager)
         else:
             self._append_message("system", "MCP server management not yet configured.")
+
+    def _show_stats(self):
+        dlg = tk.Toplevel(self.root)
+        dlg.title("Statistics")
+        dlg.transient(self.root)
+        dlg.grab_set()
+        dlg.resizable(False, False)
+        dlg.withdraw()
+
+        frame = ttk.Frame(dlg, padding=20)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        messages = self.query_engine.messages
+        user_msgs = sum(1 for m in messages if m.role == "user")
+        assistant_msgs = sum(1 for m in messages if m.role == "assistant")
+        tool_msgs = sum(1 for m in messages if m.role == "tool")
+        total_tokens = sum(len(m.content.split()) for m in messages if m.content)
+
+        stats = [
+            ("Messages", f"{len(messages)}"),
+            ("Input", f"{user_msgs}"),
+            ("Output", f"{assistant_msgs}"),
+            ("Tool results", f"{tool_msgs}"),
+            ("Est. tokens", f"{total_tokens:,}"),
+        ]
+
+        for i, (label, value) in enumerate(stats):
+            ttk.Label(frame, text=label, font=("TkDefaultFont", 10)).grid(row=i, column=0, sticky=tk.W, padx=(0, 20))
+            ttk.Label(frame, text=value, font=("TkFixedFont", 10)).grid(row=i, column=1, sticky=tk.W)
+
+        ttk.Button(frame, text="Close", command=dlg.destroy, width=10).grid(row=len(stats) + 1, column=0, columnspan=2, pady=(15, 0))
+
+        dlg.update_idletasks()
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dlg.winfo_width() // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dlg.winfo_height() // 2)
+        dlg.geometry(f"+{x}+{y}")
+        dlg.deiconify()
+        dlg.wait_window()
 
     def _bind_events(self):
         self.input_text.bind("<Return>", self._on_return)
@@ -1240,7 +1241,6 @@ class MainWindow:
         self.query_engine.on_tool_result = self._on_tool_result
         self.query_engine.on_done = self._on_done
         self.query_engine.on_error = self._on_error
-        self.query_engine.on_cost_update = self._on_cost_update
 
         def run_async():
             import warnings
@@ -1291,13 +1291,6 @@ class MainWindow:
         self.root.after(0, lambda: self._append_message("error", error))
         self._on_done()
 
-    def _on_cost_update(self, tracker: CostTracker):
-        self.root.after(0, lambda: self._update_cost(tracker))
-
-    def _update_cost(self, tracker: CostTracker):
-        self.cost_label.configure(text=f"Cost: ${tracker.total_cost:.4f}")
-        self.token_label.configure(text=f"Tokens: {tracker.total_tokens:,}")
-
     def _prompt_save(self):
         if not self._dirty:
             return True
@@ -1331,9 +1324,6 @@ class MainWindow:
 
     def _on_select_all(self):
         pass
-
-    def _show_cost(self):
-        CostDialog(self.root, self.query_engine.cost_tracker)
 
     def _show_help(self):
         dlg = tk.Toplevel(self.root)
@@ -1393,7 +1383,6 @@ class MainWindow:
   /model <name>    Change model
   /host <url>      Change API host
   /key <key>       Change API key
-  /cost            Show cost breakdown
   /config          Show configuration
 
   ─────────────────────────────────────
@@ -1429,7 +1418,6 @@ class MainWindow:
   Edit > Tools           Enable/disable built-in tools
   Edit > MCP Servers     Manage MCP server connections
 
-  View > Cost Breakdown  See token and cost details
 
   Help > Help            You are here
   Help > About           Learn more about Claudette
@@ -1522,9 +1510,6 @@ class MainWindow:
                 self.config.set_api_key(new_key)
                 self.query_engine.api_client.api_key = new_key
                 self._append_message("system", "API key updated")
-
-        elif command == "/cost":
-            CostDialog(self.root, self.query_engine.cost_tracker)
 
         elif command == "/config":
             config_text = f"""Configuration:

@@ -8,6 +8,7 @@ import WriteResult from './WriteResult'
 import TerminalOutput from './TerminalOutput'
 import ResizeHandle from './ResizeHandle'
 import FileExplorer from './FileExplorer'
+import JshTerminal from './JshTerminal'
 import FileViewer from './FileViewer'
 import UsageDisplay, { calculateCost } from './UsageDisplay'
 import SettingsPanel from './SettingsPanel'
@@ -59,7 +60,7 @@ interface CommandMessage {
 
 type Message = UserMessage | AssistantMessage | CommandMessage
 
-type Panel = 'chat' | 'files' | 'viewer'
+type Panel = 'chat' | 'files' | 'viewer' | 'jsh'
 
 export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; model: string; baseUrl: string }) {
   const [messages, setMessages] = useState<Message[]>([])
@@ -319,12 +320,16 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
       const res = await fetch(`/api/files?export=1&sessionId=${sessionId}`)
       const data = await res.json()
       if (data.files && data.files.length > 0) {
-        const content = JSON.stringify(data.files, null, 2)
-        const blob = new Blob([content], { type: 'application/json' })
+        const JSZip = (await import('jszip')).default
+        const zip = new JSZip()
+        for (const file of data.files) {
+          zip.file(file.path.replace(/^\//, ''), file.content)
+        }
+        const blob = await zip.generateAsync({ type: 'blob' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = `claudette-project-${sessionId.slice(0, 8)}.json`
+        a.download = `claudette-project-${sessionId.slice(0, 8)}.zip`
         a.click()
         URL.revokeObjectURL(url)
       }
@@ -362,6 +367,13 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
               {sessionId.slice(0, 8)}...
             </span>
           )}
+          <button
+            onClick={() => setActivePanel(activePanel === 'jsh' ? 'chat' : 'jsh')}
+            className={`px-2 py-1 text-xs border rounded transition-colors ${activePanel === 'jsh' ? 'bg-[#58a6ff22] border-[#58a6ff] text-[#58a6ff]' : 'bg-[#21262d] border-[#30363d] text-[#8b949e] hover:text-[#c9d1d9]'}`}
+            title="jsh terminal"
+          >
+            jsh
+          </button>
           <button
             onClick={() => setShowSettings(true)}
             className="p-1 text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
@@ -453,6 +465,14 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
           </div>
         </div>
 
+        {activePanel === 'jsh' && (
+          <>
+            <ResizeHandle orientation="vertical" onResize={(d) => setViewerWidth(w => Math.max(200, Math.min(900, w - d)))} />
+            <div style={{ width: viewerWidth, minWidth: 200, maxWidth: 900, flexShrink: 0 }} className="border-l border-[#30363d]">
+              <JshTerminal sessionId={sessionId} />
+            </div>
+          </>
+        )}
         {activePanel === 'viewer' && selectedFilePath && (
           <>
             <ResizeHandle orientation="vertical" onResize={(d) => setViewerWidth(w => Math.max(200, Math.min(900, w - d)))} />
