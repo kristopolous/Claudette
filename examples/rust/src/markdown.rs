@@ -285,26 +285,10 @@ pub fn render_markdown(input: &str) -> Text<'static> {
                 }
                 TagEnd::CodeBlock => {
                     in_code_block = false;
-                    let lang_str = code_lang.as_deref().unwrap_or("");
-                    let fence = if lang_str.is_empty() {
-                        "```".to_string()
-                    } else {
-                        format!("```{}", lang_str)
-                    };
-                    lines.push(Line::styled(
-                        fence,
-                        Style::default()
-                            .fg(Color::DarkGray)
-                            .add_modifier(Modifier::BOLD),
-                    ));
                     let highlighted = highlight_code(&code_content, code_lang.as_deref());
                     lines.extend(highlighted);
-                    lines.push(Line::styled(
-                        "```",
-                        Style::default()
-                            .fg(Color::DarkGray)
-                            .add_modifier(Modifier::BOLD),
-                    ));
+                    // Add spacing after code block
+                    lines.push(Line::from(""));
                 }
                 TagEnd::Emphasis => {}
                 TagEnd::Strong => {}

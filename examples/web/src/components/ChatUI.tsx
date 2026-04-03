@@ -468,7 +468,7 @@ export default function ChatUI({ apiKey, model, baseUrl }: { apiKey: string; mod
         {activePanel === 'jsh' && (
           <>
             <ResizeHandle orientation="vertical" onResize={(d) => setViewerWidth(w => Math.max(200, Math.min(900, w - d)))} />
-            <div style={{ width: viewerWidth, minWidth: 200, maxWidth: 900, flexShrink: 0 }} className="border-l border-[#30363d]">
+            <div style={{ width: viewerWidth, minWidth: 200, maxWidth: 900, flexShrink: 0 }} className="border-l border-[#30363d] h-full">
               <JshTerminal sessionId={sessionId} />
             </div>
           </>

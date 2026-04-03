@@ -5,10 +5,10 @@ use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
 use dirs;
 use ratatui::{
     backend::CrosstermBackend,
-    layout::{Alignment, Constraint, Direction, Layout, Position, Rect},
+    layout::{Constraint, Direction, Layout, Position, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span, Text},
-    widgets::{Block, Borders, Paragraph},
+    widgets::{Block, Borders, Clear, Paragraph},
     Frame, Terminal,
 };
 use serde::{Deserialize, Serialize};
@@ -542,121 +542,67 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         message_area.y + inner_padding + 1,
         message_area.width.saturating_sub(2 * (inner_padding + 1)),
         message_area.height.saturating_sub(2 * (inner_padding + 1)),
-    );
+     );
 
-    // Pre-render all messages and current_response as message bundles (role + lines)
-    #[allow(unused)]
-    enum MessageRole {
-        User,
-        Assistant,
-        Spacing,
-    }
-    let mut bundles: Vec<(MessageRole, Vec<Line<'static>>)> = Vec::new();
-    for msg in &app.messages {
-        let raw = render_markdown(&msg.content);
-        let is_user = msg.role == "user";
+    // Clear the inner area to prevent artifacts from previous frames
+    frame.render_widget(Clear, inner);
+
+    // Render messages with proper alignment and code preservation
+    // Build all lines into a flat buffer
+    let mut flat_lines: Vec<Line<'static>> = Vec::new();
+
+    // Helper to compute display width of a line
+    let line_width = |line: &Line| -> usize {
+        line.spans.iter().map(|s| s.content.as_ref().width()).sum()
+    };
+
+    // Helper to add a message to flat_lines with alignment
+    let mut add_message = |role: &str, content: &str| {
+        let raw = render_markdown(content);
+        let is_user = role == "user";
         let wrap_width = if is_user { inner.width } else { inner.width.saturating_sub(1) };
         let mut wrapped = wrap_text(&raw, wrap_width);
-        // For assistant, color tool result lines and add left margin
+        // Assistant: prepend a space as left margin
         if !is_user {
-            // Color status lines
             for line in &mut wrapped {
-                let plain: String = line.spans.iter().map(|s| s.content.as_ref()).collect();
-                if plain == "[Tool result: ok]" {
-                    *line = Line::from(Span::styled(
-                        plain,
-                        Style::default().fg(Color::Green).add_modifier(Modifier::BOLD),
-                    ));
-                } else if plain == "[Tool result: error]" {
-                    *line = Line::from(Span::styled(
-                        plain,
-                        Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
-                    ));
+                let mut new_spans = vec![Span::raw(" ")];
+                new_spans.extend(line.spans.clone());
+                *line = Line::from(new_spans);
+            }
+        }
+        // User: right-align by padding with leading spaces
+        if is_user {
+            for line in &mut wrapped {
+                let w = line_width(line);
+                if w < inner.width as usize {
+                    let spaces = inner.width as usize - w;
+                    let mut new_spans = vec![Span::raw(" ".repeat(spaces))];
+                    new_spans.extend(line.spans.clone());
+                    *line = Line::from(new_spans);
                 }
             }
-            // Add left margin space
-            for line in &mut wrapped {
-                let mut new_spans = vec![Span::raw(" ")];
-                new_spans.extend(line.spans.clone());
-                *line = Line::from(new_spans);
-            }
         }
-        let role = if is_user { MessageRole::User } else { MessageRole::Assistant };
-        bundles.push((role, wrapped));
-        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
-    }
-    if !app.current_response.is_empty() {
-        let raw = render_markdown(&app.current_response);
-        // assistant response: wrap with width-1 and add left margin
-        let wrap_width = inner.width.saturating_sub(1);
-        let mut wrapped = wrap_text(&raw, wrap_width);
-        // Color status lines
-        for line in &mut wrapped {
-            let plain: String = line.spans.iter().map(|s| s.content.as_ref()).collect();
-            if plain == "[Tool result: ok]" {
-                *line = Line::from(Span::styled(
-                    plain,
-                    Style::default().fg(Color::Green).add_modifier(Modifier::BOLD),
-                ));
-            } else if plain == "[Tool result: error]" {
-                *line = Line::from(Span::styled(
-                    plain,
-                    Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
-                ));
-            }
-        }
-        // Add left margin space
-        for line in &mut wrapped {
-            let mut new_spans = vec![Span::raw(" ")];
-            new_spans.extend(line.spans.clone());
-            *line = Line::from(new_spans);
-        }
-        bundles.push((MessageRole::Assistant, wrapped));
-        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
-    }
-    let mut bundles: Vec<(MessageRole, Vec<Line<'static>>)> = Vec::new();
+        flat_lines.extend(wrapped);
+        // spacing between messages
+        flat_lines.push(Line::from(""));
+    };
+
     for msg in &app.messages {
-        let raw = render_markdown(&msg.content);
-        let is_user = msg.role == "user";
-        let wrap_width = if is_user { inner.width } else { inner.width.saturating_sub(1) };
-        let mut wrapped = wrap_text(&raw, wrap_width);
-        // For assistant, prepend a space as left margin
-        if !is_user {
-            for line in &mut wrapped {
-                let mut new_spans = vec![Span::raw(" ")];
-                new_spans.extend(line.spans.clone());
-                *line = Line::from(new_spans);
-            }
-        }
-        let role = if is_user { MessageRole::User } else { MessageRole::Assistant };
-        bundles.push((role, wrapped));
-        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
+        add_message(&msg.role, &msg.content);
     }
     if !app.current_response.is_empty() {
-        let raw = render_markdown(&app.current_response);
-        // assistant response: wrap with width-1 and add left margin space
-        let wrap_width = inner.width.saturating_sub(1);
-        let mut wrapped = wrap_text(&raw, wrap_width);
-        for line in &mut wrapped {
-            let mut new_spans = vec![Span::raw(" ")];
-            new_spans.extend(line.spans.clone());
-            *line = Line::from(new_spans);
-        }
-        bundles.push((MessageRole::Assistant, wrapped));
-        bundles.push((MessageRole::Spacing, vec![Line::from("")]));
+        add_message("assistant", &app.current_response);
     }
 
-    // Remove trailing spacing line if present
-    if let Some((MessageRole::Spacing, _)) = bundles.last() {
-        bundles.pop();
+    // Remove trailing blank line
+    if flat_lines.last().map(|l| l.spans.is_empty() && line_width(l) == 0).unwrap_or(false) {
+        flat_lines.pop();
     }
 
-    // Compute total height for scroll
-    let total_lines: usize = bundles.iter().map(|(_, lines)| lines.len()).sum();
+    let total_lines = flat_lines.len();
     let visible = inner.height as usize;
     let max_scroll = if total_lines > visible { total_lines - visible } else { 0 };
 
-    // Auto-scroll handling
     if app.auto_scroll {
         app.scroll_offset = max_scroll;
     } else if app.scroll_offset > max_scroll {
@@ -665,45 +611,16 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
     if app.scroll_offset == max_scroll {
         app.auto_scroll = true;
     }
-    let scroll_offset = app.scroll_offset;
 
-    // Render visible message bundles with backgrounds as whole paragraphs
-    let mut y: usize = 0;
-    for (role, lines) in &bundles {
-        let h = lines.len();
-        // Skip if entirely above viewport
-        if y + h <= scroll_offset {
-            y += h;
-            continue;
-        }
-        // Stop if beyond bottom
-        if y >= scroll_offset + visible {
-            break;
-        }
-        let render_y = inner.y + (y as u16).saturating_sub(scroll_offset as u16);
-        let avail = inner.height.saturating_sub(render_y - inner.y);
-        let render_h = std::cmp::min(h as u16, avail);
-        let area = Rect::new(inner.x, render_y, inner.width, render_h);
-        let text = Text::from_iter(lines.iter().cloned());
-        match role {
-            MessageRole::User => {
-                let para = Paragraph::new(text)
-                    .alignment(Alignment::Right);
-                frame.render_widget(para, area);
-            }
-            MessageRole::Assistant => {
-                let para = Paragraph::new(text)
-                    .style(Style::default().bg(Color::Rgb(20, 20, 20))) // dark grey #141414
-                    .alignment(Alignment::Left);
-                frame.render_widget(para, area);
-            }
-            MessageRole::Spacing => {
-                // blank line, no background
-                frame.render_widget(Paragraph::new(text), area);
-            }
-        }
-        y += h;
-    }
+    // Slice visible lines and render directly (no Paragraph::scroll to avoid wrap artifacts)
+    let start = app.scroll_offset;
+    let end = (start + visible).min(total_lines);
+    let visible_lines: Vec<Line<'static>> = flat_lines[start..end].to_vec();
+    let text = Text::from(visible_lines);
+    let paragraph = Paragraph::new(text);
+    frame.render_widget(paragraph, inner);
+
+
 
     // Input area with muted border
     let input_block = Block::default()

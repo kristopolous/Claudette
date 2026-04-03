@@ -15,7 +15,7 @@ function resolvePath(input: string): string[] {
 
 export class VirtualFSImpl implements VirtualFS {
   root: VirtualFSNode
-  private baseDir: string
+  readonly baseDir: string
 
   constructor(baseDir?: string) {
     this.baseDir = baseDir || path.join(process.cwd(), '.claudette-workspace')

@@ -1111,21 +1111,25 @@ class MainWindow:
     def _add_user_bubble(self, text: str):
         wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
         wrapper.pack(fill=tk.X, pady=2, padx=10)
-        bubble = tk.Label(wrapper, text=text, bg="#0078d4", fg="white",
-                          font=("TkDefaultFont", 10), wraplength=500,
-                          justify=tk.RIGHT, padx=12, pady=8, anchor=tk.E,
-                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
-        bubble.pack(side=tk.RIGHT)
+        bubble = tk.Text(wrapper, bg="#0078d4", fg="white",
+                         font=("TkDefaultFont", 10), wrap=tk.WORD,
+                         height=1, borderwidth=0, relief=tk.FLAT,
+                         highlightthickness=0, padx=12, pady=8)
+        bubble.insert("1.0", text)
+        bubble.configure(state=tk.DISABLED)
+        bubble.pack(side=tk.RIGHT, fill=tk.X, expand=True)
         self._message_widgets.append(wrapper)
 
     def _add_assistant_bubble(self, text: str):
         wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
         wrapper.pack(fill=tk.X, pady=2, padx=10)
-        bubble = tk.Label(wrapper, text=text, bg="#e8e8e8", fg="#222222",
-                          font=("TkDefaultFont", 10), wraplength=500,
-                          justify=tk.LEFT, padx=12, pady=8, anchor=tk.W,
-                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
-        bubble.pack(side=tk.LEFT)
+        bubble = tk.Text(wrapper, bg="#e8e8e8", fg="#222222",
+                         font=("TkDefaultFont", 10), wrap=tk.WORD,
+                         height=1, borderwidth=0, relief=tk.FLAT,
+                         highlightthickness=0, padx=12, pady=8)
+        bubble.insert("1.0", text)
+        bubble.configure(state=tk.DISABLED)
+        bubble.pack(side=tk.LEFT, fill=tk.X, expand=True)
         self._message_widgets.append(wrapper)
 
     def _add_tool_bubble(self, text: str):
@@ -1135,21 +1139,25 @@ class MainWindow:
                           font=("TkDefaultFont", 8), justify=tk.LEFT, anchor=tk.W,
                           highlightthickness=0, borderwidth=0, relief=tk.FLAT)
         header.pack(anchor=tk.W, padx=2, pady=(0, 2))
-        bubble = tk.Label(wrapper, text=text, bg="#e8e4d8", fg="#333333",
-                          font=("TkFixedFont", 9), wraplength=700,
-                          justify=tk.LEFT, padx=10, pady=8, anchor=tk.W,
-                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
-        bubble.pack(fill=tk.X, side=tk.LEFT)
+        bubble = tk.Text(wrapper, bg="#e8e4d8", fg="#333333",
+                         font=("TkFixedFont", 9), wrap=tk.WORD,
+                         height=1, borderwidth=0, relief=tk.FLAT,
+                         highlightthickness=0, padx=10, pady=8)
+        bubble.insert("1.0", text)
+        bubble.configure(state=tk.DISABLED)
+        bubble.pack(fill=tk.X, side=tk.LEFT, expand=True)
         self._message_widgets.append(wrapper)
 
     def _add_error_bubble(self, text: str):
         wrapper = tk.Frame(self.chat_inner, bg="#f5f5f5", highlightthickness=0, borderwidth=0)
         wrapper.pack(fill=tk.X, pady=2, padx=10)
-        bubble = tk.Label(wrapper, text=text, bg="#fde8e8", fg="red",
-                          font=("TkDefaultFont", 10), wraplength=500,
-                          justify=tk.CENTER, padx=12, pady=8,
-                          highlightthickness=0, borderwidth=0, relief=tk.FLAT)
-        bubble.pack(fill=tk.X)
+        bubble = tk.Text(wrapper, bg="#fde8e8", fg="red",
+                         font=("TkDefaultFont", 10), wrap=tk.WORD,
+                         height=1, borderwidth=0, relief=tk.FLAT,
+                         highlightthickness=0, padx=12, pady=8)
+        bubble.insert("1.0", text)
+        bubble.configure(state=tk.DISABLED)
+        bubble.pack(fill=tk.X, expand=True)
         self._message_widgets.append(wrapper)
 
     def _add_system_bubble(self, text: str):

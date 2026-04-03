@@ -74,6 +74,7 @@ export interface VirtualFSNode {
 
 export interface VirtualFS {
   root: VirtualFSNode
+  baseDir: string
   read: (path: string) => Promise<string>
   write: (path: string, content: string) => Promise<void>
   edit: (path: string, oldString: string, newString: string) => Promise<string>
