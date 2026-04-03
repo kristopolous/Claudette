@@ -13,7 +13,7 @@ Claudette is every module, every pattern, every decision from the leak - ready t
 
 Want to go piecemeal? Run `claudia` and she will export a subset. It's completely modular.
 
-Take a Claude code feature and mix it into opencode. These are the recipes and Claudia will package it up for your agent.
+Take a Claude code feature and mix it in somewhere else, like opencode. These are the recipes and Claudia will package it up for your agent.
 
 <img width="500" alt="claudia" src="https://github.com/user-attachments/assets/b71ea9e4-1cc6-4352-abbb-24a5a2aabb9e" />
 
