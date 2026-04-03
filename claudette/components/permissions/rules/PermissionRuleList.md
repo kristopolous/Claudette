@@ -3,7 +3,7 @@ Main component for managing permission rules with tabs for allow, ask, deny, wor
 
 ## Imports
 - **Stdlib**: None
-- **External**: `chalk`, `figures`, `react`
+- **External**: `chalk`, `figures`, REACT
 - **Internal**: `state/AppState`, `utils/permissions/PermissionUpdate`, `utils/permissions/PermissionUpdateSchema`, `commands`, `components/CustomSelect/select`, `hooks/useExitOnCtrlCDWithKeybindings`, `hooks/useSearchInput`, `ink/events/keyboard-event`, `ink`, `keybindings/useKeybinding`, `utils/autoModeDenials`, `utils/permissions/PermissionRule`, `utils/permissions/permissionRuleParser`, `utils/permissions/permissions`, `utils/permissions/shadowedRuleDetection`, `utils/slowOperations`, `design-system/Pane`, `design-system/Tabs`, `SearchBox`, `ui/option`, `AddPermissionRules`, `AddWorkspaceDirectory`, `PermissionRuleDescription`, `PermissionRuleInput`, `RecentDenialsTab`, `RemoveWorkspaceDirectory`, `WorkspaceTab`
 
 ## Logic

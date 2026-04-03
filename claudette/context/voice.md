@@ -1,11 +1,11 @@
 # voice
 
 ## Purpose
-Provides React context and hooks for voice state management with store pattern.
+Provides UI context and hooks for voice state management with store pattern.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: store utils
 
 ## Logic

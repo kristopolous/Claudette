@@ -3,7 +3,7 @@ Displays keybinding configuration validation warnings and errors in the UI.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Box`, `Text` (ink), `getCachedKeybindingWarnings`, `getKeybindingsPath`, `isKeybindingCustomizationEnabled` (keybindings/loadUserBindings)
 
 ## Logic

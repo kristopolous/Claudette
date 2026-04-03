@@ -5,7 +5,7 @@ Provides ScrollBox component with overflow scroll and imperative scroll API.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `type-fest`
+- **External**: REACT, `type-fest`
 - **Internal**: bootstrap state, ink dom/reconciler/styles, ink global.d, ink components Box
 
 ## Logic
@@ -33,7 +33,7 @@ Provides ScrollBox component with overflow scroll and imperative scroll API.
 22. Content translated by -scrollTop and clipped to box bounds
 23. Works best inside fullscreen (constrained-height root) Ink tree
 24. `PropsWithChildren`, `Ref` - React types
-25. `useImperativeHandle`, `useRef`, `useState` - React hooks
+25. `useImperativeHandle`, `useRef`, `useState` - UI hooks
 26. `Except` - type-fest utility
 27. `markScrollActivity` - marks scroll activity
 28. `DOMElement` - DOM element type

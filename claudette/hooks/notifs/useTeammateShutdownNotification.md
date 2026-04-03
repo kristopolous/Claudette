@@ -2,7 +2,7 @@
 Shows low-priority batched notifications when in-process teammates (swarm agents) spawn or shut down, aggregating counts via fold.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `.././bootstrap/state` (getIsRemoteMode)
   - `.././context/notifications` (Notification type, useNotifications)

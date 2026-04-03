@@ -1,10 +1,10 @@
 # exportRenderer
 
 ## Purpose
-Renders conversation messages to ANSI or plain text for export, using the same React components as the interactive UI but in headless/static mode.
+Renders conversation messages to ANSI or plain text for export, using the same UI components as the interactive UI but in headless/static mode.
 
 ## Imports
-- **Stdlib**: `react` (React, useRef)
+- **Stdlib**: REACT (React, useRef)
 - **External**: `strip-ansi`
 - **Internal**: ../components/Messages (Messages), ../keybindings/KeybindingContext (KeybindingProvider), ../keybindings/loadUserBindings (loadKeybindingsSyncWithWarnings), ../keybindings/types (KeybindingContextName), ../state/AppState (AppStateProvider), ../Tool (Tools), ../types/message (Message), ./staticRender (renderToAnsiString)
 

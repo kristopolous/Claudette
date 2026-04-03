@@ -3,7 +3,7 @@ Handles teleport (remote session) errors by detecting and resolving login requir
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `Dialog`, `Select`, `ConsoleOAuthFlow`, `TeleportStash`, remote preconditions utilities, graceful shutdown
 
 ## Logic

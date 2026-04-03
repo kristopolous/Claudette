@@ -2,7 +2,7 @@
 Fetches current git diff data (stats and hunks) on mount; derives file list with flags and provides hunks map.
 
 ## Imports
-- **External**: `react` (useEffect, useMemo, useState), `diff` (StructuredPatchHunk type)
+- **External**: REACT (useEffect, useMemo, useState), `diff` (StructuredPatchHunk type)
 - **Internal**:
   - `./utils/gitDiff` (fetchGitDiff, fetchGitDiffHunks, GitDiffResult, GitDiffStats)
 

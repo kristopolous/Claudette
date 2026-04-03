@@ -3,7 +3,7 @@ A visual component for a CLI tree-style display that shows the progress, status,
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react), `ui-components` (e.g., ink)
+- **External**: `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
 - **Internal**: `utils/format`, `utils/theme`
 
 ## Logic

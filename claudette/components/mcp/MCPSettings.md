@@ -3,7 +3,7 @@ Serves as the main MCP settings component that manages view state and routes bet
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (useEffect, useMemo), `react/compiler-runtime`
+- **External**: REACT (useEffect, useMemo), REACT_COMPILER
 - **Internal**: `commands` (CommandResultDisplay), `services/mcp/auth` (ClaudeAuthProvider), `services/mcp/types` (McpClaudeAIProxyServerConfig, McpHTTPServerConfig, McpSSEServerConfig, McpStdioServerConfig), `services/mcp/utils` (extractAgentMcpServers, filterToolsByServer), `state/AppState` (useAppState), `utils/sessionIngressAuth` (getSessionIngressAuthToken), `MCPAgentServerMenu`, `MCPListPanel`, `MCPRemoteServerMenu`, `MCPStdioServerMenu`, `MCPToolDetailView`, `MCPToolListView`, `types` (AgentMcpServerInfo, MCPViewState, ServerInfo)
 
 ## Logic

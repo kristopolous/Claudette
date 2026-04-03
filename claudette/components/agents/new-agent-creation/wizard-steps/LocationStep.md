@@ -2,7 +2,7 @@
 Provides a wizard step for choosing where the agent configuration will be stored.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box),utils/settings/constants (SettingSource type),ConfigurableShortcutHint,CustomSelect/select (Select), designsystem/Byline, designsystem/KeyboardShortcutHint, wizard/index (useWizard), wizard/WizardDialogLayout, types (AgentWizardData type)
 
 ## Logic

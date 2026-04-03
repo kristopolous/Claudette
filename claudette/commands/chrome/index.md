@@ -14,7 +14,7 @@ Creates a command object:
 - `description`: `'Claude in Chrome (Beta) settings'`
 - `availability`: `['claude-ai']` (restricts to claude-ai mode)
 - `isEnabled`: Returns false if in a non-interactive session, true otherwise
-- `type`: `'local-jsx'` (renders a React component)
+- `type`: `'local-jsx'` (renders a UI component)
 - `load`: Dynamic import of `/chrome` (or `.tsx`)
 
 ## Exports

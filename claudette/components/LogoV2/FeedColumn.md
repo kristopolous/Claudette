@@ -5,13 +5,13 @@ Provides feed column component for rendering multiple feeds vertically.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, design-system Divider, LogoV2 Feed
 
 ## Logic
 1. `FeedColumnProps` - { feeds: FeedConfig[], maxWidth: number }
-2. `FeedColumn` - React component for feed column
-3. Uses React compiler runtime (_c) for memoization
+2. `FeedColumn` - UI component for feed column
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Calculates feedWidths via feeds.map(calculateFeedWidth)
 5. Calculates maxOfAllFeeds via Math.max(...feedWidths)
 6. Calculates actualWidth via Math.min(maxOfAllFeeds, maxWidth)

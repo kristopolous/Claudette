@@ -2,7 +2,7 @@
 Orchestrates the multi-step wizard for creating a new agent.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: memdir/paths (isAutoMemoryEnabled), Tool (Tools type), tools/AgentTool/loadAgentsDir (AgentDefinition type), wizard/index (WizardProvider), wizard/types (WizardStepComponent type), wizard-steps/ColorStep, wizard-steps/ConfirmStepWrapper, wizard-steps/DescriptionStep, wizard-steps/GenerateStep, wizard-steps/LocationStep, wizard-steps/MemoryStep, wizard-steps/MethodStep, wizard-steps/ModelStep, wizard-steps/PromptStep, wizard-steps/ToolsStep, wizard-steps/TypeStep, types (AgentWizardData type)
 
 ## Logic

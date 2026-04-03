@@ -4,7 +4,7 @@
 Assembles the full tool pool for the REPL by combining built-in tools with MCP tools.
 
 ## Imports
-- **Stdlib**: `useMemo` from 'react'
+- **Stdlib**: `useMemo` from 'REACT'
 - **External**: None
 - **Internal**: `Tools`, `ToolPermissionContext`, `assembleToolPool`, `useAppState`, `mergeAndFilterTools`
 

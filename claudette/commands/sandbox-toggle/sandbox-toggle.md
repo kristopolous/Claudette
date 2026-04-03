@@ -9,7 +9,7 @@ Configures the sandbox environment for command execution. Supports an interactiv
 
 ### Stdlib
 - `path` (`relative`)
-- `react`
+- REACT
 
 ### Internal
 - `getCwdState` from `.././bootstrap/state`

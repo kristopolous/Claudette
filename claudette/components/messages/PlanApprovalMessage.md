@@ -3,7 +3,7 @@ Renders plan approval request and response messages between teammates, showing p
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), Markdown, teammateMailbox utils, slowOperations utils, ShutdownMessage, TaskAssignmentMessage
 
 ## Logic
@@ -15,7 +15,7 @@ Renders plan approval request and response messages between teammates, showing p
 6. formatTeammateMessageContent checks for structured messages (plan approval, shutdown, idle, task assignment, terminated) and returns formatted summary or original content
 
 ## Exports
-- `PlanApprovalRequestDisplay` - React component rendering a plan approval request with plan content
-- `PlanApprovalResponseDisplay` - React component rendering approval/rejection response with feedback
+- `PlanApprovalRequestDisplay` - UI component rendering a plan approval request with plan content
+- `PlanApprovalResponseDisplay` - UI component rendering approval/rejection response with feedback
 - `tryRenderPlanApprovalMessage` - Parses and renders plan approval messages, returns null if not applicable
 - `formatTeammateMessageContent` - Formats teammate message content, returning summary for structured messages

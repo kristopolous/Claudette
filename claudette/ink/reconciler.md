@@ -1,7 +1,7 @@
 # ink/reconciler
 
 ## Purpose
-Provides React reconciler for Ink terminal rendering.
+Provides RECONCILER for Ink terminal rendering.
 
 ## Imports
 - **Stdlib**: `fs`

@@ -4,7 +4,7 @@
 Vim-style text input handler wrapping useTextInput with vim modal editing (INSERT/NORMAL modes), operators, and motions.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `Key`, `VimInputState`, `VimMode`, `Cursor`, `lastGrapheme`, vim operators and transitions, `useTextInput`
 

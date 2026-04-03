@@ -5,12 +5,12 @@ Provides emergency tip component for displaying dynamic config tips at top of fe
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink, growthbook, config
 
 ## Logic
 1. `CONFIG_NAME` - 'tengu-top-of-feed-tip'
-2. `EmergencyTip` - React component for emergency tip
+2. `EmergencyTip` - UI component for emergency tip
 3. Uses useMemo for tip via getTipOfFeed (memoized to prevent re-reads)
 4. Uses useMemo for lastShownTip from getGlobalConfig().lastShownEmergencyTip
 5. Only shows if tip.tip && tip.tip !== lastShownTip
@@ -27,7 +27,7 @@ Provides emergency tip component for displaying dynamic config tips at top of fe
 13. `getTipOfFeed` - gets tip from dynamic config with caching
 14. Returns cached value immediately, updates in background
 15. Uses getDynamicConfig_CACHED_MAY_BE_STALE<TipOfFeed>
-16. `useEffect`, `useMemo` - React hooks
+16. `useEffect`, `useMemo` - UI hooks
 17. `Box`, `Text` - ink components
 18. `getDynamicConfig_CACHED_MAY_BE_STALE` - gets dynamic config
 19. `getGlobalConfig`, `saveGlobalConfig` - config functions

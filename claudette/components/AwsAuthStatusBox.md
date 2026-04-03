@@ -3,7 +3,7 @@ A UI component that displays the current status of AWS authentication, including
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `utils/awsAuthStatusManager`, `components/AwsAuthStatusBox`
 
 ## Logic

@@ -3,7 +3,7 @@ Monitors and displays a warning indicator when memory usage is high or critical.
 
 ## Imports
 - **Stdlib**: none
-- **External**: react (React)
+- **External**: REACT (React)
 - **Internal**: ../hooks/useMemoryUsage (useMemoryUsage), ../ink (Box, Text), ../utils/format (formatFileSize)
 
 ## Logic

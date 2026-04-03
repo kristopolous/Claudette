@@ -3,7 +3,7 @@ Automatically truncates long pasted input on mount and resets the truncation fla
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `utils/config`, `inputPaste`
 
 ## Logic

@@ -3,7 +3,7 @@ Manages the display timing of the fast mode hint shown next to the fast icon, sh
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: none
 
 ## Logic

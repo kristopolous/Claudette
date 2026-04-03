@@ -3,7 +3,7 @@ Manages the bidirectional Remote Control bridge connection for Claudette on the 
 
 ## Imports
 - **Stdlib**: `child_process` (spawnSync)
-- **External**: `qrcode`, `react`
+- **External**: `qrcode`, REACT
 - **Internal**: `checkBridgePrerequisites`, `getBridgeAccessToken`, `BRIDGE_LOGIN_INSTRUCTION`, `REMOTE_CONTROL_DISCONNECTED_MSG`, `useRegisterOverlay`, `Dialog`, `ListItem`, `shouldShowRemoteCallout`, `Box`, `Text`, `useKeybindings`, `logEvent`, `useAppState`, `useSetAppState`, `LocalJSXCommandContext`, types
 
 ## Logic

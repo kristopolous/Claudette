@@ -3,7 +3,7 @@ Renders assistant tool use messages with tool name, input display, progress indi
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text, useTheme), Tool, MessageResponse, ToolUseLoader, HookProgressMessage, SentryErrorBoundary, messageActions, useTerminalSize, useAppState, classifierApprovalsHook, messages utils, log utils
 
 ## Logic
@@ -16,4 +16,4 @@ Renders assistant tool use messages with tool name, input display, progress indi
 7. Wraps output with selection-aware background and optional margin
 
 ## Exports
-- `AssistantToolUseMessage` - React component rendering tool use messages with full state management
+- `AssistantToolUseMessage` - UI component rendering tool use messages with full state management

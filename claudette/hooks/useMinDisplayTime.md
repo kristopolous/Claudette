@@ -3,7 +3,7 @@ Ensures each distinct value remains visible for at least `minMs`, preventing rap
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useEffect`, `useRef`, `useState`)
+- **External**: REACT (`useEffect`, `useRef`, `useState`)
 - **Internal**: None
 
 ## Logic

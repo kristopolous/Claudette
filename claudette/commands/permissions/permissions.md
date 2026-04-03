@@ -5,7 +5,7 @@ Opens a UI to manage tool permission allow/deny rules. Allows viewing and editin
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `PermissionRuleList` component from `.././components/permissions/rules/PermissionRuleList`

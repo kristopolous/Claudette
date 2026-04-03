@@ -4,7 +4,7 @@
 Manages an input buffer with undo support, debouncing, and size limits for text input history.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useRef`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `PastedContent`
 

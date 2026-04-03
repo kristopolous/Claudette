@@ -4,7 +4,7 @@
 Polls GitHub PR review status every 60 seconds while the session is active, stopping on idle or slow responses.
 
 ## Imports
-- **Stdlib**: `useEffect`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useEffect`, `useRef`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `getLastInteractionTime`, `fetchPrStatus`, `PrReviewState`
 

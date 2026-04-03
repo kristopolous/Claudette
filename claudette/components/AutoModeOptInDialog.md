@@ -3,7 +3,7 @@ Displays a dialog prompting the user to opt into auto mode for handling permissi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `logEvent` (analytics), `Box`, `Link`, `Text` (ink), `updateSettingsForSource` (settings), `Select` (CustomSelect), `Dialog` (design-system)
 
 ## Logic

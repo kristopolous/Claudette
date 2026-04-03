@@ -5,7 +5,7 @@ Provides spinner glyph component for animated spinner display.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, theme, Spinner utils
 
 ## Logic
@@ -15,8 +15,8 @@ Provides spinner glyph component for animated spinner display.
 4. `REDUCED_MOTION_CYCLE_MS` (2000) - 2-second cycle: 1s visible, 1s dim
 5. `ERROR_RED` - { r: 171, g: 43, b: 63 } for error color
 6. `Props` - { frame, messageColor, stalledIntensity?, reducedMotion?, time? }
-7. `SpinnerGlyph` - React component for spinner glyph
-8. Uses React compiler runtime (_c) for memoization
+7. `SpinnerGlyph` - UI component for spinner glyph
+8. Uses REACT_COMPILER runtime (_c) for memoization
 9. Gets theme via useTheme and getTheme
 10. Reduced motion: slowly flashing orange dot
 11. Calculates isDim based on time and cycle

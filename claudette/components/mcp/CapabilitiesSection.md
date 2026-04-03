@@ -3,7 +3,7 @@ Displays the capabilities (tools, resources, prompts) available on an MCP server
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink` (Box, Text), `design-system/Byline` (Byline)
 
 ## Logic

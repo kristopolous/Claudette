@@ -3,7 +3,7 @@ Provides a global search dialog that performs debounced ripgrep searches across 
 
 ## Imports
 - **Stdlib**: `path` (resolve)
-- **External**: `react` (useEffect, useRef, useState), `react/compiler-runtime`
+- **External**: REACT (useEffect, useRef, useState), REACT_COMPILER
 - **Internal**: `useRegisterOverlay` (overlayContext), `useTerminalSize` (hooks), `Text` (ink), `logEvent` (analytics), `getCwd` (utils/cwd), `openFileInExternalEditor` (utils/editor), `truncatePathMiddle`, `truncateToWidth` (utils/format), `highlightMatch` (utils/highlightMatch), `relativePath` (utils/permissions/filesystem), `readFileInRange` (utils/readFileInRange), `ripGrepStream` (utils/ripgrep), `FuzzyPicker` (design-system), `LoadingState` (design-system)
 
 ## Logic

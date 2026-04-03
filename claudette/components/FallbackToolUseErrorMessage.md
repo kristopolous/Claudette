@@ -3,7 +3,7 @@ Renders an error message when a tool execution fails, with optional truncation f
 
 ## Imports
 - **Stdlib**: none
-- **External**: `@anthropic-ai/sdk` (ToolResultBlockParam), `react`, `react/compiler-runtime`
+- **External**: `@anthropic-ai/sdk` (ToolResultBlockParam), REACT, REACT_COMPILER
 - **Internal**: `stripUnderlineAnsi` (components/shell/OutputLine), `extractTag` (utils/messages), `removeSandboxViolationTags` (utils/sandbox/sandbox-ui-utils), `Box`, `Text` (ink), `useShortcutDisplay` (keybindings), `countCharInString` (utils/stringUtils), `MessageResponse`
 
 ## Logic

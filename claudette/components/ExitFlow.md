@@ -3,7 +3,7 @@ Manages the exit flow, optionally showing a worktree dialog before gracefully sh
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `lodash-es/sample`
+- **External**: REACT, REACT_COMPILER, `lodash-es/sample`
 - **Internal**: `utils/gracefulShutdown`, `components/WorktreeExitDialog`
 
 ## Logic

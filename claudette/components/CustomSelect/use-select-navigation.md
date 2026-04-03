@@ -3,7 +3,7 @@ Manages keyboard-driven navigation and viewport scrolling for a select component
 
 ## Imports
 - **Stdlib**: `util` (isDeepStrictEqual)
-- **External**: `react` (useCallback, useEffect, useMemo, useReducer, useRef, useState)
+- **External**: REACT (useCallback, useEffect, useMemo, useReducer, useRef, useState)
 - **Internal**: `option-map` (OptionMap), `select` (OptionWithDescription)
 
 ## Logic

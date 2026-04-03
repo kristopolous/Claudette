@@ -5,7 +5,7 @@ Implements the doctor diagnostic screen that checks system health, installation 
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react/compiler-runtime`, `figures`, `react`
+- **External**: REACT_COMPILER, `figures`, REACT
 - **Internal**: Keybinding/MCP parsing warnings, context utils, envUtils, settings, bootstrap state, commands, design-system Pane, PressEnterToContinue, SandboxDoctor, ValidationErrorsList, hooks, ink components, keybindings, state, plugin types, autoUpdater, doctor diagnostics/warnings, envValidation, file utils, nativeInstaller locks, settings, shell/task output limits, xdg utils
 
 ## Logic
@@ -21,4 +21,4 @@ Implements the doctor diagnostic screen that checks system health, installation 
 10. Provides fix suggestions for detected issues
 
 ## Exports
-- `Doctor` - React component for diagnostic screen
+- `Doctor` - UI component for diagnostic screen

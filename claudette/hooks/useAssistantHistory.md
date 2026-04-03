@@ -2,7 +2,7 @@
 Lazy-loads remote assistant session history on scroll-up for viewer-only sessions.
 
 ## Imports
-- **External**: `react` (randomUUID, useCallback, useEffect, useLayoutEffect, useRef)
+- **External**: REACT (randomUUID, useCallback, useEffect, useLayoutEffect, useRef)
 - **Internal**:
   - `./assistant/sessionHistory` (createHistoryAuthCtx, fetchLatestEvents, fetchOlderEvents, HistoryAuthCtx, HistoryPage)
   - `./ink/components/ScrollBox` (ScrollBoxHandle type)

@@ -3,7 +3,7 @@ Displays a notice when the user's prompt has been stashed and will auto-restore 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `figures`, `react`
+- **External**: `figures`, REACT
 - **Internal**: `ink`
 
 ## Logic

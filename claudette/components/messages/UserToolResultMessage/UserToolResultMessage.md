@@ -2,7 +2,7 @@
 Top-level component that dispatches to the appropriate tool result message component based on the result status.
 
 ## Imports
-- **External**: `react`, `@anthropic-ai/sdk`
+- **External**: REACT, `@anthropic-ai/sdk`
 - **Internal**: `Tool`, `types/message`, `utils/messages`, `components/messages/UserToolResultMessage/UserToolCanceledMessage`, `components/messages/UserToolResultMessage/UserToolErrorMessage`, `components/messages/UserToolResultMessage/UserToolRejectMessage`, `components/messages/UserToolResultMessage/UserToolSuccessMessage`, `components/messages/UserToolResultMessage/utils`
 
 ## Logic

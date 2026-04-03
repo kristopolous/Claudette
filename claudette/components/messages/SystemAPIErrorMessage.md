@@ -3,7 +3,7 @@ Renders API error messages with retry countdown, attempt tracking, and truncated
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, usehooks-ts (useInterval)
+- **External**: REACT, usehooks-ts (useInterval)
 - **Internal**: ink (Box, Text), MessageResponse, CtrlOToExpand, api errorUtils, message types
 
 ## Logic
@@ -14,4 +14,4 @@ Renders API error messages with retry countdown, attempt tracking, and truncated
 5. Includes Ctrl+O expand prompt when error is truncated
 
 ## Exports
-- `SystemAPIErrorMessage` - React component rendering API errors with live retry countdown
+- `SystemAPIErrorMessage` - UI component rendering API errors with live retry countdown

@@ -8,7 +8,7 @@ Allows users to select or set the AI model for Claudette. Supports interactive m
 - `chalk` (for colored terminal output)
 
 ### Stdlib
-- `react` (including `useState`, `useEffect`)
+- REACT (including `useState`, `useEffect`)
 
 ### Internal
 - `CommandResultDisplay` type from `.././commands`
@@ -38,16 +38,16 @@ Key helpers:
 - `isKnownAlias(model)`: Checks if model matches a predefined alias.
 - `isOpus1mUnavailable(model)`: Returns true if model includes Opus with 1M but account lacks access and merge is disabled.
 - `isSonnet1mUnavailable(model)`: Similar for Sonnet 1M.
-- `SetModelAndClose`: React component that performs model validation/change in a `useEffect`, then calls `onDone` with result. Bypasses validation for 'default' and known aliases.
+- `SetModelAndClose`: UI component that performs model validation/change in a `useEffect`, then calls `onDone` with result. Bypasses validation for 'default' and known aliases.
 - `ModelPickerWrapper`: Memoized component that renders `ModelPicker` with current model, session override, and handles selection/cancellation. Shows fast mode notice if applicable.
 - `ShowModelAndClose`: Displays current model (including session override from plan mode) and effort.
 
 ## Exports
 - `call` (async function) - Main command handler
 - `renderModelLabel` (function) - Formats model for display
-- `SetModelAndClose` (React component) - Sets model from argument
-- `ModelPickerWrapper` (React component) - Interactive model picker
-- `ShowModelAndClose` (React component) - Shows current model
+- `SetModelAndClose` (UI component) - Sets model from argument
+- `ModelPickerWrapper` (UI component) - Interactive model picker
+- `ShowModelAndClose` (UI component) - Shows current model
 - `isKnownAlias` (function) - Alias check
 - `isOpus1mUnavailable` (function) - 1M access check for Opus
 - `isSonnet1mUnavailable` (function) - 1M access check for Sonnet

@@ -1,11 +1,11 @@
 # stats
 
 ## Purpose
-Provides React context and hooks for stats/metrics collection with counters, histograms, and sets.
+Provides UI context and hooks for stats/metrics collection with counters, histograms, and sets.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: config utils
 
 ## Logic

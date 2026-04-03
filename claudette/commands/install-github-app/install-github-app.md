@@ -2,7 +2,7 @@
  Guides users through setting up GitHub Actions for a repository to enable Claude PR assistance.
 
 ## Imports
-- **External**: `execa`, `react`
+- **External**: `execa`, REACT
 - **Internal**: Many: analytics (`logEvent`), `WorkflowMultiselectDialog`, `GITHUB_ACTION_SETUP_DOCS_URL`, `useExitOnCtrlCDWithKeybindings`, `type KeyboardEvent`, `Box`, `LocalJSXCommandOnDone`, auth utils (`getAnthropicApiKey`, `isAnthropicAuthEnabled`), `openBrowser`, `execFileNoThrow`, `getGithubRepo`, `plural`, step components (ApiKeyStep, CheckExistingSecretStep, CheckGitHubStep, ChooseRepoStep, CreatingStep, ErrorStep, ExistingWorkflowStep, InstallAppStep, OAuthFlowStep, SuccessStep, WarningsStep), `setupGitHubActions`, types (`State`, `Warning`, `Workflow`)
 
 ## Logic
@@ -22,4 +22,4 @@ Main component `InstallGitHubApp` manages a multi-step wizard:
 The flow branches based on auth method (api_key vs oauth_token) and whether skipping workflow. Uses `setupGitHubActions` to interact with GitHub API via `gh` CLI, creates branch, writes workflow files, sets secrets, and opens PR. Analytics logged throughout.
 
 ## Exports
-- `call` - Command entry returning `<InstallGitHubApp>` React component
+- `call` - Command entry returning `<InstallGitHubApp>` UI component

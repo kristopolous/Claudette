@@ -3,7 +3,7 @@ Provides a multi-step feedback and bug report submission dialog that collects us
 
 ## Imports
 - **Stdlib**: `fs/promises`
-- **External**: `axios`, `react`
+- **External**: `axios`, REACT
 - **Internal**: `getLastAPIRequest`, `logEventTo1P`, `logEvent`, `getLastAssistantMessage`, `normalizeMessagesForAPI`, `useTerminalSize`, `Box`, `Text`, `useInput`, `useKeybinding`, `queryHaiku`, `startsWithApiErrorPrefix`, `checkAndRefreshOAuthTokenIfNeeded`, `openBrowser`, `logForDebugging`, `env`, `getGitState`, `getIsGit`, `getAuthHeaders`, `getUserAgent`, `getInMemoryErrors`, `logError`, `isEssentialTrafficOnly`, `extractTeammateTranscriptsFromTasks`, `getTranscriptPath`, `loadAllSubagentTranscriptsFromDisk`, `jsonStringify`, `asSystemPrompt`, `ConfigurableShortcutHint`, `Byline`, `Dialog`, `KeyboardShortcutHint`, `TextInput`
 
 ## Logic

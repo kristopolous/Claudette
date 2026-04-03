@@ -2,7 +2,7 @@
 Handles Ctrl-C and Ctrl-D keybindings to exit the application using a double-press confirmation pattern; also supports interrupt callback.
 
 ## Imports
-- **External**: `react` (useCallback, useMemo, useState)
+- **External**: REACT (useCallback, useMemo, useState)
 - **Internal**:
   - `../ink/hooks/useapp` (useApp)
   - `./keybindings/types` (KeybindingContextName)

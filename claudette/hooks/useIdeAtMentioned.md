@@ -2,7 +2,7 @@
 Registers an MCP notification handler to detect when the user "@" mentions the assistant in the IDE, reporting file path and line range.
 
 ## Imports
-- **External**: `react` (useEffect, useRef), `zod/v4` (z)
+- **External**: REACT (useEffect, useRef), `zod/v4` (z)
 - **Internal**:
   - src/utils/log` (logError)
   - `./services/mcp/types` (MCPServerConnection, ConnectedMCPServer)

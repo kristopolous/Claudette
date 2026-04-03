@@ -3,7 +3,7 @@ Displays a detailed view of sandbox dependency status, checking for required too
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/platform`, `utils/sandbox/sandbox-adapter`
 
 ## Logic

@@ -5,7 +5,7 @@ Provides remote session detail dialog component for viewing remote agent task de
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: agentSdkTypes, Tool, types utils, commands, constants figures, hooks useElapsedTime, ink events keyboard-event, ink, tasks RemoteAgentTask, AgentTool constants, AskUserQuestionTool, ExitPlanModeTool, browser, errors, format, messages mappers/messages, stringUtils, teleport, CustomSelect select, design-system Byline/Dialog/KeyboardShortcutHint, Message, tasks RemoteSessionProgress
 
 ## Logic
@@ -17,8 +17,8 @@ Provides remote session detail dialog component for viewing remote agent task de
 6. Collapses whitespace for multi-line inputs
 7. `PHASE_LABEL` - { needs_input: 'input required', plan_ready: 'ready' }
 8. `AGENT_VERB` - { needs_input: 'waiting', plan_ready: 'done' }
-9. `RemoteSessionDetailDialog` - React component for remote session detail
-10. Uses React compiler runtime (_c) for memoization
+9. `RemoteSessionDetailDialog` - UI component for remote session detail
+10. Uses REACT_COMPILER runtime (_c) for memoization
 11. Uses useElapsedTime for elapsed time
 12. Uses useKeybindings for keyboard shortcuts
 13. Uses useState for selected option

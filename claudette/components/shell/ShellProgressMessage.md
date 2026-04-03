@@ -5,13 +5,13 @@ Provides shell progress message component for displaying command output.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`, `strip-ansi`
+- **External**: REACT, REACT_COMPILER, `strip-ansi`
 - **Internal**: ink, format, MessageResponse, OffscreenFreeze, shell ShellTimeDisplay
 
 ## Logic
 1. `Props` - { output, fullOutput, elapsedTimeSeconds?, totalLines?, totalBytes?, timeoutMs?, taskId?, verbose }
-2. `ShellProgressMessage` - React component for shell progress
-3. Uses React compiler runtime (_c) for memoization
+2. `ShellProgressMessage` - UI component for shell progress
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Strips ANSI codes from fullOutput via stripAnsi
 5. Strips ANSI codes from output, splits into lines, filters empty lines
 6. Shows last 5 lines if not verbose, full output if verbose

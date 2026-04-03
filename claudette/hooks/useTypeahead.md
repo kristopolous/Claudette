@@ -4,7 +4,7 @@
 Comprehensive typeahead/autocomplete system handling commands, files, paths, shell completions, team members, and Slack channels.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef`, `useState` from 'REACT'
 - **External**: `useDebounceCallback` from 'usehooks-ts'
 - **Internal**: `useNotifications`, `Text`, `logEvent`, `Command`, `getCommandName`, `getModeFromInput`, `getValueFromInput`, `SuggestionItem`, `SuggestionType`, `useIsModalOverlayActive`, `useRegisterOverlay`, `KeyboardEvent`, `useInput`, `useOptionalKeybindingContext`, `useRegisterKeybindingContext`, `useKeybindings`, `useShortcutDisplay`, `useAppState`, `useAppStateStore`, `AgentDefinition`, `InlineGhostText`, `PromptInputMode`, `isAgentSwarmsEnabled`, `generateProgressiveArgumentHint`, `parseArguments`, `getShellCompletions`, `formatLogMetadata`, `getSessionIdFromLog`, `searchSessionsByCustomTitle`, `applyCommandSuggestion`, `findMidInputSlashCommand`, `generateCommandSuggestions`, `getBestCommandMatch`, `isCommandInput`, `getDirectoryCompletions`, `getPathCompletions`, `isPathLikeToken`, `getShellHistoryCompletion`, `getSlackChannelSuggestions`, `hasSlackMcpServer`, `applyFileSuggestion`, `findLongestCommonPrefix`, `startBackgroundCacheRefresh`, `generateUnifiedSuggestions`
 

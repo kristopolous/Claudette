@@ -1,10 +1,10 @@
 # useVoice
 
 ## Purpose
-React hook for hold-to-talk and focus-mode voice input using Anthropic voice_stream STT (Speech-to-Text).
+UI hook for hold-to-talk and focus-mode voice input using Anthropic voice_stream STT (Speech-to-Text).
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useRef`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `useSetVoiceState`, `useTerminalFocus`, `logEvent`, `getVoiceKeyterms`, `connectVoiceStream`, `isVoiceStreamAvailable`, `logForDebugging`, `toError`, `getSystemLocaleLanguage`, `logError`, `getInitialSettings`, `sleep`
 

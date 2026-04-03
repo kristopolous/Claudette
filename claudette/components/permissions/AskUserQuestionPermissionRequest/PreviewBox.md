@@ -3,7 +3,7 @@ Renders a bordered monospace box for displaying markdown preview content with sy
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useSettings`, `useTerminalSize`, `stringWidth`, `Ansi`, `Box`, `Text`, `useTheme`, `CliHighlight`, `getCliHighlightPromise`, `applyMarkdown`, `sliceAnsi`
 
 ## Logic

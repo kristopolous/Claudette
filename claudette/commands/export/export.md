@@ -3,7 +3,7 @@ Exports the current conversation to a text file or clipboard.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ExportDialog` component, `ToolUseContext`, `LocalJSXCommandOnDone`, `Message` type, `getCwd`, `renderMessagesToPlainText`, `writeFileSync_DEPRECATED`
 
 ## Logic

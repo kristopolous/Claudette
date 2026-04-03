@@ -4,7 +4,7 @@
 Handles cancel/escape keybindings for the REPL, managing task cancellation, queue popping, and agent termination.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `logEvent`, `useAppState`, `useAppStateStore`, `useSetAppState`, `isVimModeEnabled`, `ToolUseConfirm`, `SpinnerMode`, `useNotifications`, `useIsOverlayActive`, `useCommandQueue`, `getShortcutDisplay`, `useKeybinding`, `Screen`, `exitTeammateView`, `killAllRunningAgentTasks`, `markAgentsNotified`, `PromptInputMode`, `VimMode`, `clearCommandQueue`, `enqueuePendingNotification`, `hasCommandsInQueue`, `emitTaskTerminatedSdk`
 

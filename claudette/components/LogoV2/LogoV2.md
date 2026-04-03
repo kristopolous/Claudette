@@ -5,13 +5,13 @@ Provides main LogoV2 component for terminal header display with feeds.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, hooks useTerminalSize/useMainLoopModel, ink stringWidth, logoV2Utils, format, file, LogoV2 Clawd/FeedColumn/feedConfigs/CondensedLogo/GuestPassesUpsell/OverageCreditUpsell/EmergencyTip/VoiceModeNotice/Opus1mMergeNotice, config, systemTheme, settings settings, debug, projectOnboardingState, OffscreenFreeze, releaseNotes, API dumpPrompts, envUtils, startupProfiler, sandbox sandbox-adapter, state AppState, effort, model model, stringUtils
 
 ## Logic
 1. `LEFT_PANEL_MAX_WIDTH` (50) - left panel max width
-2. `LogoV2` - React component for main logo display
-3. Uses React compiler runtime (_c) for memoization
+2. `LogoV2` - UI component for main logo display
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Gets activities via getRecentActivitySync
 5. Gets username from getGlobalConfig().oauthAccount?.displayName
 6. Uses useTerminalSize for columns

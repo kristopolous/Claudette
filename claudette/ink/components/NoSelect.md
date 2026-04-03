@@ -5,7 +5,7 @@ Provides NoSelect component for marking contents as non-selectable in fullscreen
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink components Box
 
 ## Logic
@@ -21,7 +21,7 @@ Provides NoSelect component for marking contents as non-selectable in fullscreen
 10. So click-drag over rendered code yields clean pasteable content
 11. Only affects alt-screen text selection (<AlternateScreen> with mouse tracking)
 12. No-op in main-screen scrollback render where terminal's native selection used
-13. Uses React compiler runtime (_c) for memoization
+13. Uses REACT_COMPILER runtime (_c) for memoization
 14. Renders <Box {...boxProps} noSelect={fromLeftEdge ? "from-left-edge" : true}>{children}</Box>
 15. `PropsWithChildren` - React props type
 16. `Box`, `BoxProps` - Box component and props

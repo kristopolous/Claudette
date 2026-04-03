@@ -3,7 +3,7 @@ Provides a doubly-linked-list-backed map for efficient sequential navigation thr
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (ReactNode type)
+- **External**: REACT (ReactNode type)
 - **Internal**: `select` (OptionWithDescription type)
 
 ## Logic

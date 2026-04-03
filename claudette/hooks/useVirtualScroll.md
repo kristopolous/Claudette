@@ -2,7 +2,7 @@
 Virtualizes large lists inside a ScrollBox by mounting only visible items plus overscan, dramatically reducing memory usage and render cost for long conversations.
 
 ## Imports
-- **External**: `react` (useCallback, useDeferredValue, useLayoutEffect, useMemo, useRef, useSyncExternalStore)
+- **External**: REACT (useCallback, useDeferredValue, useLayoutEffect, useMemo, useRef, useSyncExternalStore)
 - **Internal**:
   - `./ink/components/ScrollBox` (ScrollBoxHandle)
   - `./ink/dom` (DOMElement)

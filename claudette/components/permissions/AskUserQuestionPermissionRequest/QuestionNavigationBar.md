@@ -3,7 +3,7 @@ Renders a tab-based navigation bar showing all questions with their answered sta
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `useTerminalSize`, `stringWidth`, `Box`, `Text`, `Question`, `truncateToWidth`
 
 ## Logic

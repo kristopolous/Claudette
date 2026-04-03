@@ -5,7 +5,7 @@ Provides error overview component for displaying error details with source code 
 
 ## Imports
 - **Stdlib**: `fs`
-- **External**: `code-excerpt`, `react`, `stack-utils`
+- **External**: `code-excerpt`, REACT, `stack-utils`
 - **Internal**: ink components Box/Text
 
 ## Logic

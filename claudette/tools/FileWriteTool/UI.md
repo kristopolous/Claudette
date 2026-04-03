@@ -2,10 +2,10 @@
 
 ## Purpose
 
-React components for rendering FileWrite tool usage and result messages, including file creation and update displays.
+UI components for rendering FileWrite tool usage and result messages, including file creation and update displays.
 
 ## Imports
-- **Stdlib**: `path` (isAbsolute, relative, resolve), `react`
+- **Stdlib**: `path` (isAbsolute, relative, resolve), REACT
 - **External**: `@anthropic-ai/sdk` (ToolResultBlockParam), `diff` (StructuredPatchHunk)
 - **Internal**:
   - `MessageResponse` component

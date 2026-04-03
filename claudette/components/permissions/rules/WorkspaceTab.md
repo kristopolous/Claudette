@@ -3,7 +3,7 @@ Renders a tab for managing workspace directories that Claudette can access, allo
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `react`
+- **External**: `figures`, REACT
 - **Internal**: `bootstrap/state`, `commands`, `components/CustomSelect/select`, `ink`, `Tool`, `design-system/Tabs`
 
 ## Logic

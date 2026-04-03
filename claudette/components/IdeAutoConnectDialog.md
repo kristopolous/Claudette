@@ -3,7 +3,7 @@ Displays a dialog prompting the user to enable or disable auto-connect to an IDE
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/config`, `utils/ide`, `components/CustomSelect/index`, `components/design-system/Dialog`
 
 ## Logic
@@ -13,7 +13,7 @@ Displays a dialog prompting the user to enable or disable auto-connect to an IDE
 4. `shouldShowDisableAutoConnectDialog` checks if the terminal is unsupported and auto-connect is currently enabled
 
 ## Exports
-- `IdeAutoConnectDialog` - React component that prompts the user to enable IDE auto-connect
+- `IdeAutoConnectDialog` - UI component that prompts the user to enable IDE auto-connect
 - `shouldShowAutoConnectDialog` - returns true when the auto-connect enable dialog should be displayed
-- `IdeDisableAutoConnectDialog` - React component that prompts the user to disable IDE auto-connect
+- `IdeDisableAutoConnectDialog` - UI component that prompts the user to disable IDE auto-connect
 - `shouldShowDisableAutoConnectDialog` - returns true when the auto-connect disable dialog should be displayed

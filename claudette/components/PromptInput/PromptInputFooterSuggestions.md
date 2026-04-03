@@ -3,7 +3,7 @@ Renders a list of autocomplete suggestions in the prompt input footer with suppo
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `hooks/useTerminalSize`, `ink/stringWidth`, `ink`, `utils/format`, `utils/theme`
 
 ## Logic

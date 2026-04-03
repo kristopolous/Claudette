@@ -3,7 +3,7 @@ Displays a list of previous Claudette sessions filtered by the current repositor
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useState)
+- **External**: REACT (useCallback, useState)
 - **Internal**: `useTerminalSize` (hooks), `CodeSession`, `fetchCodeSessionsFromSessionsAPI` (utils/teleport/api), `Box`, `Text`, `useInput` (ink), `useKeybinding` (keybindings), `useShortcutDisplay` (keybindings), `logForDebugging` (utils/debug), `detectCurrentRepository` (utils/detectRepository), `formatRelativeTime` (utils/format), `ConfigurableShortcutHint`, `Select` (CustomSelect), `Byline`, `KeyboardShortcutHint` (design-system), `Spinner`, `TeleportError`
 
 ## Logic

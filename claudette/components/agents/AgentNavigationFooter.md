@@ -3,7 +3,7 @@ A UI footer component that provides contextual navigation instructions and handl
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react), `ui-components` (e.g., ink)
+- **External**: `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
 - **Internal**: `hooks/useExitOnCtrlCDWithKeybindings`
 
 ## Logic

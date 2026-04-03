@@ -3,7 +3,7 @@ Renders a help menu displaying available keyboard shortcuts and input mode hints
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/platform`, `keybindings/loadUserBindings`, `keybindings/useShortcutDisplay`, `services/analytics/growthbook`, `utils/fastMode`, `utils`
 
 ## Logic

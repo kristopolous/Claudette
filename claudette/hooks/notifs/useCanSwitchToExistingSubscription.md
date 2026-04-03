@@ -2,7 +2,7 @@
 Shows a low-priority startup notification encouraging users with an existing Claude subscription to log in and activate it.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**:
   - src/services/oauth/getOauthProfile` (getOauthProfileFromApiKey)
   - src/utils/auth` (isClaudeAISubscriber)

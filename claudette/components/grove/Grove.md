@@ -5,19 +5,19 @@ Provides Grove privacy settings dialog component.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: analytics, ink, API grove, CustomSelect index, design-system Byline/Dialog/KeyboardShortcutHint
 
 ## Logic
 1. `GroveDecision` - 'accept_opt_in' | 'accept_opt_out' | 'defer' | 'escape' | 'skip_rendering'
 2. `Props` - { showIfAlreadyViewed, location, onDone }
 3. `NEW_TERMS_ASCII` - ASCII art for new terms notification
-4. `GracePeriodContentBody` - React component for grace period content
-5. Uses React compiler runtime (_c) for memoization
+4. `GracePeriodContentBody` - UI component for grace period content
+5. Uses REACT_COMPILER runtime (_c) for memoization
 6. Shows update to Consumer Terms and Privacy Policy effective October 8, 2025
 7. Explains changes: help improve Claude (opt-in for chat usage), data retention extended to 5 years
 8. Links to data privacy controls, news, and terms
-9. `GroveDialog` - main React component for Grove dialog
+9. `GroveDialog` - main UI component for Grove dialog
 10. Uses useEffect, useState for state management
 11. Uses useInput for keyboard input handling
 12. Uses Select component for decision selection

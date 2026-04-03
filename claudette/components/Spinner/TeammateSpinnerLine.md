@@ -5,7 +5,7 @@ Provides teammate spinner line component for displaying individual teammate stat
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `figures`, `lodash-es/sample`, `react`
+- **External**: `figures`, `lodash-es/sample`, REACT
 - **Internal**: constants spinnerVerbs/turnCompletionVerbs, hooks useElapsedTime/useTerminalSize, ink stringWidth, ink, tasks InProcessTeammateTask types, collapseReadSearch, format, ink, Spinner teammateSelectHint
 
 ## Logic
@@ -17,7 +17,7 @@ Provides teammate spinner line component for displaying individual teammate stat
 6. For text blocks: splits by newline, takes from end (most recent lines)
 7. Truncates lines to maxLineLength (80)
 8. Reverses so oldest of 3 is first (reading order)
-9. `TeammateSpinnerLine` - React component for teammate spinner line
+9. `TeammateSpinnerLine` - UI component for teammate spinner line
 10. Uses useState for randomVerb (teammate.spinnerVerb ?? sample(getSpinnerVerbs()))
 11. Uses useElapsedTime for elapsed time tracking
 12. Uses useTerminalSize for terminal columns

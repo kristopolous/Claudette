@@ -2,7 +2,7 @@
 Determines if a tool can be used, handling allow/deny/ask decisions with auto-mode classifier, speculation, and interactive permission flows.
 
 ## Imports
-- **External**: `react` (useCallback), `@anthropic-ai/sdk` (APIUserAbortError)
+- **External**: REACT (useCallback), `@anthropic-ai/sdk` (APIUserAbortError)
 - **Internal**:
   - src/services/analytics/index` (logEvent, AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS)
   - src/services/analytics/metadata` (sanitizeToolNameForAnalytics)
@@ -40,7 +40,7 @@ Returns `CanUseToolFn` function that:
 6. **Error/Abort**: catches AbortError/APIUserAbortError → cancelAndAbort; others → log + cancel
 7. `finally`: clears classifier checking state
 
-Uses React compiler cache (`_c`) to memoize returned function across deps (`setToolPermissionContext`, `setToolUseConfirmQueue`).
+Uses REACT_COMPILER cache (`_c`) to memoize returned function across deps (`setToolPermissionContext`, `setToolUseConfirmQueue`).
 
 ## Exports
 - `useCanUseTool` - Hook returning `CanUseToolFn`

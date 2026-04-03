@@ -5,13 +5,13 @@ Provides flashing character component for shimmer animation effect.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, theme, Spinner utils
 
 ## Logic
 1. `Props` - { char, flashOpacity, messageColor, shimmerColor }
-2. `FlashingChar` - React component for flashing character
-3. Uses React compiler runtime (_c) for memoization
+2. `FlashingChar` - UI component for flashing character
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Gets theme via useTheme
 5. Gets base color from theme[messageColor]
 6. Gets shimmer color from theme[shimmerColor]

@@ -3,7 +3,7 @@ Displays user-configured keyboard shortcut hints with fallback to default shortc
 
 ## Imports
 - **Stdlib**: none
-- **External**: react (React)
+- **External**: REACT (React)
 - **Internal**: ../keybindings/types (KeybindingAction, KeybindingContextName), ../keybindings/useShortcutDisplay (useShortcutDisplay), ./design-system/KeyboardShortcutHint (KeyboardShortcutHint)
 
 ## Logic

@@ -3,7 +3,7 @@ Displays the model name for assistant messages when in transcript mode.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../ink/stringWidth`, `../ink`, `../types/message`
 
 ## Logic

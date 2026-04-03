@@ -3,7 +3,7 @@ Handles user keyboard input with convenient character and key event handling.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useEffect, useLayoutEffect), `usehooks-ts` (useEventCallback)
+- **External**: REACT (useEffect, useLayoutEffect), `usehooks-ts` (useEventCallback)
 - **Internal**: `events/input-event`, `hooks/use-stdin`
 
 ## Logic

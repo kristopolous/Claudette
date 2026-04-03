@@ -48,6 +48,6 @@ The `call` async function receives `onDone`, `_context`, and optional `args`:
 
 ## Exports
 - `call` (async function) - Main handler; shows help or toggles tag UI
-- `ToggleTagAndClose` (React component) - Tag toggle logic with confirmation
-- `ShowHelp` (React component) - Displays help text
-- `ConfirmRemoveTag` (React component) - Removal confirmation dialog
+- `ToggleTagAndClose` (UI component) - Tag toggle logic with confirmation
+- `ShowHelp` (UI component) - Displays help text
+- `ConfirmRemoveTag` (UI component) - Removal confirmation dialog

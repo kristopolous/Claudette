@@ -5,7 +5,7 @@ Provides main App component for Ink terminal rendering.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: bootstrap state, utils debug/earlyInput/envUtils/fullscreen/log, ink events emitter/input-event/terminal-event, ink parse-keypress/reconciler/selection/terminal/terminal-focus-state/terminal-querier, ink termio csi/dec, ink components AppContext/ClockContext/CursorDeclarationContext/ErrorOverview/StdinContext/TerminalFocusContext/TerminalSizeContext
 
 ## Logic

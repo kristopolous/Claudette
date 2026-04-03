@@ -3,7 +3,7 @@ A dialog component with title, subtitle, cancel handling, keyboard keybindings, 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ExitState`, `useExitOnCtrlCDWithKeybindings`, `Box`, `Text`, `useKeybinding`, `Theme`, `ConfigurableShortcutHint`, `Byline`, `KeyboardShortcutHint`, `Pane`
 
 ## Logic

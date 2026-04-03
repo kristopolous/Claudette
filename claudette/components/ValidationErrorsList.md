@@ -3,7 +3,7 @@ Groups and displays configuration validation errors as a nested tree structure o
 
 ## Imports
 - **Stdlib**: none
-- **External**: `lodashes/setWith`, `react`
+- **External**: `lodashes/setWith`, REACT
 - **Internal**: `Box`, `Text`, `useTheme`, `treeify`
 
 ## Logic

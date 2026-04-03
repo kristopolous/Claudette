@@ -2,7 +2,7 @@
 Initializes IDE integration on mount: detects IDE, manages auto-connect gating, updates dynamic MCP configuration, and tracks installation/onboarding state.
 
 ## Imports
-- **External**: `react` (useEffect)
+- **External**: REACT (useEffect)
 - **Internal**:
   - `./services/mcp/types` (ScopedMcpServerConfig)
   - `./utils/config` (getGlobalConfig)

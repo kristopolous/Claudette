@@ -304,8 +304,8 @@ These are proprietary Anthropic features. **Do not build these:**
 - [ ] **9.2** Implement state selectors (`state/selectors.md`):
   - Derived state computation
   - Memoized selectors
-- [ ] **9.3** Implement React state management (`AppState.md`):
-  - React context for state
+- [ ] **9.3** Implement UI state management (`AppState.md`):
+  - UI context for state
   - State hooks for components
 - [ ] **9.4** Implement session-level state (`bootstrap/state.md`):
   - Session ID

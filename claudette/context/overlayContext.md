@@ -1,11 +1,11 @@
 # overlayContext
 
 ## Purpose
-Provides React context for tracking active overlays for Escape key coordination.
+Provides UI context for tracking active overlays for Escape key coordination.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: ink instances, AppState
 
 ## Logic

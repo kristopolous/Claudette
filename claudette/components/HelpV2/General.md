@@ -2,7 +2,7 @@
 Displays general help information about Claudette capabilities and available keyboard shortcuts.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, components/PromptInput/PromptInputHelpMenu
 
 ## Logic
@@ -10,4 +10,4 @@ Displays general help information about Claudette capabilities and available key
 2. Displays a shortcuts section with a PromptInputHelpMenu component for keyboard reference
 
 ## Exports
-- `General` - React component that renders the general help tab content
+- `General` - UI component that renders the general help tab content

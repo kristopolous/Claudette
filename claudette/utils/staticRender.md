@@ -5,14 +5,14 @@ Workaround for Ink not supporting multiple `<Static>` components. Renders React 
 
 ## Imports
 - **Stdlib**: stream (PassThrough)
-- **External**: react/compiler-runtime, react, strip-ansi
+- **External**: REACT/compiler-runtime, REACT, strip-ansi
 - **Internal**: ../ink (render, useApp)
 
 ## Logic
 1. `RenderOnceAndExit` - wrapper component that exits after rendering:
    - Uses `useLayoutEffect` to schedule `exit()` after React's commit phase completes
    - More robust than `process.nextTick()` for React 19's async render cycle
-   - Compiled with React compiler (`_c` memoization)
+   - Compiled with REACT_COMPILER (`_c` memoization)
 2. `SYNC_START` / `SYNC_END` - DEC synchronized update markers (`\x1B[?2026h` / `\x1B[?2026l`) used by terminals
 3. `extractFirstFrame(output)` - extracts content from the first complete frame in Ink's output:
    - Ink with non-TTY stdout outputs multiple frames, each wrapped in DEC sync sequences

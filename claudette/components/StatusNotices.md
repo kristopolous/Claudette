@@ -3,7 +3,7 @@ Displays startup status notices to the user based on current configuration, agen
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `tools/AgentTool/loadAgentsDir`, `utils/claudemd`, `utils/config`, `utils/statusNoticeDefinitions`
 
 ## Logic
@@ -12,4 +12,4 @@ Displays startup status notices to the user based on current configuration, agen
 3. Renders each active notice as a React fragment within a column layout, or returns null if no notices are active
 
 ## Exports
-- `StatusNotices` - React component that renders active status notices at startup, using context from config, agents, and memory files
+- `StatusNotices` - UI component that renders active status notices at startup, using context from config, agents, and memory files

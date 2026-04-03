@@ -1,11 +1,11 @@
 # QueuedMessageContext
 
 ## Purpose
-Provides React context for queued message styling with padding and first-item tracking.
+Provides UI context for queued message styling with padding and first-item tracking.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: ink Box component
 
 ## Logic

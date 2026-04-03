@@ -3,7 +3,7 @@ A full-screen fuzzy search picker that lets users search, navigate, and select f
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useSearchInput`, `useTerminalSize`, `KeyboardEvent`, `clamp`, `Box`, `Text`, `useTerminalFocus`, `SearchBox`, `Byline`, `KeyboardShortcutHint`, `ListItem`, `Pane`
 
 ## Logic

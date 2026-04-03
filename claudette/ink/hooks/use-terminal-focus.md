@@ -3,7 +3,7 @@ Checks whether the terminal currently has focus.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext)
+- **External**: REACT (useContext)
 - **Internal**: `components/TerminalFocusContext`
 
 ## Logic

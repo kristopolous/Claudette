@@ -3,7 +3,7 @@ Renders a panel showing the status of background agent tasks with selection and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: `BLACK_CIRCLE`, `PAUSE_ICON`, `PLAY_ICON` (constants/figures), `useTerminalSize` (hooks), `stringWidth` (ink), `Box`, `Text`, `wrapText` (ink), `AppState`, `useAppState`, `useSetAppState` (state/AppState), `enterTeammateView`, `exitTeammateView` (state/teammateViewHelpers), `isPanelAgentTask`, `LocalAgentTaskState` (tasks/LocalAgentTask), `formatDuration`, `formatNumber` (utils/format), `evictTerminalTask` (utils/task/framework), `isTerminalStatus` (tasks/taskStatusUtils)
 
 ## Logic

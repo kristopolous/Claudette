@@ -3,7 +3,7 @@ Renders a structured diff view for file edits showing hunks with context lines i
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `diff`
+- **External**: REACT, `diff`
 - **Internal**: `ink`, `StructuredDiffList`, `useTerminalSize`, file edit tool types and utilities, diff utilities, read/edit context utilities, string utilities, logging
 
 ## Logic

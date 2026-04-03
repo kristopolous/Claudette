@@ -3,7 +3,7 @@ A foundational, reusable text input component for CLI applications that handles 
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `hooks/renderPlaceholder`, `hooks/usePasteHandler`, `ink/hooks/use-declared-cursor`, `ink`, `types/textInputTypes`, `utils/textHighlighting`, `components/PromptInput/ShimmeredInput`
 
 ## Logic

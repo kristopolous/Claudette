@@ -3,7 +3,7 @@ Dispatches user text messages to appropriate specialized components based on con
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk, BUILDFLAGS
+- **External**: REACT, @anthropic-ai/sdk, BUILDFLAGS
 - **Internal**: MessageResponse, InterruptedByUser, UserBashInputMessage, UserBashOutputMessage, UserCommandMessage, UserLocalCommandOutputMessage, UserMemoryInputMessage, UserPlanMessage, UserPromptMessage, UserResourceUpdateMessage, UserTeammateMessage, UserAgentNotificationMessage, xml constants, messages constants, messages utils, agentSwarmsEnabled utils
 
 ## Logic
@@ -23,4 +23,4 @@ Dispatches user text messages to appropriate specialized components based on con
 4. Falls through to UserPromptMessage for plain user text
 
 ## Exports
-- `UserTextMessage` - React component dispatching user text content to specialized message renderers
+- `UserTextMessage` - UI component dispatching user text content to specialized message renderers

@@ -3,7 +3,7 @@ Renders local command output (stdout and stderr) with diamond-prefixed formattin
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text, Markdown), MessageResponse, messages utils (extractTag), figures constants, messages constants
 
 ## Logic
@@ -14,4 +14,4 @@ Renders local command output (stdout and stderr) with diamond-prefixed formattin
 5. CloudLaunchContent parses the header line to extract label and suffix, rendering with bold label and dimmed rest
 
 ## Exports
-- `UserLocalCommandOutputMessage` - React component rendering local command stdout/stderr
+- `UserLocalCommandOutputMessage` - UI component rendering local command stdout/stderr

@@ -2,7 +2,7 @@
 Polls LSP manager and server status; shows error notifications and accumulates errors in appState.plugins.errors for /doctor.
 
 ## Imports
-- **External**: `react` (useState), `usehooks-ts` (useInterval)
+- **External**: REACT (useState), `usehooks-ts` (useInterval)
 - **Internal**:
   - `.././bootstrap/state` (getIsRemoteMode, getIsScrollDraining)
   - `.././context/notifications` (useNotifications)

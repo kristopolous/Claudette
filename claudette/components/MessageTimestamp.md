@@ -3,7 +3,7 @@ Displays a formatted timestamp for assistant messages in transcript mode.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink/stringWidth` (stringWidth), `ink` (Box, Text), `types/message` (NormalizedMessage)
 
 ## Logic

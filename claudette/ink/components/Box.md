@@ -5,7 +5,7 @@ Provides Box component - essential Ink layout component like flexbox div.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`, `type-fest`
+- **External**: REACT, REACT_COMPILER, `type-fest`
 - **Internal**: ink global.d, ink dom, ink events click-event/focus-event/keyboard-event, ink styles, ink warn
 
 ## Logic
@@ -27,7 +27,7 @@ Provides Box component - essential Ink layout component like flexbox div.
 16. Only works inside <AlternateScreen> where mode-1003 mouse tracking enabled
 17. `onMouseLeave` - fired when mouse moves out of Box's rendered rect
 18. `Box` - essential Ink component for layout, like <div style="display: flex">
-19. Uses React compiler runtime (_c) for memoization
+19. Uses REACT_COMPILER runtime (_c) for memoization
 20. Extracts props: children, flexWrap, flexDirection, flexGrow, flexShrink, ref, tabIndex, autoFocus, etc.
 21. `PropsWithChildren`, `Ref` - React types
 22. `Except` - type-fest utility

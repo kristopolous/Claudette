@@ -3,7 +3,7 @@ Declares where the terminal cursor should be parked after each frame for IME and
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useContext, useLayoutEffect, useRef)
+- **External**: REACT (useCallback, useContext, useLayoutEffect, useRef)
 - **Internal**: `components/CursorDeclarationContext`, `dom`
 
 ## Logic

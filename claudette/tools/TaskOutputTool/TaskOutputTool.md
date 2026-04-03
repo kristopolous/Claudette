@@ -4,7 +4,7 @@
 Retrieves output/logs from background tasks (shell commands, agents, remote sessions). Deprecated in favor of using Read on the task's output file path directly.
 
 ## Imports
-- **External**: `ajv`, `react`, `zod/v4`
+- **External**: `ajv`, REACT, `zod/v4`
 - **Internal**:
   - Tool: `buildTool`, `ToolDef`, `Tool`
   - Components: `FallbackToolUseErrorMessage`, `FallbackToolUseRejectedMessage`, `MessageResponse`

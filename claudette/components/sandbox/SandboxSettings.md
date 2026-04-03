@@ -3,7 +3,7 @@ Provides a tabbed settings interface for configuring sandbox mode, overrides, de
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `keybindings/useKeybinding`, `types/command`, `utils/sandbox/sandbox-adapter`, `utils/settings/settings`, `CustomSelect/select`, `design-system/Pane`, `design-system/Tabs`, `SandboxConfigTab`, `SandboxDependenciesTab`, `SandboxOverridesTab`
 
 ## Logic

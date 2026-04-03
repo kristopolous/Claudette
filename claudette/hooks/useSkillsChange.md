@@ -4,7 +4,7 @@
 Keeps the commands list fresh by reloading when skill files change on disk or when GrowthBook features refresh.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect` from 'react'
+- **Stdlib**: `useCallback`, `useEffect` from 'REACT'
 - **External**: None
 - **Internal**: `Command`, `clearCommandMemoizationCaches`, `clearCommandsCache`, `getCommands`, `onGrowthBookRefresh`, `logError`, `skillChangeDetector`
 

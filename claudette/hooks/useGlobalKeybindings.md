@@ -2,7 +2,7 @@
 Registers global and transcript-mode keybinding handlers for UI toggles (todos, transcript, brief, terminal, redraw, etc.).
 
 ## Imports
-- **External**: `react` (useCallback), BUILDFLAGS (feature)
+- **External**: REACT (useCallback), BUILDFLAGS (feature)
 - **Internal**:
   - `./keybindings/useKeybinding` (useKeybinding)
   - `./screens/REPL` (Screen type)
@@ -25,4 +25,4 @@ Component takes `Props` (screen state, setters, messageCount, optional callbacks
 All bindings use appropriate contexts and isActive conditions.
 
 ## Exports
-- `GlobalKeybindingHandlers` - React component `Props` (returns null)
+- `GlobalKeybindingHandlers` - UI component `Props` (returns null)

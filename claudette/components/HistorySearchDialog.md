@@ -3,7 +3,7 @@ Provides a fuzzy-searchable dialog for browsing and selecting from conversation 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `context/overlayContext`, `history`, `hooks/useTerminalSize`, `ink/stringWidth`, `ink/wrapAnsi`, `ink`, `services/analytics/index`, `utils/config`, `utils/format`, `components/design-system/FuzzyPicker`
 
 ## Logic
@@ -14,4 +14,4 @@ Provides a fuzzy-searchable dialog for browsing and selecting from conversation 
 5. Logs analytics events on selection and resolves the selected history entry
 
 ## Exports
-- `HistorySearchDialog` - React component that renders a searchable history picker with preview and fuzzy matching
+- `HistorySearchDialog` - UI component that renders a searchable history picker with preview and fuzzy matching

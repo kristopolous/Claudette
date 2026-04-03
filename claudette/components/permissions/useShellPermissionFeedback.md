@@ -3,7 +3,7 @@ Manages feedback-mode state and handlers for shell permission dialogs including 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `services/analytics`, `services/analytics/metadata`, `state/AppState`, `PermissionRequest`, `utils`
 
 ## Logic

@@ -3,7 +3,7 @@ Shared component for permission prompts with optional feedback input, handling o
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `keybindings/types`, `keybindings/useKeybinding`, `services/analytics`, `state/AppState`, `CustomSelect/select`
 
 ## Logic

@@ -3,7 +3,7 @@ A specialized UI hook that triggers a feedback survey specifically targeting the
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `services/analytics`, `services/policyLimits`, `tools/FileReadTool`, `types/message`, `utils/config`, `utils/envUtils`, `utils/memoryFileDetection`, `utils/messages`, `utils/telemetry/events`, `components/FeedbackSurvey/submitTranscriptShare`, `components/FeedbackSurvey/TranscriptSharePrompt`, `components/FeedbackSurvey/useSurveyState`, `components/FeedbackSurvey/utils`
 
 ## Logic

@@ -1,10 +1,10 @@
 # preflightChecks
 
 ## Purpose
-React component that runs connectivity checks against inference provider endpoints on startup, showing a spinner or error message and exiting if checks fail.
+UI component that runs connectivity checks against inference provider endpoints on startup, showing a spinner or error message and exiting if checks fail.
 
 ## Imports
-- **Stdlib**: `react`, `react/compiler-runtime`
+- **Stdlib**: REACT, REACT_COMPILER
 - **External**: `axios`
 - **Internal**: `src/services/analytics/index` (logEvent), `../components/Spinner`, `../constants/oauth`, `../hooks/useTimeout`, `../ink` (Box, Text), `../services/api/errorUtils`, `./http`, `./log`
 
@@ -19,4 +19,4 @@ React component that runs connectivity checks against inference provider endpoin
 
 ## Exports
 - `PreflightCheckResult` - interface with `success: boolean`, optional `error?: string`, optional `sslHint?: string`
-- `PreflightStep({ onSuccess })` - React component that runs connectivity checks on mount; shows spinner during checks, error with SSL hints on failure, calls `onSuccess` on success
+- `PreflightStep({ onSuccess })` - UI component that runs connectivity checks on mount; shows spinner during checks, error with SSL hints on failure, calls `onSuccess` on success

@@ -5,7 +5,7 @@ Provides context for indicating shell output should be shown in full (not trunca
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: (none)
 
 ## Logic

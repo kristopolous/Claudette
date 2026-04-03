@@ -5,14 +5,14 @@ Provides team status footer component showing teammate count.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, state AppState
 
 ## Logic
 1. `Props` - { teamsSelected, showHint }
-2. `TeamStatus` - React component for team status footer
+2. `TeamStatus` - UI component for team status footer
 3. Similar to BackgroundTaskStatus but for teammates
-4. Uses React compiler runtime (_c) for memoization
+4. Uses REACT_COMPILER runtime (_c) for memoization
 5. Gets teamContext via useAppState
 6. Derives teammate count from teamContext (no filesystem I/O needed)
 7. Filters out team-lead from count

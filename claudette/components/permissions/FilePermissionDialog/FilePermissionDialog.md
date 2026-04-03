@@ -3,7 +3,7 @@ Renders a file permission dialog that requests user approval for file operations
 
 ## Imports
 - **Stdlib**: `path` (relative)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `useDiffInIDE`, `Box`, `Text`, `ToolUseContext`, `getLanguageName`, `getCwd`, `getFsImplementation`, `safeResolvePath`, `expandPath`, `CompletionType`, `Select`, `ShowInIDEPrompt`, `usePermissionRequestLogging`, `PermissionDialog`, `ToolUseConfirm`, `WorkerBadgeProps`, `IDEDiffSupport`, `FileOperationType`, `PermissionOption`, `ToolInput`, `useFilePermissionDialog`
 
 ## Logic

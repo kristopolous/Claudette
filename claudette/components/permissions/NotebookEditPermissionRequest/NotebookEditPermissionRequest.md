@@ -3,7 +3,7 @@ Renders a permission request dialog for notebook cell edit operations, showing a
 
 ## Imports
 - **Stdlib**: path
-- **External**: react, react/compiler-runtime, zod/v4
+- **External**: REACT, REACT/compiler-runtime, zod/v4
 - **Internal**: ink, tools/NotebookEditTool, utils/log, permissions/FilePermissionDialog, permissions/PermissionRequest, NotebookEditPermissionRequest/NotebookEditToolDiff
 
 ## Logic

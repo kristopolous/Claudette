@@ -3,7 +3,7 @@ Returns the current main loop model name, resolving from session override, app s
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useEffect`, `useReducer`)
+- **External**: REACT (`useEffect`, `useReducer`)
 - **Internal**:
   - `services/analytics/growthbook` - `onGrowthBookRefresh`
   - `state/AppState` - `useAppState`

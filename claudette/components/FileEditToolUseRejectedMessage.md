@@ -3,7 +3,7 @@ Displays a message when a user rejects a file edit tool use, showing either the 
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `diff`, `react`
+- **External**: `diff`, REACT
 - **Internal**: `useTerminalSize`, `getCwd`, `Box`, `Text`, `HighlightedCode`, `MessageResponse`, `StructuredDiffList`
 
 ## Logic

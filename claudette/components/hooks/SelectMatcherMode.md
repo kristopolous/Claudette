@@ -3,7 +3,7 @@ Displays a list of configured matchers for a selected hook event, allowing users
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: entrypoints/agentSdkTypes, ink, utils/hooks/hooksSettings, utils/stringUtils, components/CustomSelect/select, components/design-system/Dialog
 
 ## Logic

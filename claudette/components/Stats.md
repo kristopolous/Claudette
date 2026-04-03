@@ -3,7 +3,7 @@ Displays usage statistics including activity heatmaps, model breakdowns, token c
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS (feature), asciichart, chalk, figures, react, react/compiler-runtime, strip-ansi
+- **External**: BUILDFLAGS (feature), asciichart, chalk, figures, REACT, REACT/compiler-runtime, strip-ansi
 - **Internal**: ../commands (CommandResultDisplay), ./hooks/useTerminalSize (useTerminalSize), ./ink/colorize (applyColor), ./ink/stringWidth (stringWidth), ./ink/styles (Color), ./ink (Ansi, Box, Text, useInput), ./keybindings/useKeybinding (useKeybinding), ./utils/config (getGlobalConfig), ./utils/format (formatDuration, formatNumber), ./utils/heatmap (generateHeatmap), ./utils/model/model (renderModelName), ./utils/screenshotClipboard (copyAnsiToClipboard), ./utils/stats (aggregateClaudeCodeStatsForRange, ClaudeCodeStats, DailyModelTokens, StatsDateRange), ./utils/systemTheme (resolveThemeSetting), ./utils/theme (getTheme, themeColorToAnsi), ./design-system/Pane (Pane), ./design-system/Tabs (Tab, Tabs, useTabHeaderFocus), ./Spinner (Spinner)
 
 ## Logic

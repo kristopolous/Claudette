@@ -12,7 +12,7 @@ Defines the `branch` command (with conditional `fork` alias) that creates a bran
 
 ## Logic
 Creates a command object:
-- `type`: `'local-jsx'` (React component)
+- `type`: `'local-jsx'` (UI component)
 - `name`: `'branch'`
 - `aliases`: `['fork']` when the `FORK_SUBAGENT` feature is disabled; otherwise `[]`
 - `description`: `'Create a branch of the current conversation at this point'`

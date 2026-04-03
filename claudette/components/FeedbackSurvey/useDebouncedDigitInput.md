@@ -3,7 +3,7 @@ A UI utility that detects and debounces single-digit numeric inputs from the mai
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `utils/stringUtils`
 
 ## Logic

@@ -3,7 +3,7 @@ Shows a desktop notification after a period of user inactivity (default 6s), typ
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useEffect`)
+- **External**: REACT (`useEffect`)
 - **Internal**:
   - `bootstrap/state` - `getLastInteractionTime`, `updateLastInteractionTime`
   - `ink/useTerminalNotification` - `useTerminalNotification`

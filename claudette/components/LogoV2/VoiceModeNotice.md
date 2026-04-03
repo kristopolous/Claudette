@@ -5,13 +5,13 @@ Provides voice mode availability notice component.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: BUILDFLAGS, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, REACT, REACT_COMPILER
 - **Internal**: config, settings settings, voice voiceModeEnabled, LogoV2 AnimatedAsterisk/Opus1mMergeNotice
 
 ## Logic
 1. `MAX_SHOW_COUNT` (3) - max times to show notice
-2. `VoiceModeNotice` - React component for voice mode notice
-3. Uses React compiler runtime (_c) for memoization
+2. `VoiceModeNotice` - UI component for voice mode notice
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Positive ternary pattern for feature gating (see docs/feature-gating.md)
 5. All strings must be inside guarded branch for dead-code elimination
 6. Returns VoiceModeNoticeInner if feature("VOICE_MODE") enabled, else null
@@ -28,7 +28,7 @@ Provides voice mode availability notice component.
 17. Returns null if !show
 18. Renders Box with AnimatedAsterisk and Text: "Voice mode is now available · /voice to enable"
 19. `feature` - feature flag checker
-20. `useEffect`, `useState` - React hooks
+20. `useEffect`, `useState` - UI hooks
 21. `Box`, `Text` - ink components
 22. `getGlobalConfig`, `saveGlobalConfig` - config functions
 23. `getInitialSettings` - gets initial settings

@@ -5,7 +5,7 @@ Opens a dialog to list and manage background tasks, including running subprocess
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `LocalJSXCommandContext` type from `.././commands`

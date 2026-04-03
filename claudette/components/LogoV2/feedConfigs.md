@@ -5,7 +5,7 @@ Provides feed configuration factory functions for LogoV2 welcome screen feeds.
 
 ## Imports
 - **Stdlib**: `os` (homedir)
-- **External**: `figures`, `react`
+- **External**: `figures`, REACT
 - **Internal**: projectOnboardingState, API referral, types/logs, utils/cwd, utils/format, LogoV2 Feed
 
 ## Logic

@@ -5,7 +5,7 @@ Renders UI messages for the cron scheduling tools (create, delete, list) across 
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `MessageResponse`, `Text`, `truncate`, `CreateOutput`, `DeleteOutput`, `ListOutput`
 
 ## Logic

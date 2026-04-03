@@ -5,15 +5,15 @@ Provides Opus 1M merge notice component and utilities.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: constants figures, ink, config, model model, LogoV2 AnimatedAsterisk
 
 ## Logic
 1. `MAX_SHOW_COUNT` (6) - max show count for notice
 2. `shouldShowOpus1mMergeNotice` - checks if should show Opus 1M merge notice
 3. Returns isOpus1mMergeEnabled() && (getGlobalConfig().opus1mMergeNoticeSeenCount ?? 0) < MAX_SHOW_COUNT
-4. `Opus1mMergeNotice` - React component for Opus 1M merge notice
-5. Uses React compiler runtime (_c) for memoization
+4. `Opus1mMergeNotice` - UI component for Opus 1M merge notice
+5. Uses REACT_COMPILER runtime (_c) for memoization
 6. Uses useState with shouldShowOpus1mMergeNotice
 7. useEffect increments opus1mMergeNoticeSeenCount in global config
 8. Returns null if !show
@@ -21,7 +21,7 @@ Provides Opus 1M merge notice component and utilities.
 10. Renders AnimatedAsterisk with char={UP_ARROW}
 11. Renders Text with dimColor: "Opus now defaults to 1M context · 5x more room, same pricing"
 12. `UP_ARROW` - up arrow constant
-13. `useEffect`, `useState` - React hooks
+13. `useEffect`, `useState` - UI hooks
 14. `Box`, `Text` - ink components
 15. `getGlobalConfig`, `saveGlobalConfig` - config functions
 16. `isOpus1mMergeEnabled` - checks if Opus 1M merge enabled

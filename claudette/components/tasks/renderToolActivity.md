@@ -5,7 +5,7 @@ Provides tool activity rendering utility for displaying tool use in agent activi
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink, Tool, tasks LocalAgentTask, theme
 
 ## Logic

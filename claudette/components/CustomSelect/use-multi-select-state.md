@@ -3,7 +3,7 @@ Manages state and keyboard input for a multi-select component with support for i
 
 ## Imports
 - **Stdlib**: `util` (isDeepStrictEqual)
-- **External**: `react` (useCallback, useState)
+- **External**: REACT (useCallback, useState)
 - **Internal**: `context/overlayContext` (useRegisterOverlay), `ink/events/input-event` (InputEvent), `ink` (useInput), `utils/stringUtils` (normalizeFullWidthDigits, normalizeFullWidthSpace), `select` (OptionWithDescription), `use-select-navigation`
 
 ## Logic

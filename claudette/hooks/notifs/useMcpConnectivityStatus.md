@@ -2,7 +2,7 @@
 Shows medium-priority notifications for MCP server connectivity issues: failed servers and servers needing authentication.
 
 ## Imports
-- **External**: `react` (useEffect)
+- **External**: REACT (useEffect)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - `.././bootstrap/state` (getIsRemoteMode)

@@ -5,7 +5,7 @@ Provides remote session progress component with review stage counts and rainbow 
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: tasks RemoteAgentTask, types utils, constants figures, hooks useSettings, ink, array, thinking
 
 ## Logic

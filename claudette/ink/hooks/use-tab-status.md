@@ -3,7 +3,7 @@ Declaratively sets the tab-status indicator with a colored dot and status text i
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useEffect, useRef)
+- **External**: REACT (useContext, useEffect, useRef)
 - **Internal**: `termio/osc`, `termio/types`
 
 ## Logic

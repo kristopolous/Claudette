@@ -3,7 +3,7 @@ A bordered region of the terminal that appears below the REPL prompt, used by sl
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useIsInsideModal`, `Box`, `Theme`, `Divider`
 
 ## Logic

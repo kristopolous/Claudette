@@ -2,7 +2,7 @@
 Fetches dynamic configuration values (from GrowthBook), returning the default initially and updating once the remote value is retrieved.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../services/analytics/growthbook` (getDynamicConfig_BLOCKS_ON_INIT)
 
 ## Logic

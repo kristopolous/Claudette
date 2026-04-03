@@ -3,7 +3,7 @@ Provides a model selection interface that lets users choose between available in
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useMemo, useState), `react/compiler-runtime`, `lodash-es/capitalize`
+- **External**: REACT (useCallback, useMemo, useState), REACT_COMPILER, `lodash-es/capitalize`
 - **Internal**: `hooks/useExitOnCtrlCDWithKeybindings`, `services/analytics` (logEvent), `utils/fastMode` (FAST_MODE_MODEL_DISPLAY, isFastModeAvailable, isFastModeCooldown, isFastModeEnabled), `ink` (Box, Text), `keybindings/useKeybinding`, `state/AppState` (useAppState, useSetAppState), `utils/effort` (convertEffortValueToLevel, getDefaultEffortForModel, modelSupportsEffort, modelSupportsMaxEffort, resolvePickerEffortPersistence, toPersistableEffort), `utils/model/model` (getDefaultMainLoopModel, modelDisplayString, parseUserSpecifiedModel), `utils/model/modelOptions` (getModelOptions), `utils/settings/settings` (getSettingsForSource, updateSettingsForSource), `components/ConfigurableShortcutHint`, `components/CustomSelect` (Select), `components/design-system/Byline`, `components/design-system/KeyboardShortcutHint`, `components/design-system/Pane`, `components/EffortIndicator` (effortLevelToSymbol)
 
 ## Logic

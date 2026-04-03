@@ -2,7 +2,7 @@
 Shows a high-priority notification when the currently selected model is deprecated.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - src/utils/model/deprecation` (getModelDeprecationWarning)

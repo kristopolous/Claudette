@@ -4,7 +4,7 @@
 Extracts turn-based file diffs from messages for display, processing only new messages incrementally.
 
 ## Imports
-- **Stdlib**: `useMemo`, `useRef` from 'react'
+- **Stdlib**: `useMemo`, `useRef` from 'REACT'
 - **External**: `diff` (StructuredPatchHunk)
 - **Internal**: `FileEditOutput`, `FileWriteOutput`, `Message`
 

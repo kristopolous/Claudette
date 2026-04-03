@@ -2,7 +2,7 @@
 Renders a successful tool use result with optional classifier approval indicators and post-tool-use hooks.
 
 ## Imports
-- **External**: `react`, BUILDFLAGS, `figures`
+- **External**: REACT, BUILDFLAGS, `figures`
 - **Internal**: `components/SentryErrorBoundary`, `ink`, `state/AppState`, `Tool`, `types/message`, `utils/classifierApprovals`, `utils/messages`, `components/MessageResponse`, `components/messages/HookProgressMessage`
 
 ## Logic

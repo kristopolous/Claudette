@@ -3,7 +3,7 @@ Renders a visual progress bar using Unicode block characters to represent a rati
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Text`, `Theme`
 
 ## Logic

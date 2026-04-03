@@ -3,7 +3,7 @@ Renders a lightning bolt icon indicating fast mode status, with different visual
 
 ## Imports
 - **Stdlib**: None
-- **External**: chalk, react, react/compiler-runtime
+- **External**: chalk, REACT, REACT/compiler-runtime
 - **Internal**: constants/figures (LIGHTNING_BOLT), ink (Text), utils/config (getGlobalConfig), utils/systemTheme (resolveThemeSetting), design-system/color (color)
 
 ## Logic
@@ -11,5 +11,5 @@ Renders a lightning bolt icon indicating fast mode status, with different visual
 2. The getFastIconString function returns the icon as a string, optionally applying theme-aware colors via chalk and the color utility
 
 ## Exports
-- `FastIcon` - React component that renders a themed lightning bolt icon
+- `FastIcon` - UI component that renders a themed lightning bolt icon
 - `getFastIconString` - Utility function that returns the fast mode icon as a colored or plain string

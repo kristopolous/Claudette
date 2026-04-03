@@ -3,7 +3,7 @@ Displays detailed debug information about permission decisions including behavio
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `chalk`, `figures`, `react`
+- **External**: BUILDFLAGS, `chalk`, `figures`, REACT
 - **Internal**: `ink`, `state/AppState`, `utils/permissions/PermissionMode`, `utils/permissions/PermissionResult`, `utils/permissions/PermissionUpdate`, `utils/permissions/permissionRuleParser`, `utils/permissions/shadowedRuleDetection`, `utils/sandbox/sandbox-adapter`, `utils/settings/constants`
 
 ## Logic

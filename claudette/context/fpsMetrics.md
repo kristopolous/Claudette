@@ -1,11 +1,11 @@
 # fpsMetrics
 
 ## Purpose
-Provides React context for FPS (frames per second) metrics getter.
+Provides UI context for FPS (frames per second) metrics getter.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: FpsMetrics type from fpsTracker
 
 ## Logic

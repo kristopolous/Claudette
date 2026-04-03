@@ -24,6 +24,6 @@ Sign in with your Anthropic account or switch accounts.
 6. Command type: 'local-jsx'
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning Login React component
-- `Login` - React component with Dialog and OAuth flow
+- `call` - async LocalJSXCommandCall returning Login UI component
+- `Login` - UI component with Dialog and OAuth flow
 - Uses useMainLoopModel hook

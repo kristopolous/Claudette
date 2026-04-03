@@ -3,7 +3,7 @@ Displays the reason why a permission decision requires user confirmation, includ
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `chalk`, `react`
+- **External**: BUILDFLAGS, `chalk`, REACT
 - **Internal**: `ink`, `state/AppState`, `utils/permissions/PermissionResult`, `utils/permissions/permissionRuleParser`, `utils/theme`, `design-system/ThemedText`
 
 ## Logic

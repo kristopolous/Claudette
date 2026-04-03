@@ -3,7 +3,7 @@ Serves as the entry point of the hooks configuration menu, displaying a list of 
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime, figures
+- **External**: REACT, REACT/compiler-runtime, figures
 - **Internal**: entrypoints/agentSdkTypes, utils/hooks/hooksConfigManager, utils/stringUtils, ink, components/CustomSelect/select, components/design-system/Dialog
 
 ## Logic

@@ -4,7 +4,7 @@
 Manages a remote CCR (Claudette Remote) session via WebSocket, handling messaging, permissions, and session lifecycle.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `BoundedUUIDSet`, `ToolUseConfirm`, `SpinnerMode`, `RemotePermissionResponse`, `RemoteSessionConfig`, `RemoteSessionManager`, `createSyntheticAssistantMessage`, `createToolStub`, `convertSDKMessage`, `isSessionEndMessage`, `useSetAppState`, `AppState`, `Tool`, `findToolByName`, `Message`, `PermissionAskDecision`, `logForDebugging`, `truncateToWidth`, `createSystemMessage`, `extractTextContent`, `handleMessageFromStream`, `StreamingToolUse`, `generateSessionTitle`, `updateSessionTitle`, `RemoteMessageContent`
 

@@ -3,7 +3,7 @@ Renders an ordered list with auto-numbered items and aligned markers.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (createContext, isValidElement, ReactNode, useContext), `react/compiler-runtime`
+- **External**: REACT (createContext, isValidElement, ReactNode, useContext), REACT_COMPILER
 - **Internal**: `Box` from `ink`, `OrderedListItem`, `OrderedListItemContext` from `OrderedListItem`
 
 ## Logic

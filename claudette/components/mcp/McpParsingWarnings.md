@@ -3,7 +3,7 @@ Displays parsing errors and warnings for MCP configurations across all scopes (u
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (useMemo), `react/compiler-runtime`
+- **External**: REACT (useMemo), REACT_COMPILER
 - **Internal**: `services/mcp/config` (getMcpConfigsByScope), `services/mcp/types` (ConfigScope), `services/mcp/utils` (describeMcpConfigFilePath, getScopeLabel), `utils/settings/validation` (ValidationError), `ink` (Box, Link, Text)
 
 ## Logic

@@ -3,7 +3,7 @@ Wraps permission request content in a styled dialog box with a title header and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `utils/theme`, `PermissionRequestTitle`, `WorkerBadge`
 
 ## Logic

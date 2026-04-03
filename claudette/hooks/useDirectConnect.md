@@ -4,7 +4,7 @@
 Manages a direct WebSocket connection to a CLI server process (claude --direct-connect).
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `ToolUseConfirm`, `createSyntheticAssistantMessage`, `createToolStub`, `convertSDKMessage`, `isSessionEndMessage`, `DirectConnectConfig`, `DirectConnectSessionManager`, `Tool`, `findToolByName`, `Message`, `PermissionAskDecision`, `RemotePermissionResponse`, `logForDebugging`, `gracefulShutdown`, `RemoteMessageContent`
 

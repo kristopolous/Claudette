@@ -5,7 +5,7 @@ Provides fallback component for highlighted code with caching.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, cliHighlight, debug, file, hash
 
 ## Logic
@@ -19,8 +19,8 @@ Provides fallback component for highlighted code with caching.
 8. Uses hashPair for cache key
 9. Moves hit to end of cache (LRU behavior)
 10. Evicts first key when cache reaches max size
-11. `HighlightedCodeFallback` - React component for highlighted code fallback
-12. Uses React compiler runtime (_c) for memoization
+11. `HighlightedCodeFallback` - UI component for highlighted code fallback
+12. Uses REACT_COMPILER runtime (_c) for memoization
 13. Converts leading tabs to spaces via convertLeadingTabsToSpaces
 14. If skipColoring: renders Ansi with code, wrapped in Text with dimColor
 15. Otherwise: gets language from file extension

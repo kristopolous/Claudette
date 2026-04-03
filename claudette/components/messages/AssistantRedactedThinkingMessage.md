@@ -3,7 +3,7 @@ Renders a placeholder for redacted thinking content when the inference provider 
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text)
 
 ## Logic
@@ -11,4 +11,4 @@ Renders a placeholder for redacted thinking content when the inference provider 
 2. Optionally adds top margin based on the addMargin prop
 
 ## Exports
-- `AssistantRedactedThinkingMessage` - React component rendering a minimal placeholder for redacted thinking content
+- `AssistantRedactedThinkingMessage` - UI component rendering a minimal placeholder for redacted thinking content

@@ -3,7 +3,7 @@ Handles keyboard input for select components, routing navigation, selection, and
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useMemo)
+- **External**: REACT (useMemo)
 - **Internal**: `context/overlayContext` (useRegisterOverlay), `ink/events/input-event` (InputEvent), `ink` (useInput), `keybindings/useKeybinding` (useKeybindings), `utils/stringUtils` (normalizeFullWidthDigits, normalizeFullWidthSpace), `select` (OptionWithDescription), `use-select-state` (SelectState)
 
 ## Logic

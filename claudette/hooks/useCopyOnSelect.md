@@ -2,7 +2,7 @@
 Provides two hooks: auto-copy selection to clipboard on drag/multi-click finish, and sync selection background color with theme.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `../components/designsystem/ThemeProvider` (useTheme)
   - `../ink/hooks/useselection` (useSelection type)

@@ -4,7 +4,7 @@
 Initializes swarm features including teammate hooks and context when ENABLE_AGENT_SWARMS is true.
 
 ## Imports
-- **Stdlib**: `useEffect` from 'react'
+- **Stdlib**: `useEffect` from 'REACT'
 - **External**: None
 - **Internal**: `getSessionId`, `AppState`, `Message`, `isAgentSwarmsEnabled`, `initializeTeammateContextFromSession`, `readTeamFile`, `initializeTeammateHooks`, `getDynamicTeamContext`
 

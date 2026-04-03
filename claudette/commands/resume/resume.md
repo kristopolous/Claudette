@@ -7,7 +7,7 @@ Resumes a previous conversation either by session ID, custom title, or search te
 ### External
 - `chalk` (for colored terminal text)
 - `figures` (for unicode icons)
-- `react` (including `useState`, `useEffect`, `useCallback`)
+- REACT (including `useState`, `useEffect`, `useCallback`)
 
 ### Stdlib
 - `crypto` (`UUID` type)
@@ -65,5 +65,5 @@ The `call` function also defines an internal `onResume` that calls `context.resu
 ## Exports
 - `call` (async function) - Main command handler
 - `filterResumableSessions` (function) - Filters log list to resumable sessions
-- `ResumeCommand` (React component) - Interactive picker
-- `ResumeError` (React component) - Error display with hint
+- `ResumeCommand` (UI component) - Interactive picker
+- `ResumeError` (UI component) - Error display with hint

@@ -3,7 +3,7 @@ Recommends LSP plugins to users when they edit files with extensions that have m
 
 ## Imports
 - **Stdlib**: `path` (`extname`, `join`)
-- **External**: `react` (`c` for compiler runtime, `useRef`, `useEffect`)
+- **External**: REACT (`c` for compiler runtime, `useRef`, `useEffect`)
 - **Internal**:
   - `bootstrap/state` - session state for LSP recommendation visibility
   - `context/notifications` - `useNotifications` for UI notifications
@@ -28,7 +28,7 @@ The hook builds on `usePluginRecommendationBase` and focuses on the LSP-specific
   - `"never"`: adds the plugin to a "never suggest" list.
   - `"disable"`: disables all LSP recommendations globally via `saveGlobalConfig`.
 
-The React compiler optimizes memoization of callbacks; a 30-second menu auto-dismiss threshold informs the timeout detection.
+The REACT_COMPILER optimizes memoization of callbacks; a 30-second menu auto-dismiss threshold informs the timeout detection.
 
 ## Exports
 - `useLspPluginRecommendation` - main hook returning recommendation state and response handler

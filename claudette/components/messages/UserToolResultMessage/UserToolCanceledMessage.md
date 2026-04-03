@@ -2,7 +2,7 @@
 Renders a notification that a tool use was canceled by the user.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/InterruptedByUser`, `components/MessageResponse`
 
 ## Logic

@@ -3,7 +3,7 @@ Displays a dialog when the user returns after being idle, offering options to co
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text), utils/format (formatTokens), CustomSelect/index (Select), design-system/Dialog (Dialog)
 
 ## Logic
@@ -12,4 +12,4 @@ Displays a dialog when the user returns after being idle, offering options to co
 3. Renders a Dialog with the idle message, a hint about clearing context for new tasks, and a Select component with options to continue, clear, dismiss, or never ask again
 
 ## Exports
-- `IdleReturnDialog` - React component that shows an idle return dialog with action options
+- `IdleReturnDialog` - UI component that shows an idle return dialog with action options

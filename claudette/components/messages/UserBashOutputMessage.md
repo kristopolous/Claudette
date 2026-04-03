@@ -3,7 +3,7 @@ Renders bash command output (stdout and stderr) extracted from XML-tagged conten
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: BashToolResultMessage, messages utils (extractTag)
 
 ## Logic
@@ -12,4 +12,4 @@ Renders bash command output (stdout and stderr) extracted from XML-tagged conten
 3. Passes both to BashToolResultMessage for display with optional verbose mode
 
 ## Exports
-- `UserBashOutputMessage` - React component extracting and rendering bash stdout/stderr from tagged content
+- `UserBashOutputMessage` - UI component extracting and rendering bash stdout/stderr from tagged content

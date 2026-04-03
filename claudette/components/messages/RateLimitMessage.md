@@ -3,7 +3,7 @@ Renders rate limit error messages with contextual upsell suggestions based on su
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), MessageResponse, claudeAiLimitsHook, rateLimitMocking, auth utils, billing utils, extra-usage command
 
 ## Logic
@@ -17,5 +17,5 @@ Renders rate limit error messages with contextual upsell suggestions based on su
 5. Renders the rate limit error text in red with dimmed upsell suggestion below
 
 ## Exports
-- `RateLimitMessage` - React component rendering rate limit errors with contextual upsell
+- `RateLimitMessage` - UI component rendering rate limit errors with contextual upsell
 - `getUpsellMessage` - Pure function generating upsell message string based on subscription params

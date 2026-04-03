@@ -3,7 +3,7 @@ Handles automatic updates for native installations by checking for new versions 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useEffect, useRef, useState), `usehooks-ts` (useInterval)
+- **External**: REACT (useEffect, useRef, useState), `usehooks-ts` (useInterval)
 - **Internal**: `services/analytics` (logEvent), `utils/debug` (logForDebugging), `utils/log` (logError), `hooks/useUpdateNotification`, `ink` (Box, Text), `utils/autoUpdater` (getMaxVersion, getMaxVersionMessage), `utils/config` (isAutoUpdaterDisabled), `utils/nativeInstaller` (installLatest), `utils/semver` (gt), `utils/settings/settings` (getInitialSettings)
 
 ## Logic

@@ -1,7 +1,7 @@
 # useSettings
 
 ## Purpose
-React hook for accessing current settings from AppState with automatic reactive updates when settings change on disk.
+UI hook for accessing current settings from AppState with automatic reactive updates when settings change on disk.
 
 ## Imports
 - **Stdlib**: None

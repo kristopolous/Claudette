@@ -5,7 +5,7 @@ Implements a shell command execution tool with sandboxing, permission checking, 
 
 ## Imports
 - **Stdlib**: `fs/promises` (copyFile, stat, truncate, link)
-- **External**: `@anthropic-ai/sdk`, `zod/v4`, `react`
+- **External**: `@anthropic-ai/sdk`, `zod/v4`, REACT
 - **Internal**: bootstrap state, tool limits, analytics, MCP vscodeSdkMcp, Tool, LocalShellTask, various utils (bash/ast, bash/commands, claudeCodeHints, codeIndexing, envUtils, errors, file, fileHistory, format, fsOperations, lazySchema, path, permissions, plugins, Shell, sandbox, semanticBoolean/number, stringUtils, task/diskOutput, TaskOutput, terminal, toolResultStorage), FileEditTool UI, gitOperationTracking, bashPermissions, commandSemantics, prompt, readOnlyValidation, sedEditParser, shouldUseSandbox, toolName, UI, utils
 
 ## Logic

@@ -3,7 +3,7 @@ Renders a visual separator indicating that the conversation context has been com
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), useShortcutDisplay
 
 ## Logic
@@ -11,4 +11,4 @@ Renders a visual separator indicating that the conversation context has been com
 2. Renders a dimmed message "✻ Conversation compacted ({shortcut} for history)" with vertical margin
 
 ## Exports
-- `CompactBoundaryMessage` - React component rendering a conversation compaction separator
+- `CompactBoundaryMessage` - UI component rendering a conversation compaction separator

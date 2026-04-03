@@ -3,7 +3,7 @@ Renders a permission request dialog for file write operations, showing a diff pr
 
 ## Imports
 - **Stdlib**: path
-- **External**: react, react/compiler-runtime, zod/v4
+- **External**: REACT, REACT/compiler-runtime, zod/v4
 - **Internal**: ink, tools/FileWriteTool, utils/cwd, utils/errors, utils/fileRead, permissions/FilePermissionDialog, permissions/FilePermissionDialog/ideDiffConfig, permissions/PermissionRequest, FileWritePermissionRequest/FileWriteToolDiff
 
 ## Logic

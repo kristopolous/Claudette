@@ -3,7 +3,7 @@ Renders a generic permission request dialog for filesystem tool operations, dele
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, permissions/FallbackPermissionRequest, permissions/FilePermissionDialog, permissions/FilePermissionDialog/useFilePermissionDialog, permissions/PermissionRequest
 
 ## Logic

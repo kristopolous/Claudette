@@ -2,7 +2,7 @@
 Derives IDE connection status ('connected' | 'disconnected' | 'pending' | null) and IDE name from MCP clients list.
 
 ## Imports
-- **External**: `react` (useMemo)
+- **External**: REACT (useMemo)
 - **Internal**: `../services/mcp/types` (MCPServerConnection)
 
 ## Logic

@@ -3,7 +3,7 @@ Provides a tab for configuring sandbox override behavior, allowing users to choo
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `types/command`, `utils/sandbox/sandbox-adapter`, `CustomSelect/select`, `design-system/Tabs`
 
 ## Logic

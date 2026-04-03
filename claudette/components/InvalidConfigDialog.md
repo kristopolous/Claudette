@@ -3,7 +3,7 @@ Displays an error dialog when the configuration file contains invalid JSON, offe
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `Box`, `render`, `Text`, `KeybindingSetup`, `AppStateProvider`, `ConfigParseError`, `getBaseRenderOptions`, `jsonStringify`, `writeFileSync_DEPRECATED`, `Select`, `Dialog`
 
 ## Logic

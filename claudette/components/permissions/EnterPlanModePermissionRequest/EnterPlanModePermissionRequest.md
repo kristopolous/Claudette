@@ -3,7 +3,7 @@ Renders a permission request dialog for entering plan mode, explaining what plan
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: bootstrap/state, ink, services/analytics/index, state/AppState, utils/planModeV2, CustomSelect/index, permissions/PermissionDialog, permissions/PermissionRequest
 
 ## Logic

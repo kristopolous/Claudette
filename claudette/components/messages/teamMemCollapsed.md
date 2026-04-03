@@ -3,7 +3,7 @@ Provides utility functions for team memory operations in collapsed read/search U
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Text), message types
 
 ## Logic
@@ -13,4 +13,4 @@ Provides utility functions for team memory operations in collapsed read/search U
 
 ## Exports
 - `checkHasTeamMemOps` - Returns true if the message contains any team memory operations
-- `TeamMemCountParts` - React component rendering team memory count text parts for collapsed UI
+- `TeamMemCountParts` - UI component rendering team memory count text parts for collapsed UI

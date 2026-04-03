@@ -3,7 +3,7 @@ Displays a selectable list of MCP tools for a given server within a dialog inter
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink` (Text), `services/mcp/mcpStringUtils` (extractMcpToolDisplayName, getMcpDisplayName), `services/mcp/utils` (filterToolsByServer), `state/AppState` (useAppState), `Tool`, `utils/stringUtils` (plural), `ConfigurableShortcutHint`, `CustomSelect/index` (Select), `design-system/Byline` (Byline), `design-system/Dialog` (Dialog), `design-system/KeyboardShortcutHint` (KeyboardShortcutHint), `types` (ServerInfo)
 
 ## Logic

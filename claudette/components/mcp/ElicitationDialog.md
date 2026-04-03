@@ -3,7 +3,7 @@ Handles MCP server elicitation requests, presenting form-based or URL-based dial
 
 ## Imports
 - **Stdlib**: None
-- **External**: `modelcontextprotocol/sdk/types` (ElicitRequestFormParams, ElicitRequestURLParams, ElicitResult, PrimitiveSchemaDefinition), `figures`, `react` (useCallback, useEffect, useMemo, useRef, useState), `react/compiler-runtime`
+- **External**: `modelcontextprotocol/sdk/types` (ElicitRequestFormParams, ElicitRequestURLParams, ElicitResult, PrimitiveSchemaDefinition), `figures`, REACT (useCallback, useEffect, useMemo, useRef, useState), REACT_COMPILER
 - **Internal**: `context/overlayContext` (useRegisterOverlay), `hooks/useNotifyAfterTimeout`, `hooks/useTerminalSize`, `ink` (Box, Text, useInput), `keybindings/useKeybinding`, `services/mcp/elicitationHandler` (ElicitationRequestEvent), `utils/browser` (openBrowser), `utils/mcp/elicitationValidation` (getEnumLabel, getEnumValues, getMultiSelectLabel, getMultiSelectValues, isDateTimeSchema, isEnumSchema, isMultiSelectEnumSchema, validateElicitationInput, validateElicitationInputAsync), `utils/stringUtils` (plural), `ConfigurableShortcutHint`, `design-system/Byline` (Byline), `design-system/Dialog` (Dialog), `design-system/KeyboardShortcutHint` (KeyboardShortcutHint), `TextInput`
 
 ## Logic

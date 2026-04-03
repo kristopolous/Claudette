@@ -5,13 +5,13 @@ Provides welcome screen component for Claudette startup display.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, env
 
 ## Logic
 1. `WELCOME_V2_WIDTH` (58) - welcome screen width
-2. `WelcomeV2` - React component for welcome screen
-3. Uses React compiler runtime (_c) for memoization
+2. `WelcomeV2` - UI component for welcome screen
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Uses useTheme for theme
 5. Checks env.terminal === "Apple_Terminal" for special handling
 6. If Apple Terminal: renders AppleTerminalWelcomeV2 with theme

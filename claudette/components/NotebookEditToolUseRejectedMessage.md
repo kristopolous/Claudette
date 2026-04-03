@@ -3,7 +3,7 @@ Renders a message indicating that a notebook edit tool use was rejected by the u
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `utils/cwd`, `ink`, `components/HighlightedCode`, `components/MessageResponse`
 
 ## Logic
@@ -13,4 +13,4 @@ Renders a message indicating that a notebook edit tool use was rejected by the u
 4. Renders the rejected source code using syntax-highlighted code display, except for delete operations
 
 ## Exports
-- `NotebookEditToolUseRejectedMessage` - React component that displays a rejection message for notebook edit tool uses with path, cell ID, and source code context
+- `NotebookEditToolUseRejectedMessage` - UI component that displays a rejection message for notebook edit tool uses with path, cell ID, and source code context

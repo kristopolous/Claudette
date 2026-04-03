@@ -6,7 +6,7 @@ Merges initial MCP clients with dynamically discovered MCP clients, deduplicatin
 ## Imports
 - **Stdlib**: None
 - **External**: `uniqBy` from 'lodash-es'
-- **Internal**: `useMemo` from 'react', `MCPServerConnection`
+- **Internal**: `useMemo` from 'REACT', `MCPServerConnection`
 
 ## Logic
 1. Combines initialClients and mcpClients arrays

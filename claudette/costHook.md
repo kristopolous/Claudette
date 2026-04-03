@@ -5,7 +5,7 @@ Provides cost summary hook for session cost tracking.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: cost-tracker, utils billing, utils fpsTracker
 
 ## Logic

@@ -3,7 +3,7 @@ Displays a list of context optimization suggestions with severity icons and esti
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `figures`
+- **External**: REACT, `figures`
 - **Internal**: `ink`, `StatusIcon`, `formatTokens`, `ContextSuggestion` type
 
 ## Logic

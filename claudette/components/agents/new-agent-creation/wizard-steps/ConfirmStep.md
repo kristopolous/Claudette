@@ -2,7 +2,7 @@
 Provides the final confirmation step that displays a summary of the agent configuration before saving.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink/events/keyboard-event (KeyboardEvent type),ink (Box, Text),keybindings/useKeybinding,memdir/paths (isAutoMemoryEnabled),Tool (Tools type),tools/AgentTool/agentMemory (getMemoryScopeDisplay),tools/AgentTool/loadAgentsDir (AgentDefinition type),utils/format (truncateToWidth),utils/model/agent (getAgentModelDisplay),ConfigurableShortcutHint, designsystem/Byline, designsystem/KeyboardShortcutHint,wizard/index (useWizard),wizard/WizardDialogLayout, agentFileUtils (getNewRelativeAgentFilePath), validateAgent (validateAgent), types (AgentWizardData type)
 
 ## Logic

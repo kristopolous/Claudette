@@ -3,7 +3,7 @@ Provides shared state management and installation logic for plugin recommendatio
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures` (icons), `react` (`c`, `useState`, `useRef`, `useEffect`)
+- **External**: `figures` (icons), REACT (`c`, `useState`, `useRef`, `useEffect`)
 - **Internal**:
   - `bootstrap/state` - `getIsRemoteMode` to check remote sessions
   - `context/notifications` - `AddNotification` type

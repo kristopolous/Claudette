@@ -2,7 +2,7 @@
 Displays a simple notification that a tool use was rejected.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `components/MessageResponse`
 
 ## Logic

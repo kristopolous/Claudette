@@ -3,7 +3,7 @@ Displays a badge showing a pull request number with color-coded review status an
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../ink`, `../utils/ghPrStatus`
 
 ## Logic

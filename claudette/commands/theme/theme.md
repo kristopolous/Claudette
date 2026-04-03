@@ -5,7 +5,7 @@ Opens a theme picker to change the user interface theme (e.g., light, dark, syst
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `CommandResultDisplay` type from `.././commands`

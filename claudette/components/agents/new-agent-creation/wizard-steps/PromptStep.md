@@ -2,7 +2,7 @@
 Provides a wizard step for entering the agent system prompt.
 
 ## Imports
-- **External**: react, react/compiler-runtime, useCallback, useState
+- **External**: REACT, REACT/compiler-runtime, useCallback, useState
 - **Internal**: ink (Box, Text),keybindings/useKeybinding,utils/promptEditor (editPromptInEditor),ConfigurableShortcutHint, designsystem/Byline, designsystem/KeyboardShortcutHint,TextInput, wizard/index (useWizard), wizard/WizardDialogLayout, types (AgentWizardData type)
 
 ## Logic

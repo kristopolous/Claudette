@@ -2,7 +2,7 @@
 Provides a wizard step for entering the agent type identifier.
 
 ## Imports
-- **External**: react, react/compiler-runtime, useState
+- **External**: REACT, REACT/compiler-runtime, useState
 - **Internal**: ink (Box, Text), keybindings/useKeybinding, tools/AgentTool/loadAgentsDir (AgentDefinition type), ConfigurableShortcutHint, design-system/Byline, design-system/KeyboardShortcutHint, TextInput, wizard/index (useWizard), wizard/WizardDialogLayout, validateAgent (validateAgentType), types (AgentWizardData type)
 
 ## Logic

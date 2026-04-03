@@ -3,7 +3,7 @@ Renders a wizard step inside a dialog with navigation footer, step counter, and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `utils/theme`, `components/design-system/Dialog`, `components/wizard/useWizard`, `components/wizard/WizardNavigationFooter`
 
 ## Logic

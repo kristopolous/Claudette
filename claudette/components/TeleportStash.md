@@ -3,7 +3,7 @@ Handles git stash operations when switching branches during teleport, prompting 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useEffect, useState), `figures`
+- **External**: REACT (useEffect, useState), `figures`
 - **Internal**: `ink` (Box, Text), `utils/debug` (logForDebugging), `utils/git` (GitFileStatus type, getFileStatus, stashToCleanState), `components/CustomSelect` (Select), `components/design-system/Dialog`, `components/Spinner`
 
 ## Logic

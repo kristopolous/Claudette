@@ -3,7 +3,7 @@ Renders a status indicator icon with appropriate symbol and color for success, e
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `Text`
 
 ## Logic

@@ -13,7 +13,7 @@ Defines the list of preapproved domains allowed for WebFetch without requiring e
 ## Logic
 
 - `PREAPPROVED_HOSTS`: Set of 80+ strings, each either:
-  - Hostname only (e.g., `'github.com'`, `'react.dev'`)
+  - Hostname only (e.g., `'github.com'`, `'react.dev' (URL hostname)`)
   - Hostname + path prefix (e.g., `'github.com/anthropics'`) requiring exact match or subpath
 - Categories include: Anthropic services, programming language docs, web frameworks, Python libs, PHP, Java, .NET, mobile, data science, databases, cloud/devops, testing, game dev, tools
 - **SECURITY WARNING**: Only for WebFetch GET; sandbox network restrictions do NOT inherit this list because some domains (Hugging Face, Kaggle, NuGet) allow uploads which could exfiltrate data

@@ -2,7 +2,7 @@
 Provides a wizard step for generating an agent configuration from a natural language description using the inference provider.
 
 ## Imports
-- **External**: @anthropic-ai/sdk (APIUserAbortError), react, react/compiler-runtime, useCallback, useRef, useState
+- **External**: @anthropic-ai/sdk (APIUserAbortError), REACT, REACT/compiler-runtime, useCallback, useRef, useState
 - **Internal**: hooks/useMainLoopModel (useMainLoopModel),ink (Box, Text),keybindings/useKeybinding,utils/abortController (createAbortController),utils/promptEditor (editPromptInEditor),ConfigurableShortcutHint, designsystem/Byline,Spinner,TextInput,wizard/index (useWizard), wizard/WizardDialogLayout, generateAgent (generateAgent), types (AgentWizardData type)
 
 ## Logic

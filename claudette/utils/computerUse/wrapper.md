@@ -4,7 +4,7 @@
 Safe: `binding` is only populated when `currentToolUseContext` is set.
 
 ## Imports
-- **Stdlib**: react
+- **Stdlib**: REACT
 - **External**: @ant/computer-use-mcp
 - **Internal**: ../../bootstrap/state, .././components/permissions/ComputerUseApproval/ComputerUseApproval, .././Tool, ./debug, /computerUseLock, /escHotkey, ./gates, ./hostAdapter, ./toolRendering
 

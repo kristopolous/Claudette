@@ -2,7 +2,7 @@
 Initializes and manages the cron scheduler for scheduled tasks (e.g., `/schedule`), firing prompts into the command queue at the appropriate times.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `./state/AppState` (useAppStateStore, useSetAppState)
   - `./Task` (isTerminalTaskStatus)

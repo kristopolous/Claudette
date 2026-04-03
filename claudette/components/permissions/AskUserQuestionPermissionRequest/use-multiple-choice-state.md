@@ -3,7 +3,7 @@ Manages state for multi-question navigation including current question index, an
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useReducer)
+- **External**: REACT (useCallback, useReducer)
 
 ## Logic
 1. Uses a reducer pattern to manage state transitions for question navigation and answer tracking

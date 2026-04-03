@@ -3,7 +3,7 @@ Provides a Text component for rendering styled text with support for color, form
 
 ## Imports
 - **Stdlib**: None specified
-- **External**: React from 'react'; React compiler runtime
+- **External**: React from 'REACT'; React compiler runtime
 - **Internal**: Color, Styles, TextStyles from ../styles
 
 ## Logic
@@ -28,7 +28,7 @@ Provides a Text component for rendering styled text with support for color, form
 
 5. **Text Component Implementation**:
    - Returns null if children is undefined or null
-   - Uses React compiler runtime (_c) for optimized rendering
+   - Uses REACT_COMPILER runtime (_c) for optimized rendering
    - Processes all style props (color, backgroundColor, bold, dim, italic, underline, strikethrough, inverse)
    - Defaults wrap to "wrap" if not provided
    - Combines text style props into textStyles object

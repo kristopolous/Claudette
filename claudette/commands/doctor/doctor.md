@@ -2,7 +2,7 @@
 Launches the Doctor screen to diagnose and verify Claudette installation and settings.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `Doctor` screen component, `LocalJSXCommandCall`
 
 ## Logic

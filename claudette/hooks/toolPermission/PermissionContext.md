@@ -22,7 +22,7 @@ Factory for creating the permission context object used during tool use authoriz
 
 ## Logic
 - `createResolveOnce<T>`: Returns a wrapper with `resolve`, `isResolved`, and `claim` to guarantee a single resolution across async callers.
-- `createPermissionQueueOps(setToolUseConfirmQueue)`: Adapts a React state setter to a generic queue interface (`push`, `remove`, `update`) used by the permission context.
+- `createPermissionQueueOps(setToolUseConfirmQueue)`: Adapts a UI state setter to a generic queue interface (`push`, `remove`, `update`) used by the permission context.
 - `createPermissionContext(...)`: Constructs a frozen context object implementing the permission lifecycle:
   - `logDecision(...)`: Delegates to `logPermissionDecision` with metadata.
   - `logCancelled()`: Logs `tengu_tool_use_cancelled` when a tool use is aborted.

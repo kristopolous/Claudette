@@ -3,7 +3,7 @@ Renders hook progress messages showing the count of in-progress PreToolUse and P
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), MessageResponse, messages utils
 
 ## Logic
@@ -13,4 +13,4 @@ Renders hook progress messages showing the count of in-progress PreToolUse and P
 4. For other hook events, shows "Running {HookEvent} hook…" dimmed text while hooks are in progress
 
 ## Exports
-- `HookProgressMessage` - React component rendering hook progress status during tool execution
+- `HookProgressMessage` - UI component rendering hook progress status during tool execution

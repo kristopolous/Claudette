@@ -5,7 +5,7 @@ Displays usage statistics and activity information for the current user. Shows a
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `Stats` component from `.././components/Stats`

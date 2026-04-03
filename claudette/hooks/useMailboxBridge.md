@@ -4,7 +4,7 @@
 Bridges mailbox messages into the REPL by polling and submitting messages when not loading.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useSyncExternalStore` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useSyncExternalStore` from 'REACT'
 - **External**: None
 - **Internal**: `useMailbox`
 

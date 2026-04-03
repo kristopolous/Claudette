@@ -3,7 +3,7 @@ Renders a selectable list of commands with truncated descriptions for display in
 
 ## Imports
 - **Stdlib**: Math
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: commands, ink, utils/format, components/CustomSelect/select, components/design-system/Tabs
 
 ## Logic
@@ -12,4 +12,4 @@ Renders a selectable list of commands with truncated descriptions for display in
 3. Renders an empty message when no commands are provided, otherwise displays a titled Select list with compact-vertical layout and keyboard navigation support
 
 ## Exports
-- `Commands` - React component that renders a list of commands as selectable options with descriptions
+- `Commands` - UI component that renders a list of commands as selectable options with descriptions

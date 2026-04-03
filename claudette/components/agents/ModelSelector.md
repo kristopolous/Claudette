@@ -2,7 +2,7 @@
 Provides a UI component for selecting an inference model for an agent.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text), utils/model/agent (getAgentModelOptions), CustomSelect/select (Select)
 
 ## Logic

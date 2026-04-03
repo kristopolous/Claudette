@@ -5,13 +5,13 @@ Provides teams dialog component for viewing and managing team members.
 
 ## Imports
 - **Stdlib**: `crypto`
-- **External**: `figures`, `react`, `react/compiler-runtime`, `usehooks-ts`
+- **External**: `figures`, REACT, REACT_COMPILER, `usehooks-ts`
 - **Internal**: context overlayContext, ink stringWidth, ink, keybindings useKeybinding/useShortcutDisplay, state AppState, Tool, AgentTool agentColorManager, debug, execFileNoThrow, format, permissions getNextPermissionMode/PermissionMode, JSON utils, swarm backends detection/registry/types, swarm constants/teamHelpers, tasks, teamDiscovery, teammateMailbox, design-system Dialog/ThemedText
 
 ## Logic
 1. `Props` - { initialTeams?, onDone }
 2. `DialogLevel` - { type: 'teammateList', teamName } | { type: 'teammateDetail', teamName, memberName }
-3. `TeamsDialog` - React component for team management
+3. `TeamsDialog` - UI component for team management
 4. Uses useRegisterOverlay to register as overlay (prevents CancelRequestHandler intercept)
 5. initialTeams derived from teamContext in PromptInput (no filesystem I/O)
 6. Uses useSetAppState for state updates

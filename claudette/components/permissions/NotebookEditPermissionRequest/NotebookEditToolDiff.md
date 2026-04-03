@@ -3,7 +3,7 @@ Renders a diff view for notebook cell edit operations, showing structured diffs 
 
 ## Imports
 - **Stdlib**: path
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, types/notebook, utils/array, utils/cwd, utils/diff, utils/fsOperations, utils/json, utils/notebook, HighlightedCode, StructuredDiff
 
 ## Logic

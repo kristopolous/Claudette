@@ -3,7 +3,7 @@ A UI hook that triggers a feedback survey after a "session memory compaction" ev
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `services/analytics`, `services/compact/sessionMemoryCompact`, `types/message`, `utils/envUtils`, `utils/messages`, `utils/telemetry/events`, `components/FeedbackSurvey/useSurveyState`, `components/FeedbackSurvey/utils`
 
 ## Logic

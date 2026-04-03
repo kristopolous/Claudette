@@ -1,8 +1,8 @@
 ## Purpose
-React component for rendering TeamCreate tool use message.
+UI component for rendering TeamCreate tool use message.
 
 ## Imports
-- **Stdlib**: `react`
+- **Stdlib**: REACT
 - **Internal**: `Input` type from TeamCreateTool
 
 ## Logic

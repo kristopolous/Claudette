@@ -2,7 +2,7 @@
 Manages API key verification status with lazy initialization, distinguishing between subscribers, missing keys, and invalid keys.
 
 ## Imports
-- **External**: `react` (useCallback, useState)
+- **External**: REACT (useCallback, useState)
 - **Internal**:
   - `./bootstrap/state` (getIsNonInteractiveSession)
   - `./services/api/claude` (verifyApiKey)

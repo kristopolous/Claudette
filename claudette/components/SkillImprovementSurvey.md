@@ -3,7 +3,7 @@ Displays a survey prompting users to apply or dismiss suggested skill improvemen
 
 ## Imports
 - **Stdlib**: none
-- **External**: react (React, useEffect, useRef)
+- **External**: REACT (React, useEffect, useRef)
 - **Internal**: ../constants/figures (BLACK_CIRCLE, BULLET_OPERATOR), ./ink (Box, Text), ./utils/hooks/skillImprovement (SkillUpdate), ../utils/stringUtils (normalizeFullWidthDigits), ./FeedbackSurvey/FeedbackSurveyView (isValidResponseInput), ./FeedbackSurvey/utils (FeedbackSurveyResponse)
 
 ## Logic

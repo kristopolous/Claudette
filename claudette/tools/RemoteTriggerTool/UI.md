@@ -5,7 +5,7 @@ Renders the user-facing UI messages for the Remote Trigger tool, displaying tool
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/MessageResponse`, `ink`, `utils/stringUtils`, `RemoteTriggerTool/RemoteTriggerTool`
 
 ## Logic

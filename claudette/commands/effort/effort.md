@@ -5,7 +5,7 @@ Sets the effort level (low, medium, high, max, auto) for the model's reasoning a
 
 ## Imports
 ### Stdlib
-- `react` (including `useState`, `useEffect`)
+- REACT (including `useState`, `useEffect`)
 
 ### Internal
 - `useMainLoopModel` from `.././hooks/useMainLoopModel`
@@ -26,8 +26,8 @@ Key functions:
 - `setEffortValue(effortValue)`: Converts to persistable form, updates user settings via `updateSettingsForSource`, logs analytics. Checks for env override (`CLAUDE_CODE_EFFORT_LEVEL`) and warns if it conflicts. Returns result message.
 - `unsetEffortLevel()`: Clears `effortLevel` from settings, logs analytics. Warns if env override is active.
 - `showCurrentEffort(appStateEffort, model)`: Computes effective effort (env > appState > auto model-based) and returns descriptive message.
-- `ApplyEffortAndClose`: React component that applies `effortUpdate` to app state via `setAppState` on mount, then calls `onDone` with message.
-- `ShowCurrentEffort`: React component that calls `showCurrentEffort()` and immediately invokes `onDone`.
+- `ApplyEffortAndClose`: UI component that applies `effortUpdate` to app state via `setAppState` on mount, then calls `onDone` with message.
+- `ShowCurrentEffort`: UI component that calls `showCurrentEffort()` and immediately invokes `onDone`.
 
 Constants:
 - `COMMON_HELP_ARGS`: `['help', '-h', '--help']`
@@ -38,5 +38,5 @@ Constants:
 - `executeEffort` (function) - Argument parser/executor
 - `setEffortValue` (function) - Sets and persists an effort level
 - `unsetEffortLevel` (function) - Clears persisted effort
-- `ShowCurrentEffort` (React component) - Displays current effort
-- `ApplyEffortAndClose` (React component) - Applies effort change and closes
+- `ShowCurrentEffort` (UI component) - Displays current effort
+- `ApplyEffortAndClose` (UI component) - Applies effort change and closes

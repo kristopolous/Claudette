@@ -3,7 +3,7 @@ Renders user command messages extracted from XML-tagged content, displaying skil
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk, figures
+- **External**: REACT, @anthropic-ai/sdk, figures
 - **Internal**: ink (Box, Text), messages utils (extractTag), xml constants
 
 ## Logic
@@ -13,4 +13,4 @@ Renders user command messages extracted from XML-tagged content, displaying skil
 4. Renders with subtle pointer prefix and user message background
 
 ## Exports
-- `UserCommandMessage` - React component rendering user command messages with skill or standard formatting
+- `UserCommandMessage` - UI component rendering user command messages with skill or standard formatting

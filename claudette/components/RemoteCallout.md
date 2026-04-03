@@ -3,7 +3,7 @@ Displays a one-time dialog prompting the user to enable remote control access to
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `isBridgeEnabled`, `Box`, `Text`, `getClaudeAIOAuthTokens`, `getGlobalConfig`, `saveGlobalConfig`, `Select`, `PermissionDialog`
 
 ## Logic

@@ -5,15 +5,15 @@ Provides channels notice component for MCP channel availability notifications.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: bootstrap state, ink, MCP channelAllowlist/channelNotification/config, auth, plugins installedPluginsManager, settings settings
 
 ## Logic
 1. Conditionally require()'d in LogoV2 behind feature('KAIROS') || feature('KAIROS_CHANNELS')
 2. No feature() guard here - whole file tree-shakes via require pattern when both flags false
 3. Do NOT import this module statically from unguarded code
-4. `ChannelsNotice` - React component for channels notice
-5. Uses React compiler runtime (_c) for memoization
+4. `ChannelsNotice` - UI component for channels notice
+5. Uses REACT_COMPILER runtime (_c) for memoization
 6. Uses useState for channels, disabled, noAuth, policyBlocked, list, unmatched
 7. Returns null if channels.length === 0
 8. hasNonDev = channels.some(channel => !channel.isDev)
@@ -25,7 +25,7 @@ Provides channels notice component for MCP channel availability notifications.
 14. If policyBlocked: shows policy blocked message
 15. If unmatched: shows unmatched channels message
 16. Renders Box with paddingLeft={2}, flexDirection="column"
-17. `useState` - React hook
+17. `useState` - UI hook
 18. `ChannelEntry`, `getAllowedChannels`, `getHasDevChannels` - bootstrap state functions
 19. `Box`, `Text` - ink components
 20. `isChannelsEnabled` - checks if channels enabled

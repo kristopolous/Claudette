@@ -3,7 +3,7 @@ Renders syntax-highlighted code blocks with optional line gutter, width measurem
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `hooks/useSettings`, `ink`, `utils/fullscreen`, `utils/sliceAnsi`, `utils/stringUtils`, `components/HighlightedCode/Fallback`, `components/StructuredDiff/colorDiff`
 
 ## Logic
@@ -14,4 +14,4 @@ Renders syntax-highlighted code blocks with optional line gutter, width measurem
 5. Renders each line with an optional gutter using ANSI slicing, or falls back to a non-highlighted display
 
 ## Exports
-- `HighlightedCode` - memoized React component that renders syntax-highlighted code with configurable width, dimming, and gutter support
+- `HighlightedCode` - memoized UI component that renders syntax-highlighted code with configurable width, dimming, and gutter support

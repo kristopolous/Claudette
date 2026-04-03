@@ -5,7 +5,7 @@ Provides AlternateScreen component for running children in terminal's alternate 
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink instances, ink termio dec, ink useTerminalNotification, ink components Box/TerminalSizeContext
 
 ## Logic
@@ -34,7 +34,7 @@ Provides AlternateScreen component for running children in terminal's alternate 
 14. Insertion effects fire during mutation phase, before resetAfterCommit
 15. ENTER_ALT_SCREEN reaches terminal before first frame does
 16. Cleanup timing unchanged: both insertion and layout effect cleanups run in mutation phase on unmount
-17. `PropsWithChildren`, `useContext`, `useInsertionEffect` - React hooks
+17. `PropsWithChildren`, `useContext`, `useInsertionEffect` - UI hooks
 18. `instances` - ink instances
 19. `DISABLE_MOUSE_TRACKING`, `ENABLE_MOUSE_TRACKING`, `ENTER_ALT_SCREEN`, `EXIT_ALT_SCREEN` - DEC constants
 20. `TerminalWriteContext` - terminal write context

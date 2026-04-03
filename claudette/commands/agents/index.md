@@ -9,7 +9,7 @@ Defines the `agents` command that provides a management interface for agent conf
 
 ## Logic
 Creates a command object with:
-- `type`: `'local-jsx'` (renders a React component)
+- `type`: `'local-jsx'` (renders a UI component)
 - `name`: `'agents'`
 - `description`: `'Manage agent configurations'`
 - `load`: A function that dynamically imports `/agents` (or `./agents`) to load the command implementation.

@@ -4,7 +4,7 @@
 Manages AI prompt suggestions, tracking display, acceptance, and logging engagement telemetry.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `useTerminalFocus`, `logEvent`, `abortSpeculation`, `useAppState`, `useSetAppState`
 

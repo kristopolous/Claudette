@@ -5,7 +5,7 @@ Provides guest passes upsell component and utilities.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, analytics, API referral, config
 
 ## Logic
@@ -26,11 +26,11 @@ Provides guest passes upsell component and utilities.
 15. Uses useState with shouldShowGuestPassesUpsell
 16. `incrementGuestPassesSeenCount` - increments guest passes seen count
 17. Saves to global config, logs tengu_guest_passes_upsell_shown event
-18. `GuestPassesUpsell` - React component for guest passes upsell
+18. `GuestPassesUpsell` - UI component for guest passes upsell
 19. Gets referrer reward via getCachedReferrerReward
 20. Renders Text with dimColor
 21. Shows "[✻] [✻] [✻] · Share Claudette and earn {amount} of extra usage · /passes" or "3 guest passes at /passes"
-22. `useState` - React hook
+22. `useState` - UI hook
 23. `Text` - ink text component
 24. `logEvent` - logs analytics event
 25. `checkCachedPassesEligibility`, `formatCreditAmount`, `getCachedReferrerReward`, `getCachedRemainingPasses` - referral functions

@@ -4,7 +4,7 @@
 AssistantToolUseMessage contract: null hides the ENTIRE row, '' shows
 
 ## Imports
-- **Stdlib**: react
+- **Stdlib**: REACT
 - **Internal**: ../../components/MessageResponse, ../../ink, ../format, ../mcpValidation
 
 ## Items

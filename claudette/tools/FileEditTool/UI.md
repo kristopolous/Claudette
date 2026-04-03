@@ -7,7 +7,7 @@ Renders UI components for file edit tool messages including use, result, rejecte
 ## Imports
 
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `@anthropic-ai/sdk/resources/index.mjs`, `diff`
+- **External**: REACT, REACT_COMPILER, `@anthropic-ai/sdk/resources/index.mjs`, `diff`
 - **Internal**: `src/components/FileEditToolUseRejectedMessage`, `src/components/MessageResponse`, `src/utils/messages`, `components/FallbackToolUseErrorMessage`, `components/FileEditToolUpdatedMessage`, `components/FilePathLink`, `ink`, `Tool`, `types/message`, `utils/diff`, `utils/file`, `utils/log`, `utils/plans`, `utils/readEditContext`, `utils/stringUtils`, `utils/theme`, `FileEditTool/types`, `FileEditTool/utils`
 
 ## Logic

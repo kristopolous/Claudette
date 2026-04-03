@@ -3,7 +3,7 @@ Renders messages from teammates in multi-agent sessions, parsing XML-formatted t
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk, figures
+- **External**: REACT, @anthropic-ai/sdk, figures
 - **Internal**: ink (Ansi, Box, Text), MessageResponse, PlanApprovalMessage, ShutdownMessage, TaskAssignmentMessage, teammateMailbox utils, xml constants, ink utils, slowOperations utils
 
 ## Logic
@@ -15,5 +15,5 @@ Renders messages from teammates in multi-agent sessions, parsing XML-formatted t
 6. Falls back to TeammateMessageContent for plain text messages with sender header and truncated content
 
 ## Exports
-- `UserTeammateMessage` - React component parsing and rendering teammate messages from XML format
+- `UserTeammateMessage` - UI component parsing and rendering teammate messages from XML format
 - `TeammateMessageContent` - Internal component rendering a single teammate message with sender, color, and content

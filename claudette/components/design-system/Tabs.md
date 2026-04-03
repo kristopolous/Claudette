@@ -3,7 +3,7 @@ A tabbed navigation component with keyboard navigation, controlled/uncontrolled 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useIsInsideModal`, `useModalScrollRef`, `useTerminalSize`, `ScrollBox`, `KeyboardEvent`, `stringWidth`, `Box`, `Text`, `useKeybindings`, `Theme`
 
 ## Logic

@@ -3,7 +3,7 @@ Displays a list of recent sandbox-blocked operations with timestamps and command
 
 ## Imports
 - **Stdlib**: Date
-- **External**: react (React, ReactNode, useEffect, useState)
+- **External**: REACT (React, ReactNode, useEffect, useState)
 - **Internal**: ../ink (Box, Text), ../utils/sandbox/sandbox-adapter (SandboxViolationEvent, SandboxManager), src/utils/platform (getPlatform)
 
 ## Logic

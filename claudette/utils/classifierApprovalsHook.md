@@ -1,11 +1,11 @@
 # utils/classifierApprovalsHook
 
 ## Purpose
-Provides React hook for classifierApprovals store without pulling React into print.ts.
+Provides UI hook for classifierApprovals store without pulling React into print.ts.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: classifierApprovals
 
 ## Logic

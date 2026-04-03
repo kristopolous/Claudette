@@ -3,7 +3,7 @@ A horizontal divider line that spans the terminal width with optional color, cus
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useTerminalSize`, `stringWidth`, `Ansi`, `Text`, `Theme`
 
 ## Logic

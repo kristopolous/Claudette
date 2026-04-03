@@ -1,7 +1,7 @@
 # mcp/useManageMCPConnections
 
 ## Purpose
-React hook for managing MCP server connections (connect, disconnect, reconnect, toggle).
+UI hook for managing MCP server connections (connect, disconnect, reconnect, toggle).
 
 ## Imports
 - **Stdlib**: (none)
@@ -9,7 +9,7 @@ React hook for managing MCP server connections (connect, disconnect, reconnect, 
 - **Internal**: MCP types, connection management utilities
 
 ## Logic
-1. Manages MCP server connection lifecycle in React context
+1. Manages MCP server connection lifecycle in UI context
 2. `connectMcpServer` - establishes connection to MCP server
 3. `disconnectMcpServer` - closes connection gracefully
 4. `reconnectMcpServer` - reconnects server (stop then start)

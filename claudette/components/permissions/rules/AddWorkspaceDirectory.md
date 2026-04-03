@@ -3,7 +3,7 @@ Provides a dialog for adding a directory to the workspace, with input validation
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `react`, `usehooks-ts`
+- **External**: `figures`, REACT, `usehooks-ts`
 - **Internal**: `commands/add-dir/validation`, `components/TextInput`, `ink/events/keyboard-event`, `ink`, `keybindings/useKeybinding`, `Tool`, `utils/suggestions/directoryCompletion`, `ConfigurableShortcutHint`, `CustomSelect/select`, `design-system/Byline`, `design-system/Dialog`, `design-system/KeyboardShortcutHint`, `PromptInput/PromptInputFooterSuggestions`
 
 ## Logic

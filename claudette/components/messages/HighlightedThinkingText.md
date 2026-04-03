@@ -3,7 +3,7 @@ Renders user prompt text with optional thinking trigger highlighting using rainb
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, figures
+- **External**: REACT, figures
 - **Internal**: ink (Box, Text), messageActions, QueuedMessageContext, formatBriefTimestamp utils, thinking utils
 
 ## Logic
@@ -14,4 +14,4 @@ Renders user prompt text with optional thinking trigger highlighting using rainb
 5. Handles queued message state by dimming the label
 
 ## Exports
-- `HighlightedThinkingText` - React component rendering user text with optional rainbow-colored thinking triggers
+- `HighlightedThinkingText` - UI component rendering user text with optional rainbow-colored thinking triggers

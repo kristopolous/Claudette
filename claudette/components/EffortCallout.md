@@ -3,7 +3,7 @@ Displays a dialog prompting users to select an effort level for the inference pr
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/auth`, `utils/config`, `utils/effort`, `utils/model/model`, `utils/settings/settings`, `components/CustomSelect/select`, `components/EffortIndicator`, `components/permissions/PermissionDialog`
 
 ## Logic
@@ -14,5 +14,5 @@ Displays a dialog prompting users to select an effort level for the inference pr
 5. Controls visibility based on subscription tier (Pro, Max, Team), model type, and prior dismissal state
 
 ## Exports
-- `EffortCallout` - React component that renders an effort level selection dialog for Opus 4.6 model users
+- `EffortCallout` - UI component that renders an effort level selection dialog for Opus 4.6 model users
 - `shouldShowEffortCallout` - function that determines whether the effort callout should be displayed based on user subscription and config state

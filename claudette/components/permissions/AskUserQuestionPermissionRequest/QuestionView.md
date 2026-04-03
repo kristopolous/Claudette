@@ -3,7 +3,7 @@ Renders a single question view with selectable options, text input, image paste 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `KeyboardEvent`, `Box`, `Text`, `useAppState`, `Question`, `QuestionOption`, `PastedContent`, `getExternalEditor`, `toIDEDisplayName`, `ImageDimensions`, `editPromptInEditor`, `OptionWithDescription`, `Select`, `SelectMulti`, `Divider`, `FilePathLink`, `PermissionRequestTitle`, `PreviewQuestionView`, `QuestionNavigationBar`, `QuestionState`
 
 ## Logic

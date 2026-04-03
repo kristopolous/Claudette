@@ -3,7 +3,7 @@ Renders a list of diff hunks with ellipsis separators between them for displayin
 
 ## Imports
 - **Stdlib**: none
-- **External**: `diff` (StructuredPatchHunk type), `react`
+- **External**: `diff` (StructuredPatchHunk type), REACT
 - **Internal**: `ink` (Box, NoSelect, Text), `utils/array` (intersperse), `components/StructuredDiff`
 
 ## Logic

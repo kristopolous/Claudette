@@ -5,7 +5,7 @@ Checks if new remote managed settings contain dangerous settings requiring user 
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: bootstrap state, ManagedSettingsSecurityDialog, dialog utils, ink render, keybindings, state, gracefulShutdown, renderOptions, settings types, analytics
 
 ## Logic

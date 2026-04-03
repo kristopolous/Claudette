@@ -3,7 +3,7 @@ Renders the navigation footer for wizard dialogs with keyboard shortcut hints an
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `hooks/useExitOnCtrlCDWithKeybindings`, `ink`, `components/ConfigurableShortcutHint`, `components/design-system/Byline`, `components/design-system/KeyboardShortcutHint`
 
 ## Logic

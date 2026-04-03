@@ -1,11 +1,11 @@
 # tools/AgentTool/UI
 
 ## Purpose
-Provides React components for rendering agent tool messages and progress.
+Provides UI components for rendering agent tool messages and progress.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `@anthropic-ai/sdk`, `react`, `zod/v4`
+- **External**: REACT_COMPILER, `@anthropic-ai/sdk`, REACT, `zod/v4`
 - **Internal**: ConfigurableShortcutHint, CtrlOToExpand, design-system components, FallbackToolUse components, Markdown, Message components, ToolUseLoader, ink components, API dumpPrompts, Tool, message types, tools types, array utils, collapseReadSearch, file, format, messages, model agent/aliases, theme, AgentTool types/schemas, agentColorManager, built-in agents
 
 ## Logic

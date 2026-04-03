@@ -3,7 +3,7 @@ Provides a text input dialog for users to set their preferred response and voice
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `figures`
+- **External**: REACT, `figures`
 - **Internal**: `ink`, `useKeybinding`, `TextInput`
 
 ## Logic

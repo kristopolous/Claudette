@@ -3,7 +3,7 @@ Renders a loading indicator for tool use operations with animated blinking and c
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `constants/figures` (BLACK_CIRCLE), `hooks/useBlink`, `ink` (Box, Text)
 
 ## Logic

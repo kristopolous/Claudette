@@ -3,7 +3,7 @@ Renders informational text about MCP server permissions for use in dialog compon
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ../ink (Link, Text)
 
 ## Logic

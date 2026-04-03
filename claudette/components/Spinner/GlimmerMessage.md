@@ -5,14 +5,14 @@ Provides glimmer message component for animated message display.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink stringWidth, ink, intl, theme, Spinner types/utils
 
 ## Logic
 1. `Props` - { message, mode, messageColor, glimmerIndex, flashOpacity, shimmerColor, stalledIntensity? }
 2. `ERROR_RED` - { r: 171, g: 43, b: 63 } for error color
-3. `GlimmerMessage` - React component for glimmer message
-4. Uses React compiler runtime (_c) for memoization
+3. `GlimmerMessage` - UI component for glimmer message
+4. Uses REACT_COMPILER runtime (_c) for memoization
 5. Gets theme via useTheme and getTheme
 6. Segments message into graphemes via getGraphemeSegmenter
 7. Calculates message width via stringWidth

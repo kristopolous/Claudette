@@ -3,7 +3,7 @@ Renders a collapsed summary of grouped read/search tool operations with live pro
 
 ## Imports
 - **Stdlib**: path (basename)
-- **External**: react, BUILDFLAGS
+- **External**: REACT, BUILDFLAGS
 - **Internal**: ink (Ansi, Box, Text, useTheme), Tool, useMinDisplayTime, useSelectedMessageBg, CtrlOToExpand, PrBadge, ToolUseLoader, messageActions, collapseReadSearch utils, file utils, format utils, fullscreen utils, messages utils, array utils, teamMemCollapsed (feature-gated)
 
 ## Logic
@@ -16,4 +16,4 @@ Renders a collapsed summary of grouped read/search tool operations with live pro
 7. Displays a minimum-duration hint row with ⎿ prefix for the current operation
 
 ## Exports
-- `CollapsedReadSearchContent` - React component rendering collapsed read/search group summaries
+- `CollapsedReadSearchContent` - UI component rendering collapsed read/search group summaries

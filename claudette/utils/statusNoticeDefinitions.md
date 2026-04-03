@@ -4,7 +4,7 @@
 Defines a collection of status notice definitions that are conditionally displayed in the UI as warnings or info messages. Each notice has an `isActive` predicate and a `render` function that produces React elements.
 
 ## Imports
-- **Stdlib**: `react`, `figures`, `path`
+- **Stdlib**: REACT, `figures`, `path`
 - **External**: none
 - **Internal**: `../ink`, `./claudemd`, `./cwd`, `./format`, `./config`, `./auth`, `../tools/AgentTool/loadAgentsDir`, `./statusNoticeHelpers`, `./ide`, `./jetbrains`
 

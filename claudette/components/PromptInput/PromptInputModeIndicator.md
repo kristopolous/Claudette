@@ -3,7 +3,7 @@ Renders the prompt character and mode indicator showing the current input mode (
 
 ## Imports
 - **Stdlib**: none
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: `ink`, `tools/AgentTool/agentColorManager`, `types/textInputTypes`, `utils/teammate`, `utils/theme`, `utils/agentSwarmsEnabled`
 
 ## Logic

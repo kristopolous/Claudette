@@ -3,7 +3,7 @@ Displays a dialog that prompts the user to select from a set of response options
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, keybindings/useKeybinding, types/hooks, components/CustomSelect/select, components/permissions/PermissionDialog
 
 ## Logic

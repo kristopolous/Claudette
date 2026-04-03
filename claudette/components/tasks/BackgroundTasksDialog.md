@@ -5,7 +5,7 @@ Provides background tasks dialog component for viewing and managing background t
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: BUILDFLAGS, `figures`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `figures`, REACT, REACT_COMPILER
 - **Internal**: coordinator coordinatorMode, hooks useTerminalSize, state AppState/teammateViewHelpers, Tool, tasks DreamTask/InProcessTeammateTask/LocalAgentTask/LocalShellTask/LocalWorkflowTask/MonitorMcpTask/RemoteAgentTask/types, types utils, array, swarm constants, commands ultraplan, commands, context overlayContext, hooks useExitOnCtrlCDWithKeybindings, ink events keyboard-event, ink, keybindings useKeybinding/useShortcutDisplay, design-system Byline/Dialog/KeyboardShortcutHint, tasks AsyncAgentDetailDialog/BackgroundTask/DreamDetailDialog/InProcessTeammateDetailDialog/RemoteSessionDetailDialog/ShellDetailDialog
 
 ## Logic
@@ -14,8 +14,8 @@ Provides background tasks dialog component for viewing and managing background t
 3. `ListItem` - union type for different task types
 4. Types: local_bash, remote_agent, local_agent, in_process_teammate, dream, local_workflow, monitor_mcp
 5. Each has id, type, label, status, task (DeepImmutable<TaskState>)
-6. `BackgroundTasksDialog` - React component for background tasks
-7. Uses React compiler runtime (_c) for memoization
+6. `BackgroundTasksDialog` - UI component for background tasks
+7. Uses REACT_COMPILER runtime (_c) for memoization
 8. Uses useTerminalSize for columns
 9. Uses useAppState, useSetAppState for state management
 10. Uses enterTeammateView, exitTeammateView for teammate view

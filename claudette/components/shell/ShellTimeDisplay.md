@@ -5,13 +5,13 @@ Provides shell time display component for showing elapsed time and timeout.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, format
 
 ## Logic
 1. `Props` - { elapsedTimeSeconds?, timeoutMs? }
-2. `ShellTimeDisplay` - React component for shell time display
-3. Uses React compiler runtime (_c) for memoization
+2. `ShellTimeDisplay` - UI component for shell time display
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Returns null if elapsedTimeSeconds undefined and no timeoutMs
 5. Formats timeout via formatDuration with hideTrailingZeros: true
 6. If elapsedTimeSeconds undefined: shows "(timeout {timeout})"

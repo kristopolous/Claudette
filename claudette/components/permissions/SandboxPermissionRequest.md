@@ -3,7 +3,7 @@ Handles permission requests for network connections outside the sandbox environm
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `utils/sandbox/sandbox-adapter`, `services/analytics`, `CustomSelect/select`, `PermissionDialog`
 
 ## Logic

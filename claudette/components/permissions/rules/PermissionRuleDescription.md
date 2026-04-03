@@ -3,7 +3,7 @@ Displays a human-readable description of a permission rule value.
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `tools/BashTool/BashTool`, `utils/permissions/PermissionRule`
 
 ## Logic

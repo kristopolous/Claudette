@@ -3,7 +3,7 @@ Layout wrapper for the REPL that manages fullscreen mode with scrollable content
 
 ## Imports
 - **Stdlib**: url (fileURLToPath)
-- **External**: figures, react, react/compiler-runtime
+- **External**: figures, REACT, REACT/compiler-runtime
 - **Internal**: ../context/modalContext (ModalContext), ./context/promptOverlayContext (PromptOverlayProvider, usePromptOverlay, usePromptOverlayDialog), ./hooks/useTerminalSize (useTerminalSize), ./ink/components/ScrollBox (ScrollBox), ./ink/instances (instances), ./ink (Box, Text), ./types/message (Message), ./utils/browser (openBrowser, openPath), ./utils/fullscreen (isFullscreenEnvEnabled), ./utils/stringUtils (plural), ./messages/nullRenderingAttachments (isNullRenderingAttachment), ./PromptInput/PromptInputFooterSuggestions (PromptInputFooterSuggestions), ./VirtualMessageList (StickyPrompt)
 
 ## Logic

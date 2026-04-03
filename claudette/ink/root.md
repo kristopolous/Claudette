@@ -5,7 +5,7 @@ Provides root rendering API for Ink applications.
 
 ## Imports
 - **Stdlib**: `stream`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: utils debug, ink frame, ink ink, ink instances
 
 ## Logic

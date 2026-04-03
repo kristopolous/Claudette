@@ -2,7 +2,7 @@
 Handles Shift+Up/Down keyboard navigation for teammate (swarm) selection and background task interactions.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `../ink/events/keyboardevent` (KeyboardEvent)
   - `./ink` (useInput)

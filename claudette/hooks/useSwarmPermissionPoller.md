@@ -4,7 +4,7 @@
 Polls for permission responses from the team leader when running as a worker agent in a swarm configuration.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useRef` from 'REACT'
 - **External**: `useInterval` from 'usehooks-ts'
 - **Internal**: `logForDebugging`, `errorMessage`, `permissionUpdateSchema`, `isSwarmWorker`, `pollForResponse`, `removeWorkerResponse`, `getAgentName`, `getTeamName`, `PermissionUpdate`
 

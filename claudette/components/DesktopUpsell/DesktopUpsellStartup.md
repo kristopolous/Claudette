@@ -3,7 +3,7 @@ Displays a startup dialog prompting users to try the Claudette desktop applicati
 
 ## Imports
 - **Stdlib**: process
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: services/analytics/growthbook, services/analytics/index, utils/config, components/CustomSelect/select, components/DesktopHandoff, components/permissions/PermissionDialog
 
 ## Logic
@@ -16,4 +16,4 @@ Displays a startup dialog prompting users to try the Claudette desktop applicati
 ## Exports
 - `getDesktopUpsellConfig` - retrieves the desktop upsell dynamic config from growthbook
 - `shouldShowDesktopUpsellStartup` - determines whether the upsell dialog should be shown based on platform, config, and dismissal state
-- `DesktopUpsellStartup` - React component that renders the desktop upsell dialog at startup
+- `DesktopUpsellStartup` - UI component that renders the desktop upsell dialog at startup

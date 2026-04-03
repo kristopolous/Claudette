@@ -3,7 +3,7 @@ Renders the title section of a permission request dialog with optional subtitle,
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `utils/theme`, `WorkerBadge`
 
 ## Logic

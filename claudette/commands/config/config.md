@@ -13,5 +13,5 @@ Open the settings/config panel to adjust Claudette preferences.
 6. Aliases: ['settings']
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning Settings React component
+- `call` - async LocalJSXCommandCall returning Settings UI component
 - `config` - Command object with lazy loader

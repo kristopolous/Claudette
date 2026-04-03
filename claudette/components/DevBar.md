@@ -3,7 +3,7 @@ Displays a development-only status bar showing slow synchronous operations for d
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `bootstrap/state`, `ink`
 
 ## Logic
@@ -13,4 +13,4 @@ Displays a development-only status bar showing slow synchronous operations for d
 4. Renders null when not in dev mode or when no slow operations exist
 
 ## Exports
-- `DevBar` - React component that renders a warning-colored text line showing recent slow sync operations
+- `DevBar` - UI component that renders a warning-colored text line showing recent slow sync operations

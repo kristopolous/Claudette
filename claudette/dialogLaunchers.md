@@ -5,7 +5,7 @@ Provides thin launchers for one-off dialog JSX components, extracting dialog ren
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: AssistantSession, StatsStore, ink Root, interactiveHelpers, KeybindingSetup, AppState, AgentMemoryScope, TeleportRemoteResponse, FpsMetrics, ValidationError types
 
 ## Logic

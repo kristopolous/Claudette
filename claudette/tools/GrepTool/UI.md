@@ -1,10 +1,10 @@
 # tools/GrepTool/UI.tsx
 
 ## Purpose
-React components for rendering Grep tool usage and result messages.
+UI components for rendering Grep tool usage and result messages.
 
 ## Imports
-- **Stdlib**: `react`
+- **Stdlib**: REACT
 - **External**: `@anthropic-ai/sdk` (ToolResultBlockParam type)
 - **Internal**:
   - `CtrlOToExpand` component

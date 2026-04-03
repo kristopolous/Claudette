@@ -3,7 +3,7 @@ A detailed view component that displays the configuration, capabilities, and sys
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `ui-framework` (e.g., react), `ui-components` (e.g., ink)
+- **External**: `figures`, `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
 - **Internal**: `keybindings/useKeybinding`, `Tool`, `tools/AgentTool/agentColorManager`, `tools/AgentTool/agentMemory`, `tools/AgentTool/agentToolUtils`, `tools/AgentTool/loadAgentsDir`, `utils/model/agent`, `components/Markdown`, `components/agents/agentFileUtils`
 
 ## Logic

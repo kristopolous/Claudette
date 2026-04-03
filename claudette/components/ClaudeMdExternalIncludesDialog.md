@@ -3,7 +3,7 @@ Displays a security dialog warning users about external CLAUDE.md file imports a
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: services/analytics/index (logEvent), ink (Box, Link, Text), utils/claudemd (ExternalClaudeMdInclude), utils/config (saveCurrentProjectConfig), CustomSelect/index (Select), design-system/Dialog (Dialog)
 
 ## Logic
@@ -14,4 +14,4 @@ Displays a security dialog warning users about external CLAUDE.md file imports a
 5. Calls onDone after the user makes a selection
 
 ## Exports
-- `ClaudeMdExternalIncludesDialog` - React component that prompts users about external CLAUDE.md imports
+- `ClaudeMdExternalIncludesDialog` - UI component that prompts users about external CLAUDE.md imports

@@ -3,7 +3,7 @@ Manages IDE integrations: detects available IDEs with Claude extensions, connect
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `chalk`, `react`
+- **External**: `chalk`, REACT
 - **Internal**: Extensive: `logEvent`, `Select`, `Dialog`, `IdeAutoConnectDialog`, `IdeDisableAutoConnectDialog`, `Box`, `Text`, `clearServerCache`, `ScopedMcpServerConfig`, `useAppState`, `useSetAppState`, `getCwd`, `execFileNoThrow`, IDE detection utils (`detectIDEs`, `detectRunningIDEs`, `isJetBrainsIde`, `isSupportedJetBrainsTerminal`, `isSupportedTerminal`, `toIDEDisplayName`), `getCurrentWorktreeSession`, `CommandResultDisplay`, `LocalJSXCommandContext`
 
 ## Logic

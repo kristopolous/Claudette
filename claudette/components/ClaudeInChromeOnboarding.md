@@ -3,7 +3,7 @@ Displays an onboarding dialog explaining the Chrome extension integration for br
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `Dialog`, analytics, Chrome extension setup utilities, config utilities
 
 ## Logic

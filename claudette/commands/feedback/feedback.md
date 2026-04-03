@@ -13,7 +13,7 @@ Submit feedback about Claudette (bug reports, suggestions).
    - Possibly attach background task information
 3. `renderFeedbackComponent` helper:
    - Takes onDone, abortSignal, messages, initialDescription, backgroundTasks
-   - Returns Feedback React component
+   - Returns Feedback UI component
 4. `call` function: extracts optional args as initialDescription, renders feedback component
 5. Command is disabled/excluded in various scenarios:
    - Bedrock/Vertex/Foundry deployments

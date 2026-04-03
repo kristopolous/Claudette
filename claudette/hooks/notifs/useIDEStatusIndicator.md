@@ -2,7 +2,7 @@
 Manages multiple IDE-related notifications: hint to enable `/ide`, disconnected status, JetBrains-specific info, and installation errors.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - src/ink` (Text)

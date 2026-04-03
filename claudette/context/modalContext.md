@@ -1,11 +1,11 @@
 # modalContext
 
 ## Purpose
-Provides React context for modal slot sizing and scroll management within FullscreenLayout.
+Provides UI context for modal slot sizing and scroll management within FullscreenLayout.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: ScrollBoxHandle type
 
 ## Logic
@@ -20,7 +20,7 @@ Provides React context for modal slot sizing and scroll management within Fullsc
 6. `useModalScrollRef` - returns scroll ref for scroll control
 
 ## Exports
-- `ModalContext` - React context for modal sizing/scroll
+- `ModalContext` - UI context for modal sizing/scroll
 - `useIsInsideModal` - checks if component is inside modal
 - `useModalOrTerminalSize` - gets modal or terminal dimensions
 - `useModalScrollRef` - gets modal scroll box reference

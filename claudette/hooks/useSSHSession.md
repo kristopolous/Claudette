@@ -4,7 +4,7 @@
 REPL integration hook for `claude ssh` sessions, managing SSH child process lifecycle and messaging.
 
 ## Imports
-- **Stdlib**: `randomUUID` from 'crypto', `useCallback`, `useEffect`, `useMemo`, `useRef` from 'react'
+- **Stdlib**: `randomUUID` from 'crypto', `useCallback`, `useEffect`, `useMemo`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `ToolUseConfirm`, `createSyntheticAssistantMessage`, `createToolStub`, `convertSDKMessage`, `isSessionEndMessage`, `SSHSession`, `SSHSessionManager`, `Tool`, `findToolByName`, `Message`, `PermissionAskDecision`, `logForDebugging`, `gracefulShutdown`, `RemoteMessageContent`
 

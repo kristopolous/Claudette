@@ -3,7 +3,7 @@ Handles the handoff flow from the terminal interface to the desktop application,
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `commands`, `ink`, `utils/browser`, `utils/desktopDeepLink`, `utils/errors`, `utils/gracefulShutdown`, `utils/sessionStorage`, `components/design-system/LoadingState`
 
 ## Logic
@@ -14,5 +14,5 @@ Handles the handoff flow from the terminal interface to the desktop application,
 5. Displays loading states for each phase and error handling with retry option
 
 ## Exports
-- `DesktopHandoff` - React component that manages the terminal-to-desktop session transfer flow
+- `DesktopHandoff` - UI component that manages the terminal-to-desktop session transfer flow
 - `getDownloadUrl` - function that returns the platform-specific desktop app download URL

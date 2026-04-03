@@ -3,7 +3,7 @@ Dialog for selecting a previous user message to restore, with options for conver
 
 ## Imports
 - **Stdlib**: crypto (randomUUID, UUID), path
-- **External**: figures, react, react/compiler-runtime
+- **External**: figures, REACT, REACT/compiler-runtime
 - **Internal**: @anthropic-ai/sdk/resources/index.mjs (ContentBlockParam, TextBlockParam),src/services/analytics/index (logEvent),src/state/AppState (useAppState),src/utils/fileHistory (DiffStats, fileHistoryCanRestore, fileHistoryEnabled, fileHistoryGetDiffStats),src/utils/log (logError),src/hooks/useTerminalSize (useTerminalSize),src/tools/FileEditTool/types (FileEditOutput),src/tools/FileWriteTool/FileWriteTool (Output), ./constants/xml (BASH_STDERR_TAG, BASH_STDOUT_TAG, COMMAND_MESSAGE_TAG, LOCAL_COMMAND_STDERR_TAG, LOCAL_COMMAND_STDOUT_TAG, TASK_NOTIFICATION_TAG, TEAMMATE_MESSAGE_TAG, TICK_TAG), ./hooks/useExitOnCtrlCDWithKeybindings (useExitOnCtrlCDWithKeybindings), ./ink (Box, Text), ./keybindings/useKeybinding (useKeybinding, useKeybindings), ./types/message (Message, PartialCompactDirection, UserMessage), ./utils/displayTags (stripDisplayTags), ./utils/messages (createUserMessage, extractTag, isEmptyMessageText, isSyntheticMessage, isToolUseResultMessage), ./utils/array (count), ./utils/format (formatRelativeTimeAgo, truncate), ./utils/theme (Theme), ./CustomSelect/select (OptionWithDescription, Select), ./Spinner (Spinner), ./design-system/Divider (Divider)
 
 ## Logic

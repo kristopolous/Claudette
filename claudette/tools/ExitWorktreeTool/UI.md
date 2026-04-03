@@ -7,7 +7,7 @@ Provides UI rendering functions for the ExitWorktree tool, displaying worktree e
 ## Imports
 
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `ToolProgressData`, `types/message`, `utils/theme`, `ExitWorktreeTool`
 
 ## Logic

@@ -3,7 +3,7 @@ Renders a review screen that displays all answered questions before final submis
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `Box`, `Text`, `Question`, `PermissionDecision`, `Select`, `Divider`, `PermissionRequestTitle`, `PermissionRuleExplanation`, `QuestionNavigationBar`
 
 ## Logic

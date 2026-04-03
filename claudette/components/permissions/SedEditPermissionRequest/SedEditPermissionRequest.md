@@ -3,7 +3,7 @@ Renders a permission request dialog for sed edit commands executed via bash, sho
 
 ## Imports
 - **Stdlib**: path
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: components/FileEditToolDiff, utils/cwd, utils/errors, utils/fileRead, utils/fsOperations, ink, tools/BashTool, tools/BashTool/sedEditParser, permissions/FilePermissionDialog, permissions/PermissionRequest
 
 ## Logic

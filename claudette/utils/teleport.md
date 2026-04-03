@@ -4,7 +4,7 @@
 Manages remote session creation, resumption, and synchronization between local Claude Code instances and remote CCR (Claude Code Remote) sessions.
 
 ## Imports
-- **Stdlib**: axios, chalk, crypto, react, zod/v4
+- **Stdlib**: axios, chalk, crypto, REACT, zod/v4
 - **External**: growthbook (feature flags), analytics
 - **Internal**: TeleportError component, oauth constants, agentSdkTypes, ink, keybindings, api/claude (queryHaiku), api/sessionIngress, oauth/client, AppState, message types, auth, background/preconditions, conversationRecovery, cwd, debug, detectRepository, envUtils, errors, execFileNoThrow, format, git, json, log, messages, model, sessionStorage, settings, systemPromptType, teleport/api, teleport/environments, teleport/gitBundle
 

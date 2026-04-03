@@ -4,7 +4,7 @@
 Processes user-initiated `!` shell commands. Routes to BashTool or PowerShellTool based on default shell setting, executes outside sandbox, and formats results as synthetic user messages.
 
 ## Imports
-- **Stdlib**: crypto, react
+- **Stdlib**: crypto, REACT
 - **External**: @anthropic-ai/sdk/resources
 - **Internal**: ../../services/analytics, ../errors, ../messages, ../shell/resolveDefaultShell, ../shell/shellToolUtils, ../toolResultStorage, ../xml, ./processUserInput, src/components/BashModeProgress, src/Tool, src/tools/BashTool/BashTool, src/types/message, src/types/tools
 

@@ -3,7 +3,7 @@ Provides a dialog for exporting conversation content to the clipboard or a file.
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `hooks/useExitOnCtrlCDWithKeybindings`, `hooks/useTerminalSize`, `ink/termio/osc`, `ink`, `keybindings/useKeybinding`, `utils/cwd`, `utils/slowOperations`, `components/ConfigurableShortcutHint`, `components/CustomSelect/select`, `components/design-system/Byline`, `components/design-system/Dialog`, `components/design-system/KeyboardShortcutHint`, `components/TextInput`
 
 ## Logic

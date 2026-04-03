@@ -3,7 +3,7 @@ Displays an onboarding dialog for IDE integration, highlighting key features and
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `utils/envDynamic`, `ink`, `keybindings/useKeybinding`, `utils/config`, `utils/env`, `utils/ide`, `components/design-system/Dialog`
 
 ## Logic
@@ -13,5 +13,5 @@ Displays an onboarding dialog for IDE integration, highlighting key features and
 4. Marks the dialog as shown in global config, keyed by terminal type, to avoid showing it again
 
 ## Exports
-- `IdeOnboardingDialog` - React component that renders the IDE onboarding experience with feature highlights and installation status
+- `IdeOnboardingDialog` - UI component that renders the IDE onboarding experience with feature highlights and installation status
 - `hasIdeOnboardingDialogBeenShown` - returns true if the onboarding dialog has already been shown for the current terminal

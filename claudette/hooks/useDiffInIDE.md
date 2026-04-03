@@ -2,7 +2,7 @@
 Shows file edit diffs in the connected IDE via MCP; handles accept/reject/close and recomputes edits from modified content.
 
 ## Imports
-- **External**: `crypto` (randomUUID), `path` (basename), `react` (useEffect, useMemo, useRef, useState)
+- **External**: `crypto` (randomUUID), `path` (basename), REACT (useEffect, useMemo, useRef, useState)
 - **Internal**:
   - src/services/analytics/index` (logEvent)
   - src/utils/fileRead` (readFileSync)

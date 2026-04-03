@@ -3,12 +3,12 @@ Provides a Spacer component that creates flexible space expanding along the majo
 
 ## Imports
 - **Stdlib**: None specified
-- **External**: React from 'react'; React compiler runtime
+- **External**: React from 'REACT'; React compiler runtime
 - **Internal**: Box component from ./Box
 
 ## Logic
 1. **Spacer Component**: A functional component that:
-   - Uses React compiler runtime (_c) for optimized rendering and memoization
+   - Uses REACT_COMPILER runtime (_c) for optimized rendering and memoization
    - Returns a Box component with flexGrow={1} prop
    - The flexGrow property causes the spacer to expand and fill available space along the main axis of its parent layout (typically horizontal in a row or vertical in a column)
 
@@ -24,4 +24,4 @@ Provides a Spacer component that creates flexible space expanding along the majo
    - Uses compiler optimization for performance
 
 ## Exports
-- `Spacer` - Default exported React component that creates flexible space
+- `Spacer` - Default exported UI component that creates flexible space

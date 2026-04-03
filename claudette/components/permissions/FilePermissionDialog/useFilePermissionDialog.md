@@ -1,9 +1,9 @@
 ## Purpose
-Provides a React hook that manages the state and interaction logic for file permission dialogs including option generation, feedback handling, and keyboard shortcuts.
+Provides a UI hook that manages the state and interaction logic for file permission dialogs including option generation, feedback handling, and keyboard shortcuts.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useMemo, useState)
+- **External**: REACT (useCallback, useMemo, useState)
 - **Internal**: `useAppState`, `useKeybindings`, `AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS`, `logEvent`, `sanitizeToolNameForAnalytics`, `PermissionUpdate`, `CompletionType`, `ToolUseConfirm`, `FileOperationType`, `getFilePermissionOptions`, `PermissionOption`, `PermissionOptionWithLabel`, `PERMISSION_HANDLERS`, `PermissionHandlerParams`
 
 ## Logic

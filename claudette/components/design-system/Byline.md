@@ -3,7 +3,7 @@ Joins child elements with a middot separator (" · ") for inline metadata displa
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Text`
 
 ## Logic

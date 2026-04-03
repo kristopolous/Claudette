@@ -4,7 +4,7 @@
 Logs messages to the transcript with incremental updates, handling compaction and conversation rewinding.
 
 ## Imports
-- **Stdlib**: `useEffect`, `useRef` from 'react'
+- **Stdlib**: `useEffect`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `UUID` from 'crypto', `useAppState`, `Message`, `isAgentSwarmsEnabled`, `cleanMessagesForLogging`, `isChainParticipant`, `recordTranscript`
 

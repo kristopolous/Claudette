@@ -3,7 +3,7 @@ A theme-aware Box wrapper that resolves theme color keys to raw color values for
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Box`, `DOMElement`, `ClickEvent`, `FocusEvent`, `KeyboardEvent`, `Color`, `Styles`, `getTheme`, `Theme`, `useTheme`
 
 ## Logic

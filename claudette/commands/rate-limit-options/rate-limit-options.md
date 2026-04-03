@@ -5,7 +5,7 @@ Internal command that displays a dialog with options when the rate limit is reac
 
 ## Imports
 ### Stdlib
-- `react` (including `useState`, `useMemo`)
+- REACT (including `useState`, `useMemo`)
 
 ### Internal
 - `CommandResultDisplay`, `LocalJSXCommandContext` types from `.././commands`
@@ -24,7 +24,7 @@ Internal command that displays a dialog with options when the rate limit is reac
 ## Logic
 The `call` async function renders the `RateLimitOptionsMenu` component, providing `onDone` and `context` (which satisfies both `ToolUseContext` and `LocalJSXCommandContext`).
 
-`RateLimitOptionsMenu` React component:
+`RateLimitOptionsMenu` UI component:
 - Uses `useClaudeAiLimits()` to get `overageDisabledReason` and `overageStatus`.
 - Gets subscription type (`getSubscriptionType`) and rate limit tier (`getRateLimitTier`).
 - Checks `hasExtraUsageEnabled` via `getOauthAccountInfo()`.
@@ -47,4 +47,4 @@ The `call` async function renders the `RateLimitOptionsMenu` component, providin
 
 ## Exports
 - `call` (async function) - Renders the rate limit options menu
-- `RateLimitOptionsMenu` (React component) - The menu UI
+- `RateLimitOptionsMenu` (UI component) - The menu UI

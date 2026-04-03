@@ -3,7 +3,7 @@ Checks for available updates and displays an update prompt with the appropriate 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `usehooks-ts`
+- **External**: REACT, `usehooks-ts`
 - **Internal**: `Text`, `getLatestVersionFromGcs`, `getMaxVersion`, `shouldSkipVersion`, `isAutoUpdaterDisabled`, `logForDebugging`, `getPackageManager`, `gt`, `gte`, `getInitialSettings`
 
 ## Logic

@@ -4,7 +4,7 @@
 Inverse-highlights every occurrence of a query string within text (case-insensitive). Used by search dialogs to show where the query matched in result rows and preview panes.
 
 ## Imports
-- **Stdlib**: `react`
+- **Stdlib**: REACT
 - **Internal**: `../ink` (Text component)
 
 ## Logic

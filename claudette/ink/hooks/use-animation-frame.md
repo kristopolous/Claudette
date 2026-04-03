@@ -3,7 +3,7 @@ Provides synchronized animations that automatically pause when offscreen.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useEffect, useState)
+- **External**: REACT (useContext, useEffect, useState)
 - **Internal**: `components/ClockContext`, `dom`, `hooks/use-terminal-viewport`
 
 ## Logic

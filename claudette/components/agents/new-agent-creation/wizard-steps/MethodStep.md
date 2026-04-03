@@ -2,7 +2,7 @@
 Provides a wizard step for choosing between AI-generated and manual agent creation methods.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box), ConfigurableShortcutHint, CustomSelect/select (Select), design-system/Byline, design-system/KeyboardShortcutHint, wizard/index (useWizard), wizard/WizardDialogLayout, types (AgentWizardData type)
 
 ## Logic

@@ -3,7 +3,7 @@ Determines whether to display a friction banner that encourages users to flag is
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useMemo`, `useRef`)
+- **External**: REACT (`useMemo`, `useRef`)
 - **Internal**: `BASH_TOOL_NAME` (tool identifier), `Message` (type), `getUserMessageText` (utility)
 
 ## Logic

@@ -3,7 +3,7 @@ A security-sensitive dialog component that prompts the user to explicitly approv
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../ink`, `../utils/config`, `./CustomSelect/index`, `./design-system/Dialog`
 
 ## Logic

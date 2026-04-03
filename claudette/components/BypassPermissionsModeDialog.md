@@ -3,7 +3,7 @@ A critical security dialog that warns the user about the risks associated with e
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `services/analytics`, `utils/gracefulShutdown`, `utils/settings/settings`, `components/CustomSelect`, `components/design-system/Dialog`
 
 ## Logic

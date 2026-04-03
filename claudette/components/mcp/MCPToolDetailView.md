@@ -3,7 +3,7 @@ Displays detailed information about a specific MCP tool including its name, desc
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink` (Box, Text), `services/mcp/mcpStringUtils` (extractMcpToolDisplayName, getMcpDisplayName), `Tool`, `ConfigurableShortcutHint`, `design-system/Dialog` (Dialog), `types` (ServerInfo)
 
 ## Logic

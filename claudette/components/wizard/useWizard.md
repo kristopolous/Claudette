@@ -3,7 +3,7 @@ Provides a typed hook for consuming the wizard context, ensuring useWizard is ca
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/wizard/types`, `components/wizard/WizardProvider`
 
 ## Logic

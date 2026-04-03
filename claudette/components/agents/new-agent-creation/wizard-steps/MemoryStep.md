@@ -2,7 +2,7 @@
 Provides a wizard step for configuring agent memory scope and persistence.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box), keybindings/useKeybinding, memdir/paths (isAutoMemoryEnabled), tools/AgentTool/agentMemory (AgentMemoryScope type, loadAgentMemoryPrompt), ConfigurableShortcutHint, CustomSelect/select, design-system/Byline, design-system/KeyboardShortcutHint, wizard/index (useWizard), wizard/WizardDialogLayout, types (AgentWizardData type)
 
 ## Logic

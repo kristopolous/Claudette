@@ -3,7 +3,7 @@ Displays the detailed diff content for a single selected file using word-level d
 
 ## Imports
 - **Stdlib**: `path` (resolve)
-- **External**: `react/compiler-runtime`, `diff` (StructuredPatchHunk type), `react`
+- **External**: REACT_COMPILER, `diff` (StructuredPatchHunk type), REACT
 - **Internal**: `../../hooks/useTerminalSize`, `.././ink`, `.././utils/cwd`, `../../utils/file`, `../design-system/Divider`, `../StructuredDiff`
 
 ## Logic

@@ -2,7 +2,7 @@
 Provides reactive access to the persistent v2 task list (todos), with automatic file watching, debouncing, fallback polling, and auto-hide after 5s when all tasks are completed. Shared singleton store avoids multiple watchers.
 
 ## Imports
-- **External**: `fs` (watch), `react` (useEffect, useSyncExternalStore)
+- **External**: `fs` (watch), REACT (useEffect, useSyncExternalStore)
 - **Internal**:
   - `./state/AppState` (useAppState, useSetAppState)
   - `./utils/signal` (createSignal)

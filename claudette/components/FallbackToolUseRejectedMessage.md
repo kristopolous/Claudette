@@ -3,7 +3,7 @@ Renders a message indicating a tool use was rejected by the user.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `InterruptedByUser`, `MessageResponse`
 
 ## Logic

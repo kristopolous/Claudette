@@ -3,7 +3,7 @@ Allows users to select their preferred output style for how Claudette communicat
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../constants/outputStyles`, `../ink`, `../utils/config`, `../utils/cwd`, `./CustomSelect/select`, `./design-system/Dialog`
 
 ## Logic

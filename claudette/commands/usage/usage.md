@@ -5,7 +5,7 @@ Opens the Settings UI with the "Usage" tab active, displaying the current plan's
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `Settings` component from `.././components/Settings/Settings`

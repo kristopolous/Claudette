@@ -2,7 +2,7 @@
 Listens for prompt notifications from the Claude for Chrome extension, enqueues them as user prompts, and syncs the current permission mode to the extension.
 
 ## Imports
-- **External**: `react` (useEffect, useRef), `@anthropic-ai/sdk` (ContentBlockParam), `zod/v4` (z)
+- **External**: REACT (useEffect, useRef), `@anthropic-ai/sdk` (ContentBlockParam), `zod/v4` (z)
 - **Internal**:
   - src/utils/log` (logError)
   - `./services/mcp/client` (callIdeRpc)
@@ -20,7 +20,7 @@ Listens for prompt notifications from the Claude for Chrome extension, enqueues 
      - Handler enqueues prompt via `enqueuePendingNotification` (user message priority 'later')
   2. On `mcpClients` or `toolPermissionMode` change: calls `callIdeRpc("set_permission_mode", { mode: chromeMode }, chromeClient)` where `chromeMode` is "skip_all_permission_checks" if mode is "bypassPermissions", else "ask"
 - Both effects are no-ops if no Chrome client found
-- Uses React compiler (`_c`) to memoize effect dependencies
+- Uses REACT_COMPILER (`_c`) to memoize effect dependencies
 
 ## Exports
 - `usePromptsFromClaudeInChrome` - Hook `(mcpClients: MCPServerConnection[], toolPermissionMode: PermissionMode) => void`

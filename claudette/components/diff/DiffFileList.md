@@ -3,7 +3,7 @@ Renders a scrollable, paginated list of changed files with selection highlightin
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react/compiler-runtime`, `figures`, `react`
+- **External**: REACT_COMPILER, `figures`, REACT
 - **Internal**: `../../hooks/useDiffData`, `.././hooks/useTerminalSize`, `../../ink`, `../../utils/format`, `../../utils/stringUtils`
 
 ## Logic

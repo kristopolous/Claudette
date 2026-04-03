@@ -3,7 +3,7 @@ Renders a diff view for file write operations, showing either a structured diff 
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: hooks/useTerminalSize, ink, utils/array, utils/diff, HighlightedCode, StructuredDiff
 
 ## Logic

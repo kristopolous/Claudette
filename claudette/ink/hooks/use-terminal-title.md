@@ -3,7 +3,7 @@ Declaratively sets the terminal tab/window title.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useEffect), `strip-ansi`
+- **External**: REACT (useContext, useEffect), `strip-ansi`
 - **Internal**: `termio/osc`, `useTerminalNotification`
 
 ## Logic

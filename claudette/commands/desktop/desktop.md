@@ -5,7 +5,7 @@ Renders the DesktopHandoff component to continue the current conversation sessio
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `CommandResultDisplay` type from `.././commands`

@@ -4,7 +4,7 @@ Merges initial commands with MCP-provided commands, deduplicating by name, to pr
 ## Imports
 - **External**: `lodashes/uniqBy` (uniqBy)
 - **Internal**: `../commands` (Command type)
-- **External**: `react` (useMemo)
+- **External**: REACT (useMemo)
 
 ## Logic
 - Hook parameters: `initialCommands: Command[]`, `mcpCommands: Command[]`

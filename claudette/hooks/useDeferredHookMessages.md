@@ -2,7 +2,7 @@
 Defers SessionStart hook messages to avoid blocking REPL initial render; provides callback to await pending hooks before first API request.
 
 ## Imports
-- **External**: `react` (useCallback, useEffect, useRef)
+- **External**: REACT (useCallback, useEffect, useRef)
 - **Internal**: `../types/message` (HookResultMessage, Message)
 
 ## Logic

@@ -23,7 +23,7 @@ Renders terminal UI for LSPTool (Language Server Protocol operations). Displays 
   - Shows summary line: "Found X results" or "Hover info available"; adds "across Y files" if multiple
   - In verbose mode: shows expanded content with indentation marker (`⎿`)
   - In non-verbose mode: shows collapse indicator (`CtrlOToExpand`) when count > 0
-  - Uses React compiler optimizations (`_c`) for memoization
+  - Uses REACT_COMPILER optimizations (`_c`) for memoization
 - **`userFacingName(): string`**: Returns `'LSP'` - the display name for the tool
 - **`renderToolUseMessage(input, {verbose})`**:
   - For position-based operations (goToDefinition, findReferences, hover, goToImplementation):

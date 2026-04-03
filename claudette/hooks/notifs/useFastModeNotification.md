@@ -2,7 +2,7 @@
 Shows notifications for Fast Mode status: org availability changes, cooldown start/expiry, and overage rejection.
 
 ## Imports
-- **External**: `react` (useEffect)
+- **External**: REACT (useEffect)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - src/state/AppState` (useAppState, useSetAppState)

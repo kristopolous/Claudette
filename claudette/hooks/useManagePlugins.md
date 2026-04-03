@@ -3,7 +3,7 @@ Bootstraps the plugin system on app mount: discovers, loads, and validates plugi
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useCallback`, `useEffect`)
+- **External**: REACT (`useCallback`, `useEffect`)
 - **Internal**:
   - `commands` - `Command` type
   - `context/notifications` - `useNotifications`

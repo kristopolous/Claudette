@@ -3,7 +3,7 @@ Displays a spinner with a loading message and optional subtitle for async operat
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Box`, `Text`, `Spinner`
 
 ## Logic

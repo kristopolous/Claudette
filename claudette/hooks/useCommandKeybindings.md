@@ -2,7 +2,7 @@
 Registers keybinding handlers for "command:*" actions; invokes corresponding slash commands immediately without clearing input.
 
 ## Imports
-- **External**: `react` (useMemo)
+- **External**: REACT (useMemo)
 - **Internal**:
   - `./context/overlayContext` (useIsModalOverlayActive)
   - `./keybindings/KeybindingContext` (useOptionalKeybindingContext)
@@ -19,4 +19,4 @@ Registers keybinding handlers for "command:*" actions; invokes corresponding sla
 6. Returns `null` (no UI)
 
 ## Exports
-- `CommandKeybindingHandlers` - React component `Props: { onSubmit: (input: string, helpers: PromptInputHelpers, ...rest) => void, isActive?: boolean }`
+- `CommandKeybindingHandlers` - UI component `Props: { onSubmit: (input: string, helpers: PromptInputHelpers, ...rest) => void, isActive?: boolean }`

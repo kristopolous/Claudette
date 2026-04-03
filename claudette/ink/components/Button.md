@@ -3,7 +3,7 @@ Provides an interactive Button component that handles keyboard, mouse, and focus
 
 ## Imports
 - **Stdlib**: None specified
-- **External**: React, useCallback, useEffect, useRef, useState from 'react'; Except from 'type-fest'; React compiler runtime
+- **External**: React, useCallback, useEffect, useRef, useState from 'REACT'; Except from 'type-fest'; React compiler runtime
 - **Internal**: 
   - DOMElement from ./dom
   - ClickEvent, FocusEvent, KeyboardEvent from respective event modules
@@ -40,8 +40,8 @@ Provides an interactive Button component that handles keyboard, mouse, and focus
    - If children is a function, calls it with current ButtonState for state-dependent styling
    - Otherwise renders children as-is (no state-dependent styling)
 
-6. **Compiler Optimization**: Uses React compiler runtime (_c) for memoization and optimized rendering
+6. **Compiler Optimization**: Uses REACT_COMPILER runtime (_c) for memoization and optimized rendering
 
 ## Exports
-- `Button` - Default exported React component for interactive buttons
+- `Button` - Default exported UI component for interactive buttons
 - `ButtonState` - Type representing the button's interactive state

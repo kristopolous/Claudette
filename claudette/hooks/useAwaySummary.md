@@ -2,7 +2,7 @@
 Generates "while you were away" summary messages after the terminal has been blurred for 5 minutes.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `../ink/terminal-focusstate` (getTerminalFocusState, subscribeTerminalFocus)
   - `./services/analytics/growthbook` (getFeatureValue_CACHED_MAY_BE_STALE)
@@ -22,4 +22,4 @@ Generates "while you were away" summary messages after the terminal has been blu
 6. Summary message is appended to messages via setMessages callback
 
 ## Exports
-- `useAwaySummary` - React hook that manages away summary generation
+- `useAwaySummary` - UI hook that manages away summary generation

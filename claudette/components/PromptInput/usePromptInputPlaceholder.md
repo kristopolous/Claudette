@@ -3,7 +3,7 @@ Generates dynamic placeholder text for the prompt input based on current context
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `react`
+- **External**: BUILDFLAGS, REACT
 - **Internal**: `hooks/useCommandQueue`, `state/AppState`, `utils/config`, `utils/exampleCommands`, `utils/messageQueueManager`, `proactive` (conditional)
 
 ## Logic

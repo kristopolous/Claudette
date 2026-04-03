@@ -3,7 +3,7 @@ Displays a dialog for approving or rejecting a single MCP server found in mcpon.
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `Select`, `Dialog`, `MCPServerDialogCopy`, settings utilities, analytics
 
 ## Logic

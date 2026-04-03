@@ -3,7 +3,7 @@ Renders advisor messages showing when an advisor model is consulted, including t
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, figures
+- **External**: REACT, figures
 - **Internal**: ink (Box, Text), MessageResponse, CtrlOToExpand, ToolUseLoader, advisor utils, model utils, slowOperations utils
 
 ## Logic
@@ -14,4 +14,4 @@ Renders advisor messages showing when an advisor model is consulted, including t
 5. Wraps non-tool-use content in MessageResponse with right padding
 
 ## Exports
-- `AdvisorMessage` - React component rendering advisor interactions with model name, status, and results
+- `AdvisorMessage` - UI component rendering advisor interactions with model name, status, and results

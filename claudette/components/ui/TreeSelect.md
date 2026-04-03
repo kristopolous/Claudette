@@ -3,7 +3,7 @@ Provides a generic component for selecting items from a hierarchical tree struct
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `KeyboardEvent` from `ink/events/keyboard-event`, `Box` from `ink`, `OptionWithDescription`, `Select` from `CustomSelect/select`
 
 ## Logic

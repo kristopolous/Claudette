@@ -3,7 +3,7 @@ Guides new users through initial setup including theme selection, authentication
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `src/services/analytics/index`, `../commands/terminalSetup/terminalSetup`, `../hooks/useExitOnCtrlCDWithKeybindings`, `../ink`, `../keybindings/useKeybinding`, `../utils/auth`, `../utils/authPortable`, `../utils/config`, `../utils/env`, `../utils/envUtils`, `../utils/preflightChecks`, `../utils/theme`, `./ApproveApiKey`, `./ConsoleOAuthFlow`, `./CustomSelect/select`, `./LogoV2/WelcomeV2`, `./PressEnterToContinue`, `./ThemePicker`, `./ui/OrderedList`
 
 ## Logic

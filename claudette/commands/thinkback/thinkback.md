@@ -10,7 +10,7 @@ Generates and displays a personalized "Year in Review" animation showcasing the 
 - `path` (`join`)
 
 ### Stdlib
-- `react` (including `useState`, `useEffect`, `useCallback`)
+- REACT (including `useState`, `useEffect`, `useCallback`)
 
 ### Internal
 - `CommandResultDisplay` type from `.././commands`
@@ -80,7 +80,7 @@ Helper exports: `getThinkbackSkillDir()`, `playAnimation()`, `ThinkbackInstaller
 ## Exports
 - `call` (async function) - Renders the think-back flow
 - `playAnimation` (async function) - Plays the generated animation
-- `ThinkbackFlow` (React component) - Main flow orchestrator
-- `ThinkbackInstaller` (React component) - Plugin/marketplace installer UI
-- `ThinkbackMenu` (React component) - Post-install action menu
+- `ThinkbackFlow` (UI component) - Main flow orchestrator
+- `ThinkbackInstaller` (UI component) - Plugin/marketplace installer UI
+- `ThinkbackMenu` (UI component) - Post-install action menu
 - Various constants and helper functions

@@ -5,12 +5,12 @@ Provides condensed logo component for terminal header display.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: hooks useMainLoopModel/useTerminalSize, ink stringWidth, ink, state AppState, effort, format, fullscreen, logoV2Utils, model model, OffscreenFreeze, LogoV2 AnimatedClawd/Clawd/GuestPassesUpsell/OverageCreditUpsell
 
 ## Logic
-1. `CondensedLogo` - React component for condensed logo
-2. Uses React compiler runtime (_c) for memoization
+1. `CondensedLogo` - UI component for condensed logo
+2. Uses REACT_COMPILER runtime (_c) for memoization
 3. Uses useTerminalSize for columns
 4. Uses useAppState for agent and effortValue
 5. Uses useMainLoopModel for model

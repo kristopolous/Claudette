@@ -3,7 +3,7 @@ Renders shutdown request and rejection messages between teammates with appropria
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), teammateMailbox utils
 
 ## Logic
@@ -13,7 +13,7 @@ Renders shutdown request and rejection messages between teammates with appropria
 4. getShutdownMessageSummary returns brief summary strings for inbox/queue display
 
 ## Exports
-- `ShutdownRequestDisplay` - React component rendering shutdown request with warning styling
-- `ShutdownRejectedDisplay` - React component rendering shutdown rejection with subtle styling
+- `ShutdownRequestDisplay` - UI component rendering shutdown request with warning styling
+- `ShutdownRejectedDisplay` - UI component rendering shutdown rejection with subtle styling
 - `tryRenderShutdownMessage` - Parses and renders shutdown messages, returns null if not applicable
 - `getShutdownMessageSummary` - Returns brief summary string for shutdown messages

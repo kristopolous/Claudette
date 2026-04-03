@@ -4,7 +4,7 @@
 Manages the skill improvement survey modal, handling suggestion display and user responses.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useRef`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `logEvent`, `useAppState`, `useSetAppState`, `Message`, `FeedbackSurveyResponse`, `SkillUpdate`, `applySkillImprovement`, `createSystemMessage`
 

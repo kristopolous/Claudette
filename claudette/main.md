@@ -5,7 +5,7 @@ Entry point that parses CLI arguments, initializes the application, and launches
 
 ## Imports
 - **Stdlib**: `fs`, `path`, `child_process`
-- **External**: `commander`, `chalk`, `react`, `lodash-es`
+- **External**: `commander`, `chalk`, REACT, `lodash-es`
 - **Internal**: `init` (entrypoints/init), `launchRepl` (replLauncher), `getCommands` (commands), `getTools` (tools), `fetchBootstrapData` (services/api/bootstrap)
 
 ## Logic

@@ -3,7 +3,7 @@ Sets a search highlight query that inverts matching visible text on screen.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useMemo)
+- **External**: REACT (useContext, useMemo)
 - **Internal**: `components/StdinContext`, `dom`, `instances`, `render-to-screen`
 
 ## Logic

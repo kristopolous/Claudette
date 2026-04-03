@@ -5,7 +5,7 @@ Provides overage credit upsell component and utilities.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, analytics, API overageCreditGrant, config, format, LogoV2 Feed
 
 ## Logic
@@ -29,7 +29,7 @@ Provides overage credit upsell component and utilities.
 18. `getUsageText` - gets usage text: "{amount} in extra usage for third-party apps · /extra-usage"
 19. `FEED_SUBTITLE` - "On us. Works on third-party apps · /extra-usage"
 20. `getFeedTitle` - gets feed title: "{amount} in extra usage"
-21. `OverageCreditUpsell` - React component for upsell
+21. `OverageCreditUpsell` - UI component for upsell
 22. Renders feed with title, subtitle
 23. `formatGrantAmount`, `getCachedOverageCreditGrant`, `refreshOverageCreditGrantCache` - overage credit functions
 24. `getGlobalConfig`, `saveGlobalConfig` - config functions

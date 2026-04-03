@@ -5,7 +5,7 @@ Provides TypeScript types for text input components including inline ghost text 
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `@anthropic-ai/sdk`, `crypto`, `react`
+- **External**: `@anthropic-ai/sdk`, `crypto`, REACT
 - **Internal**: agentSdkTypes, ink, config, imageResizer, textHighlighting, ids, message types
 
 ## Logic

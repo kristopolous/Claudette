@@ -3,7 +3,7 @@ Displays a confirmation dialog for removing a directory from the workspace.
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/CustomSelect/select`, `ink`, `Tool`, `utils/permissions/PermissionUpdate`, `design-system/Dialog`
 
 ## Logic

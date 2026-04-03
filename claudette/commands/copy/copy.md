@@ -3,7 +3,7 @@ Copies Claude's last response to clipboard, with options to select code blocks o
 
 ## Imports
 - **Stdlib**: `fs/promises`, `os`, `path`
-- **External**: `marked`, `react`
+- **External**: `marked`, REACT
 - **Internal**: Many components (Select, Byline, KeyboardShortcutHint, Pane), `setClipboard`, `logEvent`, `LocalJSXCommandCall`, `Message` types, `getGlobalConfig`, `saveGlobalConfig`, `extractTextContent`, `stripPromptXMLTags`, `countCharInString`
 
 ## Logic

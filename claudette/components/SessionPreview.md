@@ -3,7 +3,7 @@ Displays a preview of a session log with its messages, loading state, and keyboa
 
 ## Imports
 - **Stdlib**: `crypto` (UUID type)
-- **External**: `react` (useCallback), `react/compiler-runtime`
+- **External**: REACT (useCallback), REACT_COMPILER
 - **Internal**: `ink` (Box, Text), `keybindings/useKeybinding`, `tools` (getAllBaseTools), `types/logs` (LogOption), `utils/format` (formatRelativeTimeAgo), `utils/sessionStorage` (getSessionIdFromLog, isLiteLog, loadFullLog), `components/ConfigurableShortcutHint`, `components/design-system/Byline`, `components/design-system/KeyboardShortcutHint`, `components/design-system/LoadingState`, `components/Messages`
 
 ## Logic

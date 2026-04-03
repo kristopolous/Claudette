@@ -1,11 +1,11 @@
 # promptOverlayContext
 
 ## Purpose
-Provides React context for floating overlay content that escapes FullscreenLayout's bottom-slot clip.
+Provides UI context for floating overlay content that escapes FullscreenLayout's bottom-slot clip.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: SuggestionItem type
 
 ## Logic

@@ -3,7 +3,7 @@ Provides a React error boundary component that catches rendering errors and prev
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: none
 
 ## Logic

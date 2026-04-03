@@ -1,10 +1,10 @@
 # useCommandQueue
 
 ## Purpose
-React hook to subscribe to the unified command queue with frozen array returns.
+UI hook to subscribe to the unified command queue with frozen array returns.
 
 ## Imports
-- **Stdlib**: `useSyncExternalStore` from 'react'
+- **Stdlib**: `useSyncExternalStore` from 'REACT'
 - **External**: None
 - **Internal**: `QueuedCommand`, `getCommandQueueSnapshot`, `subscribeToCommandQueue`
 

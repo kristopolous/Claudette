@@ -105,7 +105,7 @@ The terminal interface built with Ink (React for CLI).
 | `ink/log-update.md` | Terminal content updates |
 | `ink/optimizer.md` | Render optimization |
 | `ink/render-node-to-output.md` | Node-to-output rendering |
-| `ink/hooks/` | React hooks for terminal (use-input, use-app, use-stdin, etc.) |
+| `ink/hooks/` | UI hooks for terminal (use-input, use-app, use-stdin, etc.) |
 | `components/App.md` | Root App component |
 | `components/Messages.md` | Message list rendering |
 | `components/Message.md` | Individual message dispatcher |
@@ -154,11 +154,11 @@ User-facing `/command` operations.
 
 | File | What it covers |
 |------|---------------|
-| `AppState.md` | React state management |
+| `AppState.md` | UI state management |
 | `state/store.md` | Core state store |
 | `state/selectors.md` | State selectors |
 | `state/onChangeAppState.md` | State change handlers |
-| `state/AppStateStore.md` | React state store |
+| `state/AppStateStore.md` | UI state store |
 | `state/teammateViewHelpers.md` | Teammate view helpers |
 | `bootstrap/state.md` | Session-level state (sessionId, cwd, userId) |
 | `context.md` | Context utilities |

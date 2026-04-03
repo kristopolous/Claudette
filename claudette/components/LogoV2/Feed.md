@@ -5,7 +5,7 @@ Provides feed component for rendering feed content with title, lines, and footer
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink stringWidth, ink, format
 
 ## Logic
@@ -21,8 +21,8 @@ Provides feed component for rendering feed content with title, lines, and footer
 10. Else: calculates maxTimestampWidth, then iterates lines to find max lineWidth
 11. lineWidth = stringWidth(line.text) + (timestampWidth > 0 ? timestampWidth + gap.length : 0)
 12. If footer: maxWidth = Math.max(maxWidth, stringWidth(footer))
-13. `Feed` - React component for feed display
-14. Uses React compiler runtime (_c) for memoization
+13. `Feed` - UI component for feed display
+14. Uses REACT_COMPILER runtime (_c) for memoization
 15. Renders title in bold with color="claude"
 16. Renders lines with timestamps if present
 17. Renders footer if present

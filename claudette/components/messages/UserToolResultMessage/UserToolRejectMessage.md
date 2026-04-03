@@ -2,7 +2,7 @@
 Renders a message for a rejected tool use, displaying the original input and rejection context.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `hooks/useTerminalSize`, `ink`, `Tool`, `types/message`, `utils/messages`, `components/FallbackToolUseRejectedMessage`
 
 ## Logic

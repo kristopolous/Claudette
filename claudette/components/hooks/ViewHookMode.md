@@ -3,7 +3,7 @@ Displays read-only details for a single configured hook, including event, matche
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, utils/hooks/hooksSettings, components/design-system/Dialog
 
 ## Logic

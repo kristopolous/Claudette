@@ -3,7 +3,7 @@ Handles keyboard and mouse scroll navigation for the fullscreen layout message s
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../context/notifications`, `../hooks/useCopyOnSelect`, `../ink/components/ScrollBox`, `../ink/hooks/use-selection`, `../ink/selection`, `../ink/terminal`, `../ink/termio/osc`, `../ink`, `../keybindings/useKeybinding`, `../utils/debug`
 
 ## Logic

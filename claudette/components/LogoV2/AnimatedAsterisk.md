@@ -5,7 +5,7 @@ Provides animated asterisk component with rainbow sweep effect.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: constants figures, ink, settings settings, Spinner utils
 
 ## Logic
@@ -13,7 +13,7 @@ Provides animated asterisk component with rainbow sweep effect.
 2. `SWEEP_COUNT` (2) - number of sweeps
 3. `TOTAL_ANIMATION_MS` - total animation duration (SWEEP_DURATION_MS * SWEEP_COUNT)
 4. `SETTLED_GREY` - settled grey color { r: 153, g: 153, b: 153 }
-5. `AnimatedAsterisk` - React component for animated asterisk
+5. `AnimatedAsterisk` - UI component for animated asterisk
 6. Default char: TEARDROP_ASTERISK
 7. Reads prefersReducedMotion once at mount - no useSettings() subscription
 8. Since that would re-render whenever settings change
@@ -31,7 +31,7 @@ Provides animated asterisk component with rainbow sweep effect.
 20. hue = (elapsed / SWEEP_DURATION_MS) * 360 % 360
 21. Renders Box with Text in hueToRgb(hue) color
 22. `TEARDROP_ASTERISK` - teardrop asterisk constant
-23. `useEffect`, `useRef`, `useState` - React hooks
+23. `useEffect`, `useRef`, `useState` - UI hooks
 24. `Box`, `Text`, `useAnimationFrame` - ink components/hooks
 25. `getInitialSettings` - gets initial settings
 26. `hueToRgb`, `toRGBColor` - color utilities

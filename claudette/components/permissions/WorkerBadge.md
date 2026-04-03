@@ -3,7 +3,7 @@ Renders a colored badge showing the worker's name for permission prompts to indi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `constants/figures`, `ink`, `utils/ink`
 
 ## Logic

@@ -3,7 +3,7 @@ Visualizes context usage breakdown including token counts per category, MCP tool
 
 ## Imports
 - **Stdlib**: None
-- **External**: BUILDFLAGS (feature), react, react/compiler-runtime
+- **External**: BUILDFLAGS (feature), REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text), utils/analyzeContext (ContextData), utils/contextSuggestions (generateContextSuggestions), utils/file (getDisplayPath), utils/format (formatTokens), utils/settings/constants (getSourceDisplayName, SettingSource), utils/stringUtils (plural), ContextSuggestions (ContextSuggestions)
 
 ## Logic
@@ -16,4 +16,4 @@ Visualizes context usage breakdown including token counts per category, MCP tool
 7. Helper function groupBySource organizes items by their source and sorts by token count descending
 
 ## Exports
-- `ContextVisualization` - React component displaying detailed context usage visualization
+- `ContextVisualization` - UI component displaying detailed context usage visualization

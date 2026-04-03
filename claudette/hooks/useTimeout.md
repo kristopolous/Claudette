@@ -3,7 +3,7 @@ Returns a boolean indicating whether a specified delay has elapsed, with an opti
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useEffect`, `useState`)
+- **External**: REACT (`useEffect`, `useState`)
 - **Internal**: None
 
 ## Logic

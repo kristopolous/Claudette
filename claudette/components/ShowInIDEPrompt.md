@@ -3,7 +3,7 @@ Prompts the user to confirm whether to open a file edit in an IDE, with support 
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `Box`, `Text`, `getCwd`, `isSupportedVSCodeTerminal`, `Select`, `Pane`
 
 ## Logic

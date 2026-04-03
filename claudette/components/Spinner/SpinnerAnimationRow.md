@@ -5,7 +5,7 @@ Provides spinner animation row component for 50ms-animated spinner portion.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: ink stringWidth, ink, tasks InProcessTeammateTask types, format, ink, theme, design-system Byline, Spinner GlimmerMessage/SpinnerGlyph/types/useStalledAnimation/utils
 
 ## Logic
@@ -28,7 +28,7 @@ Provides spinner animation row component for 50ms-animated spinner portion.
 17. Parent SpinnerWithVerb freed from 50ms render loop (~25x/turn instead of ~383x)
 18. Keeps outer Box shells, useAppState selectors, task filtering, tip/tree subtrees out of hot animation path
 19. `figures` - figures library
-20. `useMemo`, `useRef` - React hooks
+20. `useMemo`, `useRef` - UI hooks
 21. `stringWidth` - gets string width
 22. `useAnimationFrame` - animation frame hook
 23. `formatDuration`, `formatNumber` - format functions

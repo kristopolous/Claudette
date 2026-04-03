@@ -5,13 +5,13 @@ Provides background task component for displaying individual background task sta
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, tasks types, types utils, format, ink, stringUtils, constants figures, tasks RemoteSessionProgress/ShellProgress/taskStatusUtils
 
 ## Logic
 1. `Props` - { task, maxActivityWidth? }
-2. `BackgroundTask` - React component for background task display
-3. Uses React compiler runtime (_c) for memoization
+2. `BackgroundTask` - UI component for background task display
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. activityLimit = maxActivityWidth ?? 40
 5. Switches on task.type:
    - local_bash: shows command/description truncated to activityLimit, ShellProgress

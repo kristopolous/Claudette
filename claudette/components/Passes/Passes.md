@@ -5,13 +5,13 @@ Provides guest passes dialog component for referral program.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: commands, constants figures, hooks useExitOnCtrlCDWithKeybindings, ink termio/osc, ink, keybindings useKeybinding, analytics, API referral, oauth types, array, log, design-system Pane
 
 ## Logic
 1. `PassStatus` - { passNumber, isAvailable }
 2. `Props` - { onDone }
-3. `Passes` - React component for guest passes dialog
+3. `Passes` - UI component for guest passes dialog
 4. State: loading, passStatuses, isAvailable, referralLink, referrerReward
 5. Uses useExitOnCtrlCDWithKeybindings for exit on Ctrl+C
 6. `handleCancel` - handles cancel action

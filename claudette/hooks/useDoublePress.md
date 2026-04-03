@@ -4,7 +4,7 @@
 Detects double-press patterns within a timeout window (800ms), calling different callbacks for first vs second press.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useRef` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: None
 

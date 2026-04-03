@@ -5,13 +5,13 @@ Provides trust dialog component for project trust acceptance.
 
 ## Imports
 - **Stdlib**: `os`
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: analytics, bootstrap state, commands, hooks useExitOnCtrlCDWithKeybindings, ink, keybindings useKeybinding, MCP config, BashTool toolName, config, cwd, fsOperations, gracefulShutdown, CustomSelect index, permissions PermissionDialog, TrustDialog utils
 
 ## Logic
 1. `Props` - { onDone, commands? }
-2. `TrustDialog` - React component for trust dialog
-3. Uses React compiler runtime (_c) for memoization
+2. `TrustDialog` - UI component for trust dialog
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Gets project MCP servers via getMcpConfigsByScope("project")
 5. Checks hasMcpServers if project servers exist
 6. Gets hooks sources via getHooksSources

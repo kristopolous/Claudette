@@ -2,7 +2,7 @@
 Step component showing progress while creating GitHub Actions workflows and secrets.
 
 ## Imports
-- **External**: `react`, `figures`
+- **External**: REACT, `figures`
 - **Internal**: `Box`, `Text`
 
 ## Logic
@@ -15,4 +15,4 @@ Displays a vertical list of steps with status indicators: pending (.), completed
 Used during the 'creating' state.
 
 ## Exports
-- `CreatingStep` - React component (props: currentWorkflowInstallStep, secretExists, useExistingSecret, secretName, skipWorkflow?, selectedWorkflows)
+- `CreatingStep` - UI component (props: currentWorkflowInstallStep, secretExists, useExistingSecret, secretName, skipWorkflow?, selectedWorkflows)

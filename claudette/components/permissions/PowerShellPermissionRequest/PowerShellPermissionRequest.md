@@ -3,7 +3,7 @@ Renders a permission request dialog for PowerShell command execution, with suppo
 
 ## Imports
 - **Stdlib**: none
-- **External**: react
+- **External**: REACT
 - **Internal**: ink, keybindings/useKeybinding, services/analytics/growthbook, services/analytics/index, services/analytics/metadata, tools/PowerShellTool/destructiveCommandWarning, tools/PowerShellTool/PowerShellTool, tools/PowerShellTool/readOnlyValidation, utils/permissions/PermissionUpdateSchema, utils/powershell/staticPrefix, CustomSelect/select, permissions/hooks, permissions/PermissionDecisionDebugInfo, permissions/PermissionDialog, permissions/PermissionExplanation, permissions/PermissionRequest, permissions/PermissionRuleExplanation, permissions/useShellPermissionFeedback, permissions/utils, PowerShellPermissionRequest/powershellToolUseOptions
 
 ## Logic

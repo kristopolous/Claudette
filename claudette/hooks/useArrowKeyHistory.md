@@ -2,7 +2,7 @@
 Navigates command history with arrow keys, supporting mode filtering, batched disk reads, and draft preservation.
 
 ## Imports
-- **External**: `react` (useCallback, useRef, useState)
+- **External**: REACT (useCallback, useRef, useState)
 - **Internal**:
   - src/components/PromptInput/inputModes` (getModeFromInput)
   - src/context/notifications` (useNotifications)

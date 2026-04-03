@@ -3,7 +3,7 @@ Returns banner information for swarm, standalone agent, or agent CLI context to 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `state/AppState`, `state/selectors`, `tools/AgentTool/agentColorManager`, `utils/standaloneAgent`, `utils/swarm/backends/detection`, `utils/swarm/backends/registry`, `utils/swarm/constants`, `utils/teammate`, `utils/teammateContext`, `utils/theme`
 
 ## Logic

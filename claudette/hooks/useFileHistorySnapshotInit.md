@@ -2,7 +2,7 @@
 Restores file history from a previous session snapshot on first mount; ensures replay only occurs once.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `./utils/fileHistory` (FileHistorySnapshot type, FileHistoryState type, fileHistoryEnabled, fileHistoryRestoreStateFromLog)
 

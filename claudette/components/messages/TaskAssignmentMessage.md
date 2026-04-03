@@ -3,7 +3,7 @@ Renders task assignment messages between teammates with cyan-bordered display sh
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), teammateMailbox utils
 
 ## Logic
@@ -13,6 +13,6 @@ Renders task assignment messages between teammates with cyan-bordered display sh
 4. Wraps everything in a rounded cyan border box
 
 ## Exports
-- `TaskAssignmentDisplay` - React component rendering a task assignment with cyan border
+- `TaskAssignmentDisplay` - UI component rendering a task assignment with cyan border
 - `tryRenderTaskAssignmentMessage` - Parses raw content and renders if it matches task assignment format, returns null otherwise
 - `getTaskAssignmentSummary` - Returns a brief summary string for a task assignment, or null if not a task assignment

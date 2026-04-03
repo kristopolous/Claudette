@@ -3,7 +3,7 @@ Exits the REPL, handling background sessions and worktree prompts.
 
 ## Imports
 - **Stdlib**: `child_process` (spawnSync)
-- **External**: `lodash-es/sample`, `react`
+- **External**: `lodash-es/sample`, REACT
 - **Internal**: `ExitFlow` component, `LocalJSXCommandOnDone`, `isBgSession`, `gracefulShutdown`, `getCurrentWorktreeSession`
 
 ## Logic

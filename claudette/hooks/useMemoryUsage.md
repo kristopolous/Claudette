@@ -3,7 +3,7 @@ MonitorsNode process heap memory usage and reports when it exceeds high or criti
 
 ## Imports
 - **Stdlib**: None
-- **External**: `usehooks-ts` (`useInterval`), `react` (`useState`)
+- **External**: `usehooks-ts` (`useInterval`), REACT (`useState`)
 - **Internal**: None
 
 ## Logic
@@ -21,8 +21,8 @@ When status is `high` or `critical`, it returns an object with `heapUsed` (bytes
 
 ### Helpful Prompt Templates
 
-_No prompt templates found in this file. It is a React hook for memory monitoring._
+_No prompt templates found in this file. It is a UI hook for memory monitoring._
 
 ### Helpful Prompt Templates
 
-_No prompt templates found in this file. It is a React hook for memory monitoring._
+_No prompt templates found in this file. It is a UI hook for memory monitoring._

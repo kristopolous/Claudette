@@ -3,7 +3,7 @@ Displays the current sandbox configuration including filesystem read/write restr
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/sandbox/sandbox-adapter`
 
 ## Logic

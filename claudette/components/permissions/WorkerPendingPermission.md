@@ -3,7 +3,7 @@ Visual indicator shown on workers while waiting for the team lead to approve a p
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `utils/teammate`, `Spinner`, `WorkerBadge`
 
 ## Logic

@@ -2,7 +2,7 @@
 Provides a memoized hook to resolve a tool and its usage data from a tool use ID.
 
 ## Imports
-- **External**: `react`, `@anthropic-ai/sdk`
+- **External**: REACT, `@anthropic-ai/sdk`
 - **Internal**: `Tool`, `utils/messages`
 
 ## Logic

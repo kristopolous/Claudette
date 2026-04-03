@@ -2,7 +2,7 @@
 Provides an interactive UI component for selecting an agent background color.
 
 ## Imports
-- **External**: figures, react, react/compiler-runtime, useState
+- **External**: figures, REACT, REACT/compiler-runtime, useState
 - **Internal**: ink/events/keyboard-event (KeyboardEvent type), ink (Box, Text), tools/AgentTool/agentColorManager (AGENT_COLOR_TO_THEME_COLOR, AGENT_COLORS, AgentColorName type), utils/stringUtils (capitalize)
 
 ## Logic

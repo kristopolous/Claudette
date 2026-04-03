@@ -55,7 +55,7 @@ The main interactive terminal UI - renders messages, handles user input, display
 - Pass to appropriate handler (vim, shortcuts, etc.)
 
 ## Imports
-- **External**: react, ink, chalk, figures
+- **External**: REACT, ink, chalk, figures
 - **Internal**: query (query), handlePromptSubmit, createUserMessage, getTools
 
 ## Insights

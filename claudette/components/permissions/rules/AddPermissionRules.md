@@ -3,7 +3,7 @@ Provides a dialog for saving new permission rules to a chosen settings destinati
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/CustomSelect/select`, `ink`, `Tool`, `utils/permissions/PermissionRule`, `utils/permissions/PermissionUpdate`, `utils/permissions/permissionRuleParser`, `utils/permissions/shadowedRuleDetection`, `utils/sandbox/sandbox-adapter`, `utils/settings/constants`, `utils/settings/settings`, `utils/stringUtils`, `design-system/Dialog`, `PermissionRuleDescription`
 
 ## Logic

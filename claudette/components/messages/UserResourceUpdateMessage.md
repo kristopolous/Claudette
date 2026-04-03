@@ -3,7 +3,7 @@ Renders MCP resource and polling update notifications parsed from XML-formatted 
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text), figures constants
 
 ## Logic
@@ -13,4 +13,4 @@ Renders MCP resource and polling update notifications parsed from XML-formatted 
 4. Renders each update with a refresh arrow, server name, target, and optional reason
 
 ## Exports
-- `UserResourceUpdateMessage` - React component rendering MCP resource/polling updates
+- `UserResourceUpdateMessage` - UI component rendering MCP resource/polling updates

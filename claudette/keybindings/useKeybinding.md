@@ -1,9 +1,9 @@
 ## Purpose
-React hooks that register action handlers and respond to keybinding matches, with support for multi-keystroke chord sequences.
+UI hooks that register action handlers and respond to keybinding matches, with support for multi-keystroke chord sequences.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useEffect)
+- **External**: REACT (useCallback, useEffect)
 - **Internal**: `ink/events/input-event` (InputEvent), `ink` (Key, useInput), `KeybindingContext` (useOptionalKeybindingContext), `types` (KeybindingContextName)
 
 ## Logic

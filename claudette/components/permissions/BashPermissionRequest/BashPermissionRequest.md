@@ -3,7 +3,7 @@ Renders a permission request dialog for bash command execution, with support for
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime, figures
+- **External**: REACT, REACT/compiler-runtime, figures
 - **Internal**: ink, useKeybinding, useAppState, BashTool, BashTool/bashPermissions, BashTool/destructiveCommandWarning, BashTool/sedEditParser, BashTool/shouldUseSandbox, utils/bash/prefix, utils/permissions/bashClassifier, utils/permissions/PermissionUpdate, utils/sandbox/sandbox-adapter, CustomSelect/select, Spinner/ShimmerChar, Spinner/useShimmerAnimation, permissions/hooks, permissions/PermissionDecisionDebugInfo, permissions/PermissionDialog, permissions/PermissionExplanation, permissions/PermissionRequest, permissions/PermissionRuleExplanation, permissions/SedEditPermissionRequest, permissions/useShellPermissionFeedback, permissions/utils, BashPermissionRequest/bashToolUseOptions
 
 ## Logic

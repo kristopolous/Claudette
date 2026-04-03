@@ -3,7 +3,7 @@ Renders a permission request dialog for skill tool execution, with options for s
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: utils/log, bootstrap/state, ink, services/analytics/metadata, tools/SkillTool/constants, tools/SkillTool/SkillTool, utils/env, utils/permissions/permissionsLoader, utils/unaryLogging, permissions/hooks, permissions/PermissionDialog, permissions/PermissionPrompt, permissions/PermissionRequest, permissions/PermissionRuleExplanation
 
 ## Logic

@@ -2,7 +2,7 @@
 Command to display and manage privacy settings, specifically the "Help improve Claude" (grove) feature.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: 
   - `.././components/grove/Grove` (GroveDecision, GroveDialog, PrivacySettingsDialog)
   - `.././services/analytics/index` (logEvent, AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS)

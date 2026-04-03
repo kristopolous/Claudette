@@ -15,4 +15,4 @@ View uncommitted changes and per-turn diffs in an interactive dialog.
 6. Useful for understanding what code was modified when
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning DiffDialog React component or Promise to it
+- `call` - async LocalJSXCommandCall returning DiffDialog UI component or Promise to it

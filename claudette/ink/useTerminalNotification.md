@@ -1,5 +1,5 @@
 ## Purpose
-Provides React hooks for sending notifications and progress reports to compatible terminals through various protocols (iTerm2, Kitty, Ghostty, bell).
+Provides UI hooks for sending notifications and progress reports to compatible terminals through various protocols (iTerm2, Kitty, Ghostty, bell).
 
 ## Imports
 - **Stdlib**: None specified
@@ -30,7 +30,7 @@ Provides React hooks for sending notifications and progress reports to compatibl
 6. Progress function handles different states (completed, error, indeterminate, running, null) with appropriate OSC sequences
 
 ## Exports
-- `TerminalWriteContext` - React context for providing writeRaw function
-- `TerminalWriteProvider` - React component that provides the writeRaw function
+- `TerminalWriteContext` - UI context for providing writeRaw function
+- `TerminalWriteProvider` - UI component that provides the writeRaw function
 - `TerminalNotification` - Type defining the notification interface
 - `useTerminalNotification` - Hook that returns terminal notification functions

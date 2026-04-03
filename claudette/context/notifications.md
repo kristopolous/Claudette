@@ -1,11 +1,11 @@
 # notifications
 
 ## Purpose
-Provides React hook and context for managing a notification queue with priorities, timeouts, and folding.
+Provides UI hook and context for managing a notification queue with priorities, timeouts, and folding.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: AppState store, theme types
 
 ## Logic

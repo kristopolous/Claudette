@@ -3,7 +3,7 @@ Renders text input with syntax highlighting and shimmer animation support for sp
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `utils/textHighlighting`, `Spinner/ShimmerChar`
 
 ## Logic

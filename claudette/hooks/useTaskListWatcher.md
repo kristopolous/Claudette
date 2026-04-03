@@ -4,7 +4,7 @@
 Watches a task list directory and automatically picks up open, unowned tasks to work on.
 
 ## Imports
-- **Stdlib**: `useEffect`, `useRef` from 'react'
+- **Stdlib**: `useEffect`, `useRef` from 'REACT'
 - **External**: None
 - **Internal**: `FSWatcher`, `watch` from 'fs', `logForDebugging`, `claimTask`, `DEFAULT_TASKS_MODE_TASK_LIST_ID`, `ensureTasksDir`, `getTasksDir`, `listTasks`, `Task`, `updateTask`
 

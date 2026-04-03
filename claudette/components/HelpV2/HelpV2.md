@@ -3,7 +3,7 @@ Renders a tabbed help dialog displaying general information, built-in commands, 
 
 ## Imports
 - **Stdlib**: Math
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: hooks/useExitOnCtrlCDWithKeybindings, keybindings/useShortcutDisplay, commands, context/modalContext, hooks/useTerminalSize, ink, keybindings/useKeybinding, components/design-system/Pane, components/design-system/Tabs, components/HelpV2/Commands, components/HelpV2/General
 
 ## Logic
@@ -14,4 +14,4 @@ Renders a tabbed help dialog displaying general information, built-in commands, 
 5. Renders a Tabs component inside a Pane with a documentation link and exit confirmation hint
 
 ## Exports
-- `HelpV2` - React component that renders the full help dialog with tabbed navigation
+- `HelpV2` - UI component that renders the full help dialog with tabbed navigation

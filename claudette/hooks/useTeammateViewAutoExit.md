@@ -4,7 +4,7 @@
 Automatically exits teammate viewing mode when the viewed teammate task is killed, fails, or encounters an error.
 
 ## Imports
-- **Stdlib**: `useEffect` from 'react'
+- **Stdlib**: `useEffect` from 'REACT'
 - **External**: None
 - **Internal**: `useAppState`, `useSetAppState`, `exitTeammateView`, `isInProcessTeammateTask`
 

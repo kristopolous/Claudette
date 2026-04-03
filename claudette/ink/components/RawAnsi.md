@@ -5,7 +5,7 @@ Provides RawAnsi component for bypassing ANSI roundtrip for terminal-ready conte
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: (none)
 
 ## Logic

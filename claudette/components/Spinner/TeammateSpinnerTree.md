@@ -5,13 +5,13 @@ Provides teammate spinner tree component for displaying teammate status.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: ink, state AppState, tasks InProcessTeammateTask, format, Spinner TeammateSpinnerLine/teammateSelectHint
 
 ## Logic
 1. `Props` - { selectedIndex?, isInSelectionMode?, allIdle?, leaderVerb?, leaderTokenCount?, leaderIdleText? }
-2. `TeammateSpinnerTree` - React component for teammate spinner tree
-3. Uses React compiler runtime (_c) for memoization
+2. `TeammateSpinnerTree` - UI component for teammate spinner tree
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Gets tasks, viewingAgentTaskId, showTeammateMessagePreview via useAppState
 5. Gets running teammates sorted via getRunningTeammatesSorted
 6. Returns null if no teammate tasks

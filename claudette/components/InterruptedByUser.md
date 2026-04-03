@@ -3,7 +3,7 @@ Renders a dimmed interruption indicator message when the user interrupts executi
 
 ## Imports
 - **Stdlib**: none
-- **External**: react (React)
+- **External**: REACT (React)
 - **Internal**: ../ink (Text)
 
 ## Logic

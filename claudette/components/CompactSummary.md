@@ -3,7 +3,7 @@ Renders a compact summary display for summarized conversation messages, showing 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `constants/figures` (BLACK_CIRCLE), `ink` (Box, Text), `screens/REPL` (Screen type), `types/message` (NormalizedUserMessage), `utils/messages` (getUserMessageText), `components/ConfigurableShortcutHint`, `components/MessageResponse`
 
 ## Logic

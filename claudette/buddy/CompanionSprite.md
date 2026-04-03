@@ -5,7 +5,7 @@ Renders the companion (buddy) sprite in the terminal UI with idle animation, spe
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, BUILDFLAGS, `figures`, `react`
+- **External**: REACT_COMPILER, BUILDFLAGS, `figures`, REACT
 - **Internal**: terminalSize, stringWidth, ink components, AppState, config, fullscreen, theme, companion, sprites, types
 
 ## Logic
@@ -18,5 +18,5 @@ Renders the companion (buddy) sprite in the terminal UI with idle animation, spe
 7. Respects fullscreen mode and terminal size changes
 
 ## Exports
-- `SpeechBubble` - React component rendering speech bubble with tail and fade
+- `SpeechBubble` - UI component rendering speech bubble with tail and fade
 - (Component continues with sprite rendering logic)

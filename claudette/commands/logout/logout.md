@@ -3,7 +3,7 @@ Performs user logout by clearing credentials, secure storage, and related caches
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `clearTrustedDeviceTokenCache`, `Text` (ink), `refreshGrowthBookAfterAuthChange`, `getGroveNoticeConfig`, `getGroveSettings`, `clearPolicyLimitsCache`, `clearRemoteManagedSettingsCache`, `getClaudeAIOAuthTokens`, `removeApiKey`, `clearBetasCaches`, `saveGlobalConfig`, `gracefulShutdownSync`, `getSecureStorage`, `clearToolSchemaCache`, `resetUserCache`
 
 ## Logic

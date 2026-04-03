@@ -3,7 +3,7 @@ A complex UI hook that implements the business logic and pacing for showing feed
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `hooks/useDynamicConfig`, `services/analytics`, `services/policyLimits`, `types/message`, `utils/config`, `utils/envUtils`, `utils/messages`, `utils/model/model`, `utils/settings/settings`, `utils/telemetry/events`, `components/FeedbackSurvey/submitTranscriptShare`, `components/FeedbackSurvey/TranscriptSharePrompt`, `components/FeedbackSurvey/useSurveyState`, `components/FeedbackSurvey/utils`
 
 ## Logic

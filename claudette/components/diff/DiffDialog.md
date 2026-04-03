@@ -3,7 +3,7 @@ Dialog component that displays git diffs, supporting both current uncommitted ch
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react/compiler-runtime`, `diff` (StructuredPatchHunk type), `react`
+- **External**: REACT_COMPILER, `diff` (StructuredPatchHunk type), REACT
 - **Internal**: `../../commands`, `.././context/overlayContext`, `.././hooks/useDiffData`, `.././hooks/useTurnDiffs`, `.././ink`, `.././keybindings/useKeybinding`, `.././keybindings/useShortcutDisplay`, `.././types/message`, `.././utils/stringUtils`, `../designsystem/Byline`, `../design-system/Dialog`, `./DiffDetailView`, `./DiffFileList`
 
 ## Logic

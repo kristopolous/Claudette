@@ -2,7 +2,7 @@
 Toggles Fast Mode (research preview using Opus46 model) with interactive picker or shortcut arguments.
 
 ## Imports
-- **External**: `react`, `chalk`
+- **External**: REACT, `chalk`
 - **Internal**: Many: `CommandResultDisplay`, `LocalJSXCommandContext`, `Dialog`, `FastIcon`, `Box`, `Link`, `Text`, `useKeybindings`, `logEvent`, `useAppState`, `useSetAppState`, fastMode utils (`clearFastModeCooldown`, `getFastModeModel`, etc.), `formatDuration`, `formatModelPricing`, `getOpus46CostTier`, `updateSettingsForSource`
 
 ## Logic
@@ -10,5 +10,5 @@ Provides a command to enable/disable Fast Mode. `applyFastMode` updates global s
 
 ## Exports
 - `call` - Main JSX command function
-- `FastModePicker` - React component for the toggle dialog
+- `FastModePicker` - UI component for the toggle dialog
 - Internal: `applyFastMode`, `handleFastModeShortcut`

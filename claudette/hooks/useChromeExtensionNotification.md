@@ -2,7 +2,7 @@
 Shows startup notification about Claude in Chrome extension availability and subscription requirements.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**:
   - `./ink` (Text)
   - `./utils/auth` (isClaudeAISubscriber)

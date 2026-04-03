@@ -3,7 +3,7 @@ Dialog shown when settings files have validation errors, allowing users to conti
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ../ink (Text), ./utils/settings/validation (ValidationError), ./CustomSelect/index (Select), ./design-system/Dialog (Dialog), ./ValidationErrorsList (ValidationErrorsList)
 
 ## Logic

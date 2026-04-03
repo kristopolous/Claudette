@@ -5,7 +5,7 @@ Central entry point for processing all user input — handles immediate commands
 
 ## Imports
 - **Stdlib**: `crypto` (UUID)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../commands`, `../components/MessageSelector`, `../components/Spinner/types`, `../constants/querySource`, `../history`, `../hooks/useCanUseTool`, `../hooks/useIdeSelection`, `../state/AppState`, `../Tool`, `../types/command`, `../types/message`, `../types/textInputTypes`, `./abortController`, `./config`, `./debug`, `./effort`, `./fileHistory`, `./gracefulShutdown`, `./messageQueueManager`, `./model/model`, `./processUserInput/processUserInput`, `./QueryGuard`, `./queryProfiler`, `./workloadContext`, `../services/analytics`
 
 ## Logic

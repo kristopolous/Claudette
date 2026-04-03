@@ -3,7 +3,7 @@ Manages and displays notifications in the prompt footer area including IDE statu
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, REACT, REACT_COMPILER
 - **Internal**: `context/notifications`, `context/voice`, `services/analytics`, `state/AppState`, `hooks/*`, `ink`, `services/claudeAiLimitsHook`, `services/compact/autoCompact`, `services/mcp`, `utils/*`, and sibling components (AutoUpdaterWrapper, ConfigurableShortcutHint, IdeStatusIndicator, MemoryUsageIndicator, SentryErrorBoundary, TokenWarning, SandboxPromptFooterHint, VoiceIndicator)
 
 ## Logic

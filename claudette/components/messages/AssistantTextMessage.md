@@ -3,7 +3,7 @@ Renders assistant text responses with special handling for API errors, rate limi
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text, NoSelect), Markdown, MessageResponse, RateLimitMessage, InterruptedByUser, CtrlOToExpand, messageActions, compact, rateLimitMessages, api/errors, messages utils, model utils, secureStorage utils
 
 ## Logic
@@ -14,4 +14,4 @@ Renders assistant text responses with special handling for API errors, rate limi
 5. For normal text, renders as Markdown with optional dot indicator and selection-aware background
 
 ## Exports
-- `AssistantTextMessage` - React component that renders assistant text with comprehensive error message handling
+- `AssistantTextMessage` - UI component that renders assistant text with comprehensive error message handling

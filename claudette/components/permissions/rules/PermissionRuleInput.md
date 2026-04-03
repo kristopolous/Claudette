@@ -3,7 +3,7 @@ Provides a text input for entering a new permission rule with validation and exa
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `react`
+- **External**: `figures`, REACT
 - **Internal**: `components/TextInput`, `hooks/useExitOnCtrlCDWithKeybindings`, `hooks/useTerminalSize`, `ink`, `keybindings/useKeybinding`, `tools/BashTool/BashTool`, `tools/WebFetchTool/WebFetchTool`, `utils/permissions/PermissionRule`, `utils/permissions/permissionRuleParser`
 
 ## Logic

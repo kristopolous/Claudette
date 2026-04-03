@@ -3,7 +3,7 @@ Renders a permission request dialog for file edit operations using str_replace, 
 
 ## Imports
 - **Stdlib**: path
-- **External**: react, react/compiler-runtime, zod/v4
+- **External**: REACT, REACT/compiler-runtime, zod/v4
 - **Internal**: components/FileEditToolDiff, utils/cwd, ink, tools/FileEditTool, permissions/FilePermissionDialog, permissions/FilePermissionDialog/ideDiffConfig, permissions/PermissionRequest
 
 ## Logic

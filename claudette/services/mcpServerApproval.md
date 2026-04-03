@@ -5,7 +5,7 @@ Shows MCP server approval dialogs for pending project servers using existing Ink
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: MCP components, ink Root, keybindings, state, MCP config/utils
 
 ## Logic

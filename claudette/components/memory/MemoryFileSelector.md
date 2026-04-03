@@ -5,7 +5,7 @@ Provides memory file selector component for choosing memory files.
 
 ## Imports
 - **Stdlib**: `fs/promises`, `path`
-- **External**: BUILDFLAGS, `chalk`, `react`, `react/compiler-runtime`
+- **External**: BUILDFLAGS, `chalk`, REACT, REACT_COMPILER
 - **Internal**: bootstrap state, hooks useExitOnCtrlCDWithKeybindings, ink, keybindings useKeybinding, memdir paths, analytics, autoDream config/consolidationLock, state AppState, AgentTool agentMemory, browser, claudemd, envUtils, file, format, memory versions, settings settings, CustomSelect index, design-system ListItem
 
 ## Logic
@@ -13,8 +13,8 @@ Provides memory file selector component for choosing memory files.
 2. `lastSelectedPath` - remembers last selected path
 3. `OPEN_FOLDER_PREFIX` - '__open_folder__'
 4. `Props` - { onSelect, onCancel }
-5. `MemoryFileSelector` - React component for memory file selection
-6. Uses React compiler runtime (_c) for memoization
+5. `MemoryFileSelector` - UI component for memory file selection
+6. Uses REACT_COMPILER runtime (_c) for memoization
 7. Gets existing memory files via use(getMemoryFiles())
 8. Creates userMemoryPath (~/.claude/CLAUDE.md) and projectMemoryPath (cwd/CLAUDE.md)
 9. Checks hasUserMemory and hasProjectMemory

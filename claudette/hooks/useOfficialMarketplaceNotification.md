@@ -3,7 +3,7 @@ Runs on application startup to ensure the official Anthropic marketplace plugin 
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (none directly), `ink` (`Text`)
+- **External**: REACT (none directly), `ink` (`Text`)
 - **Internal**:
   - `context/notifications` - `Notification` type
   - `utils/debug` - `logForDebugging`

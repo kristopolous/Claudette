@@ -5,7 +5,7 @@ Provides hook for handling transition to red when tokens stop flowing.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: (none)
 
 ## Logic

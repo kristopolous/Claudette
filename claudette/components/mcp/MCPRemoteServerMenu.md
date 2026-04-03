@@ -3,7 +3,7 @@ Provides a menu interface for managing remote MCP servers (SSE, HTTP, or claude.
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `react` (useEffect, useRef, useState)
+- **External**: `figures`, REACT (useEffect, useRef, useState)
 - **Internal**: `services/analytics/index` (logEvent), `commands` (CommandResultDisplay), `constants/oauth` (getOauthConfig), `hooks/useExitOnCtrlCDWithKeybindings`, `hooks/useTerminalSize`, `ink/termio/osc` (setClipboard), `ink` (Box, color, Link, Text, useInput, useTheme), `keybindings/useKeybinding`, `services/mcp/auth` (AuthenticationCancelledError, performMCPOAuthFlow, revokeServerTokens), `services/mcp/client` (clearServerCache), `services/mcp/MCPConnectionManager` (useMcpReconnect, useMcpToggleEnabled), `services/mcp/utils` (describeMcpConfigFilePath, excludeCommandsByServer, excludeResourcesByServer, excludeToolsByServer, filterMcpPromptsByServer), `state/AppState` (useAppState, useSetAppState), `utils/auth` (getOauthAccountInfo), `utils/browser` (openBrowser), `utils/errors` (errorMessage), `utils/log` (logMCPDebug), `utils/stringUtils` (capitalize), `ConfigurableShortcutHint`, `CustomSelect/index` (Select), `design-system/Byline` (Byline), `design-system/KeyboardShortcutHint` (KeyboardShortcutHint), `Spinner`, `TextInput`, `CapabilitiesSection`, `types` (ClaudeAIServerInfo, HTTPServerInfo, SSEServerInfo), `utils/reconnectHelpers` (handleReconnectError, handleReconnectResult)
 
 ## Logic

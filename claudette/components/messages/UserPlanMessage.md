@@ -3,7 +3,7 @@ Renders a user's implementation plan in a bordered box with plan-mode styling.
 
 ## Imports
 - **Stdlib**: None
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text), Markdown
 
 ## Logic
@@ -12,4 +12,4 @@ Renders a user's implementation plan in a bordered box with plan-mode styling.
 3. Optionally adds top margin based on the addMargin prop
 
 ## Exports
-- `UserPlanMessage` - React component that renders a user's plan content with plan-mode visual styling
+- `UserPlanMessage` - UI component that renders a user's plan content with plan-mode visual styling

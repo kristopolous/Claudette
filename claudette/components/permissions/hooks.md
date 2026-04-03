@@ -3,7 +3,7 @@ Provides hooks and utilities for logging permission request events to analytics 
 
 ## Imports
 - **Stdlib**: none
-- **External**: BUILDFLAGS, `react`
+- **External**: BUILDFLAGS, REACT
 - **Internal**: `services/analytics`, `services/analytics/metadata`, `tools/BashTool`, `utils/bash/commands`, `utils/permissions/PermissionResult`, `utils/permissions/PermissionUpdate`, `utils/permissions/permissionRuleParser`, `utils/sandbox/sandbox-adapter`, `state/AppState`, `utils/env`, `utils/slowOperations`, `utils/unaryLogging`, `PermissionRequest`
 
 ## Logic

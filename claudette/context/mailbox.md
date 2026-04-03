@@ -1,11 +1,11 @@
 # mailbox
 
 ## Purpose
-Provides React context for Mailbox utility with memoized singleton instance.
+Provides UI context for Mailbox utility with memoized singleton instance.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: Mailbox utility class
 
 ## Logic
@@ -17,6 +17,6 @@ Provides React context for Mailbox utility with memoized singleton instance.
 6. Enables message passing between components via mailbox pattern
 
 ## Exports
-- `MailboxContext` - React context for Mailbox
+- `MailboxContext` - UI context for Mailbox
 - `MailboxProvider` - provider component with memoized instance
 - `useMailbox` - hook to access Mailbox instance

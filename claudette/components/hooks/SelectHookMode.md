@@ -3,7 +3,7 @@ Displays a read-only list of configured hooks for a given event and matcher pair
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: entrypoints/agentSdkTypes, utils/hooks/hooksConfigManager, utils/hooks/hooksSettings, ink, components/CustomSelect/select, components/design-system/Dialog
 
 ## Logic

@@ -3,7 +3,7 @@ Generates descriptive labels for the "always allow" option in shell permission d
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `bootstrap/state`, `ink`, `utils/permissions/PermissionUpdateSchema`, `utils/permissions/shellRuleMatching`
 
 ## Logic

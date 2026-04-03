@@ -5,7 +5,7 @@ Opens the Settings UI with the "Status" tab active, displaying Claudette status 
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `LocalJSXCommandContext` type from `.././commands`

@@ -1,9 +1,9 @@
 ## Purpose
-React hook that returns the display text for a configured shortcut action, falling back to a default value when the keybinding context is unavailable.
+UI hook that returns the display text for a configured shortcut action, falling back to a default value when the keybinding context is unavailable.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**: `services/analytics/index` (logEvent, AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS), `KeybindingContext` (useOptionalKeybindingContext), `types` (KeybindingContextName)
 
 ## Logic

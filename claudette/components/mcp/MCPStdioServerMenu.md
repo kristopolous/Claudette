@@ -3,7 +3,7 @@ Provides a menu interface for managing stdio-based MCP servers including reconne
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `react` (useState)
+- **External**: `figures`, REACT (useState)
 - **Internal**: `commands` (CommandResultDisplay), `hooks/useExitOnCtrlCDWithKeybindings`, `ink` (Box, color, Text, useTheme), `services/mcp/config` (getMcpConfigByName), `services/mcp/MCPConnectionManager` (useMcpReconnect, useMcpToggleEnabled), `services/mcp/utils` (describeMcpConfigFilePath, filterMcpPromptsByServer), `state/AppState` (useAppState), `utils/errors` (errorMessage), `utils/stringUtils` (capitalize), `ConfigurableShortcutHint`, `CustomSelect/index` (Select), `design-system/Byline` (Byline), `design-system/KeyboardShortcutHint` (KeyboardShortcutHint), `Spinner`, `CapabilitiesSection`, `types` (StdioServerInfo), `utils/reconnectHelpers` (handleReconnectError, handleReconnectResult)
 
 ## Logic

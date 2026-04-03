@@ -2,7 +2,7 @@
 Shows current context usage as a colored grid in interactive mode.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ContextVisualization` component, `microcompactMessages`, `LocalJSXCommandContext`, `Message` type, `analyzeContextUsage`, `getMessagesAfterCompactBoundary`, `renderToAnsiString`
 
 ## Logic

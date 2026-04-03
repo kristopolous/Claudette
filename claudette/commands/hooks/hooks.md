@@ -2,7 +2,7 @@
 Displays hook configuration menu for tool events.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `HooksConfigMenu` component, `logEvent` (analytics), `getTools`, `LocalJSXCommandCall` type
 
 ## Logic

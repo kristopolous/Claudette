@@ -3,7 +3,7 @@ Renders a keyboard shortcut hint string like "ctrl+o to expand" or "(tab to togg
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `Text`
 
 ## Logic

@@ -3,7 +3,7 @@ Renders the assistant's thinking blocks in terminal output, with support for com
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text), CtrlOToExpand, Markdown
 
 ## Logic
@@ -13,4 +13,4 @@ Renders the assistant's thinking blocks in terminal output, with support for com
 4. In verbose or transcript mode, renders the full thinking content as dimmed Markdown with a "∴ Thinking…" label
 
 ## Exports
-- `AssistantThinkingMessage` - React component that renders thinking blocks with conditional truncation based on verbose/transcript mode
+- `AssistantThinkingMessage` - UI component that renders thinking blocks with conditional truncation based on verbose/transcript mode

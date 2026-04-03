@@ -5,7 +5,7 @@ Provides shell detail dialog component for viewing shell task output.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: types utils, commands, hooks useTerminalSize, ink events keyboard-event, ink, keybindings useKeybinding, tasks LocalShellTask guards, format, fsOperations, task diskOutput, design-system Byline/Dialog/KeyboardShortcutHint
 
 ## Logic
@@ -16,8 +16,8 @@ Provides shell detail dialog component for viewing shell task output.
 5. Uses getTaskOutputPath to get output file path
 6. Uses tailFile to read last SHELL_DETAIL_TAIL_BYTES
 7. Returns { content, bytesTotal } or { content: '', bytesTotal: 0 } on error
-8. `ShellDetailDialog` - React component for shell detail dialog
-9. Uses React compiler runtime (_c) for memoization
+8. `ShellDetailDialog` - UI component for shell detail dialog
+9. Uses REACT_COMPILER runtime (_c) for memoization
 10. Uses useTerminalSize for columns
 11. Uses useState for outputPromise
 12. Uses useDeferredValue for deferredOutputPromise

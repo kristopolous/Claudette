@@ -5,7 +5,7 @@ Provides a configuration interface for Claude in Chrome (Beta). Allows users to 
 
 ## Imports
 ### Stdlib
-- `react` (including `useState`, compiler-runtime)
+- REACT (including `useState`, compiler-runtime)
 
 ### Internal
 - `OptionWithDescription` type and `Select` component from `.././components/CustomSelect/select`
@@ -27,7 +27,7 @@ The `call` async function:
 3. Determines if running in WSL via `env.isWslEnvironment()`.
 4. Renders the `ClaudeInChromeMenu` component with these status values.
 
-`ClaudeInChromeMenu` (memoized React component):
+`ClaudeInChromeMenu` (memoized UI component):
 - Displays warnings for WSL and non-subscriber users.
 - Shows current status (enabled/disabled, extension installed/detected).
 - Builds a list of options based on state:

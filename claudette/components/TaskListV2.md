@@ -3,7 +3,7 @@ Displays a list of tasks with status icons, progress indicators, teammate activi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `hooks/useTerminalSize`, `ink/stringWidth`, `ink`, `state/AppState`, `tasks/InProcessTeammateTask/types`, `tools/AgentTool/agentColorManager`, `utils/agentSwarmsEnabled`, `utils/array`, `utils/collapseReadSearch`, `utils/format`, `utils/tasks`, `utils/theme`, `components/design-system/ThemedText`
 
 ## Logic
@@ -15,4 +15,4 @@ Displays a list of tasks with status icons, progress indicators, teammate activi
 6. Displays a summary count in standalone mode
 
 ## Exports
-- `TaskListV2` - React component that renders a prioritized and optionally truncated task list with teammate activity and dependency information
+- `TaskListV2` - UI component that renders a prioritized and optionally truncated task list with teammate activity and dependency information

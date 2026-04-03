@@ -3,7 +3,7 @@ Handles the OAuth authentication flow for logging into the inference provider, s
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: services/analytics/index (logEvent), cli/handlers/auth (installOAuthTokens), hooks/useTerminalSize (useTerminalSize), ink/termio/osc (setClipboard), ink/useTerminalNotification (useTerminalNotification), ink (Box, Link, Text), keybindings/useKeybinding (useKeybinding), services/api/errorUtils (getSSLErrorHint), services/notifier (sendNotification), services/oauth/index (OAuthService), utils/auth (getOauthAccountInfo, validateForceLoginOrg), utils/log (logError), utils/settings/settings (getSettings_DEPRECATED), CustomSelect/select (Select), design-system/KeyboardShortcutHint (KeyboardShortcutHint), Spinner (Spinner), TextInput (TextInput)
 
 ## Logic
@@ -16,4 +16,4 @@ Handles the OAuth authentication flow for logging into the inference provider, s
 7. OAuthStatusMessage sub-component renders UI for each state in the OAuth flow
 
 ## Exports
-- `ConsoleOAuthFlow` - React component managing the complete OAuth login flow
+- `ConsoleOAuthFlow` - UI component managing the complete OAuth login flow

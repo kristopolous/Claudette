@@ -3,7 +3,7 @@ Displays a multi-select dialog for approving or rejecting multiple MCP servers f
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `lodash-es/partition`
+- **External**: REACT, `lodash-es/partition`
 - **Internal**: `ink`, `SelectMulti`, `Dialog`, `Byline`, `KeyboardShortcutHint`, `ConfigurableShortcutHint`, `MCPServerDialogCopy`, settings utilities, analytics
 
 ## Logic

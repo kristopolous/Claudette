@@ -3,7 +3,7 @@ ANT-ONLY: Banner component intended to prompt users to report issues via /issue 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `constants/figures`, `ink`
 
 ## Logic

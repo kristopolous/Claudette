@@ -5,15 +5,15 @@ Provides dream detail dialog component for viewing dream task details.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: types utils, hooks useElapsedTime, ink events keyboard-event, ink, keybindings useKeybinding, tasks DreamTask, stringUtils, design-system Byline/Dialog/KeyboardShortcutHint
 
 ## Logic
 1. `Props` - { task, onDone, onBack?, onKill? }
 2. `VISIBLE_TURNS` (6) - number of recent turns to render
 3. Earlier turns collapse to a count
-4. `DreamDetailDialog` - React component for dream detail dialog
-5. Uses React compiler runtime (_c) for memoization
+4. `DreamDetailDialog` - UI component for dream detail dialog
+5. Uses REACT_COMPILER runtime (_c) for memoization
 6. Uses useElapsedTime for elapsed time calculation
 7. Uses useKeybindings for keyboard shortcuts
 8. Keybindings: 'confirm:yes' → onDone

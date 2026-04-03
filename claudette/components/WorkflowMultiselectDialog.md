@@ -3,7 +3,7 @@ Dialog for selecting multiple GitHub workflows to install, with validation that 
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ../commands/install-github-app/types (Workflow), ./hooks/useExitOnCtrlCDWithKeybindings (ExitState), ./ink (Box, Link, Text), /ConfigurableShortcutHint (ConfigurableShortcutHint), /CustomSelect/SelectMulti (SelectMulti), ./design-system/Byline (Byline), ./design-system/Dialog (Dialog), ./design-system/KeyboardShortcutHint (KeyboardShortcutHint)
 
 ## Logic

@@ -2,7 +2,7 @@
 Surfaces plugin installation prompts from `<claude-code-hint />` tags; handles user responses with show-once semantics and analytics.
 
 ## Imports
-- **External**: `react` (useSyncExternalStore, useEffect, useCallback)
+- **External**: REACT (useSyncExternalStore, useEffect, useCallback)
 - **Internal**:
   - `./context/notifications` (useNotifications)
   - `./services/analytics/index` (logEvent, AnalyticsMetadata types)

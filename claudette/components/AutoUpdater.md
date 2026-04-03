@@ -3,7 +3,7 @@ A component that manages the automatic checking, downloading, and installation o
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `usehooks-ts`
+- **External**: REACT, `usehooks-ts`
 - **Internal**: `ink` (Box, Text), `hooks/useUpdateNotification`, `services/analytics`, `utils/autoUpdater`, `utils/config`, `utils/debug`, `utils/doctorDiagnostic`, `utils/localInstaller`, `utils/nativeInstaller`, `utils/semver`, `utils/settings/settings` (getInitialSettings)
 
 ## Logic

@@ -8,7 +8,7 @@ Displays the remote session URL and a QR code when Claudette is running in remot
 - `qrcode` (`toString` function to generate QR code string)
 
 ### Stdlib
-- `react` (including `useState`, `useEffect`)
+- REACT (including `useState`, `useEffect`)
 
 ### Internal
 - `Pane` from `../../components/designsystem/Pane`

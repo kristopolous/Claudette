@@ -3,7 +3,7 @@ A list item component for selection UIs with pointer, checkmark, and scroll indi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `useDeclaredCursor`, `Box`, `Text`
 
 ## Logic

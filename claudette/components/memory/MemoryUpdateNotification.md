@@ -5,7 +5,7 @@ Provides memory update notification component.
 
 ## Imports
 - **Stdlib**: `os`, `path`
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, cwd
 
 ## Logic
@@ -13,8 +13,8 @@ Provides memory update notification component.
 2. Calculates relativeToHome: '~' + path.slice(homeDir.length) if starts with homeDir
 3. Calculates relativeToCwd: './' + relative(cwd, path) if starts with cwd
 4. Returns shorter of relativeToHome or relativeToCwd, or absolute path if neither applicable
-5. `MemoryUpdateNotification` - React component for memory update notification
-6. Uses React compiler runtime (_c) for memoization
+5. `MemoryUpdateNotification` - UI component for memory update notification
+6. Uses REACT_COMPILER runtime (_c) for memoization
 7. Gets display path via getRelativeMemoryPath
 8. Renders Box with flexDirection="column", flexGrow={1}
 9. Shows Text with color="text": "Memory updated in {displayPath} · /memory to edit"

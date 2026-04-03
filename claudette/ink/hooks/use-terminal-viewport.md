@@ -3,7 +3,7 @@ Detects whether a component is currently visible within the terminal viewport.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useContext, useLayoutEffect, useRef)
+- **External**: REACT (useCallback, useContext, useLayoutEffect, useRef)
 - **Internal**: `TerminalSizeContext`, `dom`
 
 ## Logic

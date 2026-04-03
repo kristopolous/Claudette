@@ -1,15 +1,15 @@
 # ink/Ansi
 
 ## Purpose
-React component that parses ANSI escape codes and renders them as styled Text/Link components. Serves as an escape hatch for rendering pre-formatted ANSI strings from external tools (like cli-highlight) in Ink.
+UI component that parses ANSI escape codes and renders them as styled Text/Link components. Serves as an escape hatch for rendering pre-formatted ANSI strings from external tools (like cli-highlight) in Ink.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` — `React.memo`
+- **External**: REACT — `React.memo`
 - **Internal**: `./components/Link.js`, `./components/Text.js`, `./styles.js` (Color type), `./termio.js` (NamedColor, Parser, Color as TermioColor, TextStyle)
 
 ## Logic
-1. `Ansi` component is memoized via `React.memo` to prevent re-renders when parent changes but children string is the same
+1. `Ansi` component is memoized via `memoization` to prevent re-renders when parent changes but children string is the same
 2. If children is not a string, wraps it in Text (with dim if dimColor prop is true)
 3. If children is empty string, returns null
 4. Parses the ANSI string via `parseToSpans()` using the termio `Parser` to extract styled text segments
@@ -22,7 +22,7 @@ React component that parses ANSI escape codes and renders them as styled Text/Li
 11. Named colors are mapped via `NAMED_COLOR_MAP` (16 colors including bright variants)
 
 ## Exports
-- `Ansi` — memoized React component with props `{ children: string, dimColor?: boolean }`
+- `Ansi` — memoized UI component with props `{ children: string, dimColor?: boolean }`
 
 ### Internal (not exported)
 - `parseToSpans(input: string): Span[]` — parses ANSI string into styled text spans using termio Parser

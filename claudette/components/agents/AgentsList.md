@@ -3,7 +3,7 @@ A primary navigation component that displays a categorized, searchable, and inte
 
 ## Imports
 - **Stdlib**: None
-- **External**: `figures`, `ui-framework` (e.g., react), `ui-components` (e.g., ink)
+- **External**: `figures`, `ui-framework` (e.g., REACT), `ui-components` (e.g., ink)
 - **Internal**: `utils/settings/constants`, `tools/AgentTool/agentDisplay`, `tools/AgentTool/loadAgentsDir`, `utils/array`, `components/design-system/Dialog`, `components/design-system/Divider`, `components/agents/utils`
 
 ## Logic

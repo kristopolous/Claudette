@@ -2,7 +2,7 @@
 Returns formatted elapsed time for a timer; updates at regular intervals while running, supports pausing and optional end time to freeze duration.
 
 ## Imports
-- **External**: `react` (useCallback, useSyncExternalStore)
+- **External**: REACT (useCallback, useSyncExternalStore)
 - **Internal**: `../utils/format` (formatDuration)
 
 ## Logic

@@ -3,7 +3,7 @@ Provides a dialog for users to decide whether to keep or remove a worktree sessi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `src/commands`, `src/services/analytics/index`, `src/utils/debug`, `../ink`, `../utils/execFileNoThrow`, `../utils/plans`, `../utils/Shell`, `../utils/worktree`, `./CustomSelect/select`, `./design-system/Dialog`, `./Spinner`
 
 ## Logic

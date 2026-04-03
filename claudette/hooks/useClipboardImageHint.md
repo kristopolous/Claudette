@@ -2,7 +2,7 @@
 Notifies user when terminal regains focus and clipboard contains an image, suggesting the paste shortcut.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `./context/notifications` (useNotifications)
   - `./keybindings/shortcutFormat` (getShortcutDisplay)

@@ -3,7 +3,7 @@ Manages session backgrounding via Ctrl+B: backgrounds the current query, re-back
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useCallback`, `useEffect`, `useRef`)
+- **External**: REACT (`useCallback`, `useEffect`, `useRef`)
 - **Internal**:
   - `state/AppState` - `useAppState`, `useSetAppState`
   - `types/message` - `Message` type

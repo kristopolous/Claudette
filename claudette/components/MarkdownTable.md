@@ -3,7 +3,7 @@ Renders markdown tables in the terminal with adaptive column widths, text wrappi
 
 ## Imports
 - **Stdlib**: none
-- **External**: `marked`, `react`, `strip-ansi`
+- **External**: `marked`, REACT, `strip-ansi`
 - **Internal**: `useTerminalSize`, `stringWidth`, `wrapAnsi`, `Ansi`, `useTheme`, `formatToken`, `padAligned`
 
 ## Logic

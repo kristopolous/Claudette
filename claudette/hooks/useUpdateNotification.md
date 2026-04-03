@@ -4,7 +4,7 @@
 Tracks and surfaces version update notifications, deduplicating by semver major.minor.patch.
 
 ## Imports
-- **Stdlib**: `useState` from 'react'
+- **Stdlib**: `useState` from 'REACT'
 - **External**: `semver` (major, minor, patch)
 - **Internal**: None
 

@@ -1,7 +1,7 @@
 # state/AppStateStore
 
 ## Purpose
-Defines AppState type and store structure for React state management.
+Defines AppState type and store structure for UI state management.
 
 ## Imports
 - **Stdlib**: (none)

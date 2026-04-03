@@ -3,7 +3,7 @@ Generates permission option labels and configurations for file operations, with 
 
 ## Imports
 - **Stdlib**: `os` (homedir), `path` (basename, join, sep)
-- **External**: `react` (ReactNode)
+- **External**: REACT (ReactNode)
 - **Internal**: `getOriginalCwd`, `Text`, `getShortcutDisplay`, `ToolPermissionContext`, `expandPath`, `getDirectoryForPath`, `normalizeCaseForComparison`, `pathInAllowedWorkingPath`, `OptionWithDescription`
 
 ## Logic

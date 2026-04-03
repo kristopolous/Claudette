@@ -18,4 +18,4 @@ Show help and available commands in an interactive UI.
 6. Command type: 'local-jsx' with lazy load
 
 ## Exports
-- `call` - async LocalJSXCommandCall returning HelpV2 React component
+- `call` - async LocalJSXCommandCall returning HelpV2 UI component

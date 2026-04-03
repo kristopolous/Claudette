@@ -5,13 +5,13 @@ Provides async agent detail dialog component for viewing local agent task detail
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: types utils, hooks useElapsedTime, ink events keyboard-event, ink, keybindings useKeybinding, Tool, tasks LocalAgentTask, tools, format, messages, design-system Byline/Dialog/KeyboardShortcutHint, messages UserPlanMessage, tasks renderToolActivity/taskStatusUtils
 
 ## Logic
 1. `Props` - { agent, onDone, onKillAgent?, onBack? }
-2. `AsyncAgentDetailDialog` - React component for async agent detail
-3. Uses React compiler runtime (_c) for memoization
+2. `AsyncAgentDetailDialog` - UI component for async agent detail
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Uses useTheme for theme
 5. Gets tools via getTools(getEmptyToolPermissionContext())
 6. Uses useElapsedTime for elapsed time calculation

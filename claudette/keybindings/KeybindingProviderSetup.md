@@ -1,9 +1,9 @@
 ## Purpose
-Top-level React component that initializes the keybinding system, loads default and user bindings with hot-reload support, and intercepts chord sequences before other input handlers.
+Top-level UI component that initializes the keybinding system, loads default and user bindings with hot-reload support, and intercepts chord sequences before other input handlers.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useEffect, useRef, useState), `react/compiler-runtime`
+- **External**: REACT (useCallback, useEffect, useRef, useState), REACT_COMPILER
 - **Internal**: `context/notifications` (useNotifications), `ink/events/input-event` (InputEvent), ink` (Key, useInput), `utils/array` (count), `utils/debug` (logForDebugging), `utils/stringUtils` (plural), KeybindingContext` (KeybindingProvider), loadUserBindings` (initializeKeybindingWatcher, loadKeybindingsSyncWithWarnings, subscribeToKeybindingChanges), `resolver` (resolveKeyWithChordState), `types` (KeybindingContextName, ParsedBinding, ParsedKeystroke), `validate` (KeybindingWarning)
 
 ## Logic

@@ -4,7 +4,7 @@
 Registers a handler for IDE log events from MCP clients and forwards them to analytics.
 
 ## Imports
-- **Stdlib**: `useEffect` from 'react'
+- **Stdlib**: `useEffect` from 'REACT'
 - **External**: `z` from 'zod/v4'
 - **Internal**: `logEvent`, `MCPServerConnection`, `getConnectedIdeClient`, `lazySchema`
 

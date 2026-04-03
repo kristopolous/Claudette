@@ -3,7 +3,7 @@ Renders a progress UI with animated spinner and step indicators for session tele
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `figures`
+- **External**: REACT, REACT_COMPILER, `figures`
 - **Internal**: `ink`, `state/AppState`, `utils/teleport`
 
 ## Logic
@@ -12,5 +12,5 @@ Renders a progress UI with animated spinner and step indicators for session tele
 3. The `teleportWithProgress` function renders the progress UI into an existing root, drives the step state through the teleport resume process, checks out the branch, and returns processed messages with the branch name
 
 ## Exports
-- `TeleportProgress` - React component that shows the current teleport step with a spinner and step list
+- `TeleportProgress` - UI component that shows the current teleport step with a spinner and step list
 - `teleportWithProgress` - async function that orchestrates the full teleport flow with progress UI, returning messages and branch name

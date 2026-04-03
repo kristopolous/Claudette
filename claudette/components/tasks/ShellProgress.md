@@ -5,13 +5,13 @@ Provides shell progress component for displaying shell task status.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, Task, tasks LocalShellTask guards, types utils
 
 ## Logic
 1. `TaskStatusTextProps` - { status, label?, suffix? }
 2. `TaskStatusText` - renders task status text with color
-3. Uses React compiler runtime (_c) for memoization
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. displayLabel = label ?? status
 5. color: completed → success, failed → error, killed → warning, else undefined
 6. Renders Text with color, dimColor={true}, ({displayLabel}{suffix})

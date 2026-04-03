@@ -5,7 +5,7 @@ Implements miscellaneous subcommand handlers including setup-token, doctor, and 
 
 ## Imports
 - **Stdlib**: `process`
-- **External**: `react/compiler-runtime`, `react`
+- **External**: REACT_COMPILER, REACT
 - **Internal**: Logo components, hooks, ink components, keybindings, analytics, MCP, state, auth, setup/install commands
 
 ## Logic

@@ -2,7 +2,7 @@
 Public API surface for the Claudette terminal UI, re-exporting components, hooks, types, and utilities for building terminal interfaces.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink/components/design-system/*`, `ink/root`, `ink/dom`, `ink/events/*`, `ink/focus`, `ink/frame`, `ink/hooks/*`, `ink/measure-element`, `ink/termio/osc`, `ink/wrap-text`
 
 ## Logic

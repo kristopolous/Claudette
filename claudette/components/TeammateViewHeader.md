@@ -3,7 +3,7 @@ Displays a header when viewing a teammate's transcript, showing their name, task
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text), state/AppState (useAppState), state/selectors (getViewedTeammateTask), utils/ink (toInkColor), design-system/KeyboardShortcutHint (KeyboardShortcutHint), OffscreenFreeze (OffscreenFreeze)
 
 ## Logic
@@ -15,4 +15,4 @@ Displays a header when viewing a teammate's transcript, showing their name, task
 6. Wraps content in OffscreenFreeze to prevent rendering issues
 
 ## Exports
-- `TeammateViewHeader` - React component showing the header for teammate transcript view
+- `TeammateViewHeader` - UI component showing the header for teammate transcript view

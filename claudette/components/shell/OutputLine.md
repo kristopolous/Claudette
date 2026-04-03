@@ -5,7 +5,7 @@ Provides output line component for rendering shell output with JSON formatting a
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: hooks useTerminalSize, ink, hyperlink, JSON utils, terminal, MessageResponse, messageActions, shell ExpandShellOutputContext
 
 ## Logic
@@ -22,7 +22,7 @@ Provides output line component for rendering shell output with JSON formatting a
 11. Conservative: no quotes, no whitespace, no trailing comma/brace
 12. `linkifyUrlsInText` - linkifies URLs in text
 13. Replaces URLs via createHyperlink
-14. `OutputLine` - React component for output line
+14. `OutputLine` - UI component for output line
 15. Uses useTerminalSize for columns
 16. Uses useExpandShellOutput for expand state
 17. Uses useContext(InVirtualListContext) for virtual list state

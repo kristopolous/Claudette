@@ -3,7 +3,7 @@ Renders a horizontal tab bar for project tags with overflow handling and truncat
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `stringWidth`, `truncateToWidth`
 
 ## Logic

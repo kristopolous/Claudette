@@ -3,7 +3,7 @@ Provides a read-only multi-level menu for browsing configured hooks by event, ma
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: entrypoints/agentSdkTypes, state/AppState, commands, hooks/useSettingsChange, ink, keybindings/useKeybinding, utils/hooks/hooksConfigManager, utils/hooks/hooksSettings, utils/settings/settings, utils/stringUtils, components/design-system/Dialog, components/hooks/SelectEventMode, components/hooks/SelectHookMode, components/hooks/SelectMatcherMode, components/hooks/ViewHookMode
 
 ## Logic

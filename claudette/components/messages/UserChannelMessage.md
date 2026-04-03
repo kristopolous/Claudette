@@ -3,7 +3,7 @@ Renders channel messages from external sources (e.g., Slack) parsed from XML-for
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text), format utils (truncateToWidth), figures constants, xml constants
 
 ## Logic
@@ -13,4 +13,4 @@ Renders channel messages from external sources (e.g., Slack) parsed from XML-for
 4. Renders with channel arrow prefix, source/user attribution, and truncated content
 
 ## Exports
-- `UserChannelMessage` - React component rendering channel messages with source attribution
+- `UserChannelMessage` - UI component rendering channel messages with source attribution

@@ -5,7 +5,7 @@ Provides skills menu dialog displaying available skills grouped by source.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`, `lodash-es/capitalize`
+- **External**: REACT, REACT_COMPILER, `lodash-es/capitalize`
 - **Internal**: commands (Command, CommandBase, CommandResultDisplay, getCommandName, PromptCommand), ink (Box, Text), skills/loadSkillsDir (estimateSkillFrontmatterTokens, getSkillsPath), utils/file (getDisplayPath), utils/format (formatTokens), utils/settings/constants (getSettingSourceName, SettingSource), utils/stringUtils (plural), ConfigurableShortcutHint, design-system/Dialog (Dialog)
 
 ## Logic
@@ -14,8 +14,8 @@ Provides skills menu dialog displaying available skills grouped by source.
 3. `Props` - { onExit, commands }
 4. `getSourceTitle` - returns title for skill source group
 5. `getSourceSubtitle` - returns subtitle with paths or server names
-6. `SkillsMenu` - React component for skills dialog
-7. Uses React compiler runtime (_c) for memoization
+6. `SkillsMenu` - UI component for skills dialog
+7. Uses REACT_COMPILER runtime (_c) for memoization
 8. Filters commands to find skills (prompt type from skills/commands_DEPRECATED/plugin/mcp)
 9. Groups skills by source (policySettings, userSettings, projectSettings, localSettings, flagSettings, plugin, mcp)
 10. Sorts each group alphabetically by command name

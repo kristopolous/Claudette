@@ -5,7 +5,7 @@ Provides Newline component for inserting newline characters.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: (none)
 
 ## Logic
@@ -13,7 +13,7 @@ Provides Newline component for inserting newline characters.
 2. `count` - number of newlines to insert, default 1
 3. `Newline` - adds one or more newline (\n) characters
 4. Must be used within <Text> components
-5. Uses React compiler runtime (_c) for memoization
+5. Uses REACT_COMPILER runtime (_c) for memoization
 6. Renders <ink-text>{'\n'.repeat(count)}</ink-text>
 7. `React` - React library
 

@@ -1,11 +1,11 @@
 # AppState
 
 ## Purpose
-Provides React context provider for AppState store with settings change handling.
+Provides UI context provider for AppState store with settings change handling.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react/compiler-runtime`, BUILDFLAGS, `react`
+- **External**: REACT_COMPILER, BUILDFLAGS, REACT
 - **Internal**: MailboxProvider, useSettingsChange, debug utils, permissionSetup, settings utils, store, AppStateStore types
 
 ## Logic
@@ -22,7 +22,7 @@ Provides React context provider for AppState store with settings change handling
 7. `useAppState` - subscribes to state slice with selector
 
 ## Exports
-- `AppStoreContext` - React context for AppStateStore
+- `AppStoreContext` - UI context for AppStateStore
 - `AppStateProvider` - provider component
 - `useAppStateStore` - hook to get AppStateStore
 - `useAppState` - hook to subscribe to state slice

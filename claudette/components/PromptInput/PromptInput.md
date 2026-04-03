@@ -3,7 +3,7 @@ Main prompt input component that handles text entry, mode switching, suggestions
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: BUILDFLAGS, `chalk`, `react`, `strip-ansi`
+- **External**: BUILDFLAGS, `chalk`, REACT, `strip-ansi`
 - **Internal**: Extensive imports including `context/notifications`, `hooks/*`, `state/AppState`, `ink`, `keybindings/*`, `utils/*`, `commands/*`, `services/*`, `tasks/*`, `tools/*`, `types/*`, and sibling PromptInput components
 
 ## Logic

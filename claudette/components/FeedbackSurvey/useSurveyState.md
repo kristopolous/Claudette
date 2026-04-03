@@ -3,7 +3,7 @@ A state management utility for feedback surveys that orchestrates the transition
 
 ## Imports
 - **Stdlib**: `crypto` (for unique identifiers)
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `components/FeedbackSurvey/TranscriptSharePrompt`, `components/FeedbackSurvey/utils`
 
 ## Logic

@@ -2,7 +2,7 @@
 Displays a message indicating that the user rejected a proposed plan, showing the plan content in a bordered markdown block.
 
 ## Imports
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/Markdown`, `components/MessageResponse`, `ink`
 
 ## Logic

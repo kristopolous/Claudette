@@ -3,7 +3,7 @@ Displays a tab showing recently denied commands from the auto mode classifier wi
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `utils/autoModeDenials`, `CustomSelect/select`, `design-system/StatusIcon`, `design-system/Tabs`
 
 ## Logic

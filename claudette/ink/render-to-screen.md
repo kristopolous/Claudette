@@ -5,7 +5,7 @@ Provides render-to-screen functionality for isolated message rendering.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `lodash-es/noop`, `react`, `react-reconciler/constants`
+- **External**: `lodash-es/noop`, REACT, `react-reconciler/constants`
 - **Internal**: utils debug, ink dom, ink focus, ink output, ink reconciler, ink render-node-to-output, ink screen
 
 ## Logic

@@ -3,7 +3,7 @@ Displays a dialog for importing MCP servers from Claude Desktop into the current
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useEffect, useState), `react/compiler-runtime`
+- **External**: REACT (useCallback, useEffect, useState), REACT_COMPILER
 - **Internal**: `gracefulShutdown` (utils/gracefulShutdown), `writeToStdout` (utils/process), `Box`, `color`, `Text`, `useTheme` (ink), `addMcpConfig`, `getAllMcpConfigs` (services/mcp/config), `ConfigScope`, `McpServerConfig`, `ScopedMcpServerConfig` (services/mcp/types), `plural` (utils/stringUtils), `ConfigurableShortcutHint`, `SelectMulti` (CustomSelect), `Byline`, `Dialog`, `KeyboardShortcutHint` (design-system)
 
 ## Logic

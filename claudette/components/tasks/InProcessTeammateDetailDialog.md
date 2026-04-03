@@ -5,13 +5,13 @@ Provides in-process teammate detail dialog component for viewing teammate task d
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: types utils, hooks useElapsedTime, ink events keyboard-event, ink, keybindings useKeybinding, Tool, tasks InProcessTeammateTask types, tools, format, ink, design-system Byline/Dialog/KeyboardShortcutHint, tasks renderToolActivity/taskStatusUtils
 
 ## Logic
 1. `Props` - { teammate, onDone, onKill?, onBack?, onForeground? }
-2. `InProcessTeammateDetailDialog` - React component for teammate detail
-3. Uses React compiler runtime (_c) for memoization
+2. `InProcessTeammateDetailDialog` - UI component for teammate detail
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Uses useTheme for theme
 5. Gets tools via getTools(getEmptyToolPermissionContext())
 6. Uses useElapsedTime for elapsed time calculation

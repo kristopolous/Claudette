@@ -5,7 +5,7 @@ Provides UI rendering functions for the Glob tool, including user-facing message
 
 ## Imports
 - **Stdlib**: None
-- **External**: `@anthropic-ai/sdk`, `react`
+- **External**: `@anthropic-ai/sdk`, REACT
 - **Internal**: `components/MessageResponse`, `utils/messages`, `components/FallbackToolUseErrorMessage`, `constants/toolLimits`, `ink`, `utils/file`, `utils/format`, `GrepTool/GrepTool`
 
 ## Logic

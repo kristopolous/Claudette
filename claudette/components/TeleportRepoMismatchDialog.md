@@ -3,7 +3,7 @@ Displays a dialog when teleporting to a repository that has a path mismatch, all
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text), utils/file (getDisplayPath), utils/githubRepoPathMapping (removePathFromRepo, validateRepoAtPath), CustomSelect/index (Select), design-system/Dialog (Dialog), Spinner (Spinner)
 
 ## Logic
@@ -15,4 +15,4 @@ Displays a dialog when teleporting to a repository that has a path mismatch, all
 6. If no valid paths remain, instructs the user to run teleport from a checkout of the target repo
 
 ## Exports
-- `TeleportRepoMismatchDialog` - React component for resolving repository path mismatches during teleport
+- `TeleportRepoMismatchDialog` - UI component for resolving repository path mismatches during teleport

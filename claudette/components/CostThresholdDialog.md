@@ -3,7 +3,7 @@ Shows a warning dialog when session spending reaches $5 on the inference provide
 
 ## Imports
 - **Stdlib**: none
-- **External**: react (React)
+- **External**: REACT (React)
 - **Internal**: ../ink (Box, Link, Text), ./CustomSelect/index (Select), ./design-system/Dialog (Dialog)
 
 ## Logic

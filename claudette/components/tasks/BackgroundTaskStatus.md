@@ -5,13 +5,13 @@ Provides background task status component for displaying running task status.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `figures`, `react`, `react/compiler-runtime`
+- **External**: `figures`, REACT, REACT_COMPILER
 - **Internal**: hooks useTerminalSize, ink stringWidth, state AppState/teammateViewHelpers, tasks LocalAgentTask/pillLabel/types, utils horizontalScroll, ink, AgentTool agentColorManager, theme, design-system KeyboardShortcutHint, tasks taskStatusUtils
 
 ## Logic
 1. `Props` - { tasksSelected, isViewingTeammate?, teammateFooterIndex?, isLeaderIdle?, onOpenDialog? }
-2. `BackgroundTaskStatus` - React component for background task status
-3. Uses React compiler runtime (_c) for memoization
+2. `BackgroundTaskStatus` - UI component for background task status
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Uses useTerminalSize for columns
 5. Uses useAppState, useSetAppState for state management
 6. Uses enterTeammateView, exitTeammateView for teammate view

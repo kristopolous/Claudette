@@ -4,7 +4,7 @@
 Subscribes to settings file changes and invokes a callback when any setting changes, enabling reactive UI updates.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect` from 'react'
+- **Stdlib**: `useCallback`, `useEffect` from 'REACT'
 - **External**: None
 - **Internal**: `settingsChangeDetector`, `getSettings_DEPRECATED`, `SettingSource`, `SettingsJson`
 

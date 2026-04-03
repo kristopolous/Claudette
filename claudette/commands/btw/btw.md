@@ -19,4 +19,4 @@ Ask a quick side question without interrupting the main conversation.
 5. Returns null (immediate) while the async response renders inline
 
 ## Exports
-- `call` - async LocalJSXCommandCall that returns React component or null
+- `call` - async LocalJSXCommandCall that returns UI component or null

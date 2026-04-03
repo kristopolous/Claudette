@@ -2,7 +2,7 @@
 Shows rate limit warnings (high priority) and overage notifications (immediate) for Claude AI usage based on current model and subscription limits.
 
 ## Imports
-- **External**: `react` (useEffect, useMemo, useRef, useState)
+- **External**: REACT (useEffect, useMemo, useRef, useState)
 - **Internal**:
   - src/context/notifications` (useNotifications)
   - src/ink` (Text)

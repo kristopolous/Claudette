@@ -3,7 +3,7 @@ Displays a simple prompt instructing the user to press Enter to continue.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `../ink`
 
 ## Logic

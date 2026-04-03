@@ -5,7 +5,7 @@ Provides lazy-loaded command metadata for the `btw` (side question) command.
 - **Internal**: Command type, implementation from btw
 
 ## Logic
-1. Defines command with type 'local-jsx' (renders React component)
+1. Defines command with type 'local-jsx' (renders UI component)
 2. Description: "Ask a quick side question without interrupting the main conversation"
 3. Immediate: true (no confirmation prompt)
 4. Requires argument: '<question>'

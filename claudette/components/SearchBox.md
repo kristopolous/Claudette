@@ -3,7 +3,7 @@ Renders a search input display box with prefix icon, query text, cursor position
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box, Text)
 
 ## Logic
@@ -13,4 +13,4 @@ Renders a search input display box with prefix icon, query text, cursor position
 4. Wraps content in a Box with optional rounded border, suggestion-colored border when focused, and configurable padding
 
 ## Exports
-- `SearchBox` - React component rendering a styled search input display
+- `SearchBox` - UI component rendering a styled search input display

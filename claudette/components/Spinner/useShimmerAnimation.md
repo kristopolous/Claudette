@@ -5,7 +5,7 @@ Provides hook for shimmer animation timing and glimmer index calculation.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink stringWidth, ink, Spinner types
 
 ## Logic

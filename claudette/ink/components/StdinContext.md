@@ -1,11 +1,11 @@
 # ink/components/StdinContext
 
 ## Purpose
-Provides StdinContext React context for stdin stream access.
+Provides StdinContext UI context for stdin stream access.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink events emitter, ink terminal-querier
 
 ## Logic
@@ -22,10 +22,10 @@ Provides StdinContext React context for stdin stream access.
 11. `internal_eventEmitter` - internal event emitter
 12. `internal_querier` - query terminal and await responses (DECRQM, OSC 11, etc.)
 13. Null only in never-reached default context value
-14. `StdinContext` - React context exposing input stream
+14. `StdinContext` - UI context exposing input stream
 15. Default value: stdin: process.stdin, internal_eventEmitter: new EventEmitter(), setRawMode() {}, isRawModeSupported: false, internal_exitOnCtrlC: true, internal_querier: null
 16. displayName: 'InternalStdinContext'
-17. `createContext` - React context creator
+17. `createContext` - UI context creator
 18. `EventEmitter` - event emitter class
 19. `TerminalQuerier` - terminal querier type
 

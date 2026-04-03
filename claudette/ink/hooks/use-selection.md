@@ -3,7 +3,7 @@ Provides access to text selection operations on the Claudette instance in fullsc
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useMemo, useSyncExternalStore)
+- **External**: REACT (useContext, useMemo, useSyncExternalStore)
 - **Internal**: `components/StdinContext`, `instances`, `selection`
 
 ## Logic

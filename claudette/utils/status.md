@@ -4,7 +4,7 @@
 Builds diagnostic and informational property arrays displayed in the Status pane, covering sandbox state, IDE connection, MCP server health, memory usage, setting sources, installation diagnostics, account info, and API provider configuration.
 
 ## Imports
-- **Stdlib**: `chalk`, `figures`, `react`
+- **Stdlib**: `chalk`, `figures`, REACT
 - **External**: none
 - **Internal**: `../ink`, `../services/mcp/types`, `./auth`, `./claudemd`, `./doctorDiagnostic`, `./envUtils`, `./file`, `./format`, `./ide`, `./model/model`, `./model/providers`, `./mtls`, `./nativeInstaller/index`, `./proxy`, `./sandbox/sandbox-adapter`, `./settings/allErrors`, `./settings/constants`, `./settings/settings`, `./theme`
 

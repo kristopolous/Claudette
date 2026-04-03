@@ -2,7 +2,7 @@
 Monitors configuration file for validation errors; shows a high-priority warning directing users to `/doctor` for details.
 
 ## Imports
-- **External**: `react` (useCallback, useEffect, useState)
+- **External**: REACT (useCallback, useEffect, useState)
 - **Internal**:
   - src/context/notifications` (useNotifications, addNotification, removeNotification)
   - `.././bootstrap/state` (getIsRemoteMode)

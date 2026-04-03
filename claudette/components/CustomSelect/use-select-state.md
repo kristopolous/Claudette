@@ -3,7 +3,7 @@ Combines selection state management with navigation to provide a complete single
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useCallback, useState)
+- **External**: REACT (useCallback, useState)
 - **Internal**: `select` (OptionWithDescription), `use-select-navigation`
 
 ## Logic

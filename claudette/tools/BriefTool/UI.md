@@ -29,7 +29,7 @@ Renders terminal UI for BriefTool, which outputs assistant messages (Claude's re
     - Indented column (paddingLeft=2) with message and AttachmentList
   - **Default mode** (neither flag):
     - Renders empty 2px gutter spacer then message and AttachmentList
-- **`AttachmentList`**: Component (uses React compiler memoization) that:
+- **`AttachmentList`**: Component (uses REACT_COMPILER memoization) that:
   - Returns null if attachments empty
   - Maps each attachment to a Box row:
     - `pointerSmall` icon (dim) + `[image]` or `[file]` label

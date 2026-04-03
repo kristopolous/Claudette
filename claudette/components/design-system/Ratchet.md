@@ -3,7 +3,7 @@ Prevents layout shifting by locking the minimum height of content to its maximum
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `useTerminalSize`, `useTerminalViewport`, `Box`, `DOMElement`, `measureElement`
 
 ## Logic

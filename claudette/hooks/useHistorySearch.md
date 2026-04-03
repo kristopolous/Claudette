@@ -4,7 +4,7 @@
 Provides incremental history search with fuzzy matching, navigating through command history entries.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useEffect`, `useMemo`, `useRef`, `useState` from 'REACT'
 - **External**: `feature` from 'BUILDFLAGS'
 - **Internal**: `getModeFromInput`, `getValueFromInput`, `makeHistoryReader`, `KeyboardEvent`, `useInput`, `useKeybinding`, `useKeybindings`, `PromptInputMode`, `HistoryEntry`
 

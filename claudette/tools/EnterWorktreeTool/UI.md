@@ -3,7 +3,7 @@ Provides UI rendering functions for the EnterWorktree tool, displaying worktree 
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `ToolProgressData`, `types/message`, `utils/theme`, `EnterWorktreeTool`
 
 ## Logic

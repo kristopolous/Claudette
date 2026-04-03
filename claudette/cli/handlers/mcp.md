@@ -5,7 +5,7 @@ Implements MCP (Model Context Protocol) subcommand handlers for server managemen
 
 ## Imports
 - **Stdlib**: `fs/promises`, `process`, `path`
-- **External**: `p-map`, `react`
+- **External**: `p-map`, REACT
 - **Internal**: MCP components, ink render, analytics, MCP auth/client/config/utils, state, config, error/gracefulShutdown/json/platform utils, exit helpers
 
 ## Logic

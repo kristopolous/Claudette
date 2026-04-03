@@ -3,7 +3,7 @@ A UI component designed to display the real-time progress and output of bash com
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `tools/BashTool/BashTool`, `types/tools`, `components/messages/UserBashInputMessage`, `components/shell/ShellProgressMessage`
 
 ## Logic

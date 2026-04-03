@@ -4,7 +4,7 @@
 Tracks IDE text selection by registering notification handlers with the connected IDE MCP client.
 
 ## Imports
-- **Stdlib**: `useEffect`, `useRef` from 'react'
+- **Stdlib**: `useEffect`, `useRef` from 'REACT'
 - **External**: `z` from 'zod/v4'
 - **Internal**: `logError`, `MCPServerConnection`, `getConnectedIdeClient`, `lazySchema`
 

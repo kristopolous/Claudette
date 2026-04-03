@@ -3,7 +3,7 @@ Provides interval-based timing backed by a shared clock for synchronized animati
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useEffect, useRef, useState)
+- **External**: REACT (useContext, useEffect, useRef, useState)
 - **Internal**: `components/ClockContext`
 
 ## Logic

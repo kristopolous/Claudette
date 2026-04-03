@@ -2,7 +2,7 @@
 Provides a wizard step for selecting which tools the agent should have access to.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: Tool (Tools type),ConfigurableShortcutHint, designsystem/Byline, designsystem/KeyboardShortcutHint,wizard/index (useWizard), wizard/WizardDialogLayout, ToolSelector, types (AgentWizardData type)
 
 ## Logic

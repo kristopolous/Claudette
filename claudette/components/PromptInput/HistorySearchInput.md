@@ -3,7 +3,7 @@ Provides a text input field for searching through prompt history with visual fee
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink/stringWidth`, `ink`, `TextInput`
 
 ## Logic

@@ -3,7 +3,7 @@ Provides a generic permission request UI for tools that do not have a specialize
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `bootstrap/state`, `ink`, `services/analytics/metadata`, `utils/env`, `utils/permissions/permissionsLoader`, `utils/stringUtils`, `utils/unaryLogging`, `hooks`, `PermissionDialog`, `PermissionPrompt`, `PermissionRequest`, `PermissionRuleExplanation`
 
 ## Logic

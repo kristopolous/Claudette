@@ -3,7 +3,7 @@ Freezes React children when they scroll above the terminal viewport to prevent u
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext, useRef)
+- **External**: REACT (useContext, useRef)
 - **Internal**: `useTerminalViewport` (ink/hooks/use-terminal-viewport), `Box` (ink), `InVirtualListContext` (messageActions)
 
 ## Logic

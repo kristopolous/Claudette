@@ -5,13 +5,13 @@ Provides shimmer character component for message shimmer animation.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, theme
 
 ## Logic
 1. `Props` - { char, index, glimmerIndex, messageColor, shimmerColor }
-2. `ShimmerChar` - React component for shimmer character
-3. Uses React compiler runtime (_c) for memoization
+2. `ShimmerChar` - UI component for shimmer character
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Calculates isHighlighted = index === glimmerIndex
 5. Calculates isNearHighlight = Math.abs(index - glimmerIndex) === 1
 6. Calculates shouldUseShimmer = isHighlighted || isNearHighlight

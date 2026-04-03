@@ -2,7 +2,7 @@
 Shows a low-priority notification when plugins have been auto-updated, prompting the user to run `/reload-plugins` to apply changes.
 
 ## Imports
-- **External**: `react` (useEffect, useState)
+- **External**: REACT (useEffect, useState)
 - **Internal**:
   - `.././bootstrap/state` (getIsRemoteMode)
   - `.././context/notifications` (useNotifications)

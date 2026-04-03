@@ -8,7 +8,7 @@ Displays a QR code to download the Claude mobile app. Supports switching between
 - `qrcode` (`toString` function to generate QR code string)
 
 ### Stdlib
-- `react` (including `useState`, `useEffect`, `useCallback`)
+- REACT (including `useState`, `useEffect`, `useCallback`)
 
 ### Internal
 - `Pane` from `../../components/designsystem/Pane`

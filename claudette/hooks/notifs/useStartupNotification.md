@@ -2,7 +2,7 @@
 Base hook for one-time startup notifications; handles remote-mode gating, single execution per session, and supports async compute.
 
 ## Imports
-- **External**: `react` (useEffect, useRef)
+- **External**: REACT (useEffect, useRef)
 - **Internal**:
   - `.././bootstrap/state` (getIsRemoteMode)
   - `.././context/notifications` (Notification type, useNotifications)

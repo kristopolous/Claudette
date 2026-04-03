@@ -3,7 +3,7 @@ Renders image attachments in user messages as clickable links when terminal supp
 
 ## Imports
 - **Stdlib**: url (pathToFileURL)
-- **External**: react
+- **External**: REACT
 - **Internal**: ink (Box, Text, Link), MessageResponse, imageStore utils, supports-hyperlinks utils
 
 ## Logic
@@ -13,4 +13,4 @@ Renders image attachments in user messages as clickable links when terminal supp
 4. Wraps in MessageResponse for connected styling, or adds margin if image starts a new turn
 
 ## Exports
-- `UserImageMessage` - React component rendering image attachments with optional hyperlink support
+- `UserImageMessage` - UI component rendering image attachments with optional hyperlink support

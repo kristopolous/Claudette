@@ -3,7 +3,7 @@ Renders a permission request dialog that prompts the user to answer one or more 
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`, `@anthropic-ai/sdk/resources/messages.mjs` (Base64ImageSource, ImageBlockParam)
+- **External**: REACT, REACT_COMPILER, `@anthropic-ai/sdk/resources/messages.mjs` (Base64ImageSource, ImageBlockParam)
 - **Internal**: `useSettings`, `useTerminalSize`, `stringWidth`, `useTheme`, `useKeybindings`, `AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS`, `logEvent`, `useAppState`, `Question`, `AskUserQuestionTool`, `CliHighlight`, `getCliHighlightPromise`, `PastedContent`, `ImageDimensions`, `maybeResizeAndDownsampleImageBlock`, `cacheImagePath`, `storeImage`, `logError`, `applyMarkdown`, `isPlanModeInterviewPhaseEnabled`, `getPlanFilePath`, `PermissionRequestProps`, `QuestionView`, `SubmitQuestionsView`, `useMultipleChoiceState`
 
 ## Logic

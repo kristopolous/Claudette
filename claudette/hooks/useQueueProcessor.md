@@ -2,7 +2,7 @@
 Processes the unified command queue when a query is not active, there are queued commands, and no local JSX UI is blocking input.
 
 ## Imports
-- **External**: `react` (useEffect, useSyncExternalStore)
+- **External**: REACT (useEffect, useSyncExternalStore)
 - **Internal**:
   - `./types/textInputTypes` (QueuedCommand)
   - `./utils/messageQueueManager` (getCommandQueueSnapshot, subscribeToCommandQueue)

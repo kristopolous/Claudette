@@ -5,7 +5,7 @@ Provides Clawd ASCII art component with pose support.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: ink, env
 
 ## Logic
@@ -24,8 +24,8 @@ Provides Clawd ASCII art component with pose support.
 13. Apple Terminal uses bg-fill trick, so only eye poses make sense
 14. Arm poses fall back to default
 15. `APPLE_EYES` - Record<ClawdPose, string> for Apple Terminal eye poses
-16. `Clawd` - React component for Clawd
-17. Uses React compiler runtime (_c) for memoization
+16. `Clawd` - UI component for Clawd
+17. Uses REACT_COMPILER runtime (_c) for memoization
 18. Renders appropriate pose segments based on pose prop
 19. Falls back to default pose if pose not provided
 20. `env` - environment utilities

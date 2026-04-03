@@ -3,7 +3,7 @@ Shows a keyboard shortcut hint for backgrounding the current session when a quer
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `useDoublePress`, `Box`, `Text`, `useKeybinding`, `useShortcutDisplay`, `useAppState`, `useAppStateStore`, `useSetAppState`, `backgroundAll`, `hasForegroundTasks`, `getGlobalConfig`, `saveGlobalConfig`, `env`, `isEnvTruthy`, `KeyboardShortcutHint`
 
 ## Logic

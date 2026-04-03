@@ -3,7 +3,7 @@ Renders grouped tool use messages by delegating to the tool's renderGroupedToolU
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: Tool, message types, messages utils
 
 ## Logic
@@ -14,4 +14,4 @@ Renders grouped tool use messages by delegating to the tool's renderGroupedToolU
 5. Delegates to tool.renderGroupedToolUse with the assembled data and animation flag
 
 ## Exports
-- `GroupedToolUseContent` - React component rendering grouped tool uses via tool-specific renderers
+- `GroupedToolUseContent` - UI component rendering grouped tool uses via tool-specific renderers

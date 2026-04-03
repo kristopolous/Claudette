@@ -3,7 +3,7 @@ Renders a permission approval dialog for computer use operations, handling eithe
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime, figures
+- **External**: REACT, REACT/compiler-runtime, figures
 - **Internal**: ink, utils/execFileNoThrow, utils/stringUtils, CustomSelect/select, design-system/Dialog, @ant/computer-use-mcp/sentinelApps, @ant/computer-use-mcp/types
 
 ## Logic

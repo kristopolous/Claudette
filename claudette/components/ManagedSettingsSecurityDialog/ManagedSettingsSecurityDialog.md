@@ -5,13 +5,13 @@ Provides security dialog for managed settings requiring approval.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: hooks useExitOnCtrlCDWithKeybindings, ink (Box, Text), keybindings useKeybinding, settings types (SettingsJson), CustomSelect index (Select), permissions PermissionDialog (PermissionDialog), ManagedSettingsSecurityDialog utils (extractDangerousSettings, formatDangerousSettingsList)
 
 ## Logic
 1. `Props` - { settings, onAccept, onReject }
-2. `ManagedSettingsSecurityDialog` - React component for managed settings security
-3. Uses React compiler runtime (_c) for memoization
+2. `ManagedSettingsSecurityDialog` - UI component for managed settings security
+3. Uses REACT_COMPILER runtime (_c) for memoization
 4. Extracts dangerous settings via extractDangerousSettings
 5. Formats dangerous settings list via formatDangerousSettingsList
 6. Uses useExitOnCtrlCDWithKeybindings for exit state

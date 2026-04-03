@@ -3,7 +3,7 @@ Renders bash input commands extracted from XML-tagged content with a "!" prefix.
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: ink (Box, Text), messages utils (extractTag)
 
 ## Logic
@@ -12,4 +12,4 @@ Renders bash input commands extracted from XML-tagged content with a "!" prefix.
 3. Renders with "!" prefix in bash border color and bash message background
 
 ## Exports
-- `UserBashInputMessage` - React component rendering bash input commands with styled prefix
+- `UserBashInputMessage` - UI component rendering bash input commands with styled prefix

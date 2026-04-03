@@ -3,7 +3,7 @@ Exposes the stdin stream to Claudette components.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext)
+- **External**: REACT (useContext)
 - **Internal**: `components/StdinContext`
 
 ## Logic

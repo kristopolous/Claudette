@@ -3,7 +3,7 @@ A user confirmation dialog that appears when a user attempts to switch to a stab
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `utils/settings/constants`, `components/CustomSelect`, `components/design-system/Dialog`
 
 ## Logic

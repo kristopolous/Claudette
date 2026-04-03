@@ -5,7 +5,7 @@ Upgrades the user to the Max subscription plan for higher rate limits and more O
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `LocalJSXCommandContext` type from `.././commands`

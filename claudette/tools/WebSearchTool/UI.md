@@ -1,8 +1,8 @@
 ## Purpose
-React components for rendering WebSearch tool usage and result messages.
+UI components for rendering WebSearch tool usage and result messages.
 
 ## Imports
-- **Stdlib**: `react`
+- **Stdlib**: REACT
 - **External**: None
 - **Internal**:
   - `MessageResponse` component

@@ -5,13 +5,13 @@ Provides LSP plugin recommendation menu component.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink, CustomSelect select, permissions PermissionDialog
 
 ## Logic
 1. `Props` - { pluginName, pluginDescription?, fileExtension, onResponse }
 2. `AUTO_DISMISS_MS` (30s) - auto-dismiss timeout
-3. `LspRecommendationMenu` - React component for LSP recommendation
+3. `LspRecommendationMenu` - UI component for LSP recommendation
 4. Uses useRef for onResponse to avoid timer reset when onResponse changes
 5. 30-second auto-dismiss timer counts as ignored (no)
 6. `onSelect` - handles selection: 'yes' → onResponse('yes'), 'no' → onResponse('no'), 'never' → onResponse('never'), 'disable' → onResponse('disable')

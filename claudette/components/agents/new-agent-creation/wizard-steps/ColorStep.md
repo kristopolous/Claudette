@@ -2,7 +2,7 @@
 Provides a wizard step for selecting the agent background color.
 
 ## Imports
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink (Box),keybindings/useKeybinding,tools/AgentTool/agentColorManager (AgentColorName type),ConfigurableShortcutHint, designsystem/Byline, designsystem/KeyboardShortcutHint,wizard/index (useWizard), wizard/WizardDialogLayout, ColorPicker, types (AgentWizardData type)
 
 ## Logic

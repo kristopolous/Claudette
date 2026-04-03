@@ -3,7 +3,7 @@ Provides an AI-generated explanation of permission requests with risk level asse
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `keybindings/useKeybinding`, `services/analytics`, `types/message`, `utils/permissions/permissionExplainer`, `Spinner/ShimmerChar`, `Spinner/useShimmerAnimation`
 
 ## Logic

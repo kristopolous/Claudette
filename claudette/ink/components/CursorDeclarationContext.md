@@ -5,7 +5,7 @@ Provides CursorDeclarationContext for declaring cursor position.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: ink dom
 
 ## Logic
@@ -20,9 +20,9 @@ Provides CursorDeclarationContext for declaring cursor position.
 9. Makes hook safe for sibling components (e.g. list items) that transfer focus
 10. Without node check, newly-unfocused item's clear could clobber newly-focused sibling's set
 11. Depends on layout-effect order
-12. `CursorDeclarationContext` - React context for cursor declaration setter
+12. `CursorDeclarationContext` - UI context for cursor declaration setter
 13. Default value: () => {}
-14. `createContext` - React context creator
+14. `createContext` - UI context creator
 15. `DOMElement` - DOM element type
 
 ## Exports

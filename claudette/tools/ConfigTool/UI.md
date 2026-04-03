@@ -7,7 +7,7 @@ Renders UI components for the configuration tool messages including use, result,
 ## Imports
 
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `components/MessageResponse`, `ink`, `utils/slowOperations`, `tools/ConfigTool/ConfigTool`
 
 ## Logic

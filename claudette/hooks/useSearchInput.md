@@ -4,7 +4,7 @@
 Text input handler for search-like interfaces (ctrl+r history, grep, etc.) with vim-style editing keys and cursor navigation.
 
 ## Imports
-- **Stdlib**: `useCallback`, `useState` from 'react'
+- **Stdlib**: `useCallback`, `useState` from 'REACT'
 - **External**: None
 - **Internal**: `KeyboardEvent`, `useInput`, `Cursor`, `getLastKill`, `pushToKillRing`, `recordYank`, `resetKillAccumulation`, `resetYankState`, `updateYankLength`, `yankPop`, `useTerminalSize`
 

@@ -3,7 +3,7 @@ Displays diagnostic issues (errors, warnings) from files with file paths, line n
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `ink`, `DiagnosticTrackingService`, `MessageResponse`, `CtrlOToExpand`, attachment and cwd utilities
 
 ## Logic

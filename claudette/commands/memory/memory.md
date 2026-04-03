@@ -6,7 +6,7 @@ Opens a dialog to edit Claude memory files (claudemd). Allows selection of memor
 ## Imports
 ### Stdlib
 - `fs/promises` (`mkdir`, `writeFile`)
-- `react`
+- REACT
 
 ### Internal
 - `CommandResultDisplay` type from `.././commands`
@@ -25,7 +25,7 @@ Opens a dialog to edit Claude memory files (claudemd). Allows selection of memor
 The `call` async function:
 1. Clears memory file caches via `clearMemoryFileCaches()`.
 2. Primes the memory file list by awaiting `getMemoryFiles()`.
-3. Returns the `MemoryCommand` React component.
+3. Returns the `MemoryCommand` UI component.
 
 `MemoryCommand` component:
 - Renders a `Dialog` titled "Memory".

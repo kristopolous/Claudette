@@ -1,9 +1,9 @@
 ## Purpose
-Provides a React context for managing a synchronized clock that coordinates time-based updates across components, with automatic adjustment based on terminal focus state to reduce power consumption when unfocused.
+Provides a UI context for managing a synchronized clock that coordinates time-based updates across components, with automatic adjustment based on terminal focus state to reduce power consumption when unfocused.
 
 ## Imports
 - **Stdlib**: None specified
-- **External**: React hooks (createContext, useEffect, useState) from 'react'
+- **External**: React hooks (createContext, useEffect, useState) from 'REACT'
 - **Internal**: 
   - FRAME_INTERVAL_MS constant from ./constants
   - useTerminalFocus hook from ../hooks/use-terminalfocus
@@ -22,7 +22,7 @@ Provides a React context for managing a synchronized clock that coordinates time
    - startTime: Tracks when the clock started
    - tickTime: Snapshotted time for current tick (updated on each tick)
 
-3. **ClockProvider Component**: React component that:
+3. **ClockProvider Component**: UI component that:
    - Creates a clock instance via useState (stable across renders)
    - Subscribes to terminal focus changes via useTerminalFocus
    - Adjusts clock interval based on focus state (normal interval when focused, 2x when blurred)
@@ -33,10 +33,10 @@ Provides a React context for managing a synchronized clock that coordinates time
    - Automatic Pause/Resume: Clock pauses when no subscribers have keepAlive=true
    - Focus Optimization: Reduces tick frequency when terminal unfocused to save power
    - Memory Efficient: Cleans up intervals and subscribers properly
-   - Compiler Optimization: Uses React compiler runtime for optimized rendering
+   - Compiler Optimization: Uses REACT_COMPILER runtime for optimized rendering
 
 ## Exports
 - `Clock` - Type interface for clock functionality
 - `createClock` - Factory function that creates a clock instance
-- `ClockContext` - React context providing access to the clock
-- `ClockProvider` - React component that provides the clock to its subtree
+- `ClockContext` - UI context providing access to the clock
+- `ClockProvider` - UI component that provides the clock to its subtree

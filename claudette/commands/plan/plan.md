@@ -5,7 +5,7 @@ Enables plan mode (where a predefined plan guides the session) or displays the c
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `handlePlanModeTransition` from `.././bootstrap/state`
@@ -43,4 +43,4 @@ The `call` async function receives `context` and `args`. It dispatches based on 
 
 ## Exports
 - `call` (async function) - Main command handler
-- `PlanDisplay` (React component) - Displays the current plan and metadata
+- `PlanDisplay` (UI component) - Displays the current plan and metadata

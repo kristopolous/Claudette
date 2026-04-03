@@ -3,7 +3,7 @@ Manages the full teleport resume flow including session selection, loading state
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `src/services/analytics/index`, `src/utils/conversationRecovery`, `src/utils/teleport/api`, `../hooks/useTeleportResume`, `../ink`, `../keybindings/useKeybinding`, `./ResumeTask`, `./Spinner`
 
 ## Logic

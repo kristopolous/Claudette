@@ -1,10 +1,10 @@
 # tools/NotebookEditTool/UI.tsx
 
 ## Purpose
-React components for rendering NotebookEdit tool usage and result messages for Jupyter notebook cell modifications.
+UI components for rendering NotebookEdit tool usage and result messages for Jupyter notebook cell modifications.
 
 ## Imports
-- **Stdlib**: `react`
+- **Stdlib**: REACT
 - **External**: `@anthropic-ai/sdk` (ToolResultBlockParam), `zod/v4` (type), `diff` (StructuredPatchHunk)
 - **Internal**:
   - `extractTag` utility

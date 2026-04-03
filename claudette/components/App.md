@@ -3,7 +3,7 @@ The root container for interactive CLI sessions, responsible for initializing th
 
 ## Imports
 - **Stdlib**: None
-- **External**: `ui-framework` (e.g., react)
+- **External**: `ui-framework` (e.g., REACT)
 - **Internal**: `context/fpsMetrics`, `context/stats`, `state/AppState`, `state/onChangeAppState`, `utils/fpsTracker`
 
 ## Logic

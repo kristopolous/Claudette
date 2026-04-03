@@ -5,7 +5,7 @@ Displays the Passes (referral program) interface, allowing users to share a free
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `Passes` component from `.././components/Passes/Passes`

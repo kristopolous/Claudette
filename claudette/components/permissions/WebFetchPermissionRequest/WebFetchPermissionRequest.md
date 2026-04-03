@@ -3,7 +3,7 @@ Renders a permission request dialog for web fetch operations, allowing single ap
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, react/compiler-runtime
+- **External**: REACT, REACT/compiler-runtime
 - **Internal**: ink, tools/WebFetchTool, utils/permissions/permissionsLoader, CustomSelect/select, permissions/hooks, permissions/PermissionDialog, permissions/PermissionRequest, permissions/PermissionRuleExplanation, permissions/utils
 
 ## Logic

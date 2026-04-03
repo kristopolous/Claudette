@@ -3,7 +3,7 @@ Renders user memory input messages with a hash prefix and a random acknowledgmen
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, lodash-es/sample
+- **External**: REACT, lodash-es/sample
 - **Internal**: ink (Box, Text), MessageResponse, messages utils (extractTag)
 
 ## Logic
@@ -13,4 +13,4 @@ Renders user memory input messages with a hash prefix and a random acknowledgmen
 4. Shows the acknowledgment phrase in dimmed color below
 
 ## Exports
-- `UserMemoryInputMessage` - React component rendering memory input with acknowledgment
+- `UserMemoryInputMessage` - UI component rendering memory input with acknowledgment

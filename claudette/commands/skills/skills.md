@@ -5,7 +5,7 @@ Displays a menu listing all available skills (plugin-provided commands). Allows 
 
 ## Imports
 ### Stdlib
-- `react`
+- REACT
 
 ### Internal
 - `LocalJSXCommandContext` type from `.././commands`

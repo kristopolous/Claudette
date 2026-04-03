@@ -3,7 +3,7 @@ Displays a hint in the prompt footer when sandbox violations have recently occur
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink`, `keybindings/useShortcutDisplay`, `utils/sandbox/sandbox-adapter`
 
 ## Logic

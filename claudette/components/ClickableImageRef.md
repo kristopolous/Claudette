@@ -3,7 +3,7 @@ Renders an image reference as a clickable terminal hyperlink that opens the stor
 
 ## Imports
 - **Stdlib**: `url`
-- **External**: `react`, `react/compiler-runtime`
+- **External**: REACT, REACT_COMPILER
 - **Internal**: `ink/components/Link`, `ink/supports-hyperlinks`, `ink`, `utils/imageStore`, `utils/theme`
 
 ## Logic
@@ -13,4 +13,4 @@ Renders an image reference as a clickable terminal hyperlink that opens the stor
 4. Falls back to styled text with background color and selection state when hyperlinks are unsupported or the image is not found
 
 ## Exports
-- `ClickableImageRef` - React component that displays an image reference like [Image #1] as a clickable link or styled text fallback
+- `ClickableImageRef` - UI component that displays an image reference like [Image #1] as a clickable link or styled text fallback

@@ -3,7 +3,7 @@ Renders user prompt messages with text truncation for large inputs and optional 
 
 ## Imports
 - **Stdlib**: None
-- **External**: react, @anthropic-ai/sdk, BUILDFLAGS
+- **External**: REACT, @anthropic-ai/sdk, BUILDFLAGS
 - **Internal**: ink (Box), HighlightedThinkingText, messageActions, appState, bootstrap state, growthbook analytics, envUtils utils, log utils, stringUtils utils
 
 ## Logic
@@ -14,4 +14,4 @@ Renders user prompt messages with text truncation for large inputs and optional 
 5. In normal layout: renders with HighlightedThinkingText and user message background
 
 ## Exports
-- `UserPromptMessage` - React component rendering user prompts with truncation and brief mode support
+- `UserPromptMessage` - UI component rendering user prompts with truncation and brief mode support

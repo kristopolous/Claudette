@@ -4,7 +4,7 @@
 Determines if voice mode is enabled by combining user intent (settings), authentication status, and GrowthBook feature flag.
 
 ## Imports
-- **Stdlib**: `useMemo` from 'react'
+- **Stdlib**: `useMemo` from 'REACT'
 - **External**: None
 - **Internal**: `useAppState`, `hasVoiceAuth`, `isVoiceGrowthBookEnabled`
 

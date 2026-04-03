@@ -5,7 +5,7 @@ Renders the user-facing UI messages for the Read MCP Resource tool, displaying t
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`, `zod/v4`
+- **External**: REACT, `zod/v4`
 - **Internal**: `components/MessageResponse`, `components/shell/OutputLine`, `ink`, `ToolProgressData`, `types/message`, `utils/slowOperations`, `ReadMcpResourceTool/ReadMcpResourceTool`
 
 ## Logic

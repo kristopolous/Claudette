@@ -3,7 +3,7 @@ Renders a side-by-side question view with a vertical option list on the left and
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react`, `figures`
+- **External**: REACT, `figures`
 - **Internal**: `useTerminalSize`, `KeyboardEvent`, `Box`, `Text`, `useKeybinding`, `useKeybindings`, `useAppState`, `Question`, `getExternalEditor`, `toIDEDisplayName`, `editPromptInEditor`, `Divider`, `TextInput`, `PermissionRequestTitle`, `PreviewBox`, `QuestionNavigationBar`, `QuestionState`
 
 ## Logic

@@ -2,7 +2,7 @@
 Exits the process after the first render to measure startup time in specific environments (e.g., automated testing or benchmarking).
 
 ## Imports
-- **External**: `react` (useEffect)
+- **External**: REACT (useEffect)
 - **Internal**: `../utils/envUtils` (isEnvTruthy)
 
 ## Logic
@@ -13,4 +13,4 @@ Exits the process after the first render to measure startup time in specific env
 - If both true, writes startup time to stderr and calls `process.exit(0)`
 
 ## Exports
-- `useAfterFirstRender` - React hook that may terminate the process after initial render
+- `useAfterFirstRender` - UI hook that may terminate the process after initial render

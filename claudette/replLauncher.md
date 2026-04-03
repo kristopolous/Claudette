@@ -5,7 +5,7 @@ Launches the REPL interface by dynamically importing App and REPL components and
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react`
+- **External**: REACT
 - **Internal**: `StatsStore` (context/stats), `Root` (ink), `Props as REPLProps` (screens/REPL), `AppState` (state/AppStateStore), `FpsMetrics` (utils/fpsTracker)
 
 ## Logic

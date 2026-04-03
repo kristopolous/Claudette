@@ -5,11 +5,11 @@ Renders PowerShell tool UI messages for tool use, progress, queued, result, and 
 
 ## Imports
 - **Stdlib**: none
-- **External**: react, @anthropic-ai/sdk
+- **External**: REACT, @anthropic-ai/sdk
 - **Internal**: KeyboardShortcutHint, FallbackToolUseErrorMessage, MessageResponse, OutputLine, ShellProgressMessage, ShellTimeDisplay, Box, Text, Tool, ProgressMessage, PowerShellProgress, ThemeName, PowerShellTool types
 
 ## Logic
-Provides React component renderers for each stage of PowerShell tool execution. The tool use message renderer truncates long commands for display (max 2 lines, 160 chars) unless verbose mode is on. The progress message renderer shows elapsed time, output lines/bytes, and timeout info. The result renderer displays stdout/stderr output, handles background task indicators, interrupted state, and image data detection. Error rendering delegates to a fallback component.
+Provides UI component renderers for each stage of PowerShell tool execution. The tool use message renderer truncates long commands for display (max 2 lines, 160 chars) unless verbose mode is on. The progress message renderer shows elapsed time, output lines/bytes, and timeout info. The result renderer displays stdout/stderr output, handles background task indicators, interrupted state, and image data detection. Error rendering delegates to a fallback component.
 
 ## Exports
 - `renderToolUseMessage` - renders the command being executed, with truncation in non-verbose mode

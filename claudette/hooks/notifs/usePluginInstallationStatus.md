@@ -2,7 +2,7 @@
 Monitors plugin and marketplace installation status; shows a medium-priority summary notification when any installations fail.
 
 ## Imports
-- **External**: `react` (useEffect, useMemo)
+- **External**: REACT (useEffect, useMemo)
 - **Internal**:
   - `.././bootstrap/state` (getIsRemoteMode)
   - `.././context/notifications` (useNotifications)

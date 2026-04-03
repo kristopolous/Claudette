@@ -1,11 +1,11 @@
 # tools/BashTool/BashToolResultMessage
 
 ## Purpose
-React component that renders the result of a Bash tool execution, displaying stdout, stderr (with sandbox violations stripped), images, and status messages.
+UI component that renders the result of a Bash tool execution, displaying stdout, stderr (with sandbox violations stripped), images, and status messages.
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`c` for compiler runtime)
+- **External**: REACT (`c` for compiler runtime)
 - **Internal**:
   - `utils/sandbox/sandbox-ui-utils` - `removeSandboxViolationTags`
   - `components/design-system/KeyboardShortcutHint` - `KeyboardShortcutHint`
@@ -26,7 +26,7 @@ React component that renders the result of a Bash tool execution, displaying std
   - CWD reset warning in dim text, if present.
   - Fallback message when no output: either background task hint (with down arrow shortcut), `returnCodeInterpretation`, or `(No output)`.
   - `ShellTimeDisplay` if `timeoutMs` is provided.
-- Uses React compiler caching (`_c`) for memoization; early return pattern for branches.
+- Uses REACT_COMPILER caching (`_c`) for memoization; early return pattern for branches.
 
 ## Exports
-- Default export: `BashToolResultMessage` React component (type `Props` implicitly exported via JSX)
+- Default export: `BashToolResultMessage` UI component (type `Props` implicitly exported via JSX)

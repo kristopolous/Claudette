@@ -6,7 +6,7 @@ Install Claudette native build and set up shell launcher.
 - **Internal**: Native installer utilities (checkInstall, installLatest, cleanupNpmInstallations, cleanupShellAliases), settings management, analytics
 
 ## Logic
-1. React component with state machine: checking → installing → setting-up → success/error
+1. UI component with state machine: checking → installing → setting-up → success/error
 2. Installation flow:
    - Install latest native build (or specific version/target)
    - Run checkInstall to set up launcher and shell integration

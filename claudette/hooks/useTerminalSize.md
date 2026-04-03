@@ -3,7 +3,7 @@ Returns the current terminal dimensions (columns and rows) for components that n
 
 ## Imports
 - **Stdlib**: None
-- **External**: `react` (`useContext`)
+- **External**: REACT (`useContext`)
 - **Internal**:
   - `src/ink/components/TerminalSizeContext` - `TerminalSize`, `TerminalSizeContext`
 

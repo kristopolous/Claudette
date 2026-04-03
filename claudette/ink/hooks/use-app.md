@@ -3,7 +3,7 @@ Provides a method to manually exit the Claudette application.
 
 ## Imports
 - **Stdlib**: none
-- **External**: `react` (useContext)
+- **External**: REACT (useContext)
 - **Internal**: `components/AppContext`
 
 ## Logic

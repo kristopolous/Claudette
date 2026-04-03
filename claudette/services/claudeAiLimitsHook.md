@@ -1,15 +1,15 @@
 # services/claudeAiLimitsHook
 
 ## Purpose
-Provides React hook for subscribing to Claude.ai rate limit changes.
+Provides UI hook for subscribing to Claude.ai rate limit changes.
 
 ## Imports
 - **Stdlib**: (none)
-- **External**: `react`
+- **External**: REACT
 - **Internal**: claudeAiLimits
 
 ## Logic
-1. `useClaudeAiLimits` - React hook for limit state
+1. `useClaudeAiLimits` - UI hook for limit state
 2. Initializes state with copy of currentLimits
 3. useEffect adds listener to statusListeners on mount
 4. Listener updates state with new limits on change

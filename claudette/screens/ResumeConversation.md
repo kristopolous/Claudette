@@ -5,7 +5,7 @@ Implements the session resume screen that allows users to search and resume prev
 
 ## Imports
 - **Stdlib**: `path`
-- **External**: `react/compiler-runtime`, BUILDFLAGS, `react`
+- **External**: REACT_COMPILER, BUILDFLAGS, REACT
 - **Internal**: terminalSize, bootstrap state, commands, LogSelector, Spinner, cost-tracker, clipboard, ink components, keybindings, analytics, MCP types, state, Tool/Agent types, session search/restore/storage utils, REPL component
 
 ## Logic
@@ -21,4 +21,4 @@ Implements the session resume screen that allows users to search and resume prev
 10. Transitions to REPL component after resume
 
 ## Exports
-- `ResumeConversation` - React component for session resume flow
+- `ResumeConversation` - UI component for session resume flow

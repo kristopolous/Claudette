@@ -2,7 +2,7 @@
 Polls teammate/team-lead mailbox for messages, submitting them as turns when idle or queuing when busy; manages permission flows, shutdowns, mode changes, and plan approvals.
 
 ## Imports
-- **External**: `react` (useCallback, useEffect, useRef), `usehooks-ts` (useInterval)
+- **External**: REACT (useCallback, useEffect, useRef), `usehooks-ts` (useInterval)
 - **Internal**:
   - `./components/permissions/PermissionRequest` (ToolUseConfirm type)
   - `./constants/xml` (TEAMMATE_MESSAGE_TAG)
